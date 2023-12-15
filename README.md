@@ -10,7 +10,7 @@ Tianji is a free-to-use AI system. Utilize it for tasks involving worldly wisdom
 <br><br>
 
 <p align="center">
-    <img src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/logo_qwen.jpg" width="400"/>
+    <img src="./assets/tianjilogo.jpg" width="400"/>
 <p>
 <br>
 
