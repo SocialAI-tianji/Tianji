@@ -1,3 +1,9 @@
+# 文件说明
+
+ - prompt_maker.json  负责 prompt 生成和基础信息语料抽取的 json 配置
+ - web_demo.py  供通用型的 prompt 产出调试，可以不断修改 `src/prompt` 中的 `prompt.json`来调试通用型的 prompt。目前只支持 gpt 。
+
+
 # demo 运行
 
 首先安装依赖
