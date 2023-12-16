@@ -5,7 +5,7 @@ from dotenv import load_dotenv, find_dotenv
 
 _ = load_dotenv(find_dotenv())
 
-openai.api_key = 'sk-BYmrvYL6M4pK7FAJ2cAfDe381cF04303B053BaC419B41899'
+openai.api_key = os.environ['OPENAI_API_KEY']
 openai.api_base = 'https://api.zyai.online/v1'
 
 with open("src/prompt/gpt_prompt/prompt.json", "r", encoding="utf-8") as f:
