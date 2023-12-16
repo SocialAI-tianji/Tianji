@@ -1,5 +1,5 @@
 """
-使用前先安装 pip install docx --upgrade
+使用前先安装 pip install python-docx --upgrade
 
 python版本为3.10
 
