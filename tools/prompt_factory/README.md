@@ -10,8 +10,8 @@
 
 ```shell
 pip install streamlit
-pip install openai
-pip install dotenv
+pip install openai==0.28.0
+pip install python-dotenv
 ```
 
 在`openai.api_key`处填入你的`api_key`，如下所示：
