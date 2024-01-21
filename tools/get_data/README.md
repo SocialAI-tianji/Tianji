@@ -2,17 +2,31 @@
 
 这里包含了各种方便使用获取数据、清理语料的工具
 
-## Bilibili视频下载
+## Bilibili视频获取
 
 这里介绍如何从b站单独下载和批量下载视频。
 
-我们可以通过以下工具：
+我们可以通过以下等工具：
+
+http://zhouql.vip/bilibili
 
 https://github.com/nICEnnnnnnnLee/BilibiliDown
 
 https://github.com/iawia002/lux
 
-### 使用说明
+### 使用王子周棋洛的bilidown（推荐）
+
+直接下载 https://zhouql.vip/bilibili/pc/  即可，如果想要不安装还可以直接选择单文件下载，下载后直接按照ui可以很方便使用。
+
+非常优美的工具，up主的对应b站：
+
+https://space.bilibili.com/1608325226
+
+开源仓库：
+
+https://gitee.com/zhou-qiluo/bilibili-down
+
+### 使用 BilibiliDown
 
 直接下载 https://github.com/nICEnnnnnnnLee/BilibiliDown/releases/download/V6.29/BilibiliDown.v6.29.win_x64_jre11.release.zip
 
@@ -20,7 +34,8 @@ https://github.com/iawia002/lux
 
 然后输入网址批量下载即可。下载结束后直接打开文件夹可查看到已下载文件。
 
-## 这里介绍如何把视频音频变成文字
+
+## 视频音频转文字
 
 使用通义听悟
 
