@@ -61,7 +61,7 @@ def md_file_to_json_with_examples(file_path,id,heading):
 
         for block in blocks:
             test_system_part = block.split('#### Q：')[0].strip()
-
+            test_system_part = re.sub(r'#.*', '', test_system_part)
             qa_pairs = re.findall(r'#### Q：(.*?)#### A：(.*?)(?=#### Q：|$)', block, re.DOTALL)
             if (qa_pairs == []):
                 qa_pairs = re.findall(r'#### Q:(.*?)#### A:(.*?)(?=#### Q:|$)', block, re.DOTALL)
@@ -69,7 +69,9 @@ def md_file_to_json_with_examples(file_path,id,heading):
             examples = []
             for qa_pair in qa_pairs:
                 input_text = qa_pair[0].strip()
+                input_text = re.sub(r'#.*', '', input_text)
                 output_text = qa_pair[1].strip()
+                output_text = re.sub(r'#.*', '', output_text)
 
                 example_obj = {
                     "id":id,
