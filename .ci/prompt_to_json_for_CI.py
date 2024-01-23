@@ -185,7 +185,7 @@ if __name__ == '__main__':
     input_dir, input_file = os.path.split(promptpath)
     input_file_base, _ = os.path.splitext(input_file)
 
-    output_path = r"C:\Users\yhd\PycharmProjects\Tianji\tianji\prompt"
+    output_path = r"/tianji/prompt"
 
     # 使用正则表达式提取所需路径
     match = re.search(r'\\test(.*)\\[^\\]+$', promptpath)
