@@ -4,3 +4,6 @@
 .vscode/
 # 忽略日志文件
 *.log
+.idea/
+__pycache__/
+logs/
