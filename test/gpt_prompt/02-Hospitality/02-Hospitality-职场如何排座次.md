@@ -39,7 +39,7 @@
     ax.add_artist(circle)  
 
 # 标注座位  
-    for i, seat in enumerate(seats):  
+    for i, seat in enumerate(seats)：  
         ax.text(0.5 + 0.35 * np.cos(i * 2 * np.pi / len(seats)),  
                 0.5 + 0.35 * np.sin(i * 2 * np.pi / len(seats)),  
                 seat, ha='center', va='center')  
@@ -79,7 +79,7 @@ import numpy as np
     ax.add_artist(circle)  
 
 # 标注座位  
-    for i, seat in enumerate(seats):  
+    for i, seat in enumerate(seats)：  
         ax.text(0.5 + 0.35 * np.cos(i * 2 * np.pi / len(seats)),  
                 0.5 + 0.35 * np.sin(i * 2 * np.pi / len(seats)),  
                 seat, ha='center', va='center')  
@@ -139,7 +139,7 @@ A2：
     Plain Text
     import matplotlib.pyplot as plt  
 
-    def draw_seating_chart():  
+    def draw_seating_chart()：  
         # 创建图形和轴  
         fig, ax = plt.subplots()  
     
@@ -150,16 +150,16 @@ A2：
     
         # 定义座位位置和标签  
         seats = {  
-            'A': (3, 1),  
-            'B': (2, 1),  
-            'C': (1, 1),  
-            'D': (3, 0),  
-            'E': (1, 0),  
-            'F': (2, 0)  
+            'A'： (3, 1),  
+            'B'： (2, 1),  
+            'C'： (1, 1),  
+            'D'： (3, 0),  
+            'E'： (1, 0),  
+            'F'： (2, 0)  
         }  
     
         # 画出座位  
-        for label, (x, y) in seats.items():  
+        for label, (x, y) in seats.items()：  
             ax.text(x, y, label, ha='center', va='center', fontsize=20)  
             ax.plot(x, y, 'ro', markersize=100)  
     
