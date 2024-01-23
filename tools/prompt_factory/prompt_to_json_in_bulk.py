@@ -35,7 +35,7 @@ input:用户输入
 output:对应输出
 
 '''
-folder_path = r"C:\Users\yhd\PycharmProjects\Tianji\test\gpt_prompt"  # 替换成您的文件夹路径
+folder_path = r"C:\Users\yhd\PycharmProjects\Tianji\test\yiyan_prompt"  # 替换成您的文件夹路径
 
 
 def md_file_to_json_with_examples(file_path,id,heading):
@@ -132,7 +132,7 @@ def md_file_to_json_with_examples(file_path,id,heading):
                 json_obj = {
                     "id":id,
                     "name":section_title,
-                    "test_system": test_system_part,
+                    "system_prompt": test_system_part,
                     "example": examples
                 }
                 json_list.append(json_obj)
