@@ -7,9 +7,9 @@ import json
 
 '''
 # 指定要合并的JSON文件所在文件夹路径
-folder_path = '..\\Tianji\\tianji\\prompt\\yiyan_prompt'
+folder_path = r'C:\Users\yhd\PycharmProjects\Tianji\tianji\prompt\yiyan_prompt'
 # 指定要保存合并后JSON文件的路径
-output_json_path = '../tianji/prompt/yiyan_prompt/all_yiyan_prompt.json'
+output_json_path = r'C:\Users\yhd\PycharmProjects\Tianji\tianji\prompt\yiyan_prompt\all_yiyan_prompt.json'
 # 初始化一个空的JSON列表，用于存储所有JSON数据
 merged_data = []
 

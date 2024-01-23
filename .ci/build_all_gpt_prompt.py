@@ -7,9 +7,9 @@ import json
 
 '''
 # 指定要合并的JSON文件所在文件夹路径
-folder_path = '..\\Tianji\\tianji\\gpt_prompt'
+folder_path = r'C:\Users\yhd\PycharmProjects\Tianji\tianji\prompt\gpt_prompt'
 # 指定要保存合并后JSON文件的路径
-output_json_path = '../tianji/prompt/gpt_prompt/all_gpt_prompt.json'
+output_json_path = r'C:\Users\yhd\PycharmProjects\Tianji\tianji\prompt\gpt_prompt\all_gpt_prompt.json'
 # 初始化一个空的JSON列表，用于存储所有JSON数据
 merged_data = []
 
