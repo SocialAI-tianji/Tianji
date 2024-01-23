@@ -15,7 +15,7 @@ def call_with_messages(message):
     erniebot.access_token = os.environ["BAIDU_API_KEY"]
     ############
     stream = False
-
+    
     messages =[{'role': 'user', 'content': message}]
     response = erniebot.ChatCompletion.create(
         model="ernie-4.0",
