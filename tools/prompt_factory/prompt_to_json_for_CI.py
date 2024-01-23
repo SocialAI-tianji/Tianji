@@ -4,8 +4,8 @@ import re
 import os
 '''
 # @author  : Shiqiding
-# @description: 本脚本支持将.md写的规定prompt格式转换为规定格式的json
-# @version : V1.5
+# @description: 本脚本支持将.md写的规定prompt格式转换为规定格式的json,仅支持单文本转换为CI pipeline准备
+# @version : V2.0
 
 promptpath为.md格式的prompt路径，具体格式参考仓库里的prompt格式部分
 
@@ -35,7 +35,8 @@ input:用户输入
 output:对应输出
 
 '''
-promptpath=r'C:\Users\yhd\PycharmProjects\Tianji\test\gpt_prompt\01-Etiquette\01-Etiquette-家宴敬酒 .md'
+
+promptpath=r'C:\Users\yhd\PycharmProjects\Tianji\test\gpt_prompt\02-Hospitality\02-Hospitality-职场如何发出邀请_上级、客户、友商、同事等多场景.md'
 
 
 def md_file_to_json_with_examples(file_path,id,heading):
@@ -110,7 +111,7 @@ def md_file_to_json_with_examples(file_path,id,heading):
             for block in blocks:
 
                 test_system_part = block.split('#### Q：')[0].strip()
-
+                test_system_part= re.sub(r'#.*', '', test_system_part)
                 qa_pairs = re.findall(r'#### Q：(.*?)#### A：(.*?)(?=#### Q：|$)', block, re.DOTALL)
                 if (qa_pairs == []):
                     qa_pairs = re.findall(r'#### Q:(.*?)#### A:(.*?)(?=#### Q:|$)', block, re.DOTALL)
@@ -119,8 +120,9 @@ def md_file_to_json_with_examples(file_path,id,heading):
                 for qa_pair in qa_pairs:
 
                     input_text = qa_pair[0].strip()
+                    input_text=re.sub(r'#.*', '', input_text)
                     output_text = qa_pair[1].strip()
-
+                    output_text= re.sub(r'#.*', '', output_text)
 
                     example_obj = {
                         "input": input_text,
@@ -168,6 +170,8 @@ def find_first_heading(md_file_path):
         return '#' * len(match.group(1))
     else:
         return ""
+
+
 if __name__ == '__main__':
     filepath =replace_english_colons_with_chinese(promptpath)
     heading = find_first_heading(filepath)
@@ -192,6 +196,6 @@ if __name__ == '__main__':
         json_file_output_path = "无法匹配路径"
     json_file_output = os.path.join(json_file_output_path, input_file_base + ".json")
     with open(json_file_output, 'w', encoding='utf-8') as file:
-        json.dump(json_output, file, ensure_ascii=False, indent=4)
+        json.dump(json.loads(json_output), file, ensure_ascii=False, indent=4)
     print(json_output)
 
