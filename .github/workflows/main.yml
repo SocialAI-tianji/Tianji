@@ -1,9 +1,9 @@
-name: Run Python Script
+name: Check & Merge Prompt
 
 on:
   push:
     branches:
-      - main # 修改为您的默认分支
+      - main 
 
 jobs:
   run-python-script:
@@ -18,8 +18,19 @@ jobs:
       with:
         python-version: 3.9 # 指定所需的 Python 版本
 
-    - name: Install dependencies
-      run: pip install -r requirements.txt # 如果有依赖，根据您的项目需要添加
+    - name: gpt_pormpt to json
+      env:
+        folder_path: 'test/prompt/gpt_prompt'
+        output_path: 'tianji/prompt'
+      run:  python .ci/prompt_to_json_for_CI.py
 
-    - name: Run Python script
+    - name: yiyan_pormpt to json
+      env:
+        folder_path: 'test/prompt/yiyan_prompt'
+        output_path: 'tianji/prompt'
+      run:  python .ci/prompt_to_json_for_CI.py
+      
+    - name: Merge the gpt_prompt
       run: python .ci/build_all_gpt_prompt.py # 修改为您的 Python 脚本的文件名
+    - name: Merge the yiyan_prompt
+      run: python .ci/build_all_yiyan_prompt.py # 修改为您的 Python 脚本的文件名
