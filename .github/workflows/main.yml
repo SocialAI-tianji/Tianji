@@ -15,15 +15,8 @@ jobs:
     
     - name: Find and Check markdown files
       run: |
-        # 检查是否是首次提交或新分支的首次提交
-        if git rev-parse --verify HEAD~1 >/dev/null 2>&1; then
-            # 不是首次提交，获取自上次提交以来修改的 .md 文件
-            MD_FILES=$(git diff --name-only --diff-filter=AM HEAD~1 HEAD | grep '\.md$')
-        else
-            # 首次提交，获取当前提交的所有 .md 文件
-            MD_FILES=$(git ls-files '*.md')
-        fi
-    
+        MD_FILES=$(git ls-files '*.md')
+        
         # 打印文件路径
         echo "Modified markdown files:"
         echo $MD_FILES
