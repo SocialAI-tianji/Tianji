@@ -9,7 +9,15 @@ jobs:
           
   run-python-script:
     runs-on: ubuntu-latest
-    steps:
+    steps:    
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9 # 指定所需的 Python 版本
+        
     - name: Find modified markdown files
       run: |
         # 获取本次 push 涉及的 .md 文件
@@ -23,16 +31,7 @@ jobs:
           # 在这里添加需要对 .md 文件执行的命令
           # 例如: python check_markdown.py "$mdfile"
         done
-
-    
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9 # 指定所需的 Python 版本
-
+        
     - name: gpt_pormpt to json
       env:
         folder_path: 'test/prompt/gpt_prompt'
@@ -47,5 +46,6 @@ jobs:
       
     - name: Merge the gpt_prompt
       run: python .ci/build_all_gpt_prompt.py # 修改为您的 Python 脚本的文件名
+      
     - name: Merge the yiyan_prompt
       run: python .ci/build_all_yiyan_prompt.py # 修改为您的 Python 脚本的文件名
