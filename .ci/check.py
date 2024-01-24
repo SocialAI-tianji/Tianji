@@ -23,6 +23,7 @@ def validate_rule_template(md_file_path):
             return False, "Prompt部分未识别"
 
         # 检查效果示例部分
+        # 确保每个效果示例后面都有一个 Q：和一个 A：
         effect_examples = re.findall(r'^\#\#\#\s+效果示例', md_content, re.MULTILINE)
         for example in effect_examples:
             example_index = md_content.find(example)
