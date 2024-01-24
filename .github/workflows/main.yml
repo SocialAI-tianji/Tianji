@@ -3,7 +3,7 @@ name: Run Python Script
 on:
   push:
     branches:
-      - newtianji # 修改为您的默认分支
+      - main # 修改为您的默认分支
 
 jobs:
   run-python-script:
