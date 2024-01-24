@@ -10,6 +10,10 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - name: Set Python UTF-8 encoding
+      run: |
+        echo "::set-env name=PYTHONUTF8::1"
+
     - name: Checkout code
       uses: actions/checkout@v2
 
