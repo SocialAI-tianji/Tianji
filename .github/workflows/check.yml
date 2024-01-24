@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  run-python-script:
+  prompt_to_json:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
