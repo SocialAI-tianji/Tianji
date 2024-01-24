@@ -12,7 +12,14 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      
+    - name: Checkout code
+      uses: actions/checkout@v2
 
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9 # 指定所需的 Python 版本
     - name: Find modified markdown files
       run: |
         # 检查是否是首次提交
@@ -31,8 +38,7 @@ jobs:
         # 对找到的每个 .md 文件执行后续操作
         for mdfile in $MD_FILES; do
           echo "Processing file $mdfile"
-          # 这里可以添加更多的处理步骤，例如运行脚本
-          # python your-script.py "$mdfile"
+          python .ci/check.py "$mdfile"
         done
 
         
@@ -49,8 +55,6 @@ jobs:
       with:
         python-version: 3.9 # 指定所需的 Python 版本
 
-    - name: check prompt
-      run: python .ci/check.py  
     - name: gpt_pormpt to json
       env:
         folder_path: 'test/prompt/gpt_prompt'
