@@ -36,7 +36,7 @@ output:对应输出
 
 '''
 
-promptpath=r'C:\Users\yhd\PycharmProjects\Tianji\test\gpt_prompt\02-Hospitality\02-Hospitality-职场如何发出邀请_上级、客户、友商、同事等多场景.md'
+promptpath=r'C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\01-Etiquette\01-Etiquette-家宴敬酒 .md'
 
 
 def md_file_to_json_with_examples(file_path,id,heading):
@@ -185,10 +185,10 @@ if __name__ == '__main__':
     input_dir, input_file = os.path.split(promptpath)
     input_file_base, _ = os.path.splitext(input_file)
 
-    output_path = r"/tianji/prompt"
+    output_path = "..\\tianji\\prompt"
 
     # 使用正则表达式提取所需路径
-    match = re.search(r'\\test(.*)\\[^\\]+$', promptpath)
+    match = re.search(r'\\prompt(.*)\\[^\\]+$', promptpath)
     if match:
         # 提取的路径
         extracted_path = match.group(1)
