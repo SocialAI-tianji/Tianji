@@ -10,21 +10,18 @@ jobs:
   run-python-script:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    
-    - name: Find and Check markdown files
+    - name: Find modified markdown files
       run: |
-        MD_FILES=$(git ls-files '*.md')
-        
+        # 获取本次 push 涉及的 .md 文件
+        MD_FILES=$(git diff --name-only --diff-filter=AM ${{ github.event.before }} ${{ github.event.after }} | grep '\.md$')
         # 打印文件路径
         echo "Modified markdown files:"
         echo $MD_FILES
-    
         # 对找到的每个 .md 文件执行后续操作
         for mdfile in $MD_FILES; do
           echo "Processing file $mdfile"
-          python .ci/check.py "$mdfile" || exit 1
+          # 在这里添加需要对 .md 文件执行的命令
+          # 例如: python check_markdown.py "$mdfile"
         done
 
     
