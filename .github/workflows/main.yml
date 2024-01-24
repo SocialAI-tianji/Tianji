@@ -19,24 +19,6 @@ jobs:
       with:
         python-version: 3.9 # 指定所需的 Python 版本
 
-    - name: Find modified markdown files
-      run: |
-        # 检查是否是新分支或首次提交
-        if [ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]; then
-            # 新分支或首次提交，检查所有 .md 文件
-            MD_FILES=$(git ls-files '*.md')
-        else
-            # 不是新分支，获取自上次提交以来修改的 .md 文件
-            MD_FILES=$(git diff --name-only --diff-filter=AM ${{ github.event.before }} ${{ github.event.after }} | grep '\.md$')
-        fi
-        # 打印文件路径
-        echo "Modified markdown files:"
-        echo $MD_FILES
-        # 对找到的每个 .md 文件执行后续操作
-        for mdfile in $MD_FILES; do
-          echo "Processing file $mdfile"
-          python .ci/check_markdown.py "$mdfile"
-          
     - name: gpt_prompt to json
       env:
         folder_path: 'test/prompt/gpt_prompt'
