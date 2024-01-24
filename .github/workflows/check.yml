@@ -6,6 +6,32 @@ on:
       - main
 
 jobs:
+  check-md-files:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0  # 检出完整的提交历史
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Find modified markdown files and run checks
+      run: |
+        # 获取本次 push 涉及的 .md 文件
+        MD_FILES=$(git diff --name-only --diff-filter=AM ${{ github.event.before }} ${{ github.event.after }} | grep '\.md$')
+
+        # 对找到的每个 .md 文件执行后续操作
+        for mdfile in $MD_FILES; do
+          echo "Processing file $mdfile"
+          # 运行 check.py 脚本并传递文件路径
+          python .ci/check.py $mdfile
+        done
+
   prompt_to_json:
     runs-on: ubuntu-latest
     steps:
