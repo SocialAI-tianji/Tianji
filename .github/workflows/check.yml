@@ -6,19 +6,23 @@ on:
       - main
 
 jobs:
-  check-md-files:
+  print-md-files:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
-        fetch-depth: 0  # 检出完整的提交历史
+        fetch-depth: 0  # 获取所有历史以便对比
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
+    - name: Find modified markdown files
+      run: |
+        # 获取自上次提交以来修改或新增的 .md 文件
+        MD_FILES=$(git diff --name-only --diff-filter=AM ${{ github.event.before }} ${{ github.event.after }} | grep '\.md$')
+
+        # 打印所有找到的 .md 文件
+        echo "Modified markdown files:"
+        echo "$MD_FILES"
 
   prompt_to_json:
     runs-on: ubuntu-latest
