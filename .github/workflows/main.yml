@@ -20,7 +20,7 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.9 # 指定所需的 Python 版本
-    - name: Find modified markdown files
+    - name: check prompt
       run: |
         # 检查是否是首次提交
         MD_FILES=$(git diff --name-only --diff-filter=AM HEAD~1 HEAD | grep '\.md$')
