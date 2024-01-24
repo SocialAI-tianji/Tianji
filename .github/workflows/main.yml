@@ -7,7 +7,7 @@ on:
 
 jobs:
   run-python-script:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
 
@@ -18,20 +18,18 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.9 # 指定所需的 Python 版本
-    - name: Set Python UTF-8 encoding
-      run: |
-        echo "::set-env name=PYTHONUTF8::1"
+
         
     - name: gpt_pormpt to json
       env:
-        folder_path: 'test\\prompt\\gpt_prompt'
-        output_path: 'tianji\\prompt'
+        folder_path: 'test/prompt/gpt_prompt'
+        output_path: 'tianji/prompt'
       run:  python .ci/prompt_to_json_for_CI.py
 
     - name: yiyan_pormpt to json
       env:
-        folder_path: 'test\\prompt\\yiyan_prompt'
-        output_path: 'tianji\\prompt'
+        folder_path: 'test/prompt/yiyan_prompt'
+        output_path: 'tianji/prompt'
       run:  python .ci/prompt_to_json_for_CI.py
       
     - name: Merge the gpt_prompt
