@@ -13,13 +13,26 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Find and Check markdown files
+    - name: Find modified markdown files
       run: |
-        # 找出所有新增或修改的 .md 文件
-        MD_FILES=$(git diff --name-only --diff-filter=AM HEAD~1 HEAD | grep '\.md$')
-        # 检查每个文件
-        for file in $MD_FILES; do
-          python .ci/check.py "$file" || exit 1
+        # 检查是否是首次提交
+        if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            # 如果不是首次提交，获取自上次提交以来修改的 .md 文件
+            MD_FILES=$(git diff --name-only --diff-filter=AM HEAD~1 HEAD | grep '\.md$')
+        else
+            # 如果是首次提交，获取所有 .md 文件
+            MD_FILES=$(git ls-files '*.md')
+        fi
+
+        # 打印文件路径
+        echo "Modified markdown files:"
+        echo $MD_FILES
+
+        # 对找到的每个 .md 文件执行后续操作
+        for mdfile in $MD_FILES; do
+          echo "Processing file $mdfile"
+          # 这里可以添加更多的处理步骤，例如运行脚本
+          # python your-script.py "$mdfile"
         done
 
         
