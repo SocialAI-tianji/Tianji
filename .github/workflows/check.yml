@@ -20,16 +20,6 @@ jobs:
       with:
         python-version: 3.9
 
-    - name: Find modified markdown files and run checks
-      run: |
-        # 获取本次 push 涉及的 .md 文件
-        MD_FILES=$(git diff --name-only --diff-filter=AM ${{ github.event.before }} ${{ github.event.after }} | grep '\.md$')
-
-        # 对找到的每个 .md 文件执行后续操作
-        for mdfile in $MD_FILES; do
-          echo "Processing file $mdfile"
-        done
-
   prompt_to_json:
     runs-on: ubuntu-latest
     steps:
