@@ -1,0 +1,25 @@
+name: Run Python Script
+
+on:
+  push:
+    branches:
+      - newtianji # 修改为您的默认分支
+
+jobs:
+  run-python-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9 # 指定所需的 Python 版本
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt # 如果有依赖，根据您的项目需要添加
+
+    - name: Run Python script
+      run: python .ci/build_all_gpt_prompt.py # 修改为您的 Python 脚本的文件名
