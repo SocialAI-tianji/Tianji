@@ -27,7 +27,7 @@ jobs:
 
         # 对找到的每个 .md 文件执行后续操作
         for mdfile in $MD_FILES; do
-          echo "Processing file $mdfile"
+          echo "Processing file $mdfile
           # 运行 check.py 脚本并传递文件路径
           python .ci/check.py $mdfile
         done
