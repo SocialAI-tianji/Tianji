@@ -1,14 +1,13 @@
 import re
 import os
 import sys
+import argparse
 
 '''
-# @author  : Shiqiding
-# @description: 本脚本用于CI检查prompt格式是否正确
-# @version : V1.0
-
+# author  : Shiqiding
+# description: 本脚本用于CI检查prompt格式是否正确
+# version : V1.0
 '''
-file_path = os.environ.get('file_path')
 
 def validate_rule_template(md_file_path):
     try:
@@ -24,7 +23,6 @@ def validate_rule_template(md_file_path):
             return False, "Prompt部分未识别"
 
         # 检查效果示例部分
-        # 确保每个效果示例后面都有一个 Q：和一个 A：
         effect_examples = re.findall(r'^\#\#\#\s+效果示例', md_content, re.MULTILINE)
         for example in effect_examples:
             example_index = md_content.find(example)
@@ -44,9 +42,13 @@ def validate_rule_template(md_file_path):
         return False, str(e)
 
 if __name__ == '__main__':
-    flag,message=validate_rule_template(md_file_path=file_path)
-    if(flag==False):
-        print("格式错误， "+message)
+    parser = argparse.ArgumentParser(description='Check Markdown file format.')
+    parser.add_argument('file_path', help='Path to the Markdown file to be checked')
+    args = parser.parse_args()
+
+    flag, message = validate_rule_template(md_file_path=args.file_path)
+    if flag == False:
+        print("格式错误，" + message)
         sys.exit(1)
     else:
         print(message)
