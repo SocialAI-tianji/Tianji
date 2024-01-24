@@ -1,5 +1,7 @@
 import re
 import os
+import sys
+
 '''
 # @author  : Shiqiding
 # @description: 本脚本用于CI检查prompt格式是否正确
@@ -42,7 +44,12 @@ def validate_rule_template(md_file_path):
         return False, str(e)
 
 if __name__ == '__main__':
-    validate_rule_template(md_file_path=file_path)
+    flag,message=validate_rule_template(md_file_path=file_path)
+    if(flag==False):
+        print("格式错误， "+message)
+        sys.exit(1)
+    else:
+        print(message)
 
 
 
