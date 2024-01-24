@@ -6,11 +6,47 @@ on:
       - main
 
 jobs:
+  check-md-files:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9 # 指定所需的 Python 版本
+    - name: Find modified markdown files
+      run: |
+        # 检查是否是首次提交
+        if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            # 如果不是首次提交，获取自上次提交以来修改的 .md 文件
+            MD_FILES=$(git diff --name-only --diff-filter=AM HEAD~1 HEAD | grep '\.md$')
+        else
+            # 如果是首次提交，获取所有 .md 文件
+            MD_FILES=$(git ls-files '*.md')
+        fi
+
+        # 打印文件路径
+        echo "Modified markdown files:"
+        echo $MD_FILES
+
+        # 对找到的每个 .md 文件执行后续操作
+        for mdfile in $MD_FILES; do
+          echo "Processing file $mdfile"
+          python .ci/check.py "$mdfile"
+        done
+
+        
   run-python-script:
     runs-on: ubuntu-latest
 
     steps:
-
+    
     - name: Checkout code
       uses: actions/checkout@v2
 
@@ -19,7 +55,6 @@ jobs:
       with:
         python-version: 3.9 # 指定所需的 Python 版本
 
-        
     - name: gpt_pormpt to json
       env:
         folder_path: 'test/prompt/gpt_prompt'
