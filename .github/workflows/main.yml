@@ -10,9 +10,6 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Set Python UTF-8 encoding
-      run: |
-        echo "::set-env name=PYTHONUTF8::1"
 
     - name: Checkout code
       uses: actions/checkout@v2
@@ -21,7 +18,10 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.9 # 指定所需的 Python 版本
-
+    - name: Set Python UTF-8 encoding
+      run: |
+        echo "::set-env name=PYTHONUTF8::1"
+        
     - name: gpt_pormpt to json
       env:
         folder_path: 'test\\prompt\\gpt_prompt'
