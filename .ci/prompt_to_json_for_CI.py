@@ -194,12 +194,12 @@ if __name__ == '__main__':
                 #output_path = r"C:\Users\yhd\PycharmProjects\Tianji\tianji\prompt"
 
                 # 使用正则表达式提取所需路径
-                match = re.search(r'\\prompt(.*)\\[^\\]+$', promptpath)
+                match = re.search(r'/prompt(.*)/[^/]+$', promptpath)
                 if match:
                     # 提取的路径
                     extracted_path = match.group(1)
                     # 构造最终路径
-                    json_file_output_path = output_path + extracted_path + "\\"
+                    json_file_output_path = output_path + extracted_path + "/"
                 else:
                     json_file_output_path = "无法匹配路径"
                 json_file_output = os.path.join(json_file_output_path, input_file_base + ".json")
