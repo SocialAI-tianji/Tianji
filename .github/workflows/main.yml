@@ -3,7 +3,7 @@ name: Check & Merge Prompt
 on:
   push:
     branches:
-      - newtianji
+      - main
 
 jobs:
   run-python-script:
