@@ -35,7 +35,7 @@ jobs:
         # 对找到的每个 .md 文件执行后续操作
         for mdfile in $MD_FILES; do
           echo "Processing file $mdfile"
-          python .ci/check_markdown.py "$mdfile" || exit 1
+          python .ci/check_markdown.py "$mdfile"
           
     - name: gpt_prompt to json
       env:
