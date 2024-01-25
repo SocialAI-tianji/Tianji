@@ -54,7 +54,7 @@ jobs:
 
     - name: Merge the yiyan_prompt
       env:
-        yiyan_folder_json_path: 'tianji/prompt/yiyan_prompt'
+        yiyan_folder_path: 'tianji/prompt/yiyan_prompt'
         yiyan_output_json_path: 'tianji/prompt/yiyan_prompt/all_yiyan_prompt.json'
       run: python .ci/build_all_yiyan_prompt.py 
 
