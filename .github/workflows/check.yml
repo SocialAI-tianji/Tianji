@@ -6,27 +6,21 @@ on:
       - main
 
 jobs:
-  list-changed-files:
+  check:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: List changed files
-      run: |
-        # 使用github.event对象获取推送事件信息
-        echo "Push event details:"
-        echo "Repository: ${{ github.repository }}"
-        echo "Pusher: ${{ github.actor }}"
-        echo "Branch: ${{ github.ref }}"
-        echo "Commit: ${{ github.sha }}"
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
 
-        # 列出推送事件中更改的文件
-        echo "Changed files:"
-        for file in $(git diff --name-only ${{ github.event.before }} ${{ github.sha }}); do
-          echo "$file"
-        done
+    - name: Run check.py
+      run: |
+        python .ci/check.py
   prompt_to_json:
     runs-on: ubuntu-latest
     steps:
