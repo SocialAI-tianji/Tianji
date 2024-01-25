@@ -53,5 +53,12 @@ repos:
     hooks:
     -   id: mdformat
         additional_dependencies: ['mdformat-tables==0.4.0']
-
-
+        stages: [commit]
+#prompt check
+-   repo: local
+    hooks:
+    -   id: check-changes
+        name: Check Changes
+        entry: python check_changes.py
+        language: system
+        stages: [commit]

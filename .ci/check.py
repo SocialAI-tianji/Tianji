@@ -1,14 +1,13 @@
 import re
 import os
-import sys
-import argparse
+'''
+# @author  : Shiqiding
+# @description: 本脚本批量检查prompt格式是否正确
+# @version : V1.0
+
+
 
 '''
-# author  : Shiqiding
-# description: 本脚本用于CI检查prompt格式是否正确
-# version : V1.0
-'''
-
 def validate_rule_template(md_file_path):
     try:
         with open(md_file_path, 'r', encoding='utf-8') as file:
@@ -43,16 +42,16 @@ def validate_rule_template(md_file_path):
         return False, str(e)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Check Markdown file format.')
-    parser.add_argument('file_path', help='Path to the Markdown file to be checked')
-    args = parser.parse_args()
+    folder_path = "test/prompt"  # 替换为包含规则模板的文件夹路径
 
-    flag, message = validate_rule_template(md_file_path=args.file_path)
-    if flag == False:
-        print("格式错误，" + message)
-        sys.exit(1)
-    else:
-        print(message)
-
+    for foldername, subfolders, filenames in os.walk(folder_path):
+        for filename in filenames:
+            if filename.endswith(".md"):
+                md_file_path = os.path.join(foldername, filename)
+                result, message = validate_rule_template(md_file_path)
+                if result:
+                    print(f"{md_file_path}: {message}")
+                else:
+                    print(f"{md_file_path} 不符合规则模板: {message}")
 
 
