@@ -47,13 +47,13 @@ repos:
     -   id: ruff
         args: [--fix, --exit-non-zero-on-fix, --no-cache]
 
-# Document hooks
--   repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.1
-    hooks:
-    -   id: mdformat
-        additional_dependencies: ['mdformat-tables==0.4.0']
-        stages: [commit]
+## Document hooks
+#-   repo: https://github.com/executablebooks/mdformat
+#    rev: 0.7.1
+#    hooks:
+#    -   id: mdformat
+#        additional_dependencies: ['mdformat-tables==0.4.0']
+#        stages: [commit]
 #prompt check
 -   repo: local
     hooks:
