@@ -13,10 +13,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Get base commit SHA
+      id: base_sha
+      run: echo "::set-output name=base_sha::$(git rev-parse main^)"
+
     - name: Get changed files
       id: get_files
       run: |
-        CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+        BASE_SHA="${{ steps.base_sha.outputs.base_sha }}"
+        CHANGED_FILES=$(git diff --name-only $BASE_SHA HEAD)
         echo "::set-output name=files::$CHANGED_FILES"
 
     - name: Run validation script
@@ -24,7 +29,7 @@ jobs:
         CHANGED_FILES="${{ steps.get_files.outputs.files }}"
         for file in $CHANGED_FILES; do
           if [[ $file == *.md ]]; then
-            python validate_script.py "$file"
+            python .ci/validate_script.py "$file"
           fi
         done
   prompt_to_json:
