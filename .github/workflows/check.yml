@@ -49,7 +49,7 @@ jobs:
     - name: Merge the gpt_prompt
       env:
         folder_path: 'tianji/prompt/gpt_prompt'
-        output_path: 'tianji/prompt/gpt_prompt/all_gpt_prompt.json'
+        output_json_path: 'tianji/prompt/gpt_prompt/all_gpt_prompt.json'
       run: python .ci/build_all_gpt_prompt.py 
 
     - name: Merge the yiyan_prompt

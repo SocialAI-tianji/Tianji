@@ -11,6 +11,7 @@ import json
 folder_path = os.environ.get('folder_path')
 # 指定要保存合并后JSON文件的路径
 #output_json_path = r'tianji/prompt/yiyan_prompt/all_yiyan_prompt.json'
+output_json_path = os.environ.get('output_json_path')
 # 初始化一个空的JSON列表，用于存储所有JSON数据
 merged_data = []
 
