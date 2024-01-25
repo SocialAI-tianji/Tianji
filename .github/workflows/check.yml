@@ -6,22 +6,21 @@ on:
       - main
 
 jobs:
-  pre-commit:
+  check:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
 
-      - name: Install pre-commit
-        run: pip install pre-commit
-
-      - name: Run pre-commit
-        run: pre-commit run --all-files
+    - name: Run check.py
+      run: |
+        python .ci/check.py
   prompt_to_json:
     runs-on: ubuntu-latest
     steps:

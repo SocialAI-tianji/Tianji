@@ -46,7 +46,7 @@ if __name__ == '__main__':
 
     for foldername, subfolders, filenames in os.walk(folder_path):
         for filename in filenames:
-            if filename.endswith(".md"):
+            if filename.endswith(".md") and filename != "README.md":
                 md_file_path = os.path.join(foldername, filename)
                 result, message = validate_rule_template(md_file_path)
                 if result:
