@@ -1,0 +1,45 @@
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\01-Etiquette\01-Etiquette-职场与同学聚会敬酒.md 不符合规则模板: Prompt部分未识别
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\02-Hospitality\02-Hospitality-家宴如何排座次.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\02-Hospitality\02-Hospitality-家宴就餐礼仪、如何说话.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\02-Hospitality\02-Hospitality-职场如何发出邀请_上级、客户、友商、同事等多场景.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\02-Hospitality\02-Hospitality-职场如何排座次.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\02-Hospitality\02-Hospitality-职场就餐礼仪、如何说话.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\03-Gifting\03-Gifting-求人帮忙以及答谢.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\03-Gifting\03-Gifting-节日送礼.md 不符合规则模板: Prompt部分未识别
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\04-Wishes\04-Wishes-节假日祝福书面话术（短信）.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\04-Wishes\04-Wishes-节假日祝福话术（见面问好）.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\05-Communication\05-Communication-相亲.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\05-Communication\05-Communication-看望病人.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\05-Communication\05-Communication-请假.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\05-Communication\05-Communication-长辈催婚.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\05-Communication\05-Communication-面试问好.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\06-Awkwardness\06-Awkwardness-对话时忘记关键信息（姓名、职位、生日等）.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\06-Awkwardness\06-Awkwardness-打破沉默.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\06-Awkwardness\06-Awkwardness-接受&回应赞美.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\07-Conflict\07-Conflict-互联网六艺.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\07-Conflict\07-Conflict-如何合理表达&化解情绪.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\07-Conflict\07-Conflict-如何承认（承担）错误.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\07-Conflict\07-Conflict-陷入僵局如何重新建构对话.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\01-Etiquette\01-Etiquette-职场与同学聚会敬酒.md 不符合规则模板: Prompt部分未识别
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\02-Hospitality\02-Hospitality-家宴如何发出邀请_长辈、远亲、朋友、帮忙的人等多场景.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\02-Hospitality\02-Hospitality-家宴如何排座次.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\02-Hospitality\02-Hospitality-家宴就餐礼仪、如何说话.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\02-Hospitality\02-Hospitality-职场如何发出邀请_上级、客户、友商、同事等多场景.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\02-Hospitality\02-Hospitality-职场如何排座次.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\02-Hospitality\02-Hospitality-职场就餐礼仪、如何说话.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\03-Gifting\03-Gifting-求人帮忙以及答谢.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\03-Gifting\03-Gifting-节日送礼.md 不符合规则模板: Prompt部分未识别
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\04-Wishes\04-Wishes-节假日祝福书面话术（短信）.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\04-Wishes\04-Wishes-节假日祝福话术（见面问好）.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\05-Communication\05-Communication-相亲.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\05-Communication\05-Communication-看望病人.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\05-Communication\05-Communication-请假.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\05-Communication\05-Communication-长辈催婚.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\05-Communication\05-Communication-面试问好.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\06-Awkwardness\06-Awkwardness-学会拒绝.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\06-Awkwardness\06-Awkwardness-对话时忘记关键信息（姓名、职位、生日等）.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\06-Awkwardness\06-Awkwardness-打破沉默.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\06-Awkwardness\06-Awkwardness-接受&回应赞美.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\07-Conflict\07-Conflict-如何合理表达&化解情绪.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\07-Conflict\07-Conflict-如何承认（承担）错误.md 不符合规则模板: 不存在以## 开头的汉字标题
+C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt\07-Conflict\07-Conflict-陷入僵局如何重新建构对话.md 不符合规则模板: 不存在以## 开头的汉字标题

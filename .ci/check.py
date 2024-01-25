@@ -1,13 +1,7 @@
 import re
 import os
-'''
-# @author  : Shiqiding
-# @description: 本脚本批量检查prompt格式是否正确
-# @version : V1.0
+from datetime import datetime
 
-
-
-'''
 def validate_rule_template(md_file_path):
     try:
         with open(md_file_path, 'r', encoding='utf-8') as file:
@@ -22,7 +16,6 @@ def validate_rule_template(md_file_path):
             return False, "Prompt部分未识别"
 
         # 检查效果示例部分
-        # 确保每个效果示例后面都有一个 Q：和一个 A：
         effect_examples = re.findall(r'^\#\#\#\s+效果示例', md_content, re.MULTILINE)
         for example in effect_examples:
             example_index = md_content.find(example)
@@ -42,16 +35,21 @@ def validate_rule_template(md_file_path):
         return False, str(e)
 
 if __name__ == '__main__':
-    folder_path = "test/prompt"  # 替换为包含规则模板的文件夹路径
+    folder_path = r"C:\Users\yhd\PycharmProjects\Tianji\test\prompt"  # 替换为包含规则模板的文件夹路径
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    error_log_file = f"{timestamp}.txt"  # 为错误日志文件名加上时间戳
 
-    for foldername, subfolders, filenames in os.walk(folder_path):
-        for filename in filenames:
-            if filename.endswith(".md") and filename != "README.md":
-                md_file_path = os.path.join(foldername, filename)
-                result, message = validate_rule_template(md_file_path)
-                if result:
-                    print(f"{md_file_path}: {message}")
-                else:
-                    print(f"{md_file_path} 不符合规则模板: {message}")
+    with open(error_log_file, 'w', encoding='utf-8') as log_file:
+        for foldername, subfolders, filenames in os.walk(folder_path):
+            for filename in filenames:
+                if filename.endswith(".md") and filename != "README.md":
+                    md_file_path = os.path.join(foldername, filename)
+                    result, message = validate_rule_template(md_file_path)
+                    if result:
+                        print(f"{md_file_path}: {message}")
+                    else:
+                        log_file.write(f"{md_file_path} 不符合规则模板: {message}\n")
+                        print(f"{md_file_path} 不符合规则模板: {message}")
+
 
 
