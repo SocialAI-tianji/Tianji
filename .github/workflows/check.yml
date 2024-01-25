@@ -15,8 +15,8 @@ jobs:
 
     - name: List changed files
       run: |
-        # 使用git diff命令列出更改的文件并打印其路径
-        git diff --name-only HEAD^ HEAD  # 比较最新的提交与其前一次提交的文件
+        # 使用git diff命令列出最新提交与前一次提交之间的更改的文件并打印其路径
+        git diff --name-only ${{ github.event.before }} ${{ github.sha }}
   prompt_to_json:
     runs-on: ubuntu-latest
     steps:
