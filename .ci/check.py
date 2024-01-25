@@ -35,21 +35,24 @@ def validate_rule_template(md_file_path):
         return False, str(e)
 
 if __name__ == '__main__':
-    folder_path = r"test/prompt"  # 替换为包含规则模板的文件夹路径
+    folder_path = r"C:\Users\yhd\PycharmProjects\Tianji\test\prompt"  # 替换为包含规则模板的文件夹路径
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    error_log_file = f"{timestamp}.txt"  # 为错误日志文件名加上时间戳
+    log_file = f"status.txt"  # 为错误日志文件名加上时间戳
 
-    with open(error_log_file, 'w', encoding='utf-8') as log_file:
+    with open(log_file, 'w', encoding='utf-8') as log_file:
         for foldername, subfolders, filenames in os.walk(folder_path):
             for filename in filenames:
                 if filename.endswith(".md") and filename != "README.md":
                     md_file_path = os.path.join(foldername, filename)
                     result, message = validate_rule_template(md_file_path)
                     if result:
-                        print(f"{md_file_path}: {message}")
+                        output = f"{md_file_path}: {message}\n"
+                        print(output, end='')
+                        log_file.write(output)
                     else:
-                        log_file.write(f"{md_file_path} 不符合规则模板: {message}\n")
-                        print(f"{md_file_path} 不符合规则模板: {message}")
+                        output = f"{md_file_path} 不符合规则模板: {message}\n"
+                        print(output, end='')
+                        log_file.write(output)
 
 
 

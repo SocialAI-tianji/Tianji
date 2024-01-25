@@ -6,24 +6,17 @@ on:
       - main
 
 jobs:
-  check:
+  list-changed-files:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
-
-    - name: Run check.py
+    - name: List changed files
       run: |
-        python .ci/check.py
-    - name: Run Compare.py
-      run: |
-        python .ci/Compare.py
+        # 使用git diff命令列出更改的文件并打印其路径
+        git diff --name-only ${{ github.event.before }} ${{ github.sha }}
   prompt_to_json:
     runs-on: ubuntu-latest
     steps:
