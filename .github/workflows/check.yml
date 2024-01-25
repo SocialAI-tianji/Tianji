@@ -18,18 +18,18 @@ jobs:
       run: |
         # 使用git log命令获取前一次提交的哈希值
         BEFORE_COMMIT=$(git log -n 1 --skip 1 --pretty=format:"%H")
-        echo "::set-output name=base_sha::$BEFORE_COMMIT"
+        echo "BASE_SHA=$BEFORE_COMMIT" >> $GITHUB_ENV
 
     - name: Get changed files
       id: get_files
       run: |
-        BASE_SHA="${{ steps.base_sha.outputs.base_sha }}"
+        BASE_SHA="${{ env.BASE_SHA }}"
         CHANGED_FILES=$(git diff --name-only $BASE_SHA HEAD)
-        echo "::set-output name=files::$CHANGED_FILES"
+        echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
 
     - name: Run validation script
       run: |
-        CHANGED_FILES="${{ steps.get_files.outputs.files }}"
+        CHANGED_FILES="${{ env.CHANGED_FILES }}"
         for file in $CHANGED_FILES; do
           if [[ $file == *.md ]]; then
             python validate_script.py "$file"
