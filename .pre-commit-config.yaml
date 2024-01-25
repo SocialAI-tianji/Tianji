@@ -59,6 +59,6 @@ repos:
     hooks:
     -   id: check-changes
         name: Check Changes
-        entry: python check.py
+        entry: python .ci/check.py
         language: system
         stages: [commit]
