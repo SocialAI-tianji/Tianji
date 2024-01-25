@@ -21,6 +21,9 @@ jobs:
     - name: Run check.py
       run: |
         python .ci/check.py
+    - name: Run Compare.py
+      run: |
+        python .ci/Compare.py
   prompt_to_json:
     runs-on: ubuntu-latest
     steps:
