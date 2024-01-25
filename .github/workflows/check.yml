@@ -15,11 +15,18 @@ jobs:
 
     - name: List changed files
       run: |
-        # 使用git log命令获取前一次提交的哈希值
-        BEFORE_COMMIT=$(git log -n 1 --skip 1 --pretty=format:"%H")
+        # 使用github.event对象获取推送事件信息
+        echo "Push event details:"
+        echo "Repository: ${{ github.repository }}"
+        echo "Pusher: ${{ github.actor }}"
+        echo "Branch: ${{ github.ref }}"
+        echo "Commit: ${{ github.sha }}"
 
-        # 使用git diff命令列出最新提交与前一次提交之间的更改的文件并打印其路径
-        git diff --name-only $BEFORE_COMMIT ${{ github.sha }}
+        # 列出推送事件中更改的文件
+        echo "Changed files:"
+        for file in $(git diff --name-only ${{ github.event.before }} ${{ github.sha }}); do
+          echo "$file"
+        done
   prompt_to_json:
     runs-on: ubuntu-latest
     steps:
