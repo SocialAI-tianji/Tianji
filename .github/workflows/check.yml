@@ -48,13 +48,13 @@ jobs:
 
     - name: Merge the gpt_prompt
       env:
-        folder_path: 'tianji/prompt/gpt_prompt'
-        output_json_path: 'tianji/prompt/gpt_prompt/all_gpt_prompt.json'
+        gpt_folder_path: 'tianji/prompt/gpt_prompt'
+        gpt_output_json_path: 'tianji/prompt/gpt_prompt/all_gpt_prompt.json'
       run: python .ci/build_all_gpt_prompt.py 
 
     - name: Merge the yiyan_prompt
       env:
-        folder_json_path: 'tianji/prompt/yiyan_prompt'
-        output_json_path: 'tianji/prompt/yiyan_prompt/all_yiyan_prompt.json'
+        yiyan_folder_json_path: 'tianji/prompt/yiyan_prompt'
+        yiyan_output_json_path: 'tianji/prompt/yiyan_prompt/all_yiyan_prompt.json'
       run: python .ci/build_all_yiyan_prompt.py 
 
