@@ -55,10 +55,12 @@ repos:
 #        additional_dependencies: ['mdformat-tables==0.4.0']
 #        stages: [commit]
 #prompt check
+
 -   repo: local
     hooks:
-    -   id: check-changes
-        name: Check Changes
-        entry: python .ci/check.py
+    -   id: check-prompt-md-files
+        name: Check .md Files in test/prompt Directory
+        entry: python check.py
         language: system
-        stages: [commit]
+        files: test/prompt/.*\.md$
+
