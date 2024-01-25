@@ -10,29 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Get changed files
-        id: get_files
-        run: |
-          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
-          echo "::set-output name=files::$CHANGED_FILES"
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Get changed files
+      id: get_files
+      run: |
+        CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+        echo "::set-output name=files::$CHANGED_FILES"
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - name: Run validation script
-        run: |
-          CHANGED_FILES="${{ steps.get_files.outputs.files }}"
-          for file in $CHANGED_FILES; do
-            if [[ $file == *.md ]]; then
-              python .ci/validate_script.py "$file"
-            fi
-          done
+    - name: Run validation script
+      run: |
+        CHANGED_FILES="${{ steps.get_files.outputs.files }}"
+        for file in $CHANGED_FILES; do
+          if [[ $file == *.md ]]; then
+            python validate_script.py "$file"
+          fi
+        done
   prompt_to_json:
     runs-on: ubuntu-latest
     steps:
