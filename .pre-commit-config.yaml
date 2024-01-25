@@ -60,7 +60,7 @@ repos:
     hooks:
     -   id: check-prompt-md-files
         name: Check .md Files in test/prompt Directory
-        entry: python check.py
+        entry: python .ci/check.py
         language: system
         files: test/prompt/.*\.md$
 
