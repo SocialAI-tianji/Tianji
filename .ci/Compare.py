@@ -2,7 +2,7 @@
 import os
 import datetime
 import sys
-from difflib import ndiff, unified_diff
+
 
 
 def get_closest_files(directory):
@@ -33,7 +33,7 @@ def compare_files(directory, file1, file2):
         return "两个文件的行数相同，没有多余的行。"
 
 
-directory = r'C:\Users\yhd\PycharmProjects\Tianji\.ci'  # 替换为你的文件夹路径
+directory = r'.ci'  # 替换为你的文件夹路径
 closest_files = get_closest_files(directory)
 if __name__ == '__main__':
     if len(closest_files) == 2:
