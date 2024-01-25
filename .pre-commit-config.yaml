@@ -63,4 +63,5 @@ repos:
         entry: python .ci/check.py
         language: system
         files: test/prompt/.*\.md$
+        stages: [commit]
 
