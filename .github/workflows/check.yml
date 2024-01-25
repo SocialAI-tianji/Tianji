@@ -15,7 +15,10 @@ jobs:
 
     - name: Get base commit SHA
       id: base_sha
-      run: echo "::set-output name=base_sha::$(git rev-parse main^)"
+      run: |
+        # 使用git log命令获取前一次提交的哈希值
+        BEFORE_COMMIT=$(git log -n 1 --skip 1 --pretty=format:"%H")
+        echo "::set-output name=base_sha::$BEFORE_COMMIT"
 
     - name: Get changed files
       id: get_files
@@ -29,7 +32,7 @@ jobs:
         CHANGED_FILES="${{ steps.get_files.outputs.files }}"
         for file in $CHANGED_FILES; do
           if [[ $file == *.md ]]; then
-            python .ci/validate_script.py "$file"
+            python validate_script.py "$file"
           fi
         done
   prompt_to_json:
