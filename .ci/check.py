@@ -1,7 +1,11 @@
 import re
 import os
 from datetime import datetime
-
+'''
+# @author  : Shiqiding
+# @description: 对prompt进行格式检查,可以将格式不对的.md文件输出带文件名为时间戳的.txt文件(作为日志),并打印出test/prompt目录下所有文件的情况
+# @version : V1.0
+'''
 def validate_rule_template(md_file_path):
     try:
         with open(md_file_path, 'r', encoding='utf-8') as file:
@@ -35,7 +39,7 @@ def validate_rule_template(md_file_path):
         return False, str(e)
 
 if __name__ == '__main__':
-    folder_path = r"C:\Users\yhd\PycharmProjects\Tianji\test\prompt"  # 替换为包含规则模板的文件夹路径
+    folder_path = r"test/prompt"  # 替换为包含规则模板的文件夹路径
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     error_log_file = f"{timestamp}.txt"  # 为错误日志文件名加上时间戳
 

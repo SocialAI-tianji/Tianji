@@ -6,35 +6,21 @@ on:
       - main
 
 jobs:
-  check-files:
+  check:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Get base commit SHA
-      id: base_sha
-      run: |
-        # 使用git log命令获取前一次提交的哈希值
-        BEFORE_COMMIT=$(git log -n 1 --skip 1 --pretty=format:"%H")
-        echo "BASE_SHA=$BEFORE_COMMIT" >> $GITHUB_ENV
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
 
-    - name: Get changed files
-      id: get_files
+    - name: Run check.py
       run: |
-        BASE_SHA="${{ env.BASE_SHA }}"
-        CHANGED_FILES=$(git diff --name-only $BASE_SHA HEAD)
-        echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
-
-    - name: Run validation script
-      run: |
-        CHANGED_FILES="${{ env.CHANGED_FILES }}"
-        for file in $CHANGED_FILES; do
-          if [[ $file == *.md ]]; then
-            python validate_script.py "$file"
-          fi
-        done
+        python .ci/check.py
   prompt_to_json:
     runs-on: ubuntu-latest
     steps:

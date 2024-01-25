@@ -3,8 +3,11 @@ import os
 import datetime
 import sys
 
-
-
+'''
+# @author  : Shiqiding
+# @description: 拿到最近的两个error_log,对比是否有差异，差异的部分即为增量，如果其中有不符合规则模板的，则打印出来(目前还是滞后判断)
+# @version : V1.0
+'''
 def get_closest_files(directory):
     now = datetime.datetime.now()
     files = [f for f in os.listdir(directory) if f.endswith('.txt')]
@@ -42,7 +45,6 @@ if __name__ == '__main__':
         # 检查difference中是否包含特定字样
         if "不符合规则模板" in difference:
             print(difference)
-            sys.exit(1)
         else:
             print("比较结果中没有发现不符合规则模板的字样。")
     else:

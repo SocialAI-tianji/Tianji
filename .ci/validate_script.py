@@ -1,7 +1,10 @@
 import re
-import os
 import sys
-
+'''
+# @author  : Shiqiding
+# @description: 单个检查文件prompt是否符合格式，通过命令 python validate_script.py <md_file_path> 实现
+# @version : V1.0
+'''
 def validate_rule_template(md_file_path):
     try:
         with open(md_file_path, 'r', encoding='utf-8') as file:
