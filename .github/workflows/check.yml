@@ -15,8 +15,11 @@ jobs:
 
     - name: List changed files
       run: |
+        # 使用git log命令获取前一次提交的哈希值
+        BEFORE_COMMIT=$(git log -n 1 --skip 1 --pretty=format:"%H")
+
         # 使用git diff命令列出最新提交与前一次提交之间的更改的文件并打印其路径
-        git diff --name-only ${{ github.event.before }} ${{ github.sha }}
+        git diff --name-only $BEFORE_COMMIT ${{ github.sha }}
   prompt_to_json:
     runs-on: ubuntu-latest
     steps:
