@@ -1,23 +1,15 @@
-import os
-# os.environ["OPENAI_API_KEY"] = "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"  # 填入你自己的OpenAI API key
-# os.environ["OPENAI_API_MODEL"] = "gpt-3.5-turbo" # 选择你要使用的模型，例如：gpt-4, gpt-3.5-turbo
-# os.environ["OPENAI_API_BASE"] = "https://api.openai-forward.com/v1"
-
-# 项目名称：人情世故大模型
-# 项目描述：
-
+from dotenv import load_dotenv
+load_dotenv()
 import asyncio
 import sys
-sys.path.append("MetaGPT")
 from metagpt.actions import Action
 from metagpt.roles import Role
 from metagpt.schema import Message
 import json
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.utils.common_llm_api import BaiduApi
-from tianji.agents.ruyi_agent import ruyi
-from tianji.agents.qianbianzhe_agent import qianbianzhe
-
+from tianji.agents.metagpt_agents.ruyi_agent import ruyi
+from tianji.agents.metagpt_agents.qianbianzhe_agent import qianbianzhe
 
 
 # json_from_data = {
