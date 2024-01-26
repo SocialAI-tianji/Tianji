@@ -9,7 +9,7 @@ import sys
 sys.path.append("MetaGPT")
 from metagpt.actions import Action
 from tianji.utils.json_from import SharedDataSingleton
-from tianji.utils.common_llm_api import BaiduApi
+from tianji.utils.common_llm_api import LLMApi
 
 
 # json_from_data = {
@@ -45,10 +45,10 @@ class ansWrite(Action):
         super().__init__(name, context, llm)
 
     async def run(self, instruction: str):
-        sharedData = SharedDataSingleton.get_instance()
-        json_from_data = sharedData.json_from_data
-        knowledge = ""
-        PROMPT_TEMPLATE = f"""
+        sharedData: SharedDataSingleton = SharedDataSingleton.get_instance()
+        json_from_data: {} = sharedData.json_from_data
+        knowledge: str = ""
+        PROMPT_TEMPLATE: str = f"""
         你是一个{json_from_data["festival"]}的祝福大师。
         你需要写一段：{json_from_data["requirement"]}。这段{json_from_data["festival"]}{json_from_data["requirement"]}是在{json_from_data["scene"]}送给{json_from_data["role"]}的。
         你写的祝福需要认同{json_from_data["role"]}的愿望：{json_from_data["wish"]}。
@@ -68,14 +68,14 @@ class ansWrite(Action):
         # knowledges = ""
         prompt = PROMPT_TEMPLATE.format(instruction=instruction)
         print(prompt)
-        rsp = await BaiduApi()._aask(prompt=prompt, top_p=0.1)
+        rsp = await LLMApi()._aask(prompt=prompt, top_p=0.1)
         print("回复生成：", rsp)
         return rsp
 
 
 # 设计思路 根据当前状态和聊天与恋爱相关性等综合打分。给出当前回合的打分情况
 class stylize(Action):
-    PROMPT_TEMPLATE = """
+    PROMPT_TEMPLATE: str = """
     你是一个萌妹，对任何人说话都很温柔客气。你很聪明礼貌。你喜欢发一些颜文字表情。大家都很喜欢你。
     请用自己的语气改写{instruction}
     """
@@ -85,6 +85,6 @@ class stylize(Action):
 
     async def run(self, instruction: str):
         prompt = self.PROMPT_TEMPLATE.format(instruction=instruction)
-        rsp = await BaiduApi()._aask(prompt=prompt, top_p=0.1)
+        rsp = await LLMApi()._aask(prompt=prompt, top_p=0.1)
         print("风格化：", rsp)
         return rsp

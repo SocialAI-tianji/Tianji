@@ -1,11 +1,10 @@
-import erniebot 
-import asyncio
-import os
-erniebot.api_type = "aistudio"
 from dotenv import load_dotenv
 load_dotenv()
-erniebot.access_token = os.environ["BAIDU_API_KEY"]
 
+import asyncio
+import os
+import erniebot 
+from zhipuai import ZhipuAI
 
 class BaiduApi():
     def __init__(self):
@@ -21,10 +20,47 @@ class BaiduApi():
         )
         return response.result
 
-if __name__ == "__main__":
-    models = erniebot.Model.list()
-    print("可用模型",models)
+class ZhipuApi():
+    def __init__(self, glm=None):
+        if glm is None:
+            raise RuntimeError("ZhipuApi is Error!")
+        self.glm=glm
     
-    baidu_api = BaiduApi()
-    result = asyncio.run(baidu_api._aask("你好啊"))
+    async def _aask(self, prompt, stream=False, model="glm-3-turbo", top_p=0.95):
+        messages = [{'role': 'user', 'content': prompt}]
+        response = self.glm.chat.completions.create(
+            model=model,
+            messages=messages,
+            top_p=top_p,
+            stream=stream
+        )
+        return response.choices[0].message.content
+
+
+class LLMApi():
+    def __init__(self):
+        self.llm_api = None
+        # select api
+        if os.environ["ZHIPUAI_API_KEY"] is not None:
+            glm = ZhipuAI(api_key=os.environ["ZHIPUAI_API_KEY"])
+            self.llm_api = ZhipuApi(glm=glm)
+        elif os.environ["BAIDU_API_KEY"] is not None:
+            erniebot.api_type = "aistudio"
+            erniebot.access_token = os.environ["BAIDU_API_KEY"]
+            self.llm_api = BaiduApi()
+        else:
+            raise RuntimeError("No api_key found!")
+
+    # 这里的 model 的 default value 逻辑不对，应该是根据 api_type 来决定，不一定必须是 zhipuai
+    async def _aask(self, prompt, stream=False, model='glm-3-turbo', top_p=0.95):
+        return await self.llm_api._aask(prompt, stream=stream, model=model, top_p=top_p)
+
+
+if __name__ == "__main__":
+    # models = erniebot.Model.list()
+    # print("可用模型",models)
+
+    llm_api = LLMApi()
+    # result = asyncio.run(baidu_api._aask("你好啊"))
+    result = asyncio.run(llm_api._aask("你好啊"))
     print("result",result)

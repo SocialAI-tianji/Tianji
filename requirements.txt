@@ -1,1 +1,3 @@
-git+https://gitee.com/sanbucat/meta-gpt_4.git
+git+https://github.com/geekan/MetaGPT.git
+streamlit_chat
+erniebot
