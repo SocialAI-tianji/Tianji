@@ -5,5 +5,8 @@
 # 忽略日志文件
 *.log
 .idea/
-__pycache__/
 logs/
+# 中间产物
+__pycache__/
+build/
+tianji.egg-info/
