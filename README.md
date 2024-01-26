@@ -32,3 +32,16 @@ SocialAI 是设立于中国的非营利组织，我们完全开源了**Tianji**�
 以下给出 OpenAI 创始人 Sam Altman 向 特斯拉创始人 Elon Musk 敬酒的对话示例：
 
 TODO
+
+## 环境配置
+
+### 有关 key 的配置
+
+我们通过 `.env` 文件来获取环境变量，你可以根据下列例子写入对应的 key，即可成功运行调用
+
+```
+OPENAI_API_KEY=
+OPENAI_API_BASE=
+BAIDU_API_KEY=
+OPENAI_API_MODEL=
+```
