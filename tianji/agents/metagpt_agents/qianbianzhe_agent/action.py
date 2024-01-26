@@ -6,7 +6,6 @@ load_dotenv()
 
 import sys
 
-sys.path.append("MetaGPT")
 
 from typing import Optional
 from metagpt.actions import Action

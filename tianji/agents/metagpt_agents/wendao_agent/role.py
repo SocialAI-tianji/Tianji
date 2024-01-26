@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
 load_dotenv()
 import sys
-sys.path.append("MetaGPT")
 from metagpt.roles import Role
 from metagpt.schema import Message
 from .action import read_and_ana,rerask

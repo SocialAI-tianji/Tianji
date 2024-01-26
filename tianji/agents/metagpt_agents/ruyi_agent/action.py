@@ -7,7 +7,6 @@ load_dotenv()
 from tianji.utils.common_llm_api import LLMApi
 import sys
 
-sys.path.append("MetaGPT")
 from metagpt.actions import Action
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.utils.knowledge_tool import getDocumentsListByQuery
