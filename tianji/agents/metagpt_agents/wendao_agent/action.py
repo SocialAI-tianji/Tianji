@@ -9,12 +9,13 @@ import sys
 sys.path.append("MetaGPT")
 from metagpt.actions import Action
 import json
+from typing import Optional
 from tianji.utils.json_from import SharedDataSingleton
-from tianji.utils.common_llm_api import BaiduApi
+from tianji.utils.common_llm_api import LLMApi
 
 # 设计思路 给定人设并导入参考聊天话术、历史聊天语料进行聊天。
 class read_and_ana(Action):
-    PROMPT_TEMPLATE = """
+    PROMPT_TEMPLATE: str = """
     你是一个需求语言分析大师，你需要根据"历史消息记录"中的内容分析出以下要素(注意：没如果没有不要回答)：
     1.分析对话需求(requirement)。用关键词表示。如：请帮我写一段祝福。->写一段祝福
     2.分析得到目前的语言场景(scene)。用关键词表示。如：我们一家人正在吃饭。->家庭聚会
@@ -52,8 +53,10 @@ class read_and_ana(Action):
     只需要回复我JSON内容，不需要markdown格式，不需要回复其他任何内容！
     """
 
-    def __init__(self, name="read_and_ana", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "read_and_ana"
+
+    # def __init__(self, name="read_and_ana", context=None, llm=None):
+    #     super().__init__(name, context, llm)
 
     async def run(self, instruction: str):
         case = {
@@ -91,7 +94,7 @@ class read_and_ana(Action):
 
         prompt = self.PROMPT_TEMPLATE.format(instruction=sharedData.first_status_user_history, case=case, case1=case1)
         print("prompt", prompt)
-        rsp = await BaiduApi()._aask(prompt=prompt, top_p=0.1)
+        rsp = await LLMApi()._aask(prompt=prompt, top_p=0.1)
         rsp = rsp.replace("```json", "").replace("```", "")
         # rsp = rsp.strip('json\n').rstrip('')
 
@@ -103,10 +106,10 @@ class read_and_ana(Action):
 
 # 设计思路 根据当前状态和聊天与恋爱相关性等综合打分。给出当前回合的打分情况
 class rerask(Action):
-    sharedData = SharedDataSingleton.get_instance()
-    json_from_data = sharedData.json_from_data
+    sharedData: Optional[SharedDataSingleton] = SharedDataSingleton.get_instance()
+    json_from_data: Optional[dict] = sharedData.json_from_data
 
-    # PROMPT_TEMPLATE = """
+    # PROMPT_TEMPLATE: str = """
     # 限定提问的问题```
     # {question_list_str}
     # ```
@@ -115,7 +118,7 @@ class rerask(Action):
     # 1.友好，活泼
     # 你只需要回复我你的提问内容，不需要任何其他内容!
     # """
-    PROMPT_TEMPLATE = """
+    PROMPT_TEMPLATE: str = """
     你是一个提问大师，你只能从"限定提问的问题"中随机选择一个对我进行提问，每次提问只能问一个问题。
     限定提问的问题```
     {question_list_str}
@@ -123,12 +126,14 @@ class rerask(Action):
     每次提问只能问一个问题。
     """
 
-    def __init__(self, name="rerask", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "rerask"
+
+    # def __init__(self, name="rerask", context=None, llm=None):
+    #     super().__init__(name, context, llm)
 
     async def run(self, instruction: str):
-        sharedData = SharedDataSingleton.get_instance()
-        json_from_data = sharedData.json_from_data
+        sharedData: Optional[SharedDataSingleton] = SharedDataSingleton.get_instance()
+        json_from_data: Optional[dict] = sharedData.json_from_data
         # case = {"requirement": "", "scene": "家庭聚会", "festival": "元旦", "role": "妈妈", "age": "中老年人", "career": "退休中学教师", "state": "", "character": "开朗", "time": "傍晚", "hobby": "园艺", "wish": ""}
         # case = json.dumps(json_from_data)
         # print("case",case)
@@ -156,7 +161,7 @@ class rerask(Action):
 
         prompt = self.PROMPT_TEMPLATE.format(question_list_str=question_list_str)
         print("rerask prompt", prompt)
-        rsp = await BaiduApi()._aask(prompt=prompt, top_p=0.1)
+        rsp = await LLMApi()._aask(prompt=prompt, top_p=0.1)
         print("机器人提问：", rsp)
 
         if question_list == []:

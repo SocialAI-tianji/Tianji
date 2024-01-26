@@ -6,6 +6,7 @@ from metagpt.roles import Role
 from metagpt.schema import Message
 from metagpt.logs import logger
 import json
+from typing import Optional
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.utils.knowledge_tool import getDocumentsListByQuery
 from tianji.agents.ruyi_agent import ruyi
@@ -27,8 +28,8 @@ class writeMD(Action):
     # 聊天对象爱好（hobby），和role相关，就是聊天对象的兴趣爱好，例如下象棋。
     # 聊天对象愿望（wish），和role相关，就是聊天对象目前的愿望是什么，例如果希望家庭成员平安。
 
-    knowledge = ""
-    json_from_data = SharedDataSingleton.get_instance().json_from_data
+    knowledge: str = ""
+    json_from_data: {} = SharedDataSingleton.get_instance().json_from_data
     
     
     def __init__(self, name="writeMD", context=None, llm=None):
@@ -36,10 +37,10 @@ class writeMD(Action):
 
     async def run(self, instruction: str):
         # knowledges = ""
-        json_from_data = SharedDataSingleton.get_instance().json_from_data
-        knowledge_key= json_from_data["festival"] + json_from_data["requirement"]
+        json_from_data: Optional[dict] = SharedDataSingleton.get_instance().json_from_data
+        knowledge_key = json_from_data["festival"] + json_from_data["requirement"]
         knowledge = getDocumentsListByQuery(query_str=knowledge_key)
-        PROMPT_TEMPLATE = f"""
+        PROMPT_TEMPLATE: str = f"""
             你是一个{json_from_data["festival"]}的祝福大师。
             你需要写一段关于如何写{json_from_data["festival"]}{json_from_data["requirement"]}的思路总结。目前了解到这段{json_from_data["festival"]}{json_from_data["requirement"]}是在{json_from_data["scene"]}送给{json_from_data["role"]}的。
             你写的总结需要考虑如何认同{json_from_data["role"]}的愿望：{json_from_data["wish"]}。

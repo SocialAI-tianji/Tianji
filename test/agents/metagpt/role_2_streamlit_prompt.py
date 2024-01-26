@@ -6,6 +6,7 @@ from metagpt.roles import Role
 from metagpt.schema import Message
 from metagpt.logs import logger
 import json
+from typing import Optional
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.agents.wendao_agent import wendao
 from tianji.agents.ruyi_agent import ruyi
@@ -42,10 +43,10 @@ class ansWrite(Action):
         super().__init__(name, context, llm)
 
     async def run(self, instruction: str):
-        sharedData  = SharedDataSingleton.get_instance()
-        json_from_data = sharedData.json_from_data
-        knowledge = ""
-        PROMPT_TEMPLATE = f"""
+        sharedData: Optional[SharedDataSingleton]  = SharedDataSingleton.get_instance()
+        json_from_data: Optional[dict] = sharedData.json_from_data
+        knowledge: str = ""
+        PROMPT_TEMPLATE: str = f"""
         你是一个{json_from_data["festival"]}的祝福大师。
         你需要写一段：{json_from_data["requirement"]}。这段{json_from_data["festival"]}{json_from_data["requirement"]}是在{json_from_data["scene"]}送给{json_from_data["role"]}的。
         你写的祝福需要认同{json_from_data["role"]}的愿望：{json_from_data["wish"]}。

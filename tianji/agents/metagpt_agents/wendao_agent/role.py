@@ -13,7 +13,7 @@ class wendao(Role):
         profile: str = "GetInformation",
         **kwargs,
     ):
-        super().__init__(name, profile, **kwargs)
+        super().__init__(**kwargs)
         self._init_actions([read_and_ana,rerask])
         self._set_react_mode(react_mode="by_order")
 
@@ -33,7 +33,7 @@ class wendao(Role):
     '''
     async def _act_by_order(self) -> Message:
         """switch action each time by order defined in _init_actions, i.e. _act (Action1) -> _act (Action2) -> ..."""
-        for i in range(len(self._states)):
+        for i in range(len(self.states)):
             self._set_state(i)
             rsp = await self._act()
         return rsp  # return output from the last action
