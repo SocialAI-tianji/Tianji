@@ -7,6 +7,8 @@ load_dotenv()
 import sys
 
 sys.path.append("MetaGPT")
+
+from typing import Optional
 from metagpt.actions import Action
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.utils.common_llm_api import LLMApi
@@ -45,8 +47,8 @@ class ansWrite(Action):
         super().__init__(name, context, llm)
 
     async def run(self, instruction: str):
-        sharedData: SharedDataSingleton = SharedDataSingleton.get_instance()
-        json_from_data: {} = sharedData.json_from_data
+        sharedData: Optional[SharedDataSingleton] = SharedDataSingleton.get_instance()
+        json_from_data: Optional[dict] = sharedData.json_from_data
         knowledge: str = ""
         PROMPT_TEMPLATE: str = f"""
         你是一个{json_from_data["festival"]}的祝福大师。

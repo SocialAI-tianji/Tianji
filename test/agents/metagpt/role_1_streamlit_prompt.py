@@ -6,6 +6,7 @@ from metagpt.actions import Action
 from metagpt.roles import Role
 from metagpt.schema import Message
 import json
+from typing import Optional
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.utils.common_llm_api import LLMApi
 from tianji.agents.metagpt_agents.ruyi_agent import ruyi
@@ -116,8 +117,8 @@ class read_and_ana(Action):
 
 # 设计思路 根据当前状态和聊天与恋爱相关性等综合打分。给出当前回合的打分情况
 class rerask(Action):
-    sharedData: SharedDataSingleton  = SharedDataSingleton.get_instance()
-    json_from_data: {} = sharedData.json_from_data
+    sharedData: Optional[SharedDataSingleton] = SharedDataSingleton.get_instance()
+    json_from_data: Optional[dict]  = sharedData.json_from_data
 
     PROMPT_TEMPLATE: str = """
     限定提问的问题```
@@ -208,7 +209,7 @@ class wendao(Role):
     '''
     async def _act_by_order(self) -> Message:
         """switch action each time by order defined in _init_actions, i.e. _act (Action1) -> _act (Action2) -> ..."""
-        for i in range(len(self._states)):
+        for i in range(len(self.states)):
             self._set_state(i)
             rsp = await self._act()
         return rsp  # return output from the last action

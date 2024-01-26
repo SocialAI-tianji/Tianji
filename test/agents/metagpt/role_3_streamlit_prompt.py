@@ -6,6 +6,7 @@ from metagpt.roles import Role
 from metagpt.schema import Message
 from metagpt.logs import logger
 import json
+from typing import Optional
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.utils.knowledge_tool import getDocumentsListByQuery
 from tianji.agents.ruyi_agent import ruyi
@@ -28,7 +29,7 @@ class writeMD(Action):
     # 聊天对象愿望（wish），和role相关，就是聊天对象目前的愿望是什么，例如果希望家庭成员平安。
 
     knowledge: str = ""
-    json_from_data: str = SharedDataSingleton.get_instance().json_from_data
+    json_from_data: {} = SharedDataSingleton.get_instance().json_from_data
     
     
     def __init__(self, name="writeMD", context=None, llm=None):
@@ -36,7 +37,7 @@ class writeMD(Action):
 
     async def run(self, instruction: str):
         # knowledges = ""
-        json_from_data = SharedDataSingleton.get_instance().json_from_data
+        json_from_data: Optional[dict] = SharedDataSingleton.get_instance().json_from_data
         knowledge_key = json_from_data["festival"] + json_from_data["requirement"]
         knowledge = getDocumentsListByQuery(query_str=knowledge_key)
         PROMPT_TEMPLATE: str = f"""

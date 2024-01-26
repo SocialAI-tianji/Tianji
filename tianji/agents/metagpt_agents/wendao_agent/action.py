@@ -9,6 +9,7 @@ import sys
 sys.path.append("MetaGPT")
 from metagpt.actions import Action
 import json
+from typing import Optional
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.utils.common_llm_api import LLMApi
 
@@ -52,8 +53,10 @@ class read_and_ana(Action):
     只需要回复我JSON内容，不需要markdown格式，不需要回复其他任何内容！
     """
 
-    def __init__(self, name="read_and_ana", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "read_and_ana"
+
+    # def __init__(self, name="read_and_ana", context=None, llm=None):
+    #     super().__init__(name, context, llm)
 
     async def run(self, instruction: str):
         case = {
@@ -103,8 +106,8 @@ class read_and_ana(Action):
 
 # 设计思路 根据当前状态和聊天与恋爱相关性等综合打分。给出当前回合的打分情况
 class rerask(Action):
-    sharedData = SharedDataSingleton.get_instance()
-    json_from_data = sharedData.json_from_data
+    sharedData: Optional[SharedDataSingleton] = SharedDataSingleton.get_instance()
+    json_from_data: Optional[dict] = sharedData.json_from_data
 
     # PROMPT_TEMPLATE: str = """
     # 限定提问的问题```
@@ -123,12 +126,14 @@ class rerask(Action):
     每次提问只能问一个问题。
     """
 
-    def __init__(self, name="rerask", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "rerask"
+
+    # def __init__(self, name="rerask", context=None, llm=None):
+    #     super().__init__(name, context, llm)
 
     async def run(self, instruction: str):
-        sharedData = SharedDataSingleton.get_instance()
-        json_from_data = sharedData.json_from_data
+        sharedData: Optional[SharedDataSingleton] = SharedDataSingleton.get_instance()
+        json_from_data: Optional[dict] = sharedData.json_from_data
         # case = {"requirement": "", "scene": "家庭聚会", "festival": "元旦", "role": "妈妈", "age": "中老年人", "career": "退休中学教师", "state": "", "character": "开朗", "time": "傍晚", "hobby": "园艺", "wish": ""}
         # case = json.dumps(json_from_data)
         # print("case",case)
