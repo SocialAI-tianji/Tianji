@@ -4,7 +4,7 @@ import re
 import os
 '''
 # @author  : Shiqiding
-# @description: 本脚本支持将批量将.md写的规定prompt格式转换为规定格式的json
+# @description: 本脚本支持将.md写的规定prompt格式转换为规定格式的json,仅支持单文本转换为CI pipeline准备
 # @version : V2.0
 
 promptpath为.md格式的prompt路径，具体格式参考仓库里的prompt格式部分
@@ -35,7 +35,8 @@ input:用户输入
 output:对应输出
 
 '''
-folder_path = r"C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt"  # 替换成您的文件夹路径
+promptpath = os.environ.get('promptpath')
+#promptpath=r'C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\01-Etiquette\01-Etiquette-家宴敬酒 .md'
 
 
 def md_file_to_json_with_examples(file_path,id,heading):
@@ -60,7 +61,7 @@ def md_file_to_json_with_examples(file_path,id,heading):
 
         for block in blocks:
             test_system_part = block.split('#### Q：')[0].strip()
-
+            test_system_part = re.sub(r'#.*', '', test_system_part)
             qa_pairs = re.findall(r'#### Q：(.*?)#### A：(.*?)(?=#### Q：|$)', block, re.DOTALL)
             if (qa_pairs == []):
                 qa_pairs = re.findall(r'#### Q:(.*?)#### A:(.*?)(?=#### Q:|$)', block, re.DOTALL)
@@ -68,7 +69,9 @@ def md_file_to_json_with_examples(file_path,id,heading):
             examples = []
             for qa_pair in qa_pairs:
                 input_text = qa_pair[0].strip()
+                input_text = re.sub(r'#.*', '', input_text)
                 output_text = qa_pair[1].strip()
+                output_text = re.sub(r'#.*', '', output_text)
 
                 example_obj = {
                     "id":id,
@@ -172,36 +175,29 @@ def find_first_heading(md_file_path):
 
 
 if __name__ == '__main__':
+    filepath =replace_english_colons_with_chinese(promptpath)
+    heading = find_first_heading(filepath)
+    print("此文档的heading使用的是 "+heading)
+    filename=os.path.basename(filepath)
+    id =int(filename[:2])
+    print("处理文档为 " + filename+" 该文档属于第"+str(id)+"大类")
+    json_output = md_file_to_json_with_examples(filepath,id=id,heading=heading)
+    input_dir, input_file = os.path.split(promptpath)
+    input_file_base, _ = os.path.splitext(input_file)
 
-    for foldername, subfolders, filenames in os.walk(folder_path):
-        for filename in filenames:
-            if filename.endswith(".md"):
-                if filename == "README.md":
-                    continue
-                promptpath=os.path.join(foldername, filename)
-                filepath =replace_english_colons_with_chinese(promptpath)
-                print(filepath)
-                heading = find_first_heading(filepath)
-                print("此文档的heading使用的是 "+heading)
-                filename=os.path.basename(filepath)
-                id =int(filename[:2])
-                print("处理文档为 " + filename+" 该文档属于第"+str(id)+"大类")
-                json_output = md_file_to_json_with_examples(filepath,id=id,heading=heading)
-                input_dir, input_file = os.path.split(promptpath)
-                input_file_base, _ = os.path.splitext(input_file)
+    output_path = "..\\tianji\\prompt"
 
-                output_path = r"C:\Users\yhd\PycharmProjects\Tianji\tianji\prompt"
+    # 使用正则表达式提取所需路径
+    match = re.search(r'\\prompt(.*)\\[^\\]+$', promptpath)
+    if match:
+        # 提取的路径
+        extracted_path = match.group(1)
+        # 构造最终路径
+        json_file_output_path = output_path + extracted_path + "\\"
+    else:
+        json_file_output_path = "无法匹配路径"
+    json_file_output = os.path.join(json_file_output_path, input_file_base + ".json")
+    with open(json_file_output, 'w', encoding='utf-8') as file:
+        json.dump(json.loads(json_output), file, ensure_ascii=False, indent=4)
+    print(json_output)
 
-                # 使用正则表达式提取所需路径
-                match = re.search(r'\\prompt(.*)\\[^\\]+$', promptpath)
-                if match:
-                    # 提取的路径
-                    extracted_path = match.group(1)
-                    # 构造最终路径
-                    json_file_output_path = output_path + extracted_path + "\\"
-                else:
-                    json_file_output_path = "无法匹配路径"
-                json_file_output = os.path.join(json_file_output_path, input_file_base + ".json")
-                with open(json_file_output, 'w', encoding='utf-8') as file:
-                    json.dump(json.loads(json_output), file, ensure_ascii=False, indent=4)
-                print(json_output)
