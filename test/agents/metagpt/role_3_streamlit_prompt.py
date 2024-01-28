@@ -9,7 +9,10 @@ from metagpt.logs import logger
 import json
 from typing import Optional
 from tianji.utils.json_from import SharedDataSingleton
-from tianji.utils.knowledge_tool import get_docs_list_query_openai
+from tianji.utils.knowledge_tool import (
+    get_docs_list_query_openai,
+    get_docs_list_query_zhipuai,
+)
 from tianji.utils.common_llm_api import LLMApi
 from tianji.agents.metagpt_agents.ruyi_agent import ruyi
 from tianji.agents.metagpt_agents.qianbianzhe_agent import qianbianzhe
@@ -45,7 +48,7 @@ class writeMD(Action):
             dict
         ] = SharedDataSingleton.get_instance().json_from_data
         knowledge_key = json_from_data["festival"] + json_from_data["requirement"]
-        knowledge = get_docs_list_query_openai(
+        knowledge = get_docs_list_query_zhipuai(
             query_str=knowledge_key,
             loader_file_path=KNOWLEDGE_PATH,
             persist_directory=SAVE_PATH,

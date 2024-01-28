@@ -27,9 +27,9 @@ from tianji.utils.common_llm_api import LLMApi
 #             "wish": "家庭成员平安"
 #         }w
 
+
 # 设计思路 给定人设并导入参考聊天话术、历史聊天语料进行聊天。
 class ansWrite(Action):
-
     # 这是对json中每个key的解释：
     # 语言场景（scene），目前的聊天场合，比如工作聚会。
     # 节日（festival），对话目前背景所在的节日，比如生日。
@@ -42,7 +42,7 @@ class ansWrite(Action):
     # 聊天对象爱好（hobby），和role相关，就是聊天对象的兴趣爱好，例如下象棋。
     # 聊天对象愿望（wish），和role相关，就是聊天对象目前的愿望是什么，例如果希望家庭成员平安。
 
-    name: str = "read_and_ana"
+    name: str = "ansWrite"
 
     async def run(self, instruction: str):
         sharedData: Optional[SharedDataSingleton] = SharedDataSingleton.get_instance()
@@ -80,8 +80,7 @@ class stylize(Action):
     请用自己的语气改写{instruction}
     """
 
-    def __init__(self, name="rerask", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "stylize"
 
     async def run(self, instruction: str):
         prompt = self.PROMPT_TEMPLATE.format(instruction=instruction)
