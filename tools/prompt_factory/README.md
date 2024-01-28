@@ -1,6 +1,4 @@
 # 文件说明
-
- - prompt_maker.json  负责 prompt 生成和基础信息语料抽取的 json 配置
  - web_demo.py  供通用型的 prompt 产出调试，可以不断修改 `src/prompt` 中的 `prompt.json`来调试通用型的 prompt。目前只支持 gpt 。
  - prompt_to_json_in_bulk.py 负责批量将test/gpt_prompt下的.md prompt，转化为 tianji/prompt 下的json格式
  - prompt_to_json_for_CI.py 负责将单个文件 test/gpt_prompt下的.md prompt，转化为 tianji/prompt 下的json格式
