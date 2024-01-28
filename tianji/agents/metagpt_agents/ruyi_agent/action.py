@@ -9,7 +9,13 @@ import sys
 from typing import Optional
 from metagpt.actions import Action
 from tianji.utils.json_from import SharedDataSingleton
-from tianji.utils.knowledge_tool import get_docs_list_query_openai
+from tianji.utils.knowledge_tool import (
+    get_docs_list_query_openai,
+    get_docs_list_query_zhipuai,
+)
+
+KNOWLEDGE_PATH = r"/Users/fengzetao/Workspace/Github/SocialAI/Tianji/tianji/knowledges/04-Wishes/knowledges.txt"
+SAVE_PATH = r"/Users/fengzetao/Workspace/Github/SocialAI/Tianji/temp"
 
 
 # 给出针对回答的知识 并用md展示
@@ -35,7 +41,12 @@ class writeMD(Action):
         # knowledges = ""
         json_from_data = SharedDataSingleton.get_instance().json_from_data
         knowledge_key = json_from_data["festival"] + json_from_data["requirement"]
-        knowledge = get_docs_list_query_openai(query_str=knowledge_key)
+        knowledge = get_docs_list_query_zhipuai(
+            query_str=knowledge_key,
+            loader_file_path=KNOWLEDGE_PATH,
+            persist_directory=SAVE_PATH,
+            k_num=5,
+        )
         PROMPT_TEMPLATE: str = f"""
             你是一个{json_from_data["festival"]}的祝福大师。
             你需要写一段关于如何写{json_from_data["festival"]}{json_from_data["requirement"]}的思路总结。目前了解到这段{json_from_data["festival"]}{json_from_data["requirement"]}是在{json_from_data["scene"]}送给{json_from_data["role"]}的。
@@ -53,5 +64,6 @@ class writeMD(Action):
         rsp = await LLMApi()._aask(prompt=prompt, top_p=0.1)
         print("回复生成：", rsp)
         return rsp
+
 
 # 如何写 如意如意如我心意

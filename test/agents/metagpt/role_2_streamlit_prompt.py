@@ -80,7 +80,7 @@ class stylize(Action):
     请用自己的语气改写{instruction}
     """
 
-    name: str = "rerask"
+    name: str = "stylize"
 
     async def run(self, instruction: str):
         prompt = self.PROMPT_TEMPLATE.format(instruction=instruction)
