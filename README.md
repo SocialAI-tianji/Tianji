@@ -21,13 +21,11 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 </p>
 <br><br>
 
-SocialAI 是设立于中国的非营利组织，我们完全开源了**Tianji**（天机）系列工作，当前开源系统涉及为xxxxxxx。模型链接、语料和内置prompt在表格中，请点击了解详情。同时，我们公开了我们的技术研究报告，请点击我们的官网查看。
+SocialAI（来事儿AI） 是设立于中国的非营利组织，我们完全开源了**Tianji**（天机）系列工作，当前开源系统涉及为xxxxxxx。模型链接、语料和内置prompt在表格中，请点击了解详情。同时，我们公开了我们的技术研究报告，请点击我们的官网查看。
 
 人情世故大模型-天机是基于当前稳定训练的基础模型，它经过大规模高质量且多样化的数据训练，覆盖多语言（主要是中文和英文），总量高达3万亿token。在相关基准评测中，Qwen系列模型展现出非常有竞争力的性能，显著超越同规模模型并紧追一系列最强的闭源模型。利用SFT和RLHF技术，我们实现了对齐，从基座模型训练得到了对话模型。Qwen-Chat具备广泛的能力，包括聊天、文字创作、摘要、信息抽取、翻译等，同时还具备一定的代码生成和简单数学推理能力。在此基础上，我们针对LLM对接外部系统等方面进行了针对性的优化，目前具备强大的工具调用能力，以及备受关注的Code Interpreter和Agent角色扮演能力。下表列出了各个模型的特点。
 
-## 调用方式
-
-## 示例
+## 结果示例
 
 以下给出 OpenAI 创始人 Sam Altman 向 特斯拉创始人 Elon Musk 敬酒的对话示例：
 
@@ -35,13 +33,23 @@ TODO
 
 ## 环境配置
 
+### 运行环境
+
+在本项目目录下执行
+
+```bash
+pip install -r requirements.txt
+pip install .
+```
+
 ### 有关 key 的配置
 
 我们通过 `.env` 文件来获取环境变量，你可以根据下列例子写入对应的 key，即可成功运行调用
 
 ```
-OPENAI_API_KEY=
-OPENAI_API_BASE=
-BAIDU_API_KEY=
-OPENAI_API_MODEL=
+OPENAI_API_KEY=这里写入key
+OPENAI_API_BASE=这里写入网址
+ZHIPUAI_API_KEY=这里写入key
 ```
+
+调用顺序（暂时约定），首先是zhipuai，接下来是yiyan，最后是openai（TODO）
