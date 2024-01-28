@@ -1,0 +1,59 @@
+name: Check & Merge Prompt
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Run check.py
+      run: |
+        python .ci/check.py
+  prompt_to_json:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # 检出完整的提交历史
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9 # 指定所需的 Python 版本
+
+    - name: gpt_prompt to json
+      env:
+        folder_path: 'test/prompt/gpt_prompt'
+        output_path: 'tianji/prompt'
+      run: python .ci/prompt_to_json_for_CI.py
+
+    - name: yiyan_prompt to json
+      env:
+        folder_path: 'test/prompt/yiyan_prompt'
+        output_path: 'tianji/prompt'
+      run: python .ci/prompt_to_json_for_CI.py
+
+    - name: Merge the gpt_prompt
+      env:
+        gpt_folder_path: 'tianji/prompt/gpt_prompt'
+        gpt_output_json_path: 'tianji/prompt/gpt_prompt/all_gpt_prompt.json'
+      run: python .ci/build_all_gpt_prompt.py 
+
+    - name: Merge the yiyan_prompt
+      env:
+        yiyan_folder_path: 'tianji/prompt/yiyan_prompt'
+        yiyan_output_json_path: 'tianji/prompt/yiyan_prompt/all_yiyan_prompt.json'
+      run: python .ci/build_all_yiyan_prompt.py 
