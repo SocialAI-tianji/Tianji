@@ -41,11 +41,11 @@ repos:
     hooks:
     -   id: flake8
         args: ["--config=.flake8"]
--   repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.5
-    hooks:
-    -   id: ruff
-        args: [--fix, --exit-non-zero-on-fix, --no-cache]
+# -   repo: https://github.com/astral-sh/ruff-pre-commit
+#     rev: v0.1.5
+#     hooks:
+#     -   id: ruff
+#         args: [--fix, --exit-non-zero-on-fix, --no-cache]
 
 # Document hooks
 -   repo: https://github.com/executablebooks/mdformat

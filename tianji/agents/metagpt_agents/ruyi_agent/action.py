@@ -6,7 +6,7 @@ load_dotenv()
 
 from tianji.utils.common_llm_api import LLMApi
 import sys
-
+from typing import Optional
 from metagpt.actions import Action
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.utils.knowledge_tool import get_docs_list_query_openai
@@ -26,11 +26,10 @@ class writeMD(Action):
     # 聊天对象爱好（hobby），和role相关，就是聊天对象的兴趣爱好，例如下象棋。
     # 聊天对象愿望（wish），和role相关，就是聊天对象目前的愿望是什么，例如果希望家庭成员平安。
 
+    name: str = "writeMD"
+
     knowledge: str = ""
     json_from_data: str = SharedDataSingleton.get_instance().json_from_data
-
-    def __init__(self, name="writeMD", context=None, llm=None):
-        super().__init__(name, context, llm)
 
     async def run(self, instruction: str):
         # knowledges = ""

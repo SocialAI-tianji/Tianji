@@ -52,4 +52,8 @@ OPENAI_API_BASE=这里写入网址
 ZHIPUAI_API_KEY=这里写入key
 ```
 
-调用顺序（暂时约定），首先是zhipuai，接下来是yiyan，最后是openai（TODO）
+### 调用方式
+
+- 调用顺序（暂时约定），首先是 zhipuai，接下来是 yiyan，最后是 openai（TODO）
+- 如果用 LLM_Api 调用，则使用 LLM_Api().\_aask()
+- 如果用 MetaGPT 调用，则使用 self.\_aask()
