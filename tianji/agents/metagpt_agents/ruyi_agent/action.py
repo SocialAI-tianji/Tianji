@@ -9,7 +9,7 @@ import sys
 
 from metagpt.actions import Action
 from tianji.utils.json_from import SharedDataSingleton
-from tianji.utils.knowledge_tool import getDocumentsListByQuery
+from tianji.utils.knowledge_tool import get_docs_list_query_openai
 
 
 # 给出针对回答的知识 并用md展示
@@ -36,7 +36,7 @@ class writeMD(Action):
         # knowledges = ""
         json_from_data = SharedDataSingleton.get_instance().json_from_data
         knowledge_key = json_from_data["festival"] + json_from_data["requirement"]
-        knowledge = getDocumentsListByQuery(query_str=knowledge_key)
+        knowledge = get_docs_list_query_openai(query_str=knowledge_key)
         PROMPT_TEMPLATE: str = f"""
             你是一个{json_from_data["festival"]}的祝福大师。
             你需要写一段关于如何写{json_from_data["festival"]}{json_from_data["requirement"]}的思路总结。目前了解到这段{json_from_data["festival"]}{json_from_data["requirement"]}是在{json_from_data["scene"]}送给{json_from_data["role"]}的。

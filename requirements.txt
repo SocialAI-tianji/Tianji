@@ -1,3 +1,4 @@
 git+https://gitee.com/mirrors/MetaGPT.git
 streamlit_chat
 erniebot
+chromadb

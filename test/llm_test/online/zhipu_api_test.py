@@ -2,8 +2,19 @@
 # https://open.bigmodel.cn/
 # https://open.bigmodel.cn/dev/api#sdk
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from zhipuai import ZhipuAI
-client = ZhipuAI(api_key="") # 填写您自己的APIKey
+client = ZhipuAI() # 也可在此显式指定 api_key
+
+# embedding
+response = client.embeddings.create(
+    model="embedding-2", #填写需要调用的模型名称
+    input="你好",
+)
+
+# chat
 response = client.chat.completions.create(
     model="glm-4",  # 填写需要调用的模型名称
     messages=[
@@ -15,3 +26,4 @@ response = client.chat.completions.create(
     ],
 )
 print(response.choices[0].message)
+

@@ -35,7 +35,7 @@ TODO
 
 ### 运行环境
 
-在本项目目录下执行
+在本项目目录下执行下列命令，如果安装过慢，可以加上 `-i https://pypi.mirrors.ustc.edu.cn/simple/`
 
 ```bash
 pip install -r requirements.txt
