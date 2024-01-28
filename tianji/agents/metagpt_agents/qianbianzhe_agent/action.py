@@ -42,8 +42,7 @@ class ansWrite(Action):
     # 聊天对象爱好（hobby），和role相关，就是聊天对象的兴趣爱好，例如下象棋。
     # 聊天对象愿望（wish），和role相关，就是聊天对象目前的愿望是什么，例如果希望家庭成员平安。
 
-    def __init__(self, name="read_and_ana", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "read_and_ana"
 
     async def run(self, instruction: str):
         sharedData: Optional[SharedDataSingleton] = SharedDataSingleton.get_instance()

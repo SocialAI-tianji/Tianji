@@ -54,9 +54,6 @@ class read_and_ana(Action):
 
     name: str = "read_and_ana"
 
-    # def __init__(self, name="read_and_ana", context=None, llm=None):
-    #     super().__init__(name, context, llm)
-
     async def run(self, instruction: str):
         case = {
             "requirement": "祝福",
@@ -126,9 +123,6 @@ class rerask(Action):
     """
 
     name: str = "rerask"
-
-    # def __init__(self, name="rerask", context=None, llm=None):
-    #     super().__init__(name, context, llm)
 
     async def run(self, instruction: str):
         sharedData: Optional[SharedDataSingleton] = SharedDataSingleton.get_instance()

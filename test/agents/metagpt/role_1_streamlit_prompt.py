@@ -5,6 +5,7 @@ import sys
 from metagpt.actions import Action
 from metagpt.roles import Role
 from metagpt.schema import Message
+from metagpt.logs import logger
 import json
 from typing import Optional
 from tianji.utils.json_from import SharedDataSingleton
@@ -67,8 +68,7 @@ class read_and_ana(Action):
     只需要回复我JSON内容，不需要markdown格式，不需要回复其他任何内容！
     """
     
-    def __init__(self, name="read_and_ana", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "read_and_ana"
 
     async def run(self, instruction: str):
         case = {
@@ -136,8 +136,8 @@ class rerask(Action):
     ```
     每次提问只能问一个问题。
     """
-    def __init__(self, name="rerask", context=None, llm=None):
-        super().__init__(name, context, llm)
+
+    name: str = "rerask"
 
     async def run(self, instruction: str):
         sharedData  = SharedDataSingleton.get_instance()
@@ -183,30 +183,26 @@ class rerask(Action):
 
 # 问道  问出来信息
 class wendao(Role):
-    def __init__(
-        self,
-        name: str = "wendao",
-        profile: str = "GetInformation",
-        **kwargs,
-    ):
-        super().__init__(name, profile, **kwargs)
+    name: str = "wendao"
+    profile: str = "GetInformation"
+        
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._init_actions([read_and_ana,rerask])
         self._set_react_mode(react_mode="by_order")
 
-    '''
     async def _act(self) -> Message:
-        logger.info(f"{self._setting}: ready to {self._rc.todo}")
-        # By choosing the Action by order under the hood
-        # todo will be first SimpleWriteCode() then SimpleRunCode()
-        todo = self._rc.todo
+        logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
+        
+        todo = self.rc.todo
 
-        msg = self.get_memories(k=1)[0] # find the most k recent messagesA
+        msg = self.get_memories(k=1)[0]  # find the most k recent messages
         result = await todo.run(msg.content)
 
         msg = Message(content=result, role=self.profile, cause_by=type(todo))
-        self._rc.memory.add(msg)
+        self.rc.memory.add(msg)
         return msg
-    '''
+
     async def _act_by_order(self) -> Message:
         """switch action each time by order defined in _init_actions, i.e. _act (Action1) -> _act (Action2) -> ..."""
         for i in range(len(self.states)):
