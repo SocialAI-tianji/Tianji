@@ -1,14 +1,12 @@
 from dotenv import load_dotenv
 
 load_dotenv()
-# 项目名称：人情世故大模型
-# 项目描述：
-
-import sys
 
 
-from typing import Optional
+from typing import Optional, Any
 from metagpt.actions import Action
+from metagpt.logs import logger
+
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.utils.common_llm_api import LLMApi
 
@@ -29,7 +27,7 @@ from tianji.utils.common_llm_api import LLMApi
 
 
 # 设计思路 给定人设并导入参考聊天话术、历史聊天语料进行聊天。
-class ansWrite(Action):
+class AnsWrite(Action):
     # 这是对json中每个key的解释：
     # 语言场景（scene），目前的聊天场合，比如工作聚会。
     # 节日（festival），对话目前背景所在的节日，比如生日。
@@ -42,10 +40,10 @@ class ansWrite(Action):
     # 聊天对象爱好（hobby），和role相关，就是聊天对象的兴趣爱好，例如下象棋。
     # 聊天对象愿望（wish），和role相关，就是聊天对象目前的愿望是什么，例如果希望家庭成员平安。
 
-    name: str = "ansWrite"
+    name: str = "AnsWrite"
 
     async def run(self, instruction: str):
-        sharedData: Optional[SharedDataSingleton] = SharedDataSingleton.get_instance()
+        sharedData: Optional[Any] = SharedDataSingleton.get_instance()
         json_from_data: Optional[dict] = sharedData.json_from_data
         knowledge: str = ""
         PROMPT_TEMPLATE: str = f"""
@@ -63,27 +61,30 @@ class ansWrite(Action):
         经过思考后，将这些信息整理成一段完整的{json_from_data["requirement"]}。
 
         """
-        print("json_from_data####################################", json_from_data)
+        # print("json_from_data####################################", json_from_data)
 
         # knowledges = ""
         prompt = PROMPT_TEMPLATE.format(instruction=instruction)
-        print(prompt)
-        rsp = await LLMApi()._aask(prompt=prompt, top_p=0.1)
-        print("回复生成：", rsp)
+        # print(prompt)
+        rsp = await LLMApi()._aask(prompt)
+
+        logger.info("回复生成：\n" + rsp)
+
         return rsp
 
 
 # 设计思路 根据当前状态和聊天与恋爱相关性等综合打分。给出当前回合的打分情况
-class stylize(Action):
+class Stylize(Action):
     PROMPT_TEMPLATE: str = """
     你是一个萌妹，对任何人说话都很温柔客气。你很聪明礼貌。你喜欢发一些颜文字表情。大家都很喜欢你。
     请用自己的语气改写{instruction}
     """
 
-    name: str = "stylize"
+    name: str = "Stylize"
 
     async def run(self, instruction: str):
         prompt = self.PROMPT_TEMPLATE.format(instruction=instruction)
-        rsp = await LLMApi()._aask(prompt=prompt, top_p=0.1)
-        print("风格化：", rsp)
+        rsp = await LLMApi()._aask(prompt)
+        logger.info("风格化：\n" + rsp)
+
         return rsp
