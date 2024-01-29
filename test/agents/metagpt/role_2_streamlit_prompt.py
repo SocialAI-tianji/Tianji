@@ -1,17 +1,20 @@
 from dotenv import load_dotenv
 
 load_dotenv()
+
 import asyncio
+import json
+from typing import Optional, Any
+
 from metagpt.actions import Action
-from metagpt.roles import Role
+from metagpt.roles.role import Role, RoleReactMode
 from metagpt.schema import Message
 from metagpt.logs import logger
-import json
-from typing import Optional
+
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.utils.common_llm_api import LLMApi
-from tianji.agents.metagpt_agents.wendao_agent import wendao
-from tianji.agents.metagpt_agents.ruyi_agent import ruyi
+from tianji.agents.metagpt_agents.wendao import WenDao
+from tianji.agents.metagpt_agents.ruyi import RuYi
 
 # json_from_data = {
 #             "requirement": "祝福",
@@ -29,7 +32,7 @@ from tianji.agents.metagpt_agents.ruyi_agent import ruyi
 
 
 # 设计思路 给定人设并导入参考聊天话术、历史聊天语料进行聊天。
-class ansWrite(Action):
+class AnsWrite(Action):
     # 这是对json中每个key的解释：
     # 语言场景（scene），目前的聊天场合，比如工作聚会。
     # 节日（festival），对话目前背景所在的节日，比如生日。
@@ -42,10 +45,10 @@ class ansWrite(Action):
     # 聊天对象爱好（hobby），和role相关，就是聊天对象的兴趣爱好，例如下象棋。
     # 聊天对象愿望（wish），和role相关，就是聊天对象目前的愿望是什么，例如果希望家庭成员平安。
 
-    name: str = "read_and_ana"
+    name: str = "AnsWrite"
 
     async def run(self, instruction: str):
-        sharedData: Optional[SharedDataSingleton] = SharedDataSingleton.get_instance()
+        sharedData: Optional[Any] = SharedDataSingleton.get_instance()
         json_from_data: Optional[dict] = sharedData.json_from_data
         knowledge: str = ""
         PROMPT_TEMPLATE: str = f"""
@@ -63,52 +66,54 @@ class ansWrite(Action):
         经过思考后，将这些信息整理成一段完整的{json_from_data["requirement"]}。
 
         """
-        print("json_from_data####################################", json_from_data)
+        # print("json_from_data####################################", json_from_data)
 
         # knowledges = ""
         prompt = PROMPT_TEMPLATE.format(instruction=instruction)
-        print(prompt)
+        # print(prompt)
         rsp = await LLMApi()._aask(prompt)
-        print("回复生成：", rsp)
+
+        logger.info("回复生成：\n" + rsp)
+
         return rsp
 
 
 # 设计思路 根据当前状态和聊天与恋爱相关性等综合打分。给出当前回合的打分情况
-class stylize(Action):
+class Stylize(Action):
     PROMPT_TEMPLATE: str = """
     你是一个萌妹，对任何人说话都很温柔客气。你很聪明礼貌。你喜欢发一些颜文字表情。大家都很喜欢你。
     请用自己的语气改写{instruction}
     """
 
-    name: str = "stylize"
+    name: str = "Stylize"
 
     async def run(self, instruction: str):
         prompt = self.PROMPT_TEMPLATE.format(instruction=instruction)
-        rsp = await self._aask(prompt)
-        print("风格化：", rsp)
+        rsp = await LLMApi()._aask(prompt)
+        logger.info("风格化：\n" + rsp)
+
         return rsp
 
 
 # 千变者 以自己的身份回答问题
-class qianbianzhe(Role):
-    name: str = "qianbianzhe"
-    profile: str = "stylize"
+class QianBianZhe(Role):
+    name: str = "QianBianZhe"
+    profile: str = "Stylize"
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions([ansWrite, stylize])
-        self._set_react_mode(react_mode="by_order")
+        self._init_actions([AnsWrite, Stylize])
+        self._set_react_mode(react_mode=RoleReactMode.BY_ORDER.value)
 
     async def _act(self) -> Message:
-        # logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
-
+        logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
         todo = self.rc.todo
 
-        msg = self.get_memories(k=1)[0]  # find the most k recent messagesA
+        msg = self.get_memories(k=1)[0]
         result = await todo.run(msg.content)
-
         msg = Message(content=result, role=self.profile, cause_by=type(todo))
         self.rc.memory.add(msg)
+
         return msg
 
 
@@ -134,20 +139,20 @@ def run_async_code(async_function, *args, **kwargs):
 
 # 定义一个异步函数
 async def run_async_model(user_input):
-    role_wendao = wendao()
+    role_wendao = WenDao()
     result = await role_wendao.run(user_input)
     return result.content
 
 
 async def run_async_qianbianzhe(user_input):
-    role_wendao = qianbianzhe()
-    result = await role_wendao.run(user_input)
+    role_qianbianzhe = QianBianZhe()
+    result = await role_qianbianzhe.run(user_input)
     return result.content
 
 
 async def run_async_ruyi(user_input):
-    role_wendao = ruyi()
-    result = await role_wendao.run(user_input)
+    role_ruyi = RuYi()
+    result = await role_ruyi.run(user_input)
     return result.content
 
 

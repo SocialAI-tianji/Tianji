@@ -1,17 +1,20 @@
 from dotenv import load_dotenv
+
 load_dotenv()
+
 import asyncio
-import sys
+import json
+from typing import Optional, Any
+
 from metagpt.actions import Action
-from metagpt.roles import Role
+from metagpt.roles.role import Role, RoleReactMode
 from metagpt.schema import Message
 from metagpt.logs import logger
-import json
-from typing import Optional
+
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.utils.common_llm_api import LLMApi
-from tianji.agents.metagpt_agents.ruyi_agent import ruyi
-from tianji.agents.metagpt_agents.qianbianzhe_agent import qianbianzhe
+from tianji.agents.metagpt_agents.ruyi import RuYi
+from tianji.agents.metagpt_agents.qianbianzhe import QianBianZhe
 
 
 # json_from_data = {
@@ -28,8 +31,9 @@ from tianji.agents.metagpt_agents.qianbianzhe_agent import qianbianzhe
 #         "wish": ""
 #     }
 
+
 # 设计思路 给定人设并导入参考聊天话术、历史聊天语料进行聊天。
-class read_and_ana(Action):
+class RecvAndAnalyze(Action):
     PROMPT_TEMPLATE: str = """
     你是一个需求语言分析大师，你需要根据"历史消息记录"中的内容分析出以下要素(注意：没如果没有不要回答)：
     1.分析对话需求(requirement)。用关键词表示。如：请帮我写一段祝福。->写一段祝福
@@ -67,8 +71,8 @@ class read_and_ana(Action):
     请认真结合历史消息记录分析每一个要素的情况。
     只需要回复我JSON内容，不需要markdown格式，不需要回复其他任何内容！
     """
-    
-    name: str = "read_and_ana"
+
+    name: str = "RecvAndAnalyze"
 
     async def run(self, instruction: str):
         case = {
@@ -83,7 +87,7 @@ class read_and_ana(Action):
             "time": "傍晚",
             "hobby": "广场舞",
             "wish": "家庭成员平安",
-            "style": "小红书版"
+            "style": "小红书版",
         }
         case1 = {
             "requirement": "给爸爸送祝福",
@@ -97,106 +101,111 @@ class read_and_ana(Action):
             "time": "晚上",
             "hobby": "摄影",
             "wish": "希望我能学会欣赏艺术的美",
-            "style": "老年人版"
+            "style": "老年人版",
         }
+
         case = json.dumps(case)
-        case1 = json.dumps(case1)
-        sharedData  = SharedDataSingleton.get_instance()
-        print("instruction",instruction)
+        # case1 = json.dumps(case1)
 
-        prompt = self.PROMPT_TEMPLATE.format(instruction=sharedData.first_status_user_history,case = case,case1 = case1)
-        print("prompt",prompt)
-        rsp = await LLMApi()._aask(prompt=prompt,top_p=0.1)
+        sharedData = SharedDataSingleton.get_instance()
+
+        prompt = self.PROMPT_TEMPLATE.format(
+            instruction=sharedData.first_status_user_history, case=case
+        )
+
+        rsp = await LLMApi()._aask(prompt=prompt, top_p=0.1)
         rsp = rsp.replace("```json", "").replace("```", "")
-        #rsp = rsp.strip('json\n').rstrip('')
+        # rsp = rsp.strip('json\n').rstrip('')
 
-        print("机器人分析需求：",rsp)
+        logger.info("机器人分析需求：" + rsp)
         sharedData.json_from_data = json.loads(rsp)
         # json_from_data = json.loads(rsp)
         return rsp
 
+
 # 设计思路 根据当前状态和聊天与恋爱相关性等综合打分。给出当前回合的打分情况
-class rerask(Action):
-    sharedData: Optional[SharedDataSingleton] = SharedDataSingleton.get_instance()
-    json_from_data: Optional[dict]  = sharedData.json_from_data
+class RaiseQuestion(Action):
+    sharedData: Optional[Any] = SharedDataSingleton.get_instance()
+    json_from_data: Optional[dict] = sharedData.json_from_data
+
+    # PROMPT_TEMPLATE: str = """
+    # 限定提问的问题```
+    # {question_list_str}
+    # ```
+    # 你是一个提问大师，你只能从"限定提问的问题"中随机选择一个对我进行提问，每次提问只能问一个问题。
+    # 提问问题的时候，你的语言风格满足：
+    # 1.友好，活泼
+    # 你只需要回复我你的提问内容，不需要任何其他内容!
+    # """
 
     PROMPT_TEMPLATE: str = """
-    限定提问的问题```
-    {question_list_str}
-    ```
-    你是一个提问大师，你只能从"限定提问的问题"中随机选择一个对我进行提问，每次提问只能问一个问题。
-    提问问题的时候，你的语言风格满足：
-    1.友好，活泼
-    你只需要回复我你的提问内容，不需要任何其他内容!
-    """
-    PROMPT_TEMPLATE = """
-    你是一个提问大师，你只能从"限定提问的问题"中随机选择一个对我进行提问，每次提问只能问一个问题。
+    你是一个提问大师，你只能从"限定提问的问题"中随机选择一个对我进行提问。
     限定提问的问题```
     {question_list_str}
     ```
     每次提问只能问一个问题。
     """
 
-    name: str = "rerask"
+    name: str = "RaiseQuestion"
 
     async def run(self, instruction: str):
-        sharedData  = SharedDataSingleton.get_instance()
+        sharedData = SharedDataSingleton.get_instance()
         json_from_data = sharedData.json_from_data
-        #case = {"requirement": "", "scene": "家庭聚会", "festival": "元旦", "role": "妈妈", "age": "中老年人", "career": "退休中学教师", "state": "", "character": "开朗", "time": "傍晚", "hobby": "园艺", "wish": ""}
-        #case = json.dumps(json_from_data)
-        #print("case",case)
+        # case = {"requirement": "", "scene": "家庭聚会", "festival": "元旦", "role": "妈妈", "age": "中老年人", "career": "退休中学教师", "state": "", "character": "开朗", "time": "傍晚", "hobby": "园艺", "wish": ""}
+        # case = json.dumps(json_from_data)
+        # print("case",case)
         check_after_question_list = {
             "requirement": "请告诉我你的需求，比如送祝福。",
             "scene": "你准备在什么场景下进行呢？比如家庭聚会，朋友聚会等等。",
             "festival": "是在哪个特殊的节日(比如中秋节，春节)吗?",
             "role": "你送祝福的对象是谁呢？",
             "age": "你送祝福的对象年龄多大呢？",
-            #"career": "送祝福的对象是做什么职业呢？",
-            #"state": "送祝福的对象最近状态如何呢？比如身体状况，精神状况等等。",
-            #"character": "送祝福的对象他有什么性格特点吗？",
+            "career": "送祝福的对象是做什么职业呢？",
+            "state": "送祝福的对象最近状态如何呢？比如身体状况，精神状况等等。",
+            "character": "送祝福的对象他有什么性格特点吗？",
             "time": "你准备在什么时间送祝福呢？",
             "hobby": "送祝福的对象有什么习惯吗？",
-            #"wish": "送祝福的对象有哪些个人愿望吗？",
-            "style": "你期望送祝福的语气是老年风格，小红书风格还是带颜文字可爱风格呢?"
+            "wish": "送祝福的对象有哪些个人愿望吗？",
+            "style": "你期望送祝福的语气是老年风格，小红书风格还是带颜文字可爱风格呢?",
         }
         question_list = []
         for key, value in json_from_data.items():
-            if key in check_after_question_list:
-                if json_from_data[key] == "":
-                    question_list.append(check_after_question_list[key])
+            if key in check_after_question_list and value == "":
+                question_list.append(check_after_question_list[key])
 
         question_list_str = "\n".join(question_list)
 
-
         prompt = self.PROMPT_TEMPLATE.format(question_list_str=question_list_str)
-        print("rerask prompt",prompt)
-        rsp = await LLMApi()._aask(prompt=prompt,top_p=0.1)
-        print("机器人提问：",rsp)
+
+        rsp = await LLMApi()._aask(prompt=prompt, top_p=0.1)
 
         if question_list == []:
-            rsp = "YES|"+str(rsp)
+            rsp = "YES|" + str(rsp)
         else:
-            rsp = "NO|"+str(rsp)
-        print(rsp)
+            logger.info("机器人提问：" + rsp)
+            rsp = "NO|" + str(rsp)
+
+        # print(rsp)
+
         return rsp
 
 
 # 问道  问出来信息
-class wendao(Role):
-    name: str = "wendao"
+class WenDao(Role):
+    name: str = "WenDao"
     profile: str = "GetInformation"
-        
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions([read_and_ana,rerask])
-        self._set_react_mode(react_mode="by_order")
+        self._init_actions([RecvAndAnalyze, RaiseQuestion])
+        self._set_react_mode(react_mode=RoleReactMode.BY_ORDER.value)
 
     async def _act(self) -> Message:
         logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
-        
+
         todo = self.rc.todo
 
-        msg = self.get_memories(k=1)[0]  # find the most k recent messages
+        msg = self.get_memories(k=1)[0]
         result = await todo.run(msg.content)
 
         msg = Message(content=result, role=self.profile, cause_by=type(todo))
@@ -204,28 +213,17 @@ class wendao(Role):
         return msg
 
     async def _act_by_order(self) -> Message:
-        """switch action each time by order defined in _init_actions, i.e. _act (Action1) -> _act (Action2) -> ..."""
         for i in range(len(self.states)):
             self._set_state(i)
             rsp = await self._act()
-        return rsp  # return output from the last action
-
-
-
-
-
-
-
-
-
-
-
-
+        return rsp
 
 
 # 新增代码，便于区分----->Start
 import streamlit as st
 import uuid
+
+
 # 定义一个执行异步代码的函数
 def run_async_code(async_function, *args, **kwargs):
     # 创建一个新的事件循环
@@ -237,22 +235,27 @@ def run_async_code(async_function, *args, **kwargs):
     finally:
         # 关闭事件循环
         loop.close()
+
+
 # 定义一个异步函数
 async def run_async_model(user_input):
-    role_wendao = wendao()
+    role_wendao = WenDao()
     print("user_input", user_input)
     result = await role_wendao.run(user_input)
     return result.content
+
 
 async def run_async_qianbianzhe(user_input):
     role_wendao = qianbianzhe()
     result = await role_wendao.run(user_input)
     return result.content
 
+
 async def run_async_ruyi(user_input):
     role_wendao = ruyi()
     result = await role_wendao.run(user_input)
     return result.content
+
 
 def json_to_special_str(data):
     result = ""
@@ -262,39 +265,43 @@ def json_to_special_str(data):
         result += f"{key} - {value}<br/>"
     return result
 
-def show_history_st_messages():
-    sharedData  = SharedDataSingleton.get_instance()
-    for one_message in sharedData.chat_history:
-        if one_message['method'] == "json":
-            st.chat_message( one_message['role'] ).json( one_message['showdata'] )
-        if one_message['method'] == "write":
-            st.chat_message( one_message['role'] ).write( one_message['showdata'] )
 
-def show_one_message( role , method="write", showdata="",is_add=False):
-    sharedData  = SharedDataSingleton.get_instance()
+def show_history_st_messages():
+    sharedData = SharedDataSingleton.get_instance()
+    for one_message in sharedData.chat_history:
+        if one_message["method"] == "json":
+            st.chat_message(one_message["role"]).json(one_message["showdata"])
+        if one_message["method"] == "write":
+            st.chat_message(one_message["role"]).write(one_message["showdata"])
+
+
+def show_one_message(role, method="write", showdata="", is_add=False):
+    sharedData = SharedDataSingleton.get_instance()
     if method == "json":
-        st.chat_message( role ).json( showdata )
+        st.chat_message(role).json(showdata)
     if method == "write":
-        st.chat_message( role ).write( showdata )
-    if is_add == True:
-        sharedData.chat_history.append({"role": role , "method": method , "showdata": showdata})
+        st.chat_message(role).write(showdata)
+    if is_add is True:
+        sharedData.chat_history.append(
+            {"role": role, "method": method, "showdata": showdata}
+        )
 
 
 # 初始化session_state变量
-if 'user_id' not in st.session_state:
+if "user_id" not in st.session_state:
     # 为新用户会话生成一个唯一的UUID
-    st.session_state['user_id'] = str(uuid.uuid4())
+    st.session_state["user_id"] = str(uuid.uuid4())
     st.write(f"您的会话ID是: {st.session_state['user_id']}")
 
 
 # 在侧边栏中创建一个标题和一个链接
 with st.sidebar:
     st.markdown("## 友情提示")
-    "这是为了优化人情世故大模型--搜集用户需求角色(WenDao)功能。"    
+    "这是为了优化人情世故大模型--搜集用户需求角色(WenDao)功能。"
     # 创建一个滑块，用于选择最大长度，范围在0到1024之间，默认值为512
-    #max_length = st.slider("max_length", 0, 1024, 512, step=1)
-    #templature = st.slider("templature", 0, 1024, 512, step=3)
-    if st.button('清除历史'):
+    # max_length = st.slider("max_length", 0, 1024, 512, step=1)
+    # templature = st.slider("templature", 0, 1024, 512, step=3)
+    if st.button("清除历史"):
         st.session_state.messages = []
         # 获取新的需求收集对象
         status_step = 0
@@ -307,35 +314,53 @@ with st.sidebar:
 # 创建一个标题和一个副标题
 st.title("💬 人情世故-问道")
 st.caption("🚀 优化 需求搜集 的模块")
-st.chat_message( "assistant" ).write( "你通过不断的跟我沟通，我来收集你的需求。" )
+st.chat_message("assistant").write("你通过不断的跟我沟通，我来收集你的需求。")
 status_step = 0
 # 在Streamlit代码中调用异步函数
 if prompt := st.chat_input():
-	# 显示历史消息--优化前端效果
+    # 显示历史消息--优化前端效果
     show_history_st_messages()
 
-    sharedData  = SharedDataSingleton.get_instance()
-    #st.chat_message("user").write(prompt)
-    show_one_message( role="user" , method="write" , showdata=prompt , is_add = True)
+    sharedData = SharedDataSingleton.get_instance()
+    # st.chat_message("user").write(prompt)
+    show_one_message(role="user", method="write", showdata=prompt, is_add=True)
 
-    #st.write(f"您的会话ID3是: {st.session_state['user_id']}")
+    # st.write(f"您的会话ID3是: {st.session_state['user_id']}")
     # 运行异步代码并获取结果
-    sharedData.first_status_user_history = sharedData.first_status_user_history + "\n" + "user:" + str(prompt)
+    sharedData.first_status_user_history = (
+        sharedData.first_status_user_history + "\n" + "user:" + str(prompt)
+    )
     st.chat_message("assistant").write("正在处理，请稍候...")
-    print("sharedData.first_status_user_history",sharedData.first_status_user_history)
+    print("sharedData.first_status_user_history", sharedData.first_status_user_history)
     result = run_async_code(run_async_model, sharedData.first_status_user_history)
 
-    show_one_message( role="assistant" , method="write" , showdata="目前阶段的需求汇总如下" , is_add = False)
-    show_one_message( role="assistant" , method="json" , showdata=sharedData.json_from_data , is_add = False)
+    show_one_message(
+        role="assistant", method="write", showdata="目前阶段的需求汇总如下", is_add=False
+    )
+    show_one_message(
+        role="assistant",
+        method="json",
+        showdata=sharedData.json_from_data,
+        is_add=False,
+    )
     first_status_result_list = result.split("|")
     if first_status_result_list[0] == "NO":
-        #st.chat_message("assistant").write(first_status_result_list[1])
-        show_one_message( role="assistant" , method="write" , showdata=first_status_result_list[1]  , is_add = True)
-        sharedData.first_status_user_history = sharedData.first_status_user_history + "\n" + "assistant:" + str(first_status_result_list[1])
+        # st.chat_message("assistant").write(first_status_result_list[1])
+        show_one_message(
+            role="assistant",
+            method="write",
+            showdata=first_status_result_list[1],
+            is_add=True,
+        )
+        sharedData.first_status_user_history = (
+            sharedData.first_status_user_history
+            + "\n"
+            + "assistant:"
+            + str(first_status_result_list[1])
+        )
     else:
         status_step = 1
-        #st.chat_message("assistant").write("需求收集完毕，谢谢你")
-        show_one_message( role="assistant" , method="write" , showdata="需求收集完毕，谢谢你", is_add = True)
-
-
-
+        # st.chat_message("assistant").write("需求收集完毕，谢谢你")
+        show_one_message(
+            role="assistant", method="write", showdata="需求收集完毕，谢谢你", is_add=True
+        )
