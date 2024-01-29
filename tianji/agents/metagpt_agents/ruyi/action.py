@@ -9,13 +9,11 @@ from metagpt.logs import logger
 
 from tianji.utils.common_llm_api import LLMApi
 from tianji.utils.json_from import SharedDataSingleton
+from tianji.knowledges.config import KNOWLEDGE_PATH, EMBEDDING_PATH
 from tianji.utils.knowledge_tool import (
     get_docs_list_query_openai,
     get_docs_list_query_zhipuai,
 )
-
-KNOWLEDGE_PATH = r"/Users/fengzetao/Workspace/Github/SocialAI/Tianji/tianji/knowledges/04-Wishes/knowledges.txt"
-SAVE_PATH = r"/Users/fengzetao/Workspace/Github/SocialAI/Tianji/temp"
 
 
 # 给出针对回答的知识 并用md展示
@@ -44,8 +42,8 @@ class WriteMarkDown(Action):
         knowledge_key = json_from_data["festival"] + json_from_data["requirement"]
         knowledge = get_docs_list_query_zhipuai(
             query_str=knowledge_key,
-            loader_file_path=KNOWLEDGE_PATH,
-            persist_directory=SAVE_PATH,
+            loader_file_path=KNOWLEDGE_PATH.WISHES.path(),
+            persist_directory=EMBEDDING_PATH.WISHES.path(filename="zhipuai"),
             k_num=5,
         )
         print("knowledge:\n", knowledge)

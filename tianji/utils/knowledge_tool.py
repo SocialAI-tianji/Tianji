@@ -28,8 +28,8 @@ def get_docs_list_query_openai(
         db = Chroma(embedding_function=embeddings, persist_directory=persist_directory)
     else:
         loader = TextLoader(file_path=loader_file_path, encoding="utf-8")
-        print("loader_file_path", loader)
-        print(os.path.exists(loader_file_path))
+        # print("loader_file_path", loader)
+        # print(os.path.exists(loader_file_path))
         documents = loader.load()
         text_splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=0)
         docs = text_splitter.split_documents(documents)
@@ -166,8 +166,8 @@ def get_docs_list_query_zhipuai(
         db = Chroma(embedding_function=embeddings, persist_directory=persist_directory)
     else:
         loader = TextLoader(file_path=loader_file_path, encoding="utf-8")
-        print("loader_file_path", loader)
-        print(os.path.exists(loader_file_path))
+        # print("loader_file_path", loader)
+        # print(os.path.exists(loader_file_path))
         documents = loader.load()
         text_splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=0)
         docs = text_splitter.split_documents(documents)
