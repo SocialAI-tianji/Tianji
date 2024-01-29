@@ -13,8 +13,8 @@ from metagpt.logs import logger
 
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.utils.common_llm_api import LLMApi
-from tianji.agents.metagpt_agents.ruyi_agent import ruyi
-from tianji.agents.metagpt_agents.qianbianzhe_agent import qianbianzhe
+from tianji.agents.metagpt_agents.ruyi import RuYi
+from tianji.agents.metagpt_agents.qianbianzhe import QianBianZhe
 
 
 # json_from_data = {

@@ -1,30 +1,32 @@
 from dotenv import load_dotenv
 
 load_dotenv()
+
 import asyncio
+import json
+from typing import Optional, Any
+
 from metagpt.actions import Action
-from metagpt.roles import Role
+from metagpt.roles.role import Role, RoleReactMode
 from metagpt.schema import Message
 from metagpt.logs import logger
-import json
-from typing import Optional
+
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.utils.knowledge_tool import (
     get_docs_list_query_openai,
     get_docs_list_query_zhipuai,
 )
 from tianji.utils.common_llm_api import LLMApi
-from tianji.agents.metagpt_agents.ruyi_agent import ruyi
-from tianji.agents.metagpt_agents.qianbianzhe_agent import qianbianzhe
-from tianji.agents.metagpt_agents.wendao_agent import wendao
-
+from tianji.agents.metagpt_agents.ruyi import RuYi
+from tianji.agents.metagpt_agents.qianbianzhe import QianBianZhe
+from tianji.agents.metagpt_agents.wendao import WenDao
 
 KNOWLEDGE_PATH = r"/Users/fengzetao/Workspace/Github/SocialAI/Tianji/tianji/knowledges/04-Wishes/knowledges.txt"
 SAVE_PATH = r"/Users/fengzetao/Workspace/Github/SocialAI/Tianji/temp"
 
 
 # 给出针对回答的知识 并用md展示
-class writeMD(Action):
+class WriteMarkDown(Action):
     # 这是对json中每个key的解释：
     # 语言场景（scene），目前的聊天场合，比如工作聚会。
     # 节日（festival），对话目前背景所在的节日，比如生日。
@@ -37,13 +39,12 @@ class writeMD(Action):
     # 聊天对象爱好（hobby），和role相关，就是聊天对象的兴趣爱好，例如下象棋。
     # 聊天对象愿望（wish），和role相关，就是聊天对象目前的愿望是什么，例如果希望家庭成员平安。
 
-    name: str = "writeMD"
+    name: str = "WriteMarkDown"
 
     knowledge: str = ""
     json_from_data: Optional[dict] = SharedDataSingleton.get_instance().json_from_data
 
     async def run(self, instruction: str):
-        # knowledges = ""
         json_from_data: Optional[
             dict
         ] = SharedDataSingleton.get_instance().json_from_data
@@ -54,7 +55,7 @@ class writeMD(Action):
             persist_directory=SAVE_PATH,
             k_num=5,
         )
-        print("knowledge:", knowledge)
+        print("knowledge:\n", knowledge)
         PROMPT_TEMPLATE: str = f"""
             你是一个{json_from_data["festival"]}的祝福大师。
             你需要写一段关于如何写{json_from_data["festival"]}{json_from_data["requirement"]}的思路总结。目前了解到这段{json_from_data["festival"]}{json_from_data["requirement"]}是在{json_from_data["scene"]}送给{json_from_data["role"]}的。
@@ -70,30 +71,30 @@ class writeMD(Action):
             """
         prompt = PROMPT_TEMPLATE.format(instruction=instruction)
         rsp = await LLMApi()._aask(prompt)
-        print("回复生成：", rsp)
+        logger.info("回复生成：\n" + rsp)
+
         return rsp
 
 
 # 如何写 如意如意如我心意
-class ruyi(Role):
-    name: str = "ruyi"
-    profile: str = "stylize"
+class RuYi(Role):
+    name: str = "RuYi"
+    profile: str = "Stylize"
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions([writeMD])
-        self._set_react_mode(react_mode="by_order")
+        self._init_actions([WriteMarkDown])
+        self._set_react_mode(react_mode=RoleReactMode.BY_ORDER.value)
 
     async def _act(self) -> Message:
         logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
-
         todo = self.rc.todo
 
-        msg = self.get_memories(k=1)[0]  # find the most k recent messagesA
+        msg = self.get_memories(k=1)[0]
         result = await todo.run(msg.content)
-
         msg = Message(content=result, role=self.profile, cause_by=type(todo))
         self.rc.memory.add(msg)
+
         return msg
 
 
@@ -119,19 +120,19 @@ def run_async_code(async_function, *args, **kwargs):
 
 # 定义一个异步函数
 async def run_async_model(user_input):
-    role_wendao = wendao()
+    role_wendao = WenDao()
     result = await role_wendao.run(user_input)
     return result.content
 
 
 async def run_async_qianbianzhe(user_input):
-    role_wendao = qianbianzhe()
+    role_wendao = QianBianZhe()
     result = await role_wendao.run(user_input)
     return result.content
 
 
 async def run_async_ruyi(user_input):
-    role_wendao = ruyi()
+    role_wendao = RuYi()
     result = await role_wendao.run(user_input)
     return result.content
 

@@ -1,13 +1,13 @@
 from dotenv import load_dotenv
 
 load_dotenv()
-# 项目名称：人情世故大模型
-# 项目描述：
+
+from typing import Optional
+
+from metagpt.actions import Action
+from metagpt.logs import logger
 
 from tianji.utils.common_llm_api import LLMApi
-import sys
-from typing import Optional
-from metagpt.actions import Action
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.utils.knowledge_tool import (
     get_docs_list_query_openai,
@@ -19,7 +19,7 @@ SAVE_PATH = r"/Users/fengzetao/Workspace/Github/SocialAI/Tianji/temp"
 
 
 # 给出针对回答的知识 并用md展示
-class writeMD(Action):
+class WriteMarkDown(Action):
     # 这是对json中每个key的解释：
     # 语言场景（scene），目前的聊天场合，比如工作聚会。
     # 节日（festival），对话目前背景所在的节日，比如生日。
@@ -32,14 +32,15 @@ class writeMD(Action):
     # 聊天对象爱好（hobby），和role相关，就是聊天对象的兴趣爱好，例如下象棋。
     # 聊天对象愿望（wish），和role相关，就是聊天对象目前的愿望是什么，例如果希望家庭成员平安。
 
-    name: str = "writeMD"
+    name: str = "WriteMarkDown"
 
     knowledge: str = ""
-    json_from_data: str = SharedDataSingleton.get_instance().json_from_data
+    json_from_data: Optional[dict] = SharedDataSingleton.get_instance().json_from_data
 
     async def run(self, instruction: str):
-        # knowledges = ""
-        json_from_data = SharedDataSingleton.get_instance().json_from_data
+        json_from_data: Optional[
+            dict
+        ] = SharedDataSingleton.get_instance().json_from_data
         knowledge_key = json_from_data["festival"] + json_from_data["requirement"]
         knowledge = get_docs_list_query_zhipuai(
             query_str=knowledge_key,
@@ -47,6 +48,8 @@ class writeMD(Action):
             persist_directory=SAVE_PATH,
             k_num=5,
         )
+        print("knowledge:\n", knowledge)
+
         PROMPT_TEMPLATE: str = f"""
             你是一个{json_from_data["festival"]}的祝福大师。
             你需要写一段关于如何写{json_from_data["festival"]}{json_from_data["requirement"]}的思路总结。目前了解到这段{json_from_data["festival"]}{json_from_data["requirement"]}是在{json_from_data["scene"]}送给{json_from_data["role"]}的。
@@ -61,8 +64,9 @@ class writeMD(Action):
 
             """
         prompt = PROMPT_TEMPLATE.format(instruction=instruction)
-        rsp = await LLMApi()._aask(prompt=prompt, top_p=0.1)
-        print("回复生成：", rsp)
+        rsp = await LLMApi()._aask(prompt)
+        logger.info("回复生成：\n" + rsp)
+
         return rsp
 
 

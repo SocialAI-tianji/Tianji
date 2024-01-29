@@ -14,7 +14,7 @@ from metagpt.logs import logger
 from tianji.utils.json_from import SharedDataSingleton
 from tianji.utils.common_llm_api import LLMApi
 from tianji.agents.metagpt_agents.wendao import WenDao
-from tianji.agents.metagpt_agents.ruyi_agent import ruyi
+from tianji.agents.metagpt_agents.ruyi import RuYi
 
 # json_from_data = {
 #             "requirement": "祝福",
@@ -74,7 +74,6 @@ class AnsWrite(Action):
         rsp = await LLMApi()._aask(prompt)
 
         logger.info("回复生成：\n" + rsp)
-        # print("回复生成：", rsp)
 
         return rsp
 
@@ -152,7 +151,7 @@ async def run_async_qianbianzhe(user_input):
 
 
 async def run_async_ruyi(user_input):
-    role_ruyi = ruyi()
+    role_ruyi = RuYi()
     result = await role_ruyi.run(user_input)
     return result.content
 
