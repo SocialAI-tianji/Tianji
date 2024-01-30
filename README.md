@@ -111,4 +111,9 @@ sam altman：嘿，我这CEO的帽子可是随时准备摘下来给你戴戴的�
 elon musk：行，就为你这句“改变世界”，我干了这杯！不过别以为我会轻易放过你，等我下次带上我的特斯拉充电桩，看你怎么应对！
 sam altman：哈哈，我等着那一天！不过现在，让我们先享受今晚。来，最后一杯，我干了，你随意，喝得开心，别忘了，OpenAI的AI们可还在等着我们回去继续训练呢！
 ```
+## 有效prompt统计
+记录目前仓库内有多少有效的prompt
+![gpt prompt stat](.ci/gpt_prompt_statistics.png)
+![yiyan prompt stat](.ci/yiyan_prompt_statistics.png)
+
 
