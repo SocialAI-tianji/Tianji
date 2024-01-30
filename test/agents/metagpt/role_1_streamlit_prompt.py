@@ -104,22 +104,33 @@ class RecvAndAnalyze(Action):
             "style": "老年人版",
         }
 
-        case = json.dumps(case)
+        case_str = json.dumps(case)
         # case1 = json.dumps(case1)
 
         sharedData = SharedDataSingleton.get_instance()
 
         prompt = self.PROMPT_TEMPLATE.format(
-            instruction=sharedData.first_status_user_history, case=case
+            instruction=sharedData.first_status_user_history, case=case_str
         )
 
         rsp = await LLMApi()._aask(prompt=prompt, top_p=0.1)
         rsp = rsp.replace("```json", "").replace("```", "")
-        # rsp = rsp.strip('json\n').rstrip('')
 
-        logger.info("机器人分析需求：" + rsp)
-        sharedData.json_from_data = json.loads(rsp)
-        # json_from_data = json.loads(rsp)
+        new_json_from_data = sharedData.json_from_data
+        if new_json_from_data is None:
+            new_json_from_data: Optional[dict] = {}
+            for key in case.keys():
+                new_json_from_data[key] = ""
+
+        json_from_data = json.loads(rsp)
+        for key in json_from_data.keys():
+            if new_json_from_data[key] == "":
+                new_json_from_data[key] = json_from_data[key]
+
+        sharedData.json_from_data = new_json_from_data
+        rsp = json.dumps(new_json_from_data, indent=4, ensure_ascii=False)
+        logger.info("机器人分析需求：\n" + rsp)
+
         return rsp
 
 
@@ -238,7 +249,7 @@ def run_async_code(async_function, *args, **kwargs):
 
 
 # 定义一个异步函数
-async def run_async_model(user_input):
+async def run_async_wendao(user_input):
     role_wendao = WenDao()
     print("user_input", user_input)
     result = await role_wendao.run(user_input)
@@ -246,13 +257,13 @@ async def run_async_model(user_input):
 
 
 async def run_async_qianbianzhe(user_input):
-    role_wendao = qianbianzhe()
+    role_wendao = QianBianZhe()
     result = await role_wendao.run(user_input)
     return result.content
 
 
 async def run_async_ruyi(user_input):
-    role_wendao = ruyi()
+    role_wendao = RuYi()
     result = await role_wendao.run(user_input)
     return result.content
 
@@ -332,7 +343,7 @@ if prompt := st.chat_input():
     )
     st.chat_message("assistant").write("正在处理，请稍候...")
     print("sharedData.first_status_user_history", sharedData.first_status_user_history)
-    result = run_async_code(run_async_model, sharedData.first_status_user_history)
+    result = run_async_code(run_async_wendao, sharedData.first_status_user_history)
 
     show_one_message(
         role="assistant", method="write", showdata="目前阶段的需求汇总如下", is_add=False

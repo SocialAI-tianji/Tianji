@@ -84,22 +84,33 @@ class RecvAndAnalyze(Action):
             "style": "老年人版",
         }
 
-        case = json.dumps(case)
+        case_str = json.dumps(case)
         # case1 = json.dumps(case1)
 
         sharedData = SharedDataSingleton.get_instance()
 
         prompt = self.PROMPT_TEMPLATE.format(
-            instruction=sharedData.first_status_user_history, case=case
+            instruction=sharedData.first_status_user_history, case=case_str
         )
 
         rsp = await LLMApi()._aask(prompt=prompt, top_p=0.1)
         rsp = rsp.replace("```json", "").replace("```", "")
-        # rsp = rsp.strip('json\n').rstrip('')
 
-        logger.info("机器人分析需求：" + rsp)
-        sharedData.json_from_data = json.loads(rsp)
-        # json_from_data = json.loads(rsp)
+        new_json_from_data = sharedData.json_from_data
+        if new_json_from_data is None:
+            new_json_from_data: Optional[dict] = {}
+            for key in case.keys():
+                new_json_from_data[key] = ""
+
+        json_from_data = json.loads(rsp)
+        for key in json_from_data.keys():
+            if new_json_from_data[key] == "":
+                new_json_from_data[key] = json_from_data[key]
+
+        sharedData.json_from_data = new_json_from_data
+        rsp = json.dumps(new_json_from_data, indent=4, ensure_ascii=False)
+        logger.info("机器人分析需求：\n" + rsp)
+
         return rsp
 
 
