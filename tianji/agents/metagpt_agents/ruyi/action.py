@@ -63,6 +63,7 @@ class WriteMarkDown(Action):
             """
         prompt = PROMPT_TEMPLATE.format(instruction=instruction)
         rsp = await LLMApi()._aask(prompt)
+        rsp = rsp.replace("```markdown", "").replace("```", "")
         logger.info("回复生成：\n" + rsp)
 
         return rsp
