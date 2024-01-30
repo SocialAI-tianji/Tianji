@@ -1,11 +1,11 @@
 # 天机 Tianji
 
-天机是一款免费使用、非商业用途的人工智能系统。您可以利用它进行涉及人情世故的任务，如`话中有话翻译、说话的艺术建议`等，以提升您的情商和核心竞争能力。我们坚信，只有人情世故才是未来AI的核心竞争力，让我们携手见证通用人工智能的来临。 —— "天机不可泄漏。"
+天机是 SocialAI（来事儿AI）制作的一款免费使用、非商业用途的人工智能系统。您可以利用它进行涉及传统人情世故的任务，如`如何敬酒、如何说好话、如何会来事儿`等，以提升您的情商和核心竞争能力。我们坚信，只有人情世故才是未来AI的核心技术，只有会来事儿的AI才有机会走向AGI，让我们携手见证通用人工智能的来临。 —— "天机不可泄漏。"
 
-Tianji is a free, non-commercial artificial intelligence system. You can utilize it for tasks involving worldly wisdom, such as "subtext translation" and "art of conversation," to enhance your emotional intelligence and core competitiveness. We firmly believe that worldly wisdom are the future core competency of AI, and let us join hands to witness the advent of general artificial intelligence.
+Tianji is a free, non-commercial artificial intelligence system. You can utilize it for tasks involving worldly wisdom, such as "art of conversation," to enhance your emotional intelligence and core competitiveness. We firmly believe that worldly wisdom are the future core competency of AI, and let us join hands to witness the advent of general artificial intelligence.
 
 <p align="left">
-    中文</a>&nbsp ｜ &nbsp<a href="README.md">English</a>&nbsp ｜ &nbsp<a href="README_JA.md">日本語</a> ｜ &nbsp<a href="README_FR.md">Français</a> ｜ &nbsp<a href="README_ES.md">Español</a>
+    中文</a>&nbsp ｜ &nbsp<a href="README.md">English(还没空写)</a>&nbsp ｜ &nbsp<a href="README.md">日本語(还没空写)</a> 
 </p>
 <br><br>
 
@@ -14,46 +14,101 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 <p>
 <br>
 
+
 <p align="center">
-        🤗 <a href="https://huggingface.co/Qwen">Hugging Face</a>&nbsp&nbsp | &nbsp&nbsp🤖 <a href="https://modelscope.cn/organization/qwen">ModelScope</a>&nbsp&nbsp | &nbsp&nbsp 📑 <a href="https://arxiv.org/abs/2309.16609">Paper</a> &nbsp&nbsp ｜ &nbsp&nbsp🖥️ <a href="https://modelscope.cn/studios/qwen/Qwen-72B-Chat-Demo/summary">Demo</a>
-<br>
-<a href="assets/wechat.png">WeChat (微信)</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/z3GAxXZ9Ce">Discord</a>&nbsp&nbsp ｜  &nbsp&nbsp<a href="https://dashscope.aliyun.com">API</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://qianwen.aliyun.com">Web</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://apps.apple.com/cn/app/%E9%80%9A%E4%B9%89%E5%8D%83%E9%97%AE/id6466733523">APP</a>
+   <a href="https://python.org/" target="_blank"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/moelib?logo=python&style=flat-square"></a>
+   <a href="https://github.com/tatsu-lab/stanford_alpaca/blob/main/LICENSE"><img alt="LICENSE" src="https://camo.githubusercontent.com/ff42248868bc1387751598955e573b397851d947f13ddd7618c0ba9e66aacdf6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f436f64652532304c6963656e73652d4170616368655f322e302d677265656e2e737667"></a>
+   <br/>
+ 
 </p>
-<br><br>
 
-SocialAI（来事儿AI） 是设立于中国的非营利组织，我们完全开源了**Tianji**（天机）系列工作，当前开源系统涉及为xxxxxxx。模型链接、语料和内置prompt在表格中，请点击了解详情。同时，我们公开了我们的技术研究报告，请点击我们的官网查看。
+SocialAI 是设立于中国的非营利组织，我们完全开源了**Tianji**（天机）系列工作，当前开源系统涉及为Prompt、Agent、知识库、AI游戏、模型训练。具体内容，请查看文档与对应仓库。
 
-人情世故大模型-天机是基于当前稳定训练的基础模型，它经过大规模高质量且多样化的数据训练，覆盖多语言（主要是中文和英文），总量高达3万亿token。在相关基准评测中，Qwen系列模型展现出非常有竞争力的性能，显著超越同规模模型并紧追一系列最强的闭源模型。利用SFT和RLHF技术，我们实现了对齐，从基座模型训练得到了对话模型。Qwen-Chat具备广泛的能力，包括聊天、文字创作、摘要、信息抽取、翻译等，同时还具备一定的代码生成和简单数学推理能力。在此基础上，我们针对LLM对接外部系统等方面进行了针对性的优化，目前具备强大的工具调用能力，以及备受关注的Code Interpreter和Agent角色扮演能力。下表列出了各个模型的特点。
-
-## 结果示例
-
-以下给出 OpenAI 创始人 Sam Altman 向 特斯拉创始人 Elon Musk 敬酒的对话示例：
-
-TODO
-
-## 环境配置
-
-### 运行环境
-
-在本项目目录下执行下列命令，如果安装过慢，可以加上 `-i https://pypi.mirrors.ustc.edu.cn/simple/`
-
-```bash
-pip install -r requirements.txt
-pip install .
-```
-
-### 有关 key 的配置
-
-我们通过 `.env` 文件来获取环境变量，你可以根据下列例子写入对应的 key，即可成功运行调用
+基于整理后的人情世故数据，人情世故大模型系统-天机包括了常见人际交往中的七大领域（具体可以参考 [场景分类](test/场景分类) 中的场景细化细节），其中大体可分为：
 
 ```
-OPENAI_API_KEY=这里写入key
-OPENAI_API_BASE=这里写入网址
-ZHIPUAI_API_KEY=这里写入key
+1.敬酒礼仪文化 Etiquette
+  不惧碰杯，酒席桌上一条龙
+2.请客礼仪文化 Hospitality
+  友好地展示你的友好
+3.送礼礼仪文化 Gifting
+  此礼非礼，直击人心
+4.送祝福 Wishes
+  承包你的所有祝福语
+5.如何说对话 Communication
+  据说是低情商救星
+6.化解"尴尬"场合 Awkwardness
+  没心没肺，找回自我
+7.矛盾&冲突应对 Conflict
+  《能屈能伸》  
 ```
 
-### 调用方式
+结合这些领域，Tianji涉及到的技术路线共有四种：
 
-- 调用顺序（暂时约定），首先是 zhipuai，接下来是 yiyan，最后是 openai（TODO）
-- 如果用 LLM_Api 调用，则使用 LLM_Api().\_aask()
-- 如果用 MetaGPT 调用，则使用 self.\_aask()
+- 纯prompt（包括AI游戏）
+- Agent（MetaGPT等）
+- 知识库
+- 模型训练
+
+您可以在 tianji 目录下找到四种路线的对应源码，如果您想参考 `Tianji` 的项目架构、数据管理、技术路线复刻出属于自己的垂直领域 AI 应用，欢迎 fork 或者直接参考，我们乐于看到 AI 原生应用加速推进的过程。
+
+## 目录
+- [News](#News)
+  - [路线图](#路线图)
+- [运行环境](#运行环境)
+  - [环境安装](#环境安装)
+  - [key配置](#key配置)
+- [文件目录说明](#文件目录说明)
+- [运行方式](#运行方式)
+  - [示例](#示例)
+- [使用到的框架](#使用到的框架)
+- [如何参与本项目](#如何参与本项目)
+  - [提交第一个PR](#提交第一个PR)
+- [鸣谢](#鸣谢)
+
+
+## 📰 News
+
+
+### 🛣 路线图
+
+## 运行环境
+
+### 环境安装
+
+### key 配置
+
+为确保项目正常运行，请在`.env` 中设置API密钥，你可以根据下列例子写入对应的 key，即可成功运行调用,目前默认使用 zhipuai，你可以仅写入`ZHIPUAI_API_KEY`即可使用。
+
+```
+OPENAI_API_KEY=
+OPENAI_API_BASE=
+BAIDU_API_KEY=
+OPENAI_API_MODEL=
+ZHIPUAI_API_KEY=
+```
+## 文件目录说明
+
+src/：源代码目录，包含主要逻辑与算法实现
+data/：数据处理相关文件和预训练模型
+configs/：存放项目配置文件
+examples/：示例数据及使用案例
+... （根据实际项目结构补充）
+
+## 🍺运行方式
+
+## 示例
+
+以下给出 特斯拉创始人 Elon Musk  向 OpenAI 创始人 Sam Altman 敬酒的对话示例（基于内置提示词生成）：
+
+```
+elon musk：sam，你的Openai不如叫做CloseAI
+sam altman：你先管好你的grok，罚你三杯!
+elon musk： 瞧你说的，是要我喝完这瓶白酒？
+sam altman：哈哈，埃隆，你可是以星辰大海为目标的男人，一瓶白酒算什么？我可是听说你在SpaceX的派对上连火箭燃料都敢喝呢！来，这杯我干了，你随意，但别失了世界首富的风度啊！
+elon musk：你这是在激我啊，Sam老兄！那我就不客气了，我喝掉，你半杯。不过说回来，OpenAI的成果可不只是靠吹牛，你可得好好看着，别让它真的变成了“CloseAI”。
+sam altman：嘿，我这CEO的帽子可是随时准备摘下来给你戴戴的，马斯克老兄。不过今晚，让我们先忘了这些，来，为我们的友谊干杯！我喝掉，你随意，但记得，明天还得继续改变世界呢！
+elon musk：行，就为你这句“改变世界”，我干了这杯！不过别以为我会轻易放过你，等我下次带上我的特斯拉充电桩，看你怎么应对！
+sam altman：哈哈，我等着那一天！不过现在，让我们先享受今晚。来，最后一杯，我干了，你随意，喝得开心，别忘了，OpenAI的AI们可还在等着我们回去继续训练呢！
+```
+
