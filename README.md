@@ -19,7 +19,7 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
    <a href="https://python.org/" target="_blank"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/moelib?logo=python&style=flat-square"></a>
    <a href="https://github.com/tatsu-lab/stanford_alpaca/blob/main/LICENSE"><img alt="LICENSE" src="https://camo.githubusercontent.com/ff42248868bc1387751598955e573b397851d947f13ddd7618c0ba9e66aacdf6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f436f64652532304c6963656e73652d4170616368655f322e302d677265656e2e737667"></a>
    <br/>
- 
+
 </p>
 
 SocialAI（来事儿AI） 是设立于中国的非营利组织，我们完全开源了**Tianji**（天机）系列工作，当前开源系统技术路线涉及为`Prompt、AI游戏、Agent、知识库、模型训练`。具体内容，请查看文档与对应仓库。
@@ -114,9 +114,13 @@ sam altman：哈哈，我等着那一天！不过现在，让我们先享受今�
 ## 有效prompt统计
 记录目前仓库内有多少有效的prompt
 
+<div style="display: flex; justify-content: space-between;">
+  <img src=".ci/gpt_prompt_statistics.png" alt="Image 1" width="45%">
+  <img src=".ci/yiyan_prompt_statistics.png" alt="Image 2" width="45%">
+</div>
 
-| ![gpt prompt stat](.ci/gpt_prompt_statistics.png) |![yiyan prompt stat](.ci/yiyan_prompt_statistics.png) |
-| Caption for Image 1    | Caption for Image 2    | 
+
+
 
 
 
