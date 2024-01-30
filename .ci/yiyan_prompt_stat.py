@@ -1,8 +1,9 @@
 import json
 import matplotlib.pyplot as plt
 import os
-all_yiyan_json_path = os.environ.get('all_yiyan_json')
 
+#all_yiyan_json_path = os.environ.get('all_yiyan_json')
+all_yiyan_json_path=r'C:\Users\yhd\PycharmProjects\TianjiOrignal\tianji\prompt\yiyan_prompt\all_yiyan_prompt.json'
 # 打开 JSON 文本文件并加载数据
 with open(all_yiyan_json_path, 'r', encoding='utf-8') as file:
     data = json.load(file)
@@ -43,13 +44,12 @@ for id in ids:
 # 将 ID 转换为整数索引
 id_indices = list(range(len(ids)))
 
-# 设置字体为微软雅黑
-plt.rcParams['font.sans-serif'] = ['Microsoft YaHei']
+
 
 # 绘制柱状图
 plt.bar(id_indices, counts)
-plt.xlabel('分类')  # 修改横坐标标签
-plt.ylabel('有效Prompt个数')
+plt.xlabel('Category')  # 修改横坐标标签
+plt.ylabel('Number of valid prompts')
 
 # 旋转横坐标标签，以避免重叠
 plt.xticks(id_indices, labels, rotation=45, ha='right')
@@ -58,7 +58,7 @@ plt.xticks(id_indices, labels, rotation=45, ha='right')
 for i, count in enumerate(counts):
     plt.text(id_indices[i], count, str(count), ha='center', va='bottom')
 
-plt.title('yiyan Prompt 统计')
+plt.title('yiyan prompt statistics')
 
 # 保存为 PNG 图片文件
 plt.savefig('yiyan_prompt_statistics.png', bbox_inches='tight')

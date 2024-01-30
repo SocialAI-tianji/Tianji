@@ -55,19 +55,23 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install matplotlib
-        
-    - name: Install Microsoft YaHei Font
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y ttf-mscorefonts-installer
 
     - name: Count the number of gpt prompts
       env:
         all_gpt_json: 'tianji/prompt/gpt_prompt/all_gpt_prompt.json'
       run : python .ci/gpt_prompt_stat.py
-
+            mv gpt_prompt_statistics.png .ci/gpt_prompt_statistics.png
+      uses: actions/upload-artifact@v2
+      with:
+           name: gpt_prompt_statistics  # 工件的名称，您可以根据需要命名
+           path: .ci/gpt_prompt_statistics.png  # 指定生成的 PNG 文件的路径
 
     - name: Count the number of yiyan prompts
       env:
         all_yiyan_json: 'tianji/prompt/yiyan_prompt/all_yiyan_prompt.json'
       run : python .ci/yiyan_prompt_stat.py
+            mv yiyan_prompt_statistics.png .ci/yiyan_prompt_statistics.png
+      uses: actions/upload-artifact@v2
+      with:
+        name: yiyan_prompt_statistics  # 工件的名称，您可以根据需要命名
+        path: .ci/yiyan_prompt_statistics.png  # 指定生成的 PNG 文件的路径
