@@ -1,13 +1,8 @@
 name: Check & Merge Prompt
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - main
-
+    types: [opened, reopened]
 jobs:
   check:
     runs-on: ubuntu-latest
