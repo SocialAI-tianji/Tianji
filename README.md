@@ -113,8 +113,11 @@ sam altman：哈哈，我等着那一天！不过现在，让我们先享受今�
 ```
 ## 有效prompt统计
 记录目前仓库内有多少有效的prompt
+<div style="display: flex; justify-content: center;">
 
+![gpt prompt stat](.ci/gpt_prompt_statistics.png)
+![yiyan prompt stat](.ci/yiyan_prompt_statistics.png)
 
-![gpt prompt stat](.ci/gpt_prompt_statistics.png)      ![yiyan prompt stat](.ci/yiyan_prompt_statistics.png)
+</div>
 
 
