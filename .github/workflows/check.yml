@@ -1,12 +1,12 @@
 name: Check & Merge Prompt
 
 on:
+  pull_request_target:
+    types: [ assigned, opened, synchronize, reopened ]
   pull_request:
     branches:
       - main
-    types:
-      - opened
-      - synchronize
+    types: [opened, reopened]
   push:
     branches:
       - main
