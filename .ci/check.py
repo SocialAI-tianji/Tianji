@@ -55,7 +55,7 @@ if __name__ == '__main__':
                     else:
                         log_file.write(f"{md_file_path} 不符合规则模板: {message}\n")
                         print(f"{md_file_path} 不符合规则模板: {message}")
-                        sys.exit()
+                        sys.exit(1)
 
 
 
