@@ -1,1 +1,9 @@
 git+https://gitee.com/jujimeizuo/meta-gpt-tianji.git
+
+transformers==4.36.2
+sentencepiece==0.1.99
+accelerate==0.24.1
+transformers_stream_generator==0.0.4
+modelscope
+tiktoken
+einops
