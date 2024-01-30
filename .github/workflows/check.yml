@@ -51,12 +51,18 @@ jobs:
         yiyan_output_json_path: 'tianji/prompt/yiyan_prompt/all_yiyan_prompt.json'
       run: python .ci/build_all_yiyan_prompt.py
 
+    - name: Install matplotlib
+      run: |
+        python -m pip install --upgrade pip
+        pip install matplotlib
+
     - name: Count the number of gpt prompts
       env:
         all_gpt_json: 'tianji/prompt/gpt_prompt/all_gpt_prompt.json'
       run : python .ci/gpt_prompt_stat.py
 
+
     - name: Count the number of yiyan prompts
-      env: 
+      env:
         all_yiyan_json: 'tianji/prompt/yiyan_prompt/all_yiyan_prompt.json'
       run : python .ci/yiyan_prompt_stat.py
