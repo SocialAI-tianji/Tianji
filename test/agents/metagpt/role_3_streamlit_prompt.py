@@ -71,6 +71,7 @@ class WriteMarkDown(Action):
             """
         prompt = PROMPT_TEMPLATE.format(instruction=instruction)
         rsp = await LLMApi()._aask(prompt)
+        rsp = rsp.replace("```markdown", "").replace("```", "")
         logger.info("回复生成：\n" + rsp)
 
         return rsp
@@ -126,14 +127,14 @@ async def run_async_model(user_input):
 
 
 async def run_async_qianbianzhe(user_input):
-    role_wendao = QianBianZhe()
-    result = await role_wendao.run(user_input)
+    role_qianbianzhe = QianBianZhe()
+    result = await role_qianbianzhe.run(user_input)
     return result.content
 
 
 async def run_async_ruyi(user_input):
-    role_wendao = RuYi()
-    result = await role_wendao.run(user_input)
+    role_ruyi = RuYi()
+    result = await role_ruyi.run(user_input)
     return result.content
 
 

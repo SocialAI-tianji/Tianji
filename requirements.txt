@@ -1,1 +1,1 @@
-git+https://github.com/SocialAI-tianji/MetaGPT.git
+git+https://gitee.com/jujimeizuo/meta-gpt-tianji.git
