@@ -1,6 +1,7 @@
 import re
 import os
 from datetime import datetime
+import sys
 '''
 # @author  : Shiqiding
 # @description: 对prompt进行格式检查,可以将格式不对的.md文件输出带文件名为时间戳的.txt文件(作为日志),并打印出test/prompt目录下所有文件的情况
@@ -54,6 +55,7 @@ if __name__ == '__main__':
                     else:
                         log_file.write(f"{md_file_path} 不符合规则模板: {message}\n")
                         print(f"{md_file_path} 不符合规则模板: {message}")
+                        sys.exit()
 
 
 
