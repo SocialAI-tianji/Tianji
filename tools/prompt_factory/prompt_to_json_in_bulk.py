@@ -35,7 +35,7 @@ input:用户输入
 output:对应输出
 
 '''
-folder_path = r"C:\Users\yhd\PycharmProjects\Tianji\test\prompt\yiyan_prompt"  # 替换成您的文件夹路径
+folder_path = r"C:\Users\yhd\PycharmProjects\TianjiOrignal\test\prompt\yiyan_prompt"  # 替换成您的文件夹路径
 
 
 def md_file_to_json_with_examples(file_path,id,heading):
@@ -190,7 +190,7 @@ if __name__ == '__main__':
                 input_dir, input_file = os.path.split(promptpath)
                 input_file_base, _ = os.path.splitext(input_file)
 
-                output_path = r"C:\Users\yhd\PycharmProjects\Tianji\tianji\prompt"
+                output_path = r"C:\Users\yhd\PycharmProjects\TianjiOrignal\tianji\prompt"
 
                 # 使用正则表达式提取所需路径
                 match = re.search(r'\\prompt(.*)\\[^\\]+$', promptpath)
