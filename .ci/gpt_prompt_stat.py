@@ -1,7 +1,12 @@
 import json
 import matplotlib.pyplot as plt
 import os
+'''
+# @author  : Shiqiding
+# @description: 统计gpt prompt
+# @version : V1.0
 
+'''
 all_gpt_json_path = os.environ.get('all_gpt_json')
 #all_gpt_json_path=r'C:\Users\yhd\PycharmProjects\TianjiOrignal\tianji\prompt\gpt_prompt\all_gpt_prompt.json'
 # 打开 JSON 文本文件并加载数据
