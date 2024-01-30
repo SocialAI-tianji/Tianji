@@ -42,7 +42,7 @@ def validate_rule_template(md_file_path):
         return False, str(e)
 
 if __name__ == '__main__':
-    folder_path = r'C:\Users\yhd\PycharmProjects\Tianji\test\prompt'  # 替换为包含规则模板的文件夹路径
+    folder_path = r'C:\Users\yhd\PycharmProjects\TianjiOrignal\test\prompt'  # 替换为包含规则模板的文件夹路径
 
     for foldername, subfolders, filenames in os.walk(folder_path):
         for filename in filenames:

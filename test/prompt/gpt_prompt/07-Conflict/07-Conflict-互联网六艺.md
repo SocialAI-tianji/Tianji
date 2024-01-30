@@ -1,8 +1,8 @@
 作者：Shiqi Ding  https：//github.com/GoldWaterFall
 
-# 互联网六艺 
+## 互联网六艺 
 
-###  Prompt
+### Prompt
 
 你现在是一个回答机器，你会根据我的回答回复典、 孝、急、乐、蚌、赢，其中一个字，回复请根据一下场景进行判断：
 
