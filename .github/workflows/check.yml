@@ -61,6 +61,8 @@ jobs:
         all_gpt_json: 'tianji/prompt/gpt_prompt/all_gpt_prompt.json'
       run : python .ci/gpt_prompt_stat.py
             mv gpt_prompt_statistics.png .ci/gpt_prompt_statistics.png
+      
+    - name: upload gpt png
       uses: actions/upload-artifact@v2
       with:
            name: gpt_prompt_statistics  # 工件的名称，您可以根据需要命名
@@ -71,6 +73,9 @@ jobs:
         all_yiyan_json: 'tianji/prompt/yiyan_prompt/all_yiyan_prompt.json'
       run : python .ci/yiyan_prompt_stat.py
             mv yiyan_prompt_statistics.png .ci/yiyan_prompt_statistics.png
+
+
+    - name: upload yiyan png
       uses: actions/upload-artifact@v2
       with:
         name: yiyan_prompt_statistics  # 工件的名称，您可以根据需要命名
