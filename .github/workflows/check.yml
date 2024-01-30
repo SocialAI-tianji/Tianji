@@ -61,7 +61,7 @@ jobs:
         all_gpt_json: 'tianji/prompt/gpt_prompt/all_gpt_prompt.json'
       run : python .ci/gpt_prompt_stat.py
             mv gpt_prompt_statistics.png .ci/gpt_prompt_statistics.png
-      
+
     - name: upload gpt png
       uses: actions/upload-artifact@v2
       with:

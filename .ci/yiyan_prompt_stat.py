@@ -2,8 +2,8 @@ import json
 import matplotlib.pyplot as plt
 import os
 
-#all_yiyan_json_path = os.environ.get('all_yiyan_json')
-all_yiyan_json_path=r'C:\Users\yhd\PycharmProjects\TianjiOrignal\tianji\prompt\yiyan_prompt\all_yiyan_prompt.json'
+all_yiyan_json_path = os.environ.get('all_yiyan_json')
+#all_yiyan_json_path=r'C:\Users\yhd\PycharmProjects\TianjiOrignal\tianji\prompt\yiyan_prompt\all_yiyan_prompt.json'
 # 打开 JSON 文本文件并加载数据
 with open(all_yiyan_json_path, 'r', encoding='utf-8') as file:
     data = json.load(file)
