@@ -99,13 +99,3 @@ jobs:
         name: yiyan_prompt_statistics  # 工件的名称，您可以根据需要命名
         path: .ci/yiyan_prompt_statistics.png  # 指定生成的 PNG 文件的路径
 
-    - name: Commit and Push Changes
-      run: |
-        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-        git config --global user.name "${{ github.actor }}"
-        git add .  # 添加修改的文件，路径根据实际情况调整
-        git commit -m "Update prompt files"  # 提交更改，自定义提交消息
-        git push origin main  # 推送更改回仓库，分支名根据实际情况调整
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
