@@ -100,15 +100,15 @@ jobs:
         name: yiyan_prompt_statistics  # 工件的名称，您可以根据需要命名
         path: .ci/yiyan_prompt_statistics.png  # 指定生成的 PNG 文件的路径
 
-    - name: Configure Git credentials
-      run: |
-        git config user.name "GoldWaterFall"
-        git config user.email "2038547278@qq.com"
-
-    - name: Commit and push changes
-      run: |
-        git add .
-        git commit -m "Auto commit after PR merge"
-        git push
+#    - name: Configure Git credentials
+#      run: |
+#        git config user.name ""
+#        git config user.email ""
+#
+#    - name: Commit and push changes
+#      run: |
+#        git add .
+#        git commit -m "Auto commit after PR merge"
+#        git push
 
 
