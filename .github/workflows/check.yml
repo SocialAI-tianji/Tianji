@@ -9,23 +9,9 @@ on:
     branches:
       - main
 jobs:
-  check:
+  check :
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
-
-    - name: Run check.py
-      run: |
-        python .ci/check.py
-  prompt_to_json:
-    runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -35,7 +21,11 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.9 # 指定所需的 Python 版本
+        python-version: 3.9
+
+    - name: check the prompt
+      run: |
+        python .ci/check.py
 
     - name: gpt_prompt to json
       env:
@@ -49,15 +39,76 @@ jobs:
         output_path: 'tianji/prompt'
       run: python .ci/prompt_to_json_for_CI.py
 
+    - name: upload json
+      uses: actions/upload-artifact@v2
+      with:
+        name: upload_json
+        path: tianji/prompt
+
     - name: Merge the gpt_prompt
       env:
         gpt_folder_path: 'tianji/prompt/gpt_prompt'
         gpt_output_json_path: 'tianji/prompt/gpt_prompt/all_gpt_prompt.json'
-      run: python .ci/build_all_gpt_prompt.py 
+      run: python .ci/build_all_gpt_prompt.py
+
+
+    - name: upload all gpt json
+      uses: actions/upload-artifact@v2
+      with:
+        name: upload_all_gpt_json
+        path: tianji/prompt/gpt_prompt/all_gpt_prompt.json
 
     - name: Merge the yiyan_prompt
       env:
         yiyan_folder_path: 'tianji/prompt/yiyan_prompt'
         yiyan_output_json_path: 'tianji/prompt/yiyan_prompt/all_yiyan_prompt.json'
-      run: python .ci/build_all_yiyan_prompt.py 
+      run: python .ci/build_all_yiyan_prompt.py
+
+    - name: upload all yiyan json
+      uses: actions/upload-artifact@v2
+      with:
+        name: upload_all_yiyan_json
+        path: tianji/prompt/yiyan_prompt/all_yiyan_prompt.json
+
+    - name: Install matplotlib
+      run: |
+        python -m pip install --upgrade pip
+        pip install matplotlib
+
+    - name: Count the number of gpt prompts
+      env:
+        all_gpt_json: 'tianji/prompt/gpt_prompt/all_gpt_prompt.json'
+      run : python .ci/gpt_prompt_stat.py
+            mv gpt_prompt_statistics.png .ci/gpt_prompt_statistics.png
+
+    - name: upload gpt png
+      uses: actions/upload-artifact@v2
+      with:
+           name: gpt_prompt_statistics  # 工件的名称，您可以根据需要命名
+           path: .ci/gpt_prompt_statistics.png  # 指定生成的 PNG 文件的路径
+
+    - name: Count the number of yiyan prompts
+      env:
+        all_yiyan_json: 'tianji/prompt/yiyan_prompt/all_yiyan_prompt.json'
+      run : python .ci/yiyan_prompt_stat.py
+            mv yiyan_prompt_statistics.png .ci/yiyan_prompt_statistics.png
+
+
+    - name: upload yiyan png
+      uses: actions/upload-artifact@v2
+      with:
+        name: yiyan_prompt_statistics  # 工件的名称，您可以根据需要命名
+        path: .ci/yiyan_prompt_statistics.png  # 指定生成的 PNG 文件的路径
+
+#    - name: Configure Git credentials
+#      run: |
+#        git config user.name ""
+#        git config user.email ""
+#
+#    - name: Commit and push changes
+#      run: |
+#        git add .
+#        git commit -m "Auto commit after PR merge"
+#        git push
+
 
