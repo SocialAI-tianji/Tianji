@@ -206,7 +206,7 @@ cur_query_prompt = "<|im_start|>user\n{user}<|im_end|>\n<|im_start|>assistant\n"
 
 def combine_history(prompt):
     messages = st.session_state.messages
-    meta_instruction = ""
+    meta_instruction = "你现在是一个送祝福大师，帮我针对不同人和事情、节日送对应的祝福"
     total_prompt = f"<s><|im_start|>system\n{meta_instruction}<|im_end|>\n"
     for message in messages:
         cur_content = message["content"]
