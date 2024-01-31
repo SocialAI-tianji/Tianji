@@ -35,7 +35,7 @@ input:用户输入
 output:对应输出
 
 '''
-folder_path = r"C:\Users\yhd\PycharmProjects\TianjiOrignal\test\prompt\yiyan_prompt"  # 替换成您的文件夹路径
+folder_path = r"C:\Users\yhd\PycharmProjects\TianjiOrignal\test\prompt\gpt_prompt"  # 替换成您的文件夹路径
 
 
 def md_file_to_json_with_examples(file_path,id,heading):
