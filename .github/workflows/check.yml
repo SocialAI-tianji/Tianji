@@ -50,7 +50,7 @@ jobs:
         gpt_folder_path: 'tianji/prompt/gpt_prompt'
         gpt_output_json_path: 'tianji/prompt/gpt_prompt/all_gpt_prompt.json'
       run: python .ci/build_all_gpt_prompt.py
-           mv all_gpt_prompt.json  tianji/prompt/gpt_prompt/all_gpt_prompt.json
+
 
     - name: upload all gpt json
       uses: actions/upload-artifact@v2
