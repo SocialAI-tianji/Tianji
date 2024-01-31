@@ -99,6 +99,11 @@ jobs:
         name: yiyan_prompt_statistics  # 工件的名称，您可以根据需要命名
         path: .ci/yiyan_prompt_statistics.png  # 指定生成的 PNG 文件的路径
 
+    - name: Configure Git Identity
+      run: |
+        git config --global user.email "2038547278@qq.com"
+        git config --global user.name "GoldWater"
+
     - name: Add, Commit, and Push Changes
       run: |
         git add .  # 添加所有更改的文件
