@@ -101,8 +101,8 @@ jobs:
 
     - name: Configure Git Identity
       run: |
-        git config --global user.email "2038547278@qq.com"
-        git config --global user.name "GoldWater"
+        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+        git config --global user.name "${{ github.actor }}"
 
     - name: Add, Commit, and Push Changes
       run: |
