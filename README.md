@@ -68,7 +68,6 @@ SocialAI（来事儿AI） 是设立于中国的非营利组织，我们完全开
 - [如何复刻超越本项目](#如何复刻超越本项目)
 - [鸣谢](#鸣谢)
 
-
 ## 📰 News
 
 - **[2024.02.01]** 🧑‍🚀 我们发布了有关 prompt、Agent应用、知识库、模型微调的初版体验地址，将仓库转为开放。
@@ -146,3 +145,12 @@ sam altman：哈哈，我等着那一天！不过现在，让我们先享受今�
   <img src=".ci/gpt_prompt_statistics.png" alt="Image 1" width="45%">
   <img src=".ci/yiyan_prompt_statistics.png" alt="Image 2" width="45%">
 </div>
+
+
+## 鸣谢
+TODO
+
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=SocialAI-tianji/Tianji&type=Date)](https://star-history.com/#SocialAI-tianji/Tianji&Date)
