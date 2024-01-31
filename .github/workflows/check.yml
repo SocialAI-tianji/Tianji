@@ -98,3 +98,9 @@ jobs:
       with:
         name: yiyan_prompt_statistics  # 工件的名称，您可以根据需要命名
         path: .ci/yiyan_prompt_statistics.png  # 指定生成的 PNG 文件的路径
+
+    - name: Add, Commit, and Push Changes
+      run: |
+        git add .  # 添加所有更改的文件
+        git commit -m "Update files"  # 提交更改，自定义提交消息
+        git push  # 推送更改回仓库
