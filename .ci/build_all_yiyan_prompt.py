@@ -25,6 +25,10 @@ def merge_json_files(directory):
                     json_data = json.load(file)
                     merged_data.extend(json_data)
 
+# 清空 output_json_path 文件中的所有文本内容并写入一个空的 JSON 数组
+with open(output_json_path, 'w', encoding='utf-8') as output_file:
+    output_file.write('[]')
+
 # 调用递归函数以遍历文件夹及其子文件夹下的所有JSON文件
 merge_json_files(folder_path)
 
