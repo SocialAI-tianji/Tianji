@@ -1,6 +1,7 @@
 import json
 import matplotlib.pyplot as plt
 import os
+import shutil
 '''
 # @author  : Shiqiding
 # @description: 统计yiyan prompt
@@ -67,6 +68,8 @@ plt.title('yiyan prompt statistics')
 
 # 保存为 PNG 图片文件
 plt.savefig('yiyan_prompt_statistics.png', bbox_inches='tight')
+
+shutil.move('yiyan_prompt_statistics.png', '.ci/yiyan_prompt_statistics.png')
 
 # 显示图形
 plt.show()
