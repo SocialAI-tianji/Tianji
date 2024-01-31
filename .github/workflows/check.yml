@@ -100,12 +100,6 @@ jobs:
         name: yiyan_prompt_statistics  # 工件的名称，您可以根据需要命名
         path: .ci/yiyan_prompt_statistics.png  # 指定生成的 PNG 文件的路径
 
-    - name: Commit files
-      run: |
-        git config user.name "${{ github.actor }}"
-        git config user.email "${{ github.event.sender.email }}"
-        git add .
-        git commit -m "Auto commit from GitHub Actions"
-        git push
+
 
 
