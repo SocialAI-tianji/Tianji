@@ -109,17 +109,17 @@ BAIDU_API_KEY=
 OPENAI_API_MODEL=
 ZHIPUAI_API_KEY=
 ```
+
 ## 文件目录说明
 
+```
 assets/：静态图片文件 
-
 run/： 运行用文件 
-
 test/：测试文件 
-
 tianji/：源代码目录，包含主要逻辑与算法实现 
-
 tools/：帮助收集数据的工具  
+```
+
 
 ## 🍺运行方式
 
