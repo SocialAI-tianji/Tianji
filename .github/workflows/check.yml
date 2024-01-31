@@ -102,13 +102,12 @@ jobs:
 
 #    - name: Configure Git credentials
 #      run: |
-#        git config user.name ""
-#        git config user.email ""
+#        git config user.name ${{ secrets.GIT_USER }}
+#        git config user.email ${{ secrets.GIT_EMAIL }}
 #
 #    - name: Commit and push changes
 #      run: |
 #        git add .
 #        git commit -m "Auto commit after PR merge"
 #        git push
-
 
