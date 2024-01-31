@@ -1,6 +1,7 @@
 import json
 import matplotlib.pyplot as plt
 import os
+import shutil
 '''
 # @author  : Shiqiding
 # @description: 统计gpt prompt
@@ -66,6 +67,10 @@ plt.title('gpt prompt statistics')
 
 # 保存为 PNG 图片文件
 plt.savefig('gpt_prompt_statistics.png', bbox_inches='tight')
+
+
+shutil.move('gpt_prompt_statistics.png', '.ci/gpt_prompt_statistics.png')
+
 
 # 显示图形
 plt.show()
