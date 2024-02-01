@@ -39,6 +39,12 @@ jobs:
         output_path: 'tianji/prompt'
       run: python .ci/prompt_to_json_for_CI.py
 
+    - name: aigame_prompt to json
+      env:
+        folder_path: 'test/prompt/aigame/zhipu'
+        output_path: 'tianji/prompt'
+      run: python .ci/prompt_to_json_for_CI.py
+
     - name: upload json
       uses: actions/upload-artifact@v2
       with:
@@ -69,6 +75,12 @@ jobs:
       with:
         name: upload_all_yiyan_json
         path: tianji/prompt/yiyan_prompt/all_yiyan_prompt.json
+
+    - name: Merge the aigame_prompt
+      env:
+        aigame_folder_path: 'tianji/prompt/aigame'
+        aigame_output_json_path: 'tianji/prompt/aigame/zhipu/all_aigame_json'
+      run: python .ci/build_all_aigame_prompt.py
 
     - name: Install matplotlib
       run: |
