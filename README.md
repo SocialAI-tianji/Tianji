@@ -70,7 +70,7 @@ SocialAI（来事儿AI） 是设立于中国的非营利组织，我们完全开
 
 ## 📰 News
 
-- **[2024.02.01]** 🧑‍🚀 我们发布了有关 prompt、Agent应用、知识库、模型微调的初版体验地址，将仓库转为开放。
+- **[2024.02.01]** 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库(TODO)、[模型微调](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的初版体验地址，将仓库转为开放。
 
 ### 🛣 路线图
 
