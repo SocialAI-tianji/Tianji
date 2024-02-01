@@ -70,7 +70,7 @@ SocialAI（来事儿AI） 是设立于中国的非营利组织，我们完全开
 
 ## 📰 News
 
-- **[2024.02.01]** 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库(TODO)、[模型微调](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的初版体验地址，将仓库转为开放。
+- **[2024.02.01]** 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库(TODO)、[模型微调(基于InternLM2)](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的初版体验地址，将仓库转为开放。
 
 ### 🛣 路线图
 
@@ -148,7 +148,16 @@ sam altman：哈哈，我等着那一天！不过现在，让我们先享受今�
 
 
 ## 鸣谢
-TODO
+
+感谢下列所有人对本项目的帮助：
+
+- 所有贡献者
+- 上海人工智能实验室 [InternLM(书生·浦语) 模型](https://github.com/InternLM/InternLM)，以及提供的A100显卡资源！
+- [InternLM(书生·浦语) 系列开源教程（目前最好的LLM实战全栈教程之一）](https://github.com/InternLM/tutorial)
+- Datawhale 开源学习社区
+- 奇想星球
+
+TODO......
 
 
 ## Star History
