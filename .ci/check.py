@@ -67,5 +67,10 @@ if __name__ == '__main__':
     # 使用 shutil.move 将日志文件移动到 .ci/log 文件夹下
     shutil.move(log_file_path, os.path.join('.ci/log', error_log_file))
 
-
+    # 删除 .ci/log 下的空文件
+    for file in os.listdir(log_folder):
+        file_path = os.path.join(log_folder, file)
+        if os.path.isfile(file_path) and os.path.getsize(file_path) == 0:
+            os.remove(file_path)
+            print(f"Deleted empty log file: {file}")
 
