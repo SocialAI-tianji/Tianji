@@ -81,7 +81,7 @@ jobs:
     - name: Merge the aigame_prompt
       env:
         aigame_folder_path: 'tianji/prompt/aigame'
-        aigame_output_json_path: 'tianji/prompt/aigame/zhipu/all_aigame_json'
+        aigame_output_json_path: 'tianji/prompt/aigame/all_aigame_prompt.json'
       run: python .ci/build_all_aigame_prompt.py
 
     - name: Install matplotlib
