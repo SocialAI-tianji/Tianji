@@ -3,7 +3,7 @@
 
 <div style="display: flex; justify-content: space-between;">
   
-  <img src=".ci/gpt_prompt_statistics.png" alt="Image 1" width="45%">
-  <img src=".ci/yiyan_prompt_statistics.png" alt="Image 2" width="45%">
+  <img src="Tianji/.ci/gpt_prompt_statistics.png" alt="Image 1" width="45%">
+  <img src="Tianji/.ci/yiyan_prompt_statistics.png" alt="Image 2" width="45%">
   
 </div>
