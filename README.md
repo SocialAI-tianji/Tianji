@@ -82,6 +82,7 @@ SocialAI（来事儿AI） 是设立于中国的非营利组织，我们完全开
 - [ ] 将项目挂载 openxlab
 - [ ] 将项目挂载 modelscope
 - [ ] 完成 prompt、Agent 贡献指南
+- [ ] 补充文档（如何参考本项目构建自己的应用prompt、agent、知识库、微调应用）
 - [ ] 完成[人情世故大模型-送祝福](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的模型微调数据收集到微调过程的可复现文档
 - [ ] 开源人情世故语料-送祝福至huggingface
 - [ ] 开放知识库语料获取细节至huggingface
@@ -179,7 +180,7 @@ sam altman：哈哈，我等着那一天！不过现在，让我们先享受今�
   - 带娃助手（数据收集与知识库）
   - 生活指南（数据收集与知识库）
   ......
-  
+
 ## 贡献者
 
 [感谢其中的每一位贡献者](docs/contributor.md)，也欢迎你一起加入！
