@@ -1,5 +1,6 @@
 import gradio as gr
 import json
+import random
 from zhipuai import ZhipuAI
 
 file_path = 'tianji/prompt/yiyan_prompt/all_yiyan_prompt.json'
@@ -27,13 +28,25 @@ def get_system_prompt_by_name(name):
             return item['system_prompt']
     return None  # If the name is not found
 
-def change_example(name,cls_choose_value):
+def change_example(name,cls_choose_value,chatbot):
+    now_example = []
+    if chatbot is not None:
+        print("切换场景清理bot历史")
+        chatbot.clear()
     for i in cls_choose_value:
         if i['name'] == name:
             now_example = [[j['input'],j['output']] for j in i['example']]
     if now_example is []:
         raise gr.Error("获取example出错！")
-    return gr.update(samples=now_example)
+    return gr.update(samples=now_example),chat_history
+
+def random_button_click():
+    choice_number = random.randint(0, 6)
+    now_id = choice_number + 1
+    cls_choose = CHOICES[choice_number]
+    now_json_data = _get_id_json_id(choice_number)
+    random_name = [i['name'] for i in now_json_data]
+    return cls_choose,now_json_data,gr.update(choices=get_names_by_id(now_id),value= random.choice(random_name))
 
 def example_click(dataset,name,now_json):
     system = ""
@@ -57,7 +70,7 @@ def _get_id_json_id(idx):
 
 def cls_choose_change(idx):
     now_id = idx +1
-    return _get_id_json_id(idx),gr.update(choices=get_names_by_id(now_id))
+    return _get_id_json_id(idx),gr.update(choices=get_names_by_id(now_id),value=get_names_by_id(now_id)[0])
 
 def combine_message_and_history(message, chat_history):
     # 将聊天历史中的每个元素（假设是元组）转换为字符串
@@ -106,32 +119,43 @@ def regenerate(chat_history,system_prompt):
     # 返回更新后的聊天记录
     return msg, chat_history
 
+TITLE = """
+# Tianji 人情世故大模型系统——prompt版 欢迎star🤗！\n 
+## 🤖感谢[智谱AI](https://www.zhipuai.cn/)的token支持！
+## 开源项目地址：https://github.com/SocialAI-tianji/Tianji
+## 请先选择一个场景！【否则会报错】👈
+### 我们的愿景是构建一个从数据收集开始的大模型全栈垂直领域开源实践。\n
+### 我们还有其他体验应用：知识库、agent、大模型微调，欢迎体验！更欢迎你的贡献！祝大家龙年快乐！
+"""
+
 with gr.Blocks() as demo:
     chat_history = gr.State()
     now_json_data = gr.State(value=_get_id_json_id(0))
     now_name = gr.State()
-    gr.Markdown('# 人情世故大模型demo')
+    gr.Markdown(TITLE)
     cls_choose = gr.Radio(label="请选择任务大类",choices=CHOICES,type="index",value="敬酒") 
+    input_example = gr.Dataset(components=["text","text"],samples=[
+                    ["请先选择合适的场景","请先选择合适的场景"],
+                    ])
     with gr.Row():
         with gr.Column(scale=1):
-            name = gr.Dropdown(choices=get_names_by_id(1), label='场景', info='请选择合适的场景',interactive=True)
-            system_prompt = gr.TextArea(label='系统提示词')
-            name.change(fn=get_system_prompt_by_name, inputs=[name], outputs=[system_prompt])
+            dorpdown_name = gr.Dropdown(choices=get_names_by_id(1),label='场景', info='请选择合适的场景',interactive=True)
+            system_prompt = gr.TextArea(label='系统提示词') #TODO 需要给初始值嘛？包括example
+            random_button = gr.Button('🪄点我随机一个试试！',size='lg')
+            dorpdown_name.change(fn=get_system_prompt_by_name, inputs=[dorpdown_name], outputs=[system_prompt])
         with gr.Column(scale=4):
-            chatbot = gr.Chatbot(label='聊天界面', value=[['请先选择一个场景！【否则会报错】，遇到问题请刷新重试', "目前仅支持十轮对话，超过十轮对话后将会自动清空聊天记录"]])
+            chatbot = gr.Chatbot(label='聊天界面', value=[['如果喜欢，请给我们一个⭐，谢谢', "不知道选哪个？试试点击随机按钮把！"]])
             msg = gr.Textbox(label="输入信息")
             msg.submit(respond, inputs=[system_prompt,msg, chatbot], outputs=[msg, chatbot])
             submit = gr.Button('发送').click(respond, inputs=[system_prompt,msg, chatbot], outputs=[msg, chatbot])
             with gr.Row():
                 clear = gr.Button('记录删除').click(clear_history, inputs=[chatbot], outputs=[chatbot])
                 regenerate = gr.Button('重新生成').click(regenerate, inputs=[chatbot,system_prompt], outputs = [msg, chatbot])    
-    input_example = gr.Dataset(components=["text","text"],samples=[
-                    ["请先选择合适的场景","请先选择合适的场景"],
-                    ])
-    
-    cls_choose.change(fn=cls_choose_change,inputs=cls_choose,outputs=[now_json_data,name])
-    name.change(fn=change_example,inputs = [name,now_json_data], outputs=input_example)
-    input_example.click(fn=example_click, inputs=[input_example,name,now_json_data],outputs=[msg,system_prompt] )
+
+    cls_choose.change(fn=cls_choose_change,inputs=cls_choose,outputs=[now_json_data,dorpdown_name])
+    dorpdown_name.change(fn=change_example,inputs = [dorpdown_name,now_json_data,chatbot], outputs=[input_example,chat_history])
+    input_example.click(fn=example_click, inputs=[input_example,dorpdown_name,now_json_data],outputs=[msg,system_prompt] )
+    random_button.click(fn=random_button_click,outputs=[cls_choose,now_json_data,dorpdown_name])
 
 if __name__ == "__main__":
-    demo.launch(share=True)
+    demo.launch()
