@@ -77,6 +77,7 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 - [x] 释放最简初版(涉及prompt、aigame、agent、知识库、模型微调)
 - [ ] 公开所有服务器体验地址
+- [ ] 使用[chatchat](https://github.com/chatchat-space/Langchain-Chatchat)接入知识库并开放体验地址
 - [ ] 将项目挂载 huggingface
 - [ ] 将项目挂在 aistudio
 - [ ] 将项目挂载 openxlab
