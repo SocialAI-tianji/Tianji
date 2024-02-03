@@ -7,7 +7,7 @@ import os
 
 from zhipuai import ZhipuAI
 
-class InternLM2_LLM(LLM):
+class Zhipu_LLM(LLM):
     tokenizer : AutoTokenizer = None
     model: AutoModelForCausalLM = None
     client: Any = None

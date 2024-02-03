@@ -2,7 +2,7 @@ import os
 
 from langchain.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
-from model import InternLM2_LLM
+from .model import Zhipu_LLM
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 
@@ -24,7 +24,7 @@ def load_chain():
 
     # 加载自定义 LLM
     # llm = InternLM_LLM(model_path = "/root/share/model_repos/internlm-chat-7b")
-    llm = InternLM2_LLM()
+    llm = Zhipu_LLM()
     # 定义一个 Prompt Template
     template = """使用以下上下文中文来回答最后的问题。如果你不知道答案，就说你不知道，不要试图编造答
     案。尽量使答案调理清楚，内容详实。总是在回答的最后说”谢谢你的提问！“。
