@@ -1,10 +1,12 @@
 import gradio as gr
 import json
 import random
+from dotenv import load_dotenv
+load_dotenv()
 from zhipuai import ZhipuAI
-
+import os
 file_path = 'tianji/prompt/yiyan_prompt/all_yiyan_prompt.json'
-API_KEY = ''
+API_KEY = os.environ['ZHIPUAI_API_KEY']
 CHOICES = ["敬酒","请客","送礼","送祝福","人际交流","化解尴尬","矛盾应对"]
 
 with open(file_path, 'r', encoding='utf-8') as file:

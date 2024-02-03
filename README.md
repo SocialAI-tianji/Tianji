@@ -53,38 +53,40 @@ SocialAI（来事儿AI） 是设立于中国的非营利组织，我们完全开
 您可以在 tianji 目录下找到四种路线的对应源码，如果您想参考 `Tianji` 的项目架构、数据管理、技术路线复刻出属于自己的垂直领域 AI 应用，欢迎 fork 或者直接参考，我们将会开源所有包括从`项目的起步、数据的方向探索、数据构建与管理、AI应用从0制作、领域（比如人情世故）与技术路线的深入结合`的全过程；我们希望看到 AI 原生应用在生活中进一步的加速推进。
 
 ## 目录
-- [News](#News)
+- [News](#📰News)
   - [路线图](#路线图)
 - [运行环境](#运行环境)
   - [环境安装](#环境安装)
   - [key配置](#key配置)
 - [文件目录说明](#文件目录说明)
   - [文档说明](#文档说明)
-- [运行方式](#运行方式)
+- [运行方式](#🍺运行方式)
   - [示例](#示例)
-- [使用到的框架](#使用到的框架)
 - [如何参与本项目](#如何参与本项目)
+  - [问题看板](#问题看板)
   - [提交第一个PR](#提交第一个PR)
-- [如何复刻超越本项目](#如何复刻超越本项目)
+- [如何复刻本项目](#如何复刻本项目)
+- [贡献者](#贡献者)
 - [鸣谢](#鸣谢)
 
-## 📰 News
+## 📰News
 
 - **[2024.02.01]** 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库(TODO)、[模型微调(基于InternLM2)](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的初版体验地址，将仓库转为开放。
 
-### 🛣 路线图
+### 路线图
 
-- [x] 释放初版资源
+- [x] 释放最简初版(涉及prompt、aigame、agent、知识库、模型微调)
 - [ ] 公开所有服务器体验地址
 - [ ] 将项目挂载 huggingface
+- [ ] 将项目挂在 aistudio
 - [ ] 将项目挂载 openxlab
 - [ ] 将项目挂载 modelscope
-- [ ] 完成 Agent 贡献指南
-- [ ] 完成模型微调数据收集到微调过程的可复现文档
-- [ ] 开源人情世故语料-送祝福
-- [ ] 开放知识库语料获取细节
+- [ ] 完成 prompt、Agent 贡献指南
+- [ ] 完成[人情世故大模型-送祝福](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的模型微调数据收集到微调过程的可复现文档
+- [ ] 开源人情世故语料-送祝福至huggingface
+- [ ] 开放知识库语料获取细节至huggingface
 - [ ] 开源人情世故语料-6k
-- [ ] 收集 & 开源人情世故语料-2w
+- [ ] 收集 & 开源人情世故语料-2w并训练给出结果和全过程
 
 ## 运行环境
 
@@ -97,32 +99,47 @@ pip install -r requirements.txt
 pip install . 
 ```
 
-### key 配置
+### key配置
 
-为确保项目正常运行，请在`.env` 中设置API密钥，你可以根据下列例子写入对应的 key，即可成功运行调用,目前默认使用 zhipuai，你可以仅写入`ZHIPUAI_API_KEY`即可使用。
+为确保项目正常运行，**请在项目内新建`.env`文件，并在其中设置你的API密钥**，你可以根据下列例子写入对应的 key，即可成功运行调用,目前默认使用 zhipuai，你可以仅写入`ZHIPUAI_API_KEY`即可使用。
 
 ```
 OPENAI_API_KEY=
 OPENAI_API_BASE=
+ZHIPUAI_API_KEY=
 BAIDU_API_KEY=
 OPENAI_API_MODEL=
-ZHIPUAI_API_KEY=
 ```
 
 ## 文件目录说明
 
 ```
 assets/：静态图片文件 
-run/： 运行用文件 
-test/：测试文件 
-tianji/：源代码目录，包含主要逻辑与算法实现 
-tools/：帮助收集数据的工具  
+run/： 包括了各类演示用前端
+test/：这里存放了各类功能的测试文件，包括核心模块以及llm运行的单元测试
+tianji/：源代码目录，包含主要逻辑与算法实现
+tools/：帮助收集数据、整理数据清洗语料的工具
 ```
 
+### 文档说明
+
+TODO,待覆盖全文档
 
 ## 🍺运行方式
 
+以下给出 prompt 以及 agent 的相关应用方式，在运行前请确保你已经新建`.env`文件：
+
+```bash
+# 运行prompt webui前端
+python3 run/metagpt_webui.py
+
+# 运行agent前端
+streamlit run run/metagpt_webui.py
+```
+
 ## 示例
+
+### 如何敬酒
 
 以下给出 特斯拉创始人 Elon Musk  向 OpenAI 创始人 Sam Altman 敬酒的对话示例（基于内置提示词生成）：
 
@@ -139,6 +156,28 @@ sam altman：哈哈，我等着那一天！不过现在，让我们先享受今�
 
 
 
+
+## 如何参与本项目
+
+### 问题看板
+
+  这里记录了该项目存在的一些问题（欢迎领取解决），以及未来的一些路线图需要完成，当前还没时间写，如果您有时间想一起来玩儿，请issue或者直接邮箱联系我: physicoada@gmail.com
+
+### 提交第一个PR 
+  
+  得益于良好的ci设施，你只需要参考[示例PR](https://github.com/SocialAI-tianji/Tianji/pull/27)，就可以很快提出自己的第一个prompt PR！
+  提交PR后，新的prompt将自动合并于 `tianji/prompt` 下的json文件中，方便一键调用。如果你不知道写什么，可以参考 [场景分类](test/场景分类) 中的各类场景细化细节，写出不同人情世故领域的prompt。
+
+## 如何复刻本项目
+
+  该项目的初衷，第一是为了让`AI学会核心技术`，第二是让更多人（领域/行业）可以构建属于自己的AI系统，加速AI对每一个领域的渗透。你可以通过以下方式来学习该项目：
+
+  具体内容 TODO 等有空的时候补完，会从怎么做prompt、agent、知识库再到模型微调说起（从盘古开天地起....
+
+## 贡献者
+
+[感谢其中的每一位贡献者](docs\contributor.md)，也欢迎你一起加入！
+
 ## 鸣谢
 
 感谢下列所有人对本项目的帮助：
@@ -147,11 +186,8 @@ sam altman：哈哈，我等着那一天！不过现在，让我们先享受今�
 - 强大的[智谱AI](https://open.bigmodel.cn/)的token支持！（除微调外，目前基座皆基于智谱AI）
 - 上海人工智能实验室 [InternLM(书生·浦语) 模型](https://github.com/InternLM/InternLM)，以及提供的A100显卡资源！
 - [InternLM(书生·浦语) 系列开源教程（目前最好的LLM实战全栈教程之一）](https://github.com/InternLM/tutorial)
-- Datawhale 开源学习社区
-- 奇想星球
-
-TODO......（还没写完
-
+- [Datawhale 开源学习社区](https://github.com/datawhalechina)
+- [奇想星球](https://1aigc.cn/)
 
 ## Star History
 
