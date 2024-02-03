@@ -10,3 +10,4 @@ einops
 
 # for RQA
 langchain==0.0.292
+gradio==3.50.2
