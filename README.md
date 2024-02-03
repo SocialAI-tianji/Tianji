@@ -22,7 +22,7 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 </p>
 
-SocialAI（来事儿AI） 是设立于中国的非营利组织，我们完全开源了**Tianji**（天机）系列工作，当前开源系统技术路线涉及为`Prompt、AI游戏、Agent、知识库、模型训练`。具体内容，请查看文档与对应仓库。
+[SocialAI（来事儿AI）](https://socialai-tianji.github.io/socialai-web/) 是设立于中国的非营利组织，我们完全开源了**Tianji**（天机）系列工作，当前开源系统技术路线涉及为[Prompt](tianji/prompt/yiyan_prompt)、[AI游戏](test/prompt/aigame/zhipu)、[Agent](tianji/agents)、知识库、模型训练。具体内容，请查看文档与对应仓库。
 
 基于整理后的人情世故数据，人情世故大模型系统-天机包括了常见人际交往中的七大领域（具体可以参考 [场景分类](test/场景分类) 中的场景细化细节），其中大体可分为：
 
