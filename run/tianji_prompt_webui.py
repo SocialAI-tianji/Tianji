@@ -42,12 +42,15 @@ def change_example(name,cls_choose_value,chatbot):
         raise gr.Error("获取example出错！")
     return gr.update(samples=now_example),chat_history
 
-def random_button_click():
+def random_button_click(chatbot):
     choice_number = random.randint(0, 6)
     now_id = choice_number + 1
     cls_choose = CHOICES[choice_number]
     now_json_data = _get_id_json_id(choice_number)
     random_name = [i['name'] for i in now_json_data]
+    if chatbot is not None:
+        print("切换场景清理bot历史")
+        chatbot.clear()
     return cls_choose,now_json_data,gr.update(choices=get_names_by_id(now_id),value= random.choice(random_name))
 
 def example_click(dataset,name,now_json):
@@ -125,7 +128,7 @@ TITLE = """
 # Tianji 人情世故大模型系统——prompt版 欢迎star🤗！\n 
 ## 🤖感谢[智谱AI](https://www.zhipuai.cn/)的token支持！
 ## 开源项目地址：https://github.com/SocialAI-tianji/Tianji
-## 请先选择一个场景！【否则会报错】👈
+## 使用方法：选择或随机一个场景，输入提示词（或者点击上面的Example自动填充），随后发送！
 ### 我们的愿景是构建一个从数据收集开始的大模型全栈垂直领域开源实践。\n
 ### 我们还有其他体验应用：知识库、agent、大模型微调，欢迎体验！更欢迎你的贡献！祝大家龙年快乐！
 """
@@ -157,7 +160,7 @@ with gr.Blocks() as demo:
     cls_choose.change(fn=cls_choose_change,inputs=cls_choose,outputs=[now_json_data,dorpdown_name])
     dorpdown_name.change(fn=change_example,inputs = [dorpdown_name,now_json_data,chatbot], outputs=[input_example,chat_history])
     input_example.click(fn=example_click, inputs=[input_example,dorpdown_name,now_json_data],outputs=[msg,system_prompt] )
-    random_button.click(fn=random_button_click,outputs=[cls_choose,now_json_data,dorpdown_name])
+    random_button.click(fn=random_button_click,inputs=chatbot,outputs=[cls_choose,now_json_data,dorpdown_name])
 
 if __name__ == "__main__":
     demo.launch()
