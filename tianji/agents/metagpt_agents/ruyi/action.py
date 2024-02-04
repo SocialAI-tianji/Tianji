@@ -9,7 +9,7 @@ from metagpt.logs import logger
 
 from tianji.utils.common_llm_api import LLMApi
 from tianji.utils.json_from import SharedDataSingleton
-from tianji.knowledges.config import KNOWLEDGE_PATH, EMBEDDING_PATH
+from tianji.agents.knowledges.config import AGENT_KNOWLEDGE_PATH, AGENT_EMBEDDING_PATH
 from tianji.utils.knowledge_tool import (
     get_docs_list_query_openai,
     get_docs_list_query_zhipuai,
@@ -42,8 +42,8 @@ class WriteMarkDown(Action):
         knowledge_key = json_from_data["festival"] + json_from_data["requirement"]
         knowledge = get_docs_list_query_zhipuai(
             query_str=knowledge_key,
-            loader_file_path=KNOWLEDGE_PATH.WISHES.path(),
-            persist_directory=EMBEDDING_PATH.WISHES.path(filename="zhipuai"),
+            loader_file_path=AGENT_KNOWLEDGE_PATH.WISHES.path(),
+            persist_directory=AGENT_EMBEDDING_PATH.WISHES.path(filename="zhipuai"),
             k_num=5,
         )
         print("knowledge:\n", knowledge)

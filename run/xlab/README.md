@@ -4,4 +4,4 @@
 
 ## 祝福模块
 
-- 部署地址：https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish
+- 祝福模块部署地址：https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish

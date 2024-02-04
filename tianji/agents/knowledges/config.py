@@ -18,8 +18,8 @@ def get_all_knowledge_paths(knowledge_path: str = METAGPT_ROOT, suffix: str = ".
 """
 
 
-class KNOWLEDGE_PATH(str, Enum):
-    WISHES = TIANJI_PATH / "tianji/knowledges/04-Wishes"
+class AGENT_KNOWLEDGE_PATH(str, Enum):
+    WISHES = TIANJI_PATH / "tianji/agents/knowledges/04-Wishes"
 
     def path(self):
         load_path = self.value
@@ -28,7 +28,7 @@ class KNOWLEDGE_PATH(str, Enum):
         return os.path.join(load_path, "knowledges.txt")
 
 
-class EMBEDDING_PATH(str, Enum):
+class AGENT_EMBEDDING_PATH(str, Enum):
     WISHES = TIANJI_PATH / "temp/embedding/04-Wishes"
 
     def path(self, filename="other"):
