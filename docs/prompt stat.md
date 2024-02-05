@@ -1,5 +1,5 @@
 # 有效prompt统计
-记录目前仓库内有多少有效的prompt
+记录目前仓库内有多少有效的prompt(目前包含gpt prompt和yiyan prompt)
 
 <div style="display: flex; justify-content: space-between;">
   
