@@ -8,14 +8,14 @@ on:
     branches:
       - main
     paths:
-      - test/prompt
-      - tianji/prompt
+      - 'test/prompt/**'
+      - 'tainji/prompt/**'
   push:
     branches:
       - main
     paths:
-      - test/prompt
-      - tianji/prompt
+      - 'test/prompt/**'
+      - 'tainji/prompt/**'
 jobs:
   check :
     runs-on: ubuntu-latest
