@@ -1,7 +1,7 @@
 from langchain.document_loaders import DirectoryLoader, TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
-from langchain.vectorstores import Chroma 
+from langchain.vectorstores import Chroma
 
 from . import RQA_ST_Liyi_Chroma_Config
 
@@ -12,12 +12,11 @@ if __name__ == "__main__":
 
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=3000, chunk_overlap=150)
     split_docs = text_splitter.split_documents(loader.load())
-    
-    
-    embeddings = HuggingFaceEmbeddings(model_name="/root/weights/model/sentence-transformer")
+
+    embeddings = HuggingFaceEmbeddings(
+        model_name="/root/weights/model/sentence-transformer"
+    )
     vectordb = Chroma.from_documents(
-        documents=split_docs,
-        embedding=embeddings,
-        persist_directory=persist_directory 
+        documents=split_docs, embedding=embeddings, persist_directory=persist_directory
     )
     vectordb.persist()

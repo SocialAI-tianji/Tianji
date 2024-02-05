@@ -6,18 +6,21 @@ from tianji.knowledges.script.model import Zhipu_LLM
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 
+
 def load_chain():
     # 加载问答链
     # 定义 Embeddings
-    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
+    embeddings = HuggingFaceEmbeddings(
+        model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    )
 
     # 向量数据库持久化路径
-    persist_directory = 'tianji/knowledges/liyi/chroma'
+    persist_directory = "tianji/knowledges/liyi/chroma"
 
     # 加载数据库
     vectordb = Chroma(
         persist_directory=persist_directory,  # 允许我们将persist_directory目录保存到磁盘上
-        embedding_function=embeddings
+        embedding_function=embeddings,
     )
 
     print(vectordb._collection.count())
@@ -32,17 +35,26 @@ def load_chain():
     问题: {question}
     简洁详实的答案:"""
 
-    QA_CHAIN_PROMPT = PromptTemplate(input_variables=["context","question"],template=template)
+    QA_CHAIN_PROMPT = PromptTemplate(
+        input_variables=["context", "question"], template=template
+    )
 
     # 运行 chain
-    qa_chain = RetrievalQA.from_chain_type(llm,retriever=vectordb.as_retriever(),return_source_documents=True,chain_type_kwargs={"prompt":QA_CHAIN_PROMPT})
-    
+    qa_chain = RetrievalQA.from_chain_type(
+        llm,
+        retriever=vectordb.as_retriever(),
+        return_source_documents=True,
+        chain_type_kwargs={"prompt": QA_CHAIN_PROMPT},
+    )
+
     return qa_chain
 
-class Model_center():
+
+class Model_center:
     """
-    存储检索问答链的对象 
+    存储检索问答链的对象
     """
+
     def __init__(self):
         # 构造函数，加载检索问答链
         self.chain = load_chain()
@@ -51,15 +63,15 @@ class Model_center():
         """
         调用问答链进行回答
         """
-        if question == None or len(question) < 1:
+        if question is None or len(question) < 1:
             return "", chat_history
         try:
-            chat_history.append(
-                (question, self.chain({"query": question})["result"]))
+            chat_history.append((question, self.chain({"query": question})["result"]))
             # 将问答结果直接附加到问答历史中，Gradio 会将其展示出来
             return "", chat_history
         except Exception as e:
             return e, chat_history
+
 
 import gradio as gr
 
@@ -68,12 +80,14 @@ model_center = Model_center()
 # 创建一个 Web 界面
 block = gr.Blocks()
 with block as demo:
-    with gr.Row(equal_height=True):   
+    with gr.Row(equal_height=True):
         with gr.Column(scale=15):
             # 展示的页面标题
-            gr.Markdown("""<h1><center>InternLM</center></h1>
+            gr.Markdown(
+                """<h1><center>InternLM</center></h1>
                 <center>书生浦语</center>
-                """)
+                """
+            )
 
     with gr.Row():
         with gr.Column(scale=4):
@@ -87,17 +101,21 @@ with block as demo:
                 db_wo_his_btn = gr.Button("Chat")
             with gr.Row():
                 # 创建一个清除按钮，用于清除聊天机器人组件的内容。
-                clear = gr.ClearButton(
-                    components=[chatbot], value="Clear console")
-                
-        # 设置按钮的点击事件。当点击时，调用上面定义的 qa_chain_self_answer 函数，并传入用户的消息和聊天历史记录，然后更新文本框和聊天机器人组件。
-        db_wo_his_btn.click(model_center.qa_chain_self_answer, inputs=[
-                            msg, chatbot], outputs=[msg, chatbot])
+                clear = gr.ClearButton(components=[chatbot], value="Clear console")
 
-    gr.Markdown("""提醒：<br>
+        # 设置按钮的点击事件。当点击时，调用上面定义的 qa_chain_self_answer 函数，并传入用户的消息和聊天历史记录，然后更新文本框和聊天机器人组件。
+        db_wo_his_btn.click(
+            model_center.qa_chain_self_answer,
+            inputs=[msg, chatbot],
+            outputs=[msg, chatbot],
+        )
+
+    gr.Markdown(
+        """提醒：<br>
     1. 初始化数据库时间可能较长，请耐心等待。
     2. 使用中如果出现异常，将会在文本输入框进行展示，请不要惊慌。 <br>
-    """)
+    """
+    )
 gr.close_all()
 # 直接启动
 demo.launch()
