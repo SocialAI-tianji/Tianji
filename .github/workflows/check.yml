@@ -10,12 +10,14 @@ on:
     paths:
       - 'test/prompt/**'
       - 'tainji/prompt/**'
+      - '.ci/**'
   push:
     branches:
       - main
     paths:
       - 'test/prompt/**'
       - 'tainji/prompt/**'
+      - '.ci/**'
 jobs:
   check :
     runs-on: ubuntu-latest
