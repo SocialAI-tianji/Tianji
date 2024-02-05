@@ -33,16 +33,13 @@ def parser_txt(path):
             line = line.strip()
             if line != "":
                 out = out + line + '\n'
-                # log.info(line)
     return out
 
 if __name__ == "__main__":
-    ori_data_path = "/root/datasets/liyi"
-
-    # log.info(os.listdir(ori_data_path))
-
-    data_dict = {}
     
+    ori_data_path = "/root/datasets/liyi"
+    
+    data_dict = {}
     for sub_dir_name in os.listdir(ori_data_path):
         sub_dir_path = os.path.join(ori_data_path, sub_dir_name)
         data_dict.setdefault(sub_dir_path, {})
@@ -53,18 +50,14 @@ if __name__ == "__main__":
 
             sorted(file_path, reverse=True)
             if file_path.endswith('.docx'):
-                # log.info(int(file_path.split('-')[1][1:]))
                 samples.setdefault('docx', [])
                 samples['docx'].append(sub_file_name)
             elif file_path.endswith('.txt'):
-                # log.info(file_path)
                 samples.setdefault('txt', [])
                 samples['txt'].append(sub_file_name)
         
         data_dict[sub_dir_path].setdefault("samples", samples)
 
-    # log.info(data_dict)
-    # sorted
     for datax, obj in data_dict.items():
         if 'samples' in obj.keys():
             samples = obj['samples']
@@ -74,9 +67,6 @@ if __name__ == "__main__":
                 obj['samples']['docx'] = file_list
             data_dict[datax] = obj
 
-    # log.info(data_dict)
-
-    # docx, txt
     docx_list = []
     txt_list = []
     for datax, obj in data_dict.items():
@@ -87,9 +77,6 @@ if __name__ == "__main__":
             
             if 'txt' in samples.keys():
                 txt_list.extend(os.path.join(datax, x) for x in samples['txt'])
-
-    # log.info(docx_list)
-    # log.info(txt_list)
 
     data_dir = os.path.join(ori_data_path, 'datasets')
     if not os.path.exists(data_dir):
@@ -103,7 +90,6 @@ if __name__ == "__main__":
     
     for ind, file in enumerate(txt_list):
         out_text = parser_txt(file)
-        # import pdb; pdb.set_trace()
         with open(os.path.join(data_dir, f'txt_{ind}.txt'), 'w') as f:
             f.write(out_text)
     
