@@ -7,9 +7,15 @@ on:
     types: [ assigned, opened, synchronize, reopened ]
     branches:
       - main
+    paths:
+      - test/prompt
+      - tianji/prompt
   push:
     branches:
       - main
+    paths:
+      - test/prompt
+      - tianji/prompt
 jobs:
   check :
     runs-on: ubuntu-latest
