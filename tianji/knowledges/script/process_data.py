@@ -2,10 +2,30 @@ import os
 import logging
 
 import docx
+import argparse
+
+
+def argsParser():
+    parser = argparse.ArgumentParser(
+        description='该脚本能够将原始 .txt/.docx 转化为 .txt数据'
+            '例如 `path`=liyi/ '
+            '|-- liyi'
+            '   |-- jingjiu'
+            '       |-- *.txt'
+            '       |-- .....'
+            '   |-- songli'
+            '       |-- *.docx'
+            '       |-- .....'
+            '将在 liyi/datasets 下生成处理后的 .txt 文件'
+            '例如：python process_data.py \ '
+            '--path liyi/'    
+        )
+    parser.add_argument('--path', type=str, help='原始数据集目录')
+    args = parser.parse_args()
+    return args
 
 log = logging.getLogger('myLogger')
 log.setLevel(logging.DEBUG)
-
 
 BASIC_FORMAT = "%(asctime)s %(levelname)-8s %(message)s"
 formatter = logging.Formatter(BASIC_FORMAT)
@@ -36,8 +56,8 @@ def parser_txt(path):
     return out
 
 if __name__ == "__main__":
-    
-    ori_data_path = "/root/datasets/liyi"
+    ARGS = argsParser()
+    ori_data_path = ARGS.path
     
     data_dict = {}
     for sub_dir_name in os.listdir(ori_data_path):
