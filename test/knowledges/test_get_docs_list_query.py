@@ -1,5 +1,5 @@
 import tianji.utils.knowledge_tool as knowledgetool
-from tianji.knowledges.config import KNOWLEDGE_PATH, EMBEDDING_PATH
+from tianji.agents.knowledges.config import AGENT_KNOWLEDGE_PATH, AGENT_EMBEDDING_PATH
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -10,10 +10,10 @@ load_dotenv()
 # doclist = knowledgetool.get_docs_list_query_openai(query_str="春节",loader_file_path=KNOWLEDGE_PATH, \
 #                                   persist_directory = SAVE_PATH,k_num=5)
 
-doclist = knowledgetool.get_docs_list_query_openai(
+doclist = knowledgetool.get_docs_list_query_zhipuai(
     query_str="春节",
-    loader_file_path=KNOWLEDGE_PATH.WISHES.path(),
-    persist_directory=EMBEDDING_PATH.WISHES.path(filename="openai"),
+    loader_file_path=AGENT_KNOWLEDGE_PATH.WISHES.path(),
+    persist_directory=AGENT_EMBEDDING_PATH.WISHES.path(filename="zhipuai"),
     k_num=5,
 )
 
