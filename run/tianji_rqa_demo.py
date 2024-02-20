@@ -23,7 +23,7 @@ def load_chain():
     案。尽量使答案调理清楚，内容详实。总是在回答的最后说”谢谢你的提问！“。
     {context}
     问题: {question}
-    简洁真实、300字左右的答案:"""
+    详细真实的答案:"""
 
     QA_CHAIN_PROMPT = PromptTemplate(
         input_variables=["context", "question"], template=template
