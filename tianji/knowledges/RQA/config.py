@@ -9,7 +9,7 @@ class RQA_ST_Liyi_Chroma_Config:
     # 原始数据位置 online 设置为空
     ORIGIN_DATA = ""
     # 持久化数据库位置，例如 Tianji/tianji/knowledges/liyi/chroma
-    PERSIST_DIRECTORY = "/root/code/Tianji/tianji/knowledges/RQA/.storage/chroma/liyi/chroma.sqlite3"  # TIANJI_PATH + "/Tianji/tianji/knowledges/liyi/chroma"
+    PERSIST_DIRECTORY = "/root/code/Tianji/tianji/knowledges/RQA/.storage/chroma/liyi/"  # TIANJI_PATH + "/Tianji/tianji/knowledges/liyi/chroma"
     # Sentence-Transformer词向量模型权重位置
     HF_SENTENCE_TRANSFORMER_WEIGHT = (
         "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
