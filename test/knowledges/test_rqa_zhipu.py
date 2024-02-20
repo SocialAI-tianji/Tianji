@@ -1,4 +1,4 @@
-from tianji.knowledges.script.demo import model_center
+from tianji.knowledges.RAG.demo import model_center
 
 if __name__ == "__main__":
     model = model_center()

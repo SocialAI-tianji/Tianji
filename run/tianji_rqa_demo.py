@@ -2,7 +2,7 @@ import os
 
 from langchain.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
-from tianji.knowledges.script.model import Zhipu_LLM
+from tianji.knowledges.RAG.model import Zhipu_LLM
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 
