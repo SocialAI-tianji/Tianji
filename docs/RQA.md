@@ -4,7 +4,7 @@
 
 1. 准备数据
 1. 构建embdding数据库
-1. 根据自定义embdding数据库，实现Agent智能体
+1. 根据自定义embdding数据库，实现知识外挂 RQA
 
 # 数据准备
 
@@ -31,7 +31,7 @@ HF_SENTENCE_TRANSFORMER_WEIGHT = (
 python Tianji/tianji/knowledges/RQA/emb.py
 ```
 
-# 运行Agent智能体Demo
+# 运行 Demo
 
 ```python
 python Tianji/run/tianji_rqa_demo.py
