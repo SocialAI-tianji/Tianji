@@ -7,3 +7,7 @@ transformers_stream_generator==0.0.4
 modelscope
 tiktoken
 einops
+
+# for RQA
+langchain==0.0.292
+gradio==3.50.2
