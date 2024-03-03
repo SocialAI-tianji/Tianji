@@ -5,7 +5,7 @@
 Tianji is a free, non-commercial artificial intelligence system. You can utilize it for tasks involving worldly wisdom, such as "art of conversation," to enhance your emotional intelligence and core competitiveness. We firmly believe that worldly wisdom are the future core competency of AI, and let us join hands to witness the advent of general artificial intelligence.
 
 <p align="left">
-    中文</a>&nbsp ｜ &nbsp<a href="README.md">English(还没空写)</a>&nbsp ｜ &nbsp<a href="README.md">日本語(还没空写)</a>
+    中文</a>&nbsp ｜ &nbsp<a href="README.md">English(还没空写)</a>&nbsp ｜ &nbsp<a href="README.md">日本語(还没空写)</a> 
 </p>
 <br><br>
 
@@ -13,6 +13,7 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
     <img src="./assets/tianjilogo.jpg" width="400"/>
 <p>
 <br>
+
 
 <p align="center">
    <a href="https://python.org/" target="_blank"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/moelib?logo=python&style=flat-square"></a>
@@ -23,7 +24,7 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 [SocialAI（来事儿AI）](https://socialai-tianji.github.io/socialai-web/) 是设立于中国的非营利组织，我们完全开源了**Tianji**（天机）系列工作，当前开源系统技术路线涉及为[Prompt](tianji/prompt/yiyan_prompt)、[AI游戏](test/prompt/aigame/zhipu)、[Agent](tianji/agents)、知识库、模型训练。具体内容，请查看文档与对应仓库。
 
-基于整理后的人情世故数据，人情世故大模型系统-天机包括了常见人际交往中的七大领域（具体可以参考 [场景分类](test/%E5%9C%BA%E6%99%AF%E5%88%86%E7%B1%BB) 中的场景细化细节），其中大体可分为：
+基于整理后的人情世故数据，人情世故大模型系统-天机包括了常见人际交往中的七大领域（具体可以参考 [场景分类](test/场景分类) 中的场景细化细节），其中大体可分为：
 
 ```
 1.敬酒礼仪文化 Etiquette
@@ -39,7 +40,7 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 6.化解"尴尬"场合 Awkwardness
   没心没肺，找回自我
 7.矛盾&冲突应对 Conflict
-  《能屈能伸》
+  《能屈能伸》  
 ```
 
 结合这些领域，Tianji涉及到的技术路线共有四种：
@@ -52,43 +53,42 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 您可以在 tianji 目录下找到四种路线的对应源码，如果您想参考 `Tianji` 的项目架构、数据管理、技术路线复刻出属于自己的垂直领域 AI 应用，欢迎 fork 或者直接参考，我们将会开源所有包括从`项目的起步、数据的方向探索、数据构建与管理、AI应用从0制作、领域（比如人情世故）与技术路线的深入结合`的全过程；我们希望看到 AI 原生应用在生活中进一步的加速推进。
 
 ## 目录
-
-- [News](#%F0%9F%93%B0News)
-  - [路线图](#%E8%B7%AF%E7%BA%BF%E5%9B%BE)
-- [运行环境](#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83)
-  - [环境安装](#%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85)
-  - [key配置](#key%E9%85%8D%E7%BD%AE)
-- [文件目录说明](#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E8%AF%B4%E6%98%8E)
-  - [文档说明](#%E6%96%87%E6%A1%A3%E8%AF%B4%E6%98%8E)
-- [运行方式](#%F0%9F%8D%BA%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F)
-  - [示例](#%E7%A4%BA%E4%BE%8B)
-- [如何参与本项目](#%E5%A6%82%E4%BD%95%E5%8F%82%E4%B8%8E%E6%9C%AC%E9%A1%B9%E7%9B%AE)
-  - [问题看板](#%E9%97%AE%E9%A2%98%E7%9C%8B%E6%9D%BF)
-  - [提交第一个PR](#%E6%8F%90%E4%BA%A4%E7%AC%AC%E4%B8%80%E4%B8%AAPR)
-- [如何复刻本项目](#%E5%A6%82%E4%BD%95%E5%A4%8D%E5%88%BB%E6%9C%AC%E9%A1%B9%E7%9B%AE)
-- [贡献者](#%E8%B4%A1%E7%8C%AE%E8%80%85)
-- [鸣谢](#%E9%B8%A3%E8%B0%A2)
+- [News](#📰News)
+  - [路线图](#路线图)
+- [运行环境](#运行环境)
+  - [环境安装](#环境安装)
+  - [key配置](#key配置)
+- [文件目录说明](#文件目录说明)
+  - [文档说明](#文档说明)
+- [运行方式](#🍺运行方式)
+  - [示例](#示例)
+- [如何参与本项目](#如何参与本项目)
+  - [问题看板](#问题看板)
+  - [提交第一个PR](#提交第一个PR)
+- [如何复刻本项目](#如何复刻本项目)
+- [贡献者](#贡献者)
+- [鸣谢](#鸣谢)
 
 ## 📰News
 
-- **\[2024.02.01\]** 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库(TODO)、[模型微调(基于InternLM2)](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的初版体验地址，将仓库转为开放。
+- **[2024.02.01]** 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库(TODO)、[模型微调(基于InternLM2)](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的初版体验地址，将仓库转为开放。
 
 ### 路线图
 
-- \[x\] 释放最简初版(涉及prompt、aigame、agent、知识库、模型微调)
-- \[ \] 公开所有服务器体验地址(3月03前）
-- \[ \] 使用[chatchat](https://github.com/chatchat-space/Langchain-Chatchat)接入知识库并开放体验地址(2月17前）
-- \[ \] 将项目挂载 huggingface
-- \[ \] 将项目挂在 aistudio(3月03前）
-- \[ \] 将项目挂载 openxlab
-- \[ \] 将项目挂载 modelscope
-- \[ \] 完成 prompt、Agent 贡献指南(3月03前）
-- \[ \] 补充文档（如何参考本项目构建自己的应用prompt、agent、知识库、微调应用）
-- \[ \] 完成[人情世故大模型-送祝福](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的模型微调数据收集到微调过程的可复现文档
-- \[ \] 开源人情世故语料-送祝福至huggingface
-- \[ \] 开放知识库语料获取细节至huggingface
-- \[ \] 开源人情世故语料-6k
-- \[ \] 收集 & 开源人情世故语料-2w并训练给出结果和全过程
+- [x] 释放最简初版(涉及prompt、aigame、agent、知识库、模型微调)
+- [ ] 公开所有服务器体验地址(3月03前）
+- [ ] 使用[chatchat](https://github.com/chatchat-space/Langchain-Chatchat)接入知识库并开放体验地址(2月17前）
+- [ ] 将项目挂载 huggingface
+- [ ] 将项目挂在 aistudio(3月03前）
+- [ ] 将项目挂载 openxlab
+- [ ] 将项目挂载 modelscope
+- [ ] 完成 prompt、Agent 贡献指南(3月03前）
+- [ ] 补充文档（如何参考本项目构建自己的应用prompt、agent、知识库、微调应用）
+- [ ] 完成[人情世故大模型-送祝福](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的模型微调数据收集到微调过程的可复现文档
+- [ ] 开源人情世故语料-送祝福至huggingface
+- [ ] 开放知识库语料获取细节至huggingface
+- [ ] 开源人情世故语料-6k
+- [ ] 收集 & 开源人情世故语料-2w并训练给出结果和全过程
 
 ## 运行环境
 
@@ -98,14 +98,12 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 ```
 pip install -r requirements.txt
-pip install .
+pip install . 
 ```
 
 ### key配置
 
 为确保项目正常运行，**请在项目内新建`.env`文件，并在其中设置你的API密钥**，你可以根据下列例子写入对应的 key，即可成功运行调用,目前默认使用 zhipuai，你可以仅写入`ZHIPUAI_API_KEY`即可使用。
-
-如果在从Hugging Face下载模型时遇到速度极慢或无法下载的问题，请在.env文件中设置`HF_ENDPOINT`的值为'https://hf-mirror.com'。请注意，某些Hugging Face仓库可能需要访问权限（例如Jina Ai）。为此，请注册一个Hugging Face账号，并在.env文件中添加`HF_TOKEN`。你可以在[这里](https://huggingface.co/settings/tokens)找到并获取你的token。
 
 ```
 OPENAI_API_KEY=
@@ -113,15 +111,12 @@ OPENAI_API_BASE=
 ZHIPUAI_API_KEY=
 BAIDU_API_KEY=
 OPENAI_API_MODEL=
-HF_HOME='./cache/'
-HF_ENDPOINT = 'https://hf-mirror.com'
-HF_TOKEN=
 ```
 
 ## 文件目录说明
 
 ```
-assets/：静态图片文件
+assets/：静态图片文件 
 run/： 包括了各类演示用前端
 test/：这里存放了各类功能的测试文件，包括核心模块以及llm运行的单元测试
 tianji/：源代码目录，包含主要逻辑与算法实现
@@ -161,28 +156,30 @@ elon musk：行，就为你这句“改变世界”，我干了这杯！不过�
 sam altman：哈哈，我等着那一天！不过现在，让我们先享受今晚。来，最后一杯，我干了，你随意，喝得开心，别忘了，OpenAI的AI们可还在等着我们回去继续训练呢！
 ```
 
+
+
+
 ## 如何参与本项目
 
 ### 问题看板
 
-这里记录了该项目存在的一些问题（欢迎领取解决），以及未来的一些路线图需要完成，当前还没时间写，如果您有时间想一起来玩儿，请issue或者直接邮箱联系我: physicoada@gmail.com
+  这里记录了该项目存在的一些问题（欢迎领取解决），以及未来的一些路线图需要完成，当前还没时间写，如果您有时间想一起来玩儿，请issue或者直接邮箱联系我: physicoada@gmail.com
 
-### 提交第一个PR
-
-得益于良好的ci设施，你只需要参考[示例PR](https://github.com/SocialAI-tianji/Tianji/pull/27)，就可以很快提出自己的第一个prompt PR！
-提交PR后，新的prompt将自动合并于 `tianji/prompt` 下的json文件中，方便一键调用。如果你不知道写什么，可以参考 [场景分类](test/%E5%9C%BA%E6%99%AF%E5%88%86%E7%B1%BB) 中的各类场景细化细节，写出不同人情世故领域的prompt。
+### 提交第一个PR 
+  
+  得益于良好的ci设施，你只需要参考[示例PR](https://github.com/SocialAI-tianji/Tianji/pull/27)，就可以很快提出自己的第一个prompt PR！
+  提交PR后，新的prompt将自动合并于 `tianji/prompt` 下的json文件中，方便一键调用。如果你不知道写什么，可以参考 [场景分类](test/场景分类) 中的各类场景细化细节，写出不同人情世故领域的prompt。
 
 ## 如何复刻本项目
 
-该项目的初衷，第一是为了让`AI学会核心技术`，第二是让更多人（领域/行业）可以构建属于自己的AI系统，加速AI对每一个领域的渗透。你可以通过以下方式来学习该项目：
+  该项目的初衷，第一是为了让`AI学会核心技术`，第二是让更多人（领域/行业）可以构建属于自己的AI系统，加速AI对每一个领域的渗透。你可以通过以下方式来学习该项目：
 
-具体内容 TODO 等有空的时候补完，会从怎么做prompt、agent、知识库再到模型微调说起（从盘古开天地起....
+  具体内容 TODO 等有空的时候补完，会从怎么做prompt、agent、知识库再到模型微调说起（从盘古开天地起....
 
-你可以参考本项目创造出新的垂直领域应用:
-
-- 租房助手（agent）
-- 带娃助手（数据收集与知识库）
-- 生活指南（数据收集与知识库）
+  你可以参考本项目创造出新的垂直领域应用:
+  - 租房助手（agent）
+  - 带娃助手（数据收集与知识库）
+  - 生活指南（数据收集与知识库）
   ......
 
 ## 贡献者
