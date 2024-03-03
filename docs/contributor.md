@@ -2,9 +2,9 @@
 
 感谢每一位小伙伴对该项目的贡献！您在提交PR的时候可以顺带修改这个文件记录（如果想的话），非常感谢，让我们携手见证真正AGI的来临。（如果喜欢，您也可以把这里当作一个提交PR后的寄语墙）
 
-| 姓名             | 主页                  | 个人贡献                        | 想说的话                            |
-|----------------|-------------------------------------------|-----------------------------|---------------------------------|
-| sanbuphy       | https://github.com/sanbuphy               | 组织 & 持续推动项目全环节                   | 希望能帮大家留出更多时间探索真我。               |
+| 姓名             | 主页                                        | 个人贡献                        | 想说的话                            |
+| -------------- | ----------------------------------------- | --------------------------- | ------------------------------- |
+| sanbuphy       | https://github.com/sanbuphy               | 组织 & 持续推动项目全环节              | 希望能帮大家留出更多时间探索真我。               |
 | Shiqi Ding     | https://github.com/GoldWaterFall          | 数据采集 & Prompt管理             | 希望能慢慢搭建出prompt治理和数据集治理的体系       |
 | jujimeizuo     | https://github.com/jujimeizuo             | 参与 Agent 实现                 | 和志同道合的朋友做热爱的事情                  |
 | aJupyter       | https://github.com/aJupyter               | todo：参与构建agent和知识库          | 想到就去做                           |
@@ -23,7 +23,7 @@
 | xiaoliang wang | https://github.com/tomowang               | 初版官网结构及样式                   |                                 |
 | LXY            | https://github.com/xinyulin0807           | 网站调整                        | 感谢大佬们愿意带我这个萌新                   |
 | 不要葱姜蒜          | https://github.com/KMnO4-zx               | 模型微调、训练                     | For the Dreamer，For the Leaner！ |
-| dingyue772     | https://github.com/dingyue772             | 参与构建prompt                  |
-|jianfeng777 |   https://github.com/jianfeng777 |  参与gradio前端制作 |  希望开源社区越来越繁荣！|  
-|      |          |                   |
-|      |          |                   |
+| dingyue772     | https://github.com/dingyue772             | 参与构建prompt                  |                                 |
+| jianfeng777    | https://github.com/jianfeng777            | 参与gradio前端制作                | 希望开源社区越来越繁荣！                    |
+|                |                                           |                             |                                 |
+|                |                                           |                             |                                 |

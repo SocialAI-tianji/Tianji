@@ -16,7 +16,7 @@ response = client.chat.completions.create(
     messages=[
         {"role": "system", "content": "你是一个助手"},
         {"role": "user", "content": "你好"},
-    ]
+    ],
 )
 
 print(response.choices[0].message.content)
