@@ -43,7 +43,6 @@ class Model_center:
     """
     模型广场，目前支持智浦AI
     """
-
     def __init__(self):
         self.chain = load_chain()
 

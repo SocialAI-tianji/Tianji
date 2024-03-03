@@ -2,8 +2,7 @@
 import json
 import re
 import os
-
-"""
+'''
 # @author  : Shiqiding
 # @description: 本脚本支持将.md写的规定prompt格式转换为规定格式的json,仅支持单文本转换为CI pipeline准备
 # @version : V2.0
@@ -35,12 +34,12 @@ test_system:prompt内容
 input:用户输入
 output:对应输出
 
-"""
-promptpath = os.environ.get("promptpath")
-# promptpath=r'C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\01-Etiquette\01-Etiquette-家宴敬酒 .md'
+'''
+promptpath = os.environ.get('promptpath')
+#promptpath=r'C:\Users\yhd\PycharmProjects\Tianji\test\prompt\gpt_prompt\01-Etiquette\01-Etiquette-家宴敬酒 .md'
 
 
-def md_file_to_json_with_examples(file_path, id, heading):
+def md_file_to_json_with_examples(file_path,id,heading):
     """
     从给定的文件路径读取Markdown文件，并按指定格式将其内容转换为JSON格式。
     此版本处理同一提示中的多个Q&A对，并将它们分组到“example”下。
@@ -51,99 +50,93 @@ def md_file_to_json_with_examples(file_path, id, heading):
     返回：
     json_object（str）：JSON格式的字符串。
     """
-    if heading == "":
-        with open(file_path, "r", encoding="utf-8") as file:
+    if(heading==""):
+        with open(file_path, 'r', encoding='utf-8') as file:
             md_content = file.read()
 
-        blocks = re.split(r"###\s+Prompt\s*[:：]?\s*\n", md_content, flags=re.IGNORECASE)
+        blocks = re.split(r'###\s+Prompt\s*[:：]?\s*\n', md_content, flags=re.IGNORECASE)
 
         blocks = blocks[1:]
         json_list = []
 
         for block in blocks:
-            test_system_part = block.split("#### Q：")[0].strip()
-            test_system_part = re.sub(r"#.*", "", test_system_part)
-            qa_pairs = re.findall(
-                r"#### Q：(.*?)#### A：(.*?)(?=#### Q：|$)", block, re.DOTALL
-            )
-            if qa_pairs == []:
-                qa_pairs = re.findall(
-                    r"#### Q:(.*?)#### A:(.*?)(?=#### Q:|$)", block, re.DOTALL
-                )
+            test_system_part = block.split('#### Q：')[0].strip()
+            test_system_part = re.sub(r'#.*', '', test_system_part)
+            qa_pairs = re.findall(r'#### Q：(.*?)#### A：(.*?)(?=#### Q：|$)', block, re.DOTALL)
+            if (qa_pairs == []):
+                qa_pairs = re.findall(r'#### Q:(.*?)#### A:(.*?)(?=#### Q:|$)', block, re.DOTALL)
 
             examples = []
             for qa_pair in qa_pairs:
                 input_text = qa_pair[0].strip()
-                input_text = re.sub(r"#.*", "", input_text)
+                input_text = re.sub(r'#.*', '', input_text)
                 output_text = qa_pair[1].strip()
-                output_text = re.sub(r"#.*", "", output_text)
+                output_text = re.sub(r'#.*', '', output_text)
 
                 example_obj = {
-                    "id": id,
-                    "name": "无标题",
+                    "id":id,
+                    "name":"无标题",
                     "input": input_text,
-                    "output": output_text,
+                    "output": output_text
                 }
                 examples.append(example_obj)
 
             json_obj = {
                 # "name":name,
                 "test_system": test_system_part,
-                "example": examples,
+                "example": examples
             }
             json_list.append(json_obj)
 
         return json.dumps(json_list, indent=4, ensure_ascii=False)
     else:
-        with open(file_path, "r", encoding="utf-8") as file:
+        with open(file_path, 'r', encoding='utf-8') as file:
             md_content = file.read()
 
-        pattern = rf"\n(?={re.escape(heading)} [^\#\n]+)"
+        pattern = rf'\n(?={re.escape(heading)} [^\#\n]+)'
         sections = re.split(pattern, md_content)
 
         json_list = []
 
         for section in sections:
-            pattern = rf"{re.escape(heading)}\s*(.*?)\s*\n"
+
+            pattern = rf'{re.escape(heading)}\s*(.*?)\s*\n'
             title_match = re.match(pattern, section)
             section_title = title_match.group(1).strip() if title_match else "无标题"
 
             # 提取该部分的内容
-            section_content = (
-                section[len(title_match.group(0)) :] if title_match else section
-            )
-            blocks = re.split(
-                r"###\s+Prompt\s*[:：]?\s*\n", section_content, flags=re.IGNORECASE
-            )
+            section_content = section[len(title_match.group(0)):] if title_match else section
+            blocks = re.split(r'###\s+Prompt\s*[:：]?\s*\n', section_content,flags=re.IGNORECASE)
 
             blocks = blocks[1:]
 
             for block in blocks:
-                test_system_part = block.split("#### Q：")[0].strip()
-                test_system_part = re.sub(r"#.*", "", test_system_part)
-                qa_pairs = re.findall(
-                    r"#### Q：(.*?)#### A：(.*?)(?=#### Q：|$)", block, re.DOTALL
-                )
-                if qa_pairs == []:
-                    qa_pairs = re.findall(
-                        r"#### Q:(.*?)#### A:(.*?)(?=#### Q:|$)", block, re.DOTALL
-                    )
+
+                test_system_part = block.split('#### Q：')[0].strip()
+                test_system_part= re.sub(r'#.*', '', test_system_part)
+                qa_pairs = re.findall(r'#### Q：(.*?)#### A：(.*?)(?=#### Q：|$)', block, re.DOTALL)
+                if (qa_pairs == []):
+                    qa_pairs = re.findall(r'#### Q:(.*?)#### A:(.*?)(?=#### Q:|$)', block, re.DOTALL)
 
                 examples = []
                 for qa_pair in qa_pairs:
-                    input_text = qa_pair[0].strip()
-                    input_text = re.sub(r"#.*", "", input_text)
-                    output_text = qa_pair[1].strip()
-                    output_text = re.sub(r"#.*", "", output_text)
 
-                    example_obj = {"input": input_text, "output": output_text}
+                    input_text = qa_pair[0].strip()
+                    input_text=re.sub(r'#.*', '', input_text)
+                    output_text = qa_pair[1].strip()
+                    output_text= re.sub(r'#.*', '', output_text)
+
+                    example_obj = {
+                        "input": input_text,
+                        "output": output_text
+                    }
                     examples.append(example_obj)
 
                 json_obj = {
-                    "id": id,
-                    "name": section_title,
+                    "id":id,
+                    "name":section_title,
                     "system_prompt": test_system_part,
-                    "example": examples,
+                    "example": examples
                 }
                 json_list.append(json_obj)
 
@@ -151,48 +144,51 @@ def md_file_to_json_with_examples(file_path, id, heading):
 
 
 def replace_english_colons_with_chinese(md_file_path):
+
     try:
-        with open(md_file_path, "r", encoding="utf-8") as file:
+
+        with open(md_file_path, 'r', encoding='utf-8') as file:
             file_contents = file.read()
 
-        file_contents = re.sub(r":", "：", file_contents)
 
-        with open(md_file_path, "w", encoding="utf-8") as file:
+        file_contents = re.sub(r':', '：', file_contents)
+
+
+        with open(md_file_path, 'w', encoding='utf-8') as file:
             file.write(file_contents)
 
     except Exception as e:
         print(f"发生错误：{str(e)}")
     return md_file_path
 
-
 def find_first_heading(md_file_path):
     # 打开并读取Markdown文件
-    with open(md_file_path, "r", encoding="utf-8") as file:
+    with open(md_file_path, 'r', encoding='utf-8') as file:
         content = file.read()
 
-    match = re.search(r"^\s*(#{1,2})(?!\#)\s", content, re.MULTILINE)
+    match = re.search(r'^\s*(#{1,2})(?!\#)\s', content, re.MULTILINE)
 
     if match:
-        return "#" * len(match.group(1))
+        return '#' * len(match.group(1))
     else:
         return ""
 
 
-if __name__ == "__main__":
-    filepath = replace_english_colons_with_chinese(promptpath)
+if __name__ == '__main__':
+    filepath =replace_english_colons_with_chinese(promptpath)
     heading = find_first_heading(filepath)
-    print("此文档的heading使用的是 " + heading)
-    filename = os.path.basename(filepath)
-    id = int(filename[:2])
-    print("处理文档为 " + filename + " 该文档属于第" + str(id) + "大类")
-    json_output = md_file_to_json_with_examples(filepath, id=id, heading=heading)
+    print("此文档的heading使用的是 "+heading)
+    filename=os.path.basename(filepath)
+    id =int(filename[:2])
+    print("处理文档为 " + filename+" 该文档属于第"+str(id)+"大类")
+    json_output = md_file_to_json_with_examples(filepath,id=id,heading=heading)
     input_dir, input_file = os.path.split(promptpath)
     input_file_base, _ = os.path.splitext(input_file)
 
     output_path = "..\\tianji\\prompt"
 
     # 使用正则表达式提取所需路径
-    match = re.search(r"\\prompt(.*)\\[^\\]+$", promptpath)
+    match = re.search(r'\\prompt(.*)\\[^\\]+$', promptpath)
     if match:
         # 提取的路径
         extracted_path = match.group(1)
@@ -201,6 +197,7 @@ if __name__ == "__main__":
     else:
         json_file_output_path = "无法匹配路径"
     json_file_output = os.path.join(json_file_output_path, input_file_base + ".json")
-    with open(json_file_output, "w", encoding="utf-8") as file:
+    with open(json_file_output, 'w', encoding='utf-8') as file:
         json.dump(json.loads(json_output), file, ensure_ascii=False, indent=4)
     print(json_output)
+
