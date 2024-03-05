@@ -73,6 +73,8 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 - **[2024.02.01]** 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库(TODO)、[模型微调(基于InternLM2)](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的初版体验地址，将仓库转为开放。
 
+注：最近忙于加班中...等到稍微空闲一点就马上爆肝更新，请等待！
+
 ### 路线图
 
 - [x] 释放最简初版(涉及prompt、aigame、agent、知识库、模型微调)
