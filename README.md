@@ -133,7 +133,7 @@ TODO,待覆盖全文档
 
 ```bash
 # 运行prompt webui前端
-python3 run/metagpt_webui.py
+python3 run/tianji_prompt_webui.py
 
 # 运行agent前端
 streamlit run run/metagpt_webui.py
