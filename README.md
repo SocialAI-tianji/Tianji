@@ -71,6 +71,8 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 ## 📰News
 
+- **[2024.05.02]** 🚀 我们发布了有关人情世故大模型-送祝福的数据收集到微调过程的[全流程可复现文档](./docs/finetune/tianji-wishes-chinese.md)及其对应[数据](https://huggingface.co/datasets/sanbu/tianji-wishes-chinese/tree/main)、[配置](./tianji/finetune/xtuner/internlm2_chat_7b_qlora_oasst1_e3_copy.py)、[辅助脚本](./tools/finetune/xtuner_merge.sh)，（鸽了一段时间但又回来了，主要维护者持续加班忙了，放假才能快乐开源）
+
 - **[2024.02.01]** 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库(TODO)、[模型微调(基于InternLM2)](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的初版体验地址，将仓库转为开放。
 
 注：最近忙于加班中...等到稍微空闲一点就马上爆肝更新，请等待！准备重启项目ing
@@ -78,19 +80,21 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 ### 路线图
 
 - [x] 释放最简初版(涉及prompt、aigame、agent、知识库、模型微调)
-- [ ] 完成[人情世故大模型-送祝福](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的模型微调数据收集到微调过程的可复现文档
+- [x] 完成[人情世故大模型-送祝福](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的模型微调数据收集到微调过程的可复现文档
+- [x] 开源人情世故语料-送祝福至huggingface
+- [ ] 迭代更好的数据制造工具与清洗方案，开源数据清洗脚本
+- [ ] 完成知识库部分迭代
 - [ ] 完成 Agent 部分文档
-- [ ] 补充文档（如何参考本项目构建自己的应用prompt、agent、知识库、微调应用）
-- [ ] 开源人情世故语料-送祝福至huggingface
 - [ ] 开放知识库语料获取细节至huggingface
-- [ ] 开源人情世故语料-6k
+- [ ] 补充文档（如何参考本项目构建自己的应用prompt、agent、知识库、微调应用）
+- [ ] 整理多维度数据，开源较完整人情世故语料
 - [ ] 收集 & 开源人情世故语料-2w并训练给出结果和全过程
 
 ## 运行环境
 
 ### 环境安装
 
-在本项目中，执行下列指令即可安装完成
+在本项目中，执行下列指令即可安装项目的完成
 
 ```
 pip install -r requirements.txt
@@ -164,7 +168,7 @@ sam altman：哈哈，我等着那一天！不过现在，让我们先享受今�
 
 ### 问题看板
 
-  这里记录了该项目存在的一些问题（欢迎领取解决），以及未来的一些路线图需要完成，当前还没时间写，如果您有时间想一起来玩儿，请issue或者直接邮箱联系我: physicoada@gmail.com
+  [这里](https://github.com/SocialAI-tianji/Tianji/issues/31)记录了该项目存在的一些问题（欢迎领取解决），以及未来的一些路线图需要完成，当前还没时间写，如果您有时间想一起来玩儿，请issue或者直接邮箱联系我: physicoada@gmail.com
 
 ### 提交第一个PR 
   
