@@ -612,7 +612,6 @@ MERGE_OUTPUT_DIR="./merge" # 与原模型合并后的输出地址
 SCRIPT_PATH="./internlm2_chat_7b_qlora_oasst1_e3_copy.py" # 训练配置文件
 SRC_MODEL_PATH="/home/model_temp/Shanghai_AI_Laboratory/internlm2-chat-7b" # 原模型地址
 WEIGHTS_PATH="/home/finetune/work_dirs/internlm2_chat_7b_qlora_oasst1_e3_copy/iter_150.pth" # lora权重地址
-SYSTEM_PROMPT="你现在是一个送祝福大师，帮我针对不同人和事情、节日送对应的祝福" # 默认system prompt
 
 rm -rf $HF_OUTPUT_DIR
 rm -rf $MERGE_OUTPUT_DIR
@@ -628,6 +627,23 @@ xtuner convert merge \
 ```
 
 如果这步报错，请检查 WEIGHTS_PATH 是否正确。
+
+当然，你也可以不合并（合并后就可以上传权重），而是转换后直接加载lora，对应脚本如下：
+
+```bash
+HF_OUTPUT_DIR="./hf" # lora转为hf格式后的输出地址
+SCRIPT_PATH="./internlm2_chat_7b_qlora_oasst1_e3_copy.py" # 训练配置文件
+SRC_MODEL_PATH="/home/model_temp/Shanghai_AI_Laboratory/internlm2-chat-7b"
+WEIGHTS_PATH="/home/finetune/work_dirs/internlm2_chat_7b_qlora_oasst1_e3_copy/iter_150.pth"
+
+rm -rf $HF_OUTPUT_DIR
+rm -rf $MERGE_OUTPUT_DIR
+mkdir -p $HF_OUTPUT_DIR
+
+xtuner convert pth_to_hf "${SCRIPT_PATH}" "${WEIGHTS_PATH}" "${HF_OUTPUT_DIR}"
+
+xtuner chat "${SRC_MODEL_PATH}" --adapter "${HF_OUTPUT_DIR}" --prompt-template internlm2_chat --system "你现在是一个送祝福大师，帮我针对不同人和事情、节日送对应的祝福" --temperature 0.7 
+```
 
 启动对话：
 
