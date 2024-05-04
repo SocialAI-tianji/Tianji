@@ -71,18 +71,31 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 ## 📰News
 
-- **[2024.05.02]** 🚀 我们发布了有关人情世故大模型-送祝福的数据收集到微调过程的[全流程可复现文档](./docs/finetune/tianji-wishes-chinese.md)及其对应[数据](https://huggingface.co/datasets/sanbu/tianji-wishes-chinese/tree/main)、[配置](./tianji/finetune/xtuner/internlm2_chat_7b_qlora_oasst1_e3_copy.py)、[辅助脚本](./tools/finetune/README.md)，（鸽了一段时间但又回来了，主要维护者持续加班忙了，放假才能快乐开源）
+- **[2024.05.04]** 🚀 我们发布了以《化解"尴尬"场合》为例的[微调数据获取、制造教程](https://github.com/SocialAI-tianji/Tianji/blob/main/docs/finetune/how-to-get-finetune-data.md)，对应数据开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)
+
+- **[2024.05.02]** 🚀 我们发布了有关人情世故大模型-送祝福的数据收集到微调过程的[全流程可复现文档](./docs/finetune/tianji-wishes-chinese.md)及其对应[数据](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)、[配置](./tianji/finetune/xtuner/internlm2_chat_7b_qlora_oasst1_e3_copy.py)、[辅助脚本](./tools/finetune/README.md)，（鸽了一段时间但又回来了，主要维护者持续加班忙了，放假才能快乐开源）
 
 - **[2024.02.01]** 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库(TODO)、[模型微调(基于InternLM2)](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的初版体验地址，将仓库转为开放。
 
-注：最近忙于加班中...等到稍微空闲一点就马上爆肝更新，请等待！准备重启项目ing
-
 ### 路线图
+
+现在急缺小伙伴一起完成数据制造的工作（已有完整pipeline但是缺时间），欢迎感兴趣的同学一起参与，目前还缺的数据方向为：（其他方向也可继续补充，只要你喜欢）
+
+```
+1.敬酒礼仪文化 Etiquette
+  不惧碰杯，酒席桌上一条龙
+2.请客礼仪文化 Hospitality
+  友好地展示你的友好
+3.送礼礼仪文化 Gifting
+  此礼非礼，直击人心
+7.矛盾&冲突应对 Conflict
+  《能屈能伸》  
+```
 
 - [x] 释放最简初版(涉及prompt、aigame、agent、知识库、模型微调)
 - [x] 完成[人情世故大模型-送祝福](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的模型微调数据收集到微调过程的可复现文档
 - [x] 开源人情世故语料-送祝福至huggingface
-- [ ] 迭代更好的数据制造工具与清洗方案，开源数据清洗脚本
+- [x] 迭代更好的数据制造工具与清洗方案，开源数据清洗脚本
 - [ ] 完成知识库部分迭代
 - [ ] 完成 Agent 部分文档
 - [ ] 开放知识库语料获取细节至huggingface
@@ -146,7 +159,7 @@ streamlit run run/metagpt_webui.py
 
 ## 示例
 
-### 如何敬酒
+### 使用提示词部分：如何敬酒
 
 以下给出 特斯拉创始人 Elon Musk  向 OpenAI 创始人 Sam Altman 敬酒的对话示例（基于内置提示词生成）：
 
@@ -161,8 +174,13 @@ elon musk：行，就为你这句“改变世界”，我干了这杯！不过�
 sam altman：哈哈，我等着那一天！不过现在，让我们先享受今晚。来，最后一杯，我干了，你随意，喝得开心，别忘了，OpenAI的AI们可还在等着我们回去继续训练呢！
 ```
 
+### 使用知识库部分
 
+TODO
 
+### 使用微调后模型部分
+
+TODO
 
 ## 如何参与本项目
 
