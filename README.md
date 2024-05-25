@@ -207,7 +207,11 @@ TODO
 
 ## 贡献者
 
-[感谢其中的每一位贡献者](docs/contributor.md)，也欢迎你一起加入！
+<a href="https://github.com/eryajf/learn-github/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=SocialAI-tianji/Tianji" />
+</a>
+
+[有些贡献者没有github，我们感谢其中的每一位贡献者！](docs/contributor.md)，也欢迎你一起加入！
 
 ## 鸣谢
 
