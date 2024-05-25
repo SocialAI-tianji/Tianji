@@ -52,6 +52,10 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 您可以在 tianji 目录下找到四种路线的对应源码，如果您想参考 `Tianji` 的项目架构、数据管理、技术路线复刻出属于自己的垂直领域 AI 应用，欢迎 fork 或者直接参考，我们将会开源所有包括从`项目的起步、数据的方向探索、数据构建与管理、AI应用从0制作、领域（比如人情世故）与技术路线的深入结合`的全过程；我们希望看到 AI 原生应用在生活中进一步的加速推进。
 
+如果您想提建议 / 参与这个项目的开发流程，欢迎加入社区群！
+
+![image](https://github.com/SocialAI-tianji/Tianji/assets/96160062/41355386-f640-45fa-9f38-5f1384773094)
+
 ## 目录
 - [News](#📰News)
   - [路线图](#路线图)
