@@ -93,7 +93,11 @@ class BilibiliScraper:
                 if link_tag and title_tag:
                     sub_url = 'http:' + link_tag['href']
                     title = title_tag['title']
-                    view_count = self._get_video_details(sub_url)
+                    try:
+                        view_count = self._get_video_details(sub_url)
+                    except:
+                        print(f"now url:{sub_url} {title} error!")
+                        continue
                     sub_video_info = {
                         'URL': sub_url,
                         'Title': title,
@@ -119,9 +123,9 @@ class BilibiliScraper:
 # 使用示例
 if __name__ == "__main__":
     scraper = BilibiliScraper()
-    keyword = "ddpm"
+    keyword = "如何调整情绪"
     start_page = 1
-    end_page = 3
+    end_page = 6
     videos = scraper.scrape_videos(keyword, start_page, end_page)
     scraper.save_to_csv(videos, './bilibili_videos.csv')
     print(f"Saved {len(videos)} videos to 'bilibili_videos.csv'")
