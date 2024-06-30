@@ -12,7 +12,7 @@ import copy
 import warnings
 from dataclasses import asdict, dataclass
 from typing import Callable, List, Optional
-
+import os
 import streamlit as st
 import torch
 from torch import nn
@@ -24,9 +24,10 @@ from modelscope import snapshot_download
 
 logger = logging.get_logger(__name__)
 
-snapshot_download("sanbuphy/tianji-wish-7b", cache_dir="./model")
-model_path = "./model/sanbuphy/tianji-wish-7b"
-
+# 提前下载模型
+model_path = './internlm2-chat-7b'
+os.system(f'git clone https://code.openxlab.org.cn/OpenLMLab/internlm2-chat-7b.git {base_path}')
+os.system(f'cd {base_path} && git lfs pull')
 
 @dataclass
 class GenerationConfig:
