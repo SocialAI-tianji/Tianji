@@ -361,7 +361,8 @@ evaluation_inputs = [
 + dataset=dict(type=load_dataset, path='json', data_files=dict(train=data_path)),
 ```
 
-以下是修改后的结果，你可以直接复制（只要修改模型路径和训练集路径，以及Evaluate的input，就可以把他变为你自己的配置文件开始训练。）（你可能奇怪为什么都是steps而不是epoch，我猜测因为llm通常推荐训练一轮，没必要多epoch。）：
+以下是修改后的结果，你可以直接复制（只要修改模型路径和训练集路径，以及Evaluate的input，就可以把他变为你自己的配置文件开始训练。）
+或者，你也可以在 tianji 的主仓库中获得所有使用 xtuner 的微调配置 `https://github.com/SocialAI-tianji/Tianji/tree/main/tianji/finetune/xtuner`。
 
 ```python
 # Copyright (c) OpenMMLab. All rights reserved.
@@ -579,10 +580,10 @@ log_processor = dict(by_epoch=False)
 
 ```
 
-接下来对新的配置直接开始训练：
+接下来对新的配置直接开始训练(如果你显存不够，可以切换成 ` --deepspeed deepspeed_zero3 ` )
 
-```python
-xtuner train ./internlm2_chat_7b_qlora_oasst1_e3_copy.py  --deepspeed deepspeed_zero2
+```bash
+xtuner train ./internlm2_chat_7b_qlora_oasst1_e3_copy.py  --deepspeed deepspeed_zero2 
 ```
 
 训练结束后，所有权重文件放置在训练目录下的work_dirs中，目录大致为：
@@ -597,10 +598,18 @@ drwxr-xr-x 3 root root       4096 May  2 12:23 20240502_122337/
 
 值得注意的是，这里通常只需要微调一轮就好，原因是llm通常是过目不忘（有很多相关研究）容易过拟合。
 
-如果你想查看更多超参数对结果带来的变动，请参考：
+- 如果你想查看更多超参数对结果带来的变动，请参考：
 
 LoRA和QLoRA微调语言大模型：数百次实验后的见解 - OneFlow的文章 - 知乎
 [https://zhuanlan.zhihu.com/p/664912829](https://zhuanlan.zhihu.com/p/664912829)
+
+- 如果你想使用全量微调，对于 internlm2-7B 请至少准备 2xA100 80G 的显卡使用下列命令启用微调。（建议你使用“万”级别的数据再进行全量微调，目前天机相关数据还不足以支持好的全量微调）推荐混入更多正常对话数据来确保全量微调效果正常。NPROC_PER_NODE 的值表示使用几张显卡进行微调,此时双卡每张卡显存占用接近 79G。
+
+```bash
+NPROC_PER_NODE=2 xtuner train ./全量微调配置.py  --deepspeed deepspeed_zero3
+```
+
+
 
 ## 效果验证
 
