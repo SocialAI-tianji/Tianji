@@ -26,8 +26,8 @@ logger = logging.get_logger(__name__)
 
 # 提前下载模型
 model_path = './internlm2-chat-7b'
-os.system(f'git clone https://code.openxlab.org.cn/OpenLMLab/internlm2-chat-7b.git {base_path}')
-os.system(f'cd {base_path} && git lfs pull')
+os.system(f'git clone https://code.openxlab.org.cn/sanbuphy/tianji-wish-internlm2-7b.git {model_path}')
+os.system(f'cd {model_path} && git lfs pull')
 
 @dataclass
 class GenerationConfig:

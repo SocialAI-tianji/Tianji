@@ -25,5 +25,5 @@
 | 不要葱姜蒜          | https://github.com/KMnO4-zx               | 模型微调、训练                     | For the Dreamer，For the Leaner！ |
 | dingyue772     | https://github.com/dingyue772             | 参与构建prompt                  |
 |jianfeng777 |   https://github.com/jianfeng777 |  参与gradio前端制作 |  希望开源社区越来越繁荣！|  
-|      |          |                   |
+|DISKETR         |   https://github.com/DISKETR |  lora微调   |  Generative Intelligence, Endless Creativity |  
 |      |          |                   |
