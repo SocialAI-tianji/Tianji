@@ -14,6 +14,8 @@
 
 Tianji is a free, non-commercial artificial intelligence system. You can utilize it for tasks involving worldly wisdom, such as "art of conversation," to enhance your emotional intelligence and core competitiveness. We firmly believe that worldly wisdom are the future core competency of AI, and let us join hands to witness the advent of general artificial intelligence.
 
+天機は SocialAI（来事儿AI）が制作した無料で非商業目的の人工知能システムです。伝統的な人間関係や世事に関連するタスク、例えば「乾杯の仕方」「上手な話し方」「人付き合いの仕方」などに活用でき、あなたの情緒的知性とコア競争力を向上させることができます。私たちは、人間関係や世事こそが将来のAIの核心技術であり、人付き合いの上手なAIだけがAGIに向かう機会があると固く信じています。一緒に汎用人工知能の到来を見届けましょう。 —— 「天機は漏らすべからず。」
+
 ## 你将在天机中学会 🍉
 
 - 构建 [prompt](./tianji/prompt/gpt_prompt/) 对话[大模型应用](./run/tianji_prompt_webui.py)
