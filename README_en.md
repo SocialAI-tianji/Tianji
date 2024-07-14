@@ -213,4 +213,4 @@ Thanks to all the following people for their help with this project:
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=SocialAI-tianji/Tianji&type=Date)](https://star-history.com/#SocialAI-tianji/Tianji&Date)
+![Star History Chart](https://api.star-history.com/svg?repos=SocialAI-tianji/Tianji&type=Date)](https://star-history.com/#SocialAI-tianji/Tianji&Date)
