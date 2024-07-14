@@ -220,4 +220,4 @@ PRを提出すると、新しいプロンプトは自動的に `tianji/prompt` �
 
 ## スター履歴
 
-![Star History Chart](https://api.star-history.com/svg?repos=SocialAI-tianji/Tianji&type=Date)](https://star-history.com/#SocialAI-tianji/Tianji&Date)
+![Star History Chart](https://api.star-history.com/svg?repos=SocialAI-tianji/Tianji&type=Date)
