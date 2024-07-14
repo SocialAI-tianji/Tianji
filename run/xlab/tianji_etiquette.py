@@ -25,7 +25,7 @@ from modelscope import snapshot_download
 logger = logging.get_logger(__name__)
 
 # 提前下载模型
-model_path = './tianji-wish-etiquette'
+model_path = './tianji-etiquette'
 os.system(f'git clone https://code.openxlab.org.cn/sanbuphy/tianji-etiquette-internlm2-7b.git {model_path}')
 os.system(f'cd {model_path} && git lfs pull')
 
