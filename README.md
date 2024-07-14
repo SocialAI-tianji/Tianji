@@ -1,26 +1,33 @@
 # 天机 Tianji
+<p align="center">
+    <img src="./assets/tianjilogo.jpg" width="100"/>
+<br>
+<p align="center">
+    &nbsp<a href="README.md">中文</a>&nbsp ｜ &nbsp<a href="README_en.md">English</a>&nbsp ｜ &nbsp<a href="README_jp.md">日本語</a> 
+<p align="center">
+   <a href="https://python.org/" target="_blank"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/moelib?logo=python&style=flat-square"></a>
+   <a href="https://github.com/tatsu-lab/stanford_alpaca/blob/main/LICENSE"><img alt="LICENSE" src="https://camo.githubusercontent.com/ff42248868bc1387751598955e573b397851d947f13ddd7618c0ba9e66aacdf6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f436f64652532304c6963656e73652d4170616368655f322e302d677265656e2e737667"></a>
+   <br/>
+</p>
 
 天机是 SocialAI（来事儿AI）制作的一款免费使用、非商业用途的人工智能系统。您可以利用它进行涉及传统人情世故的任务，如`如何敬酒、如何说好话、如何会来事儿`等，以提升您的情商和核心竞争能力。我们坚信，只有人情世故才是未来AI的核心技术，只有会来事儿的AI才有机会走向AGI，让我们携手见证通用人工智能的来临。 —— "天机不可泄漏。"
 
 Tianji is a free, non-commercial artificial intelligence system. You can utilize it for tasks involving worldly wisdom, such as "art of conversation," to enhance your emotional intelligence and core competitiveness. We firmly believe that worldly wisdom are the future core competency of AI, and let us join hands to witness the advent of general artificial intelligence.
 
-<p align="left">
-    中文</a>&nbsp ｜ &nbsp<a href="README.md">English(还没空写)</a>&nbsp ｜ &nbsp<a href="README.md">日本語(还没空写)</a> 
-</p>
-<br><br>
+## 你将在天机中学会 🍉
 
-<p align="center">
-    <img src="./assets/tianjilogo.jpg" width="400"/>
-<p>
-<br>
+- 构建 [prompt](./tianji/prompt/gpt_prompt/) 对话[大模型应用](./run/tianji_prompt_webui.py)
 
+- 制作 [AI 游戏](./tianji/prompt/aigame/zhipu/)（类似哄哄模拟器）应用
 
-<p align="center">
-   <a href="https://python.org/" target="_blank"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/moelib?logo=python&style=flat-square"></a>
-   <a href="https://github.com/tatsu-lab/stanford_alpaca/blob/main/LICENSE"><img alt="LICENSE" src="https://camo.githubusercontent.com/ff42248868bc1387751598955e573b397851d947f13ddd7618c0ba9e66aacdf6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f436f64652532304c6963656e73652d4170616368655f322e302d677265656e2e737667"></a>
-   <br/>
+- 基于 [metagpt](./tianji/agents/metagpt_agents/) 构建[智能体应用](./run/metagpt_webui.py)  （即将重构）
 
-</p>
+- 从零构建一个[知识库对话应用](./tianji/knowledges/) （即将重构）
+
+- [从零制作数据](./docs/finetune/how-to-get-finetune-data.md)、[微调](./docs/finetune/how-to-get-finetune-data.md)属于自己的大语言模型
+
+**学完全部内容后，你将获得大语言模型入门级全栈应用开发能力。🕶️**
+
 
 [SocialAI（来事儿AI）](https://socialai-tianji.github.io/socialai-web/) 是设立于中国的非营利组织，我们完全开源了**Tianji**（天机）系列工作，当前开源系统技术路线涉及为[Prompt](tianji/prompt/yiyan_prompt)、[AI游戏](test/prompt/aigame/zhipu)、[Agent](tianji/agents)、知识库、[模型训练](docs/finetune/tianji-wishes-chinese.md)。具体内容，请查看文档与对应仓库。
 
@@ -54,7 +61,7 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 如果您想提建议 / 参与这个项目的开发流程，欢迎加入社区群！
 
-![image](https://github.com/SocialAI-tianji/Tianji/assets/96160062/41355386-f640-45fa-9f38-5f1384773094)
+![image](./assets/tianji-wechat.jpg)
 
 ## 目录
 - [News](#📰News)
@@ -75,26 +82,15 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 ## 📰News
 
+- **[2024.07.14]** 更新了新版的[送祝福模块](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes) 支持更多风格切换，数据已开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.1.json)
+
 - **[2024.05.04]** 🚀 我们发布了以《化解"尴尬"场合》为例的[微调数据获取、制造教程](https://github.com/SocialAI-tianji/Tianji/blob/main/docs/finetune/how-to-get-finetune-data.md)，对应数据开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)
 
 - **[2024.05.02]** 🚀 我们发布了有关人情世故大模型-送祝福的数据收集到微调过程的[全流程可复现文档](./docs/finetune/tianji-wishes-chinese.md)及其对应[数据](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)、[配置](./tianji/finetune/xtuner/internlm2_chat_7b_qlora_oasst1_e3_copy.py)、[辅助脚本](./tools/finetune/README.md)，（鸽了一段时间但又回来了，主要维护者持续加班忙了，放假才能快乐开源）
 
-- **[2024.02.01]** 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库(TODO)、[模型微调(基于InternLM2)](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的初版体验地址，将仓库转为开放。
+- **[2024.02.01]** 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库(TODO)、[模型微调(基于InternLM2)](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes)的初版体验地址，将仓库转为开放。
 
 ### 路线图
-
-现在急缺小伙伴一起完成数据制造的工作（已有完整pipeline但是缺时间），欢迎感兴趣的同学一起参与，目前还缺的数据方向为：（其他方向也可继续补充，只要你喜欢）
-
-```
-1.敬酒礼仪文化 Etiquette
-  不惧碰杯，酒席桌上一条龙
-2.请客礼仪文化 Hospitality
-  友好地展示你的友好
-3.送礼礼仪文化 Gifting
-  此礼非礼，直击人心
-7.矛盾&冲突应对 Conflict
-  《能屈能伸》  
-```
 
 - [x] 释放最简初版(涉及prompt、aigame、agent、知识库、模型微调)
 - [x] 完成[人情世故大模型-送祝福](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的模型微调数据收集到微调过程的可复现文档
@@ -163,7 +159,16 @@ streamlit run run/metagpt_webui.py
 
 ## 示例
 
-### 使用提示词部分：如何敬酒
+### 微调 - 祝福模块
+当前祝福模块支持三种模式触发： 
+
+1. 普通风格，直接写祝福对象，符合常见对话规律。
+2. 小红书风格，在祝福对象指定后加上 小红书风格，可触发；自带emoji以及可爱对话风格。 
+3. 严肃风格，在祝福对象指定后加上 严肃风格，可触发；文书风格。
+
+![](./assets/demo_wishes.png)
+
+### prompt - 如何敬酒
 
 以下给出 特斯拉创始人 Elon Musk  向 OpenAI 创始人 Sam Altman 敬酒的对话示例（基于内置提示词生成）：
 
@@ -178,12 +183,7 @@ elon musk：行，就为你这句“改变世界”，我干了这杯！不过�
 sam altman：哈哈，我等着那一天！不过现在，让我们先享受今晚。来，最后一杯，我干了，你随意，喝得开心，别忘了，OpenAI的AI们可还在等着我们回去继续训练呢！
 ```
 
-### 使用知识库部分
-
-TODO
-
-### 使用微调后模型部分
-
+### 知识库 - xxx
 TODO
 
 ## 如何参与本项目
@@ -200,8 +200,6 @@ TODO
 ## 如何复刻本项目
 
   该项目的初衷，第一是为了让`AI学会核心技术`，第二是让更多人（领域/行业）可以构建属于自己的AI系统，加速AI对每一个领域的渗透。你可以通过以下方式来学习该项目：
-
-  具体内容 TODO 等有空的时候补完，会从怎么做prompt、agent、知识库再到模型微调说起（从盘古开天地起....
 
   你可以参考本项目创造出新的垂直领域应用:
   - 租房助手（agent）
