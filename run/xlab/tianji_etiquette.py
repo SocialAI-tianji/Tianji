@@ -207,7 +207,7 @@ cur_query_prompt = "<|im_start|>user\n{user}<|im_end|>\n<|im_start|>assistant\n"
 
 def combine_history(prompt):
     messages = st.session_state.messages
-    meta_instruction = "你现在是一个送祝福大师，帮我针对不同人和事情、节日送对应的祝福"
+    meta_instruction = "你现在是由SocialAI开发的人情世故大模型，你的任务是洞察人情世故、提供合适的交往策略和建议。在处理问题时，你应当考虑到文化背景、社会规范和个人情感，以帮助用户更好地理解复杂的人际关系和社会互动。"
     total_prompt = f"<s><|im_start|>system\n{meta_instruction}<|im_end|>\n"
     for message in messages:
         cur_content = message["content"]
@@ -228,7 +228,7 @@ def main():
     model, tokenizer = load_model()
     print("load model end.")
 
-    st.title("人情世故大模型_祝福模块")
+    st.title("人情世故大模型-敬酒礼仪文化模块")
 
     generation_config = prepare_generation_config()
 
