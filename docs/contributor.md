@@ -7,7 +7,7 @@
 | sanbuphy       | https://github.com/sanbuphy               | 组织 & 持续推动项目全环节                   | 希望能帮大家留出更多时间探索真我。               |
 | Shiqi Ding     | https://github.com/GoldWaterFall          | 数据采集 & Prompt管理             | 希望能慢慢搭建出prompt治理和数据集治理的体系       |
 | jujimeizuo     | https://github.com/jujimeizuo             | 参与 Agent 实现                 | 和志同道合的朋友做热爱的事情                  |
-| aJupyter       | https://github.com/aJupyter               | todo：参与构建agent和知识库          | 想到就去做                           |
+| aJupyter       | https://github.com/aJupyter               | 模型微调、训练           | 想到就去做                           |
 | LiJianan_SJTU  | https://github.com/OpenMMLab-Assistant005 | prompt工程师（haha）、王牌美工        |                                 |
 | MING_X         | https://github.com/MING-ZCH               | Human-like表达，人类情感对齐，心理领域知识库 | 探索情感智能的未来~                      |
 | Jiaojiao Li    | https://github.com/Aphasia0515            | 参与构建prompt                  |                                 |
