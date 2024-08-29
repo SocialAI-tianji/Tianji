@@ -159,6 +159,20 @@ git commit -m "提交信息"
 git push
 ```
 
+这一步，你需要反复执行下列两步（对于复杂的格式你需要自己修改）,直到 commit 成功
+
+```
+git add .
+git commit -m "提交信息"
+```
+
+若全部成功，你将会看到类似如下信息显示：
+
+```
+[main 2333] rebuild code standard
+ 5 files changed, 4 insertions(+), 3 deletions(-)
+```
+
 ## 文件目录说明
 
 ```
