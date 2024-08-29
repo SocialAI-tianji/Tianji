@@ -8,7 +8,8 @@ setup(
     url="https://socialai-tianji.github.io/socialai-web/",
     packages=find_packages(exclude=["build", "dist"]),
     install_requires=[
-        "metagpt==0.6.0" "transformers==4.36.2",
+        "metagpt==0.6.0",
+        "transformers==4.36.2",
         "sentencepiece==0.1.99",
         "accelerate==0.24.1",
         "transformers_stream_generator==0.0.4",
