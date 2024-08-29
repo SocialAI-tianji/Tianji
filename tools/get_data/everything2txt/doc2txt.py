@@ -1,13 +1,19 @@
 """
-使用前先安装 pip install python-docx --upgrade
+使用说明:
+    该脚本用于将指定文件夹中的 DOC 和 DOCX 文件转换为 TXT 文件，并将转换后的文件保存到另一个文件夹。
 
-python版本为3.10
+    使用方法:
+    python convert_docs_to_txt.py -s <源文件夹路径> -d <目标文件夹路径>
 
-使用方法为  `python convert_docs_to_txt.py doc来源文件夹 txt目标文件夹`
+    参数:
+    -s --source_folder: 指定 DOC 和 DOCX 文件所在的源文件夹路径。
+    -d --destination_folder: 指定转换后 TXT 文件的保存文件夹路径。
 """
+
 import os
 import sys
 from docx import Document
+import argparse
 
 
 def convert_docs_to_txt(source_folder, destination_folder):
@@ -42,11 +48,11 @@ def convert_docs_to_txt(source_folder, destination_folder):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("请提供当前文件夹路径和目标文件夹路径作为命令行参数。")
-        print("示例: python convert_docs_to_txt.py 源文件夹路径 目标文件夹路径")
-        exit()
+    parser = argparse.ArgumentParser(description="将指定文件夹中的 DOC 和 DOCX 文件转换为 TXT 文件")
+    parser.add_argument("-s", "--source_folder", type=str, required=True, help="源文件夹路径")
+    parser.add_argument(
+        "-d", "--destination_folder", type=str, required=True, help="目标文件夹路径"
+    )
+    args = parser.parse_args()
 
-    current_folder = sys.argv[1]
-    destination_folder = sys.argv[2]
-    convert_docs_to_txt(current_folder, destination_folder)
+    convert_docs_to_txt(args.source_folder, args.destination_folder)

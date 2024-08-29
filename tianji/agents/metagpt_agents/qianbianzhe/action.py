@@ -1,3 +1,5 @@
+# qianbianzhe 是一个用于生成个性化文本的模块，主要通过两个动作类：AnsWrite和Stylize，来实现生成祝福语和风格化文本的功能。
+
 from dotenv import load_dotenv
 
 load_dotenv()

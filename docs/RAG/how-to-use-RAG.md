@@ -1,14 +1,14 @@
-# 知识外挂 RQA 使用说明
+# 知识外挂 RAG 使用说明
 
 一共包含3个步骤：
 
 1. 准备数据
 1. 构建embdding数据库
-1. 根据自定义embdding数据库，实现知识外挂 RQA
+1. 根据自定义embdding数据库，实现知识外挂 RAG
 
 # 数据准备
 
-参考[text](Tianji/tianji/knowledges/RQA/script/process_data.py)
+参考[text](Tianji/tianji/knowledges/RAG/script/process_data.py)
 
 # 构建embdding数据库
 
@@ -28,11 +28,11 @@ HF_SENTENCE_TRANSFORMER_WEIGHT = (
 运行脚本，基于Chroma构建向量数据库
 
 ```python
-python Tianji/tianji/knowledges/RQA/emb.py
+python Tianji/tianji/knowledges/RAG/emb.py
 ```
 
 # 运行 Demo
 
 ```python
-python Tianji/run/tianji_rqa_demo.py
+python Tianji/run/tianji_RAG_demo.py
 ```

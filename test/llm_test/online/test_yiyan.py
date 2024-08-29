@@ -1,22 +1,25 @@
+# 参考 https://github.com/PaddlePaddle/ERNIE-SDK/blob/develop/erniebot/README.md
 import os
 from dotenv import load_dotenv
 import erniebot
 
 load_dotenv()
 
-# 当你看不懂代码的时候看看其它代码然后看看文档。
+# 列出支持的模型
+models = erniebot.Model.list()
+print(models)
+
+# 设置鉴权参数
 erniebot.api_type = "aistudio"
+erniebot.access_token = os.environ["BAIDU_API_KEY"]
 
 
 def call_with_messages(message):
-    # 每次用复制这些
-    erniebot.access_token = os.environ["BAIDU_API_KEY"]
-    ############
     stream = False
 
     messages = [{"role": "user", "content": message}]
     response = erniebot.ChatCompletion.create(
-        model="ernie-4.0", messages=messages, top_p=0.95, stream=stream  # 改
+        model="ernie-4.0-turbo-8k ", messages=messages, top_p=0.95, stream=stream
     )
     if stream:
         result = ""
@@ -29,4 +32,4 @@ def call_with_messages(message):
 
 
 if __name__ == "__main__":
-    call_with_messages("你好")
+    call_with_messages("你好，请介绍下你自己")

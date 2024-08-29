@@ -1,3 +1,4 @@
+# 此文件用于加载环境变量，以便在千变者角色中使用配置
 from dotenv import load_dotenv
 
 load_dotenv()

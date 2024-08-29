@@ -7,8 +7,8 @@
 .idea/
 logs/
 # 中间产物
-__pycache__/
-build/
-tianji.egg-info/
-temp/
+__pycache__/*
+build/*
+tianji.egg-info/*
+temp/*
 *.bin

@@ -1,3 +1,4 @@
+# 该脚本用于将模型权重从 PTH 格式转换为 HF 格式，并合并模型权重
 HF_OUTPUT_DIR="./hf"
 MERGE_OUTPUT_DIR="./merge"
 SCRIPT_PATH="./internlm2_chat_7b_qlora_oasst1_e3_copy.py" 

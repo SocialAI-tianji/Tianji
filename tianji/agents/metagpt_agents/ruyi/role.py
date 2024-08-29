@@ -1,3 +1,5 @@
+# 此文件定义了RuYi角色，负责处理特定的任务并生成相应的消息。
+
 from metagpt.roles.role import Role, RoleReactMode
 from metagpt.schema import Message
 from metagpt.logs import logger

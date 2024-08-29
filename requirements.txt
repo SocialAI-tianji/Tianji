@@ -1,5 +1,4 @@
-git+https://gitee.com/jujimeizuo/meta-gpt-tianji.git
-
+metagpt==0.6.0
 transformers==4.36.2
 sentencepiece==0.1.99
 accelerate==0.24.1

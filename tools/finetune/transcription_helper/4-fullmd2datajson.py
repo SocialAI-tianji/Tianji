@@ -14,24 +14,31 @@ SYSTEM_PROMPT = """
 需要抽取的原文如下：
 """
 
-# 
+#
 # 设置 zhipuai API 的密钥
 from zhipuai import ZhipuAI
+
+
 def get_data_ds(content):
-    client = ZhipuAI(api_key=key) # 请填写您自己的APIKey
+    client = ZhipuAI(api_key=key)  # 请填写您自己的APIKey
     response = client.chat.completions.create(
-      model="glm-4",  # 填写需要调用的模型名称
+        model="glm-4-flash",  # 填写需要调用的模型名称
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},  # 系统消息，通常用于设置上下文或系统角色
-            {"role": "user", "content": content, "temperature": 0.7}  # 用户消息，包含输入内容和输出多样性参数
+            {
+                "role": "user",
+                "content": content,
+                "temperature": 0.7,
+            },  # 用户消息，包含输入内容和输出多样性参数
         ]
-        #stream=True,
-        )
+        # stream=True,
+    )
     res = response.choices[0].message.content
     return res
 
+
 txt_folder_path = "txt地址"  # fullmd 的文件夹地址
-output_file_path = './xxxxxxx.json' # 保存 json 名
+output_file_path = "./xxxxxxx.json"  # 保存 json 名
 error_file_path = "./tianji_qa_error_files.txt"
 
 all_qadata = []
@@ -40,32 +47,46 @@ for filename in os.listdir(txt_folder_path):
     print(f"\n\n当前处理第{count}个txt文件 {filename}\n")
     file_path = os.path.join(txt_folder_path, filename)  # 获取文件完整路径
     try:
-        with open(file_path, 'r', encoding='utf-8') as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             content = file.read()  # 读取文件内容
-            llm_reply = get_data_ds("<<开始>>"+f"当前文件主题为{filename}"+content+"<<结束>>")
-            json_text = llm_reply.replace(' ','').replace('\n','').replace('```','').replace('json','',1)
+            llm_reply = get_data_ds(
+                "<<开始>>" + f"当前文件主题为{filename}" + content + "<<结束>>"
+            )
+            json_text = (
+                llm_reply.replace(" ", "")
+                .replace("\n", "")
+                .replace("```", "")
+                .replace("json", "", 1)
+            )
             json_text = json_text.strip()
             qadata = json.loads(json_text)
-            print("当前结果:\n",qadata)
+            print("当前结果:\n", qadata)
             all_qadata.extend(qadata)
     except Exception as e:
         # 重试一次
         try:
-            with open(file_path, 'r', encoding='utf-8') as file:
+            with open(file_path, "r", encoding="utf-8") as file:
                 content = file.read()  # 读取文件内容
-                llm_reply = get_data_ds("<<开始>>"+f"当前文件主题为{filename}"+content+"<<结束>>")
-                json_text = llm_reply.replace(' ','').replace('\n','').replace('```','').replace('json','',1)
+                llm_reply = get_data_ds(
+                    "<<开始>>" + f"当前文件主题为{filename}" + content + "<<结束>>"
+                )
+                json_text = (
+                    llm_reply.replace(" ", "")
+                    .replace("\n", "")
+                    .replace("```", "")
+                    .replace("json", "", 1)
+                )
                 json_text = json_text.strip()
                 qadata = json.loads(json_text)
-                print("当前结果:\n",qadata)
-                all_qadata.extend(qadata)   
+                print("当前结果:\n", qadata)
+                all_qadata.extend(qadata)
         except Exception as e:
             # 如果处理过程中出现异常，记录错误文件地址
-            with open(error_file_path, "a", encoding='utf-8') as error_file:
-                print("错误！",e)
-                print("错误！",json_text)
-                error_file.write(file_path+'\n')
+            with open(error_file_path, "a", encoding="utf-8") as error_file:
+                print("错误！", e)
+                print("错误！", json_text)
+                error_file.write(file_path + "\n")
         continue
     count += 1
-with open(output_file_path, "w", encoding='utf8') as f:
+with open(output_file_path, "w", encoding="utf8") as f:
     json.dump(all_qadata, f, ensure_ascii=False, indent=4)

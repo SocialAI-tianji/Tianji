@@ -1,3 +1,5 @@
+# 此文件用于处理与生成个性化祝福相关的Markdown文档。
+
 from dotenv import load_dotenv
 
 load_dotenv()
