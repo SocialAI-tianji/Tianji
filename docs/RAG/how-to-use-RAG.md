@@ -1,38 +1,47 @@
-# 知识外挂 RAG 使用说明
+# RAG 对话系统
 
-一共包含3个步骤：
+这是一个基于检索增强生成（RAG）的对话系统，使用 Gradio 构建用户界面。系统可以根据用户提供的知识库回答问题，支持文件夹和网页两种数据源。
 
-1. 准备数据
-1. 构建embdding数据库
-1. 根据自定义embdding数据库，实现知识外挂 RAG
+## 主要特点
 
-# 数据准备
+- 使用自定义的智谱AI（ZhipuAI）LLM 和 Embedding 模型
+- 支持 HuggingFace 和 ZhipuAI 两种 Embedding 选项
+- 可选择文件夹或网页作为知识库数据源
+- 可自定义文本分块大小、缓存路径等参数
+- 使用 Chroma 作为向量数据库
+- 提供友好的 Gradio 用户界面
 
-参考[text](Tianji/tianji/knowledges/RAG/script/process_data.py)
+## 使用方法
 
-# 构建embdding数据库
+1. 安装依赖：
+   pip install -r requirements.txt
 
-填写配置文件
+1. 设置环境变量：
+   在 `.env` 文件中设置必要的 API 密钥等信息。
 
-```python
-# 原始数据位置 online 设置为空
-ORIGIN_DATA = ""
-# 持久化数据库位置，例如 chroma/liyi/
-PERSIST_DIRECTORY = ""
-# Sentence-Transformer词向量模型权重位置
-HF_SENTENCE_TRANSFORMER_WEIGHT = (
-    "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-)
-```
+1. 运行程序：
+   python run/demo_rag_langchain_onlinellm.py
 
-运行脚本，基于Chroma构建向量数据库
+1. 在 Gradio 界面中：
 
-```python
-python Tianji/tianji/knowledges/RAG/emb.py
-```
+- 选择 Embedding 模型（HuggingFace 或 ZhipuAI）
+- 设置文本块大小
+- 指定缓存和数据库路径
+- 选择数据源类型（文件夹或网页）
+- 提供数据路径
+- 点击"初始化数据库"按钮
+- 在聊天框中输入问题并开始对话
 
-# 运行 Demo
+## 注意事项
 
-```python
-python Tianji/run/tianji_RAG_demo.py
-```
+- 初始化数据库可能需要一些时间，请耐心等待
+- 如遇到异常，错误信息会显示在文本输入框中
+- 本系统使用自定义的智谱AI（ZhipuAI）LLM 和 Embedding 模型，需要相应的 API 密钥
+
+## 主要函数
+
+- `create_embeddings`: 创建 Embedding 模型
+- `create_vectordb`: 创建或加载向量数据库
+- `initialize_chain`: 初始化 RAG 链
+- `handle_question`: 处理用户问题
+- `update_settings`: 更新设置并初始化模型
