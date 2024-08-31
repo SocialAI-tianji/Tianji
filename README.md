@@ -29,7 +29,7 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 - 基于 [metagpt](./tianji/agents/metagpt_agents/) 构建[智能体应用](./run/metagpt_webui.py)  （即将重构）
 
-- 从零构建一个[知识库对话应用](./tianji/knowledges/) （即将重构）
+- 从零构建一个[知识库对话应用](./tianji/knowledges/)
 
 - [从零制作语言模型微调数据](./docs/finetune/how-to-get-finetune-data.md)、[微调](./docs/finetune/how-to-get-finetune-data.md)属于自己的大语言模型
 
@@ -93,7 +93,9 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 ## 📰News
 
-- **\[2024.07.16\]** 🚀 我们发布了第一款专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)
+- **\[2024.08.31\]** 🚀 重构了仓库组织结构,工具类以及内容更适合一键学习使用;完成了 langchain [知识库问答](./tianji/knowledges/) [demo](run/demo_rag_langchain_onlinellm.py) 的重构.
+
+- **\[2024.07.16\]** 🚀 我们发布了第一款们发布了第一款专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)
 
 - **\[2024.07.14\]** 更新了新版的[送祝福模块](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes) 支持更多风格切换，数据已开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.1.json)
 
@@ -110,8 +112,8 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 - \[x\] 开源人情世故语料-送祝福至huggingface
 - \[x\] 迭代更好的数据制造工具与清洗方案，开源数据清洗脚本
 - \[ \] 完成知识库部分迭代
-- \[ \] 完成 Agent 部分文档
 - \[ \] 开放知识库语料获取细节至huggingface
+- \[ \] 完成 Agent 部分文档
 - \[ \] 补充文档（如何参考本项目构建自己的应用prompt、agent、知识库、微调应用）
 - \[ \] 整理多维度数据，开源较完整人情世故语料
 - \[ \] 收集 & 开源人情世故语料-2w并训练给出结果和全过程
