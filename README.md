@@ -7,8 +7,6 @@
     &nbsp<a href="README.md">中文</a>&nbsp ｜ &nbsp<a href="README_en.md">English</a>&nbsp ｜ &nbsp<a href="README_jp.md">日本語</a>
 <p align="center">
    <a href="https://python.org/" target="_blank"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/moelib?logo=python&style=flat-square"></a>
-   <a href="https://github.com/tatsu-lab/stanford_alpaca/blob/main/LICENSE"><img alt="LICENSE" src="https://camo.githubusercontent.com/ff42248868bc1387751598955e573b397851d947f13ddd7618c0ba9e66aacdf6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f436f64652532304c6963656e73652d4170616368655f322e302d677265656e2e737667"></a>
-   <br/>
 </p>
 
 天机是 SocialAI（来事儿AI）制作的一款免费使用、非商业用途的人工智能系统。您可以利用它进行涉及传统人情世故的任务，如`如何敬酒、如何说好话、如何会来事儿`等，以提升您的情商和核心竞争能力。我们坚信，只有人情世故才是未来AI的核心技术，只有会来事儿的AI才有机会走向AGI，让我们携手见证通用人工智能的来临。 —— "天机不可泄漏。"
