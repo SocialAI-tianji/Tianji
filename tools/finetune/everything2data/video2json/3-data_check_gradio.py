@@ -1,6 +1,6 @@
 """
 使用说明:
-    该脚本用于创建一个简单的 Gradio 界面，用于浏览、删除和查看指定文件夹中的 Markdown 文件。
+    该脚本用于创建一个简单的 Gradio 界面，用于浏览、删除和查看指定文件夹中的 Markdown 文件, 你也可以直接让大模型帮忙 review.
 
     使用方法:
     python 3-data_check_gradio.py -f <文件夹路径>
