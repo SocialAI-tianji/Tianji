@@ -8,7 +8,7 @@
     参数:
     -i --input_folder: 指定包含 Markdown 文件的输入文件夹路径。
     -o --output_folder: 指定不符合主题要求的 Markdown 文件的输出文件夹路径。
-    -t --theme: 指定主题要求的内容。
+    -t --theme: 指定主题相关的内容。比如 "敬酒/酒文化/喝酒/酒席"
     -d --debug: 启用调试模式，打印每一个llm输出的结果。
     -m --model: 指定使用的模型，默认为 'internlm/internlm2_5-7b-chat'。
 """
