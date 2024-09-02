@@ -110,13 +110,17 @@ persist_directory = os.path.join(TIANJI_PATH, "temp", "chromadb_1-etiquette")
 model_chain = initialize_chain(chunk_size, persist_directory, data_path)
 
 # 创建Gradio界面
+
+TITLE = """
+# Tianji 人情世故大模型系统-敬酒版(基于知识库实现) 欢迎star！\n
+## 🤖开源项目地址：https://github.com/SocialAI-tianji/Tianji
+## 使用方法：输入提示,或点击Example自动填充
+## 如果觉得回答不满意,可以重复多次询问
+### 我们的愿景是构建一个从数据收集开始的大模型全栈垂直领域开源实践.
+"""
+
 with gr.Blocks() as demo:
-    gr.Markdown(
-        """提醒：<br>
-        1. 初始化数据库可能需要一些时间，请耐心等待。<br>
-        2. 如果使用过程中出现异常，将在文本输入框中显示，请不要惊慌。<br>
-        """
-    )
+    gr.Markdown(TITLE)
 
     init_status = gr.Textbox(label="初始化状态", value="数据库已初始化", interactive=False)
     chatbot = gr.Chatbot(height=450, show_copy_button=True)
