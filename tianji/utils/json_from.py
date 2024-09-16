@@ -8,6 +8,11 @@ class SharedDataSingleton:
     json_from_data = None  # 这是要共享的变量
     first_status_user_history = ""
     first_status_message_list = []
+    message_list_for_agent = []
+    scene_label = ""
+    scene_attribute={}
+    extra_query=[]
+    search_results={}
     chat_history = []
     uuid_obj = {}
     ask_num = 0
@@ -40,6 +45,11 @@ class SharedDataSingleton:
         cls.json_from_data = None  # 这是要共享的变量
         cls.first_status_user_history = ""
         cls.first_status_message_list = []
+        cls.message_list_for_agent=[]
+        cls.scene_attribute={}
+        cls.scene_label = ""
+        cls.extra_query=[]
+        cls.search_results={}
         cls.chat_history = []
         cls.uuid_obj = {}
         return cls
