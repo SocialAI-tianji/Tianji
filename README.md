@@ -1,25 +1,48 @@
 # 天机 Tianji
 
+[English](./README_en.md)
+
+[日本語](./README_jp.md)
+
+<div align="center">
+<img src=assets\tianjilogo.jpg width="30%"/>
+</div>
 <p align="center">
-    <img src="./assets/tianjilogo.jpg" width="100"/>
-<br>
-<p align="center">
-    &nbsp<a href="README.md">中文</a>&nbsp ｜ &nbsp<a href="README_en.md">English</a>&nbsp ｜ &nbsp<a href="README_jp.md">日本語</a>
-<p align="center">
-   <a href="https://python.org/" target="_blank"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/moelib?logo=python&style=flat-square"></a>
+
+🍵 在线体验懂人情世故的天机[prompt应用](http://120.76.130.14:6006/prompt/)、[知识库应用](http://120.76.130.14:6006/knowledges/)、[Agent应用](http://120.76.130.14:6005/)
+
+在上海人工智能实验室 OpenXLab 在线体验天机人情世故微调模型：[送祝福模块](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes)、[敬酒礼仪文化](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette)
 </p>
 
-天机是 SocialAI（来事儿AI）制作的一款免费使用、非商业用途的人工智能系统。您可以利用它进行涉及传统人情世故的任务，如`如何敬酒、如何说好话、如何会来事儿`等，以提升您的情商和核心竞争能力。我们坚信，只有人情世故才是未来AI的核心技术，只有会来事儿的AI才有机会走向AGI，让我们携手见证通用人工智能的来临。 —— "天机不可泄漏。"
-
-Tianji is a free, non-commercial artificial intelligence system. You can utilize it for tasks involving worldly wisdom, such as "art of conversation," to enhance your emotional intelligence and core competitiveness. We firmly believe that worldly wisdom are the future core competency of AI, and let us join hands to witness the advent of general artificial intelligence.
-
-天機は SocialAI（来事儿AI）が制作した無料で非商業目的の人工知能システムです。伝統的な人間関係や世事に関連するタスク、例えば「乾杯の仕方」「上手な話し方」「人付き合いの仕方」などに活用でき、あなたの情緒的知性とコア競争力を向上させることができます。私たちは、人間関係や世事こそが将来のAIの核心技術であり、人付き合いの上手なAIだけがAGIに向かう機会があると固く信じています。一緒に汎用人工知能の到来を見届けましょう。 —— 「天機は漏らすべからず。」
-
-</p>
-</br>
+<p align="center">
+📚 查看  <a href="docs" target="_blank">使用文档</a>
 </p>
 
-## 你将在天机中学会 🍉
+<p align="center">
+🍓 在 🤗 huggingface 获取天机的 <a href="https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main" target="_blank"> 所有数据</a>
+</p>
+
+<p align="center">
+    💡  有疑问或功能请求，欢迎 <a href="https://github.com/SocialAI-tianji/Tianji/issues" target="_blank">创建一个 issue</a> ，或者加入我们的 <a href="assets\tianji-wechat.jpg" target="_blank">微信社区群</a>
+</p>
+
+
+## 📰News
+
+ 🔥🔥 **News**: ```2024.08.31```: -我们重构了仓库组织结构，更新了相关工具代码以及README。彻底更新了 langchain [知识库问答](./tianji/knowledges/) 相关内容以及对应 [demo](run/demo_rag_langchain_onlinellm.py)，让项目更适合一键学习使用。
+ 🔥**News**: ```2024.07.16```: 我们发布了第一款们发布了第一款专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)
+
+ 🔥**News**: ```2024.07.14```: 更新了新版的[送祝福模块](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes) 支持更多风格切换，数据已开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.1.json)
+
+ 🔥**News**: ```2024.05.04```: 我们发布了以《化解"尴尬"场合》为例的[微调数据获取、制造教程](https://github.com/SocialAI-tianji/Tianji/blob/main/docs/finetune/how-to-get-finetune-data.md)，对应数据开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)
+
+ 🔥**News**: ```2024.05.02```: 我们发布了有关人情世故大模型-送祝福的数据收集到微调过程的[全流程可复现文档](./docs/finetune/tianji-wishes-chinese.md)及其对应[数据](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)、[配置](./tianji/finetune/xtuner/internlm2_chat_7b_qlora_oasst1_e3_copy.py)、[辅助脚本](./tools/finetune/README.md)，（鸽了一段时间但又回来了，主要维护者持续加班忙了，放假才能快乐开源）
+
+ 🍵 **News**: ```2024.02.01```: 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库(TODO)、[模型微调(基于InternLM2)](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes)的初版体验地址，将仓库转为开放。
+
+## 你将在该项目中学会 🍉
+
+**学完全部内容，你将获得大语言模型入门级全栈应用开发能力。**
 
 - 构建 [prompt](./tianji/prompt/gpt_prompt/) 对话[大模型应用](./run/tianji_prompt_webui.py)
 
@@ -31,13 +54,113 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 - [从零制作语言模型微调数据](./docs/finetune/how-to-get-finetune-data.md)、[微调](./docs/finetune/how-to-get-finetune-data.md)属于自己的大语言模型
 
-**学完全部内容后，你将获得大语言模型入门级全栈应用开发能力。🕶️**
 
-</p>
-</br>
-</p>
+## 目录
 
-[SocialAI（来事儿AI）](https://socialai-tianji.github.io/socialai-web/) 是设立于中国的非营利组织，我们完全开源了**Tianji**（天机）系列工作，当前开源系统技术路线涉及为[Prompt](tianji/prompt/yiyan_prompt)、[AI游戏](test/prompt/aigame/zhipu)、[Agent](tianji/agents)、知识库、[模型训练](docs/finetune/tianji-wishes-chinese.md)。具体内容，请查看文档与对应仓库。
+
+- [快速开始](#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83)
+  - [环境安装](#%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85)
+  - [key配置](#key%E9%85%8D%E7%BD%AE)
+- [路线图](#%E8%B7%AF%E7%BA%BF%E5%9B%BE)
+- [技术路线](#%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF)
+- [文件目录说明](#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E8%AF%B4%E6%98%8E)
+  - [文档说明](#%E6%96%87%E6%A1%A3%E8%AF%B4%E6%98%8E)
+- [运行方式](#%F0%9F%8D%BA%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F)
+  - [示例](#%E7%A4%BA%E4%BE%8B)
+- [如何参与本项目](#%E5%A6%82%E4%BD%95%E5%8F%82%E4%B8%8E%E6%9C%AC%E9%A1%B9%E7%9B%AE)
+  - [问题看板](#%E9%97%AE%E9%A2%98%E7%9C%8B%E6%9D%BF)
+  - [提交第一个PR](#%E6%8F%90%E4%BA%A4%E7%AC%AC%E4%B8%80%E4%B8%AAPR)
+- [如何复刻本项目](#%E5%A6%82%E4%BD%95%E5%A4%8D%E5%88%BB%E6%9C%AC%E9%A1%B9%E7%9B%AE)
+- [贡献者](#%E8%B4%A1%E7%8C%AE%E8%80%85)
+- [鸣谢](#%E9%B8%A3%E8%B0%A2)
+
+
+## 快速开始 💫
+
+### 环境安装
+
+在本项目中，执行下列指令即可完成项目的安装
+
+```
+pip install -e .
+```
+
+### key配置
+
+为确保项目正常运行，**请在项目内新建`.env`文件，并在其中设置你的API密钥**，你可以根据下列例子写入对应的 key，即可成功运行调用,目前默认使用 zhipuai，你可以仅写入`ZHIPUAI_API_KEY`即可使用。
+
+```
+ZHIPUAI_API_KEY=
+```
+
+如果在从Hugging Face下载模型时遇到速度极慢或无法下载的问题，请在.env文件中设置`HF_ENDPOINT`的值为`https://hf-mirror.com`。请注意，某些Hugging Face仓库可能需要访问权限（例如Jina Ai）。为此，请注册一个Hugging Face账号，并在.env文件中添加`HF_TOKEN`。你可以在[这里](https://huggingface.co/settings/tokens)找到并获取你的token。
+
+```
+HF_HOME='./cache/'
+HF_ENDPOINT = 'https://hf-mirror.com'
+OPENAI_API_KEY=
+OPENAI_API_BASE=
+ZHIPUAI_API_KEY=
+BAIDU_API_KEY=
+OPENAI_API_MODEL=
+HF_TOKEN=
+```
+
+### 运行
+
+以下给出 prompt 以及 agent 的相关应用方式，在运行前请确保你已经新建`.env`文件：
+
+```bash
+# 运行prompt webui前端
+python3 run/tianji_prompt_webui.py
+
+# 运行agent前端
+streamlit run run/metagpt_webui.py
+
+# 运行langchain前端
+python run/demo_rag_langchain_onlinellm.py
+```
+
+### 开发环境配置
+
+在进行项目开发与贡献之前，在保证key的正确设定后，你还需要在提交 pull request 前进行格式检查。你可以参考下列方式进行 pre-commit 的安装，在 commit 环节将会看到变更文件格式会被自动修改。
+
+```
+pip install pre-commit
+pre-commit install
+git add .
+git commit -m "提交信息"
+git push
+```
+
+这一步，你需要反复执行下列两步,直到 commit 成功 （该过程会帮助你自动修复绝大部分格式错误，但对于某些复杂格式需要自己手动根据提示修改。）
+
+```
+git add .
+git commit -m "提交信息"
+```
+
+若全部成功，你将会看到类似如下信息显示：
+
+```
+[main 2333] rebuild code standard
+ 5 files changed, 4 insertions(+), 3 deletions(-)
+```
+
+## 路线图
+
+- [x] 释放最简初版(涉及prompt、aigame、agent、知识库、模型微调)
+- [x] 完成[人情世故大模型-送祝福](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的模型微调数据收集到微调过程的可复现文档
+- [x] 开源人情世故语料-送祝福至huggingface
+- [x] 迭代更好的数据制造工具与清洗方案，开源数据清洗脚本
+- [ ] 完成知识库部分迭代
+- [ ] 开放知识库语料获取细节至huggingface
+- [ ] 完成 Agent 部分文档
+- [ ] 补充文档（如何参考本项目构建自己的应用prompt、agent、知识库、微调应用）
+- [ ] 整理多维度数据，开源较完整人情世故语料
+- [ ] 收集 & 开源人情世故语料-2w并训练给出结果和全过程
+
+## 技术路线
 
 基于整理后的人情世故数据，人情世故大模型系统-天机包括了常见人际交往中的七大领域（具体可以参考 [场景分类](test/%E5%9C%BA%E6%99%AF%E5%88%86%E7%B1%BB) 中的场景细化细节），其中大体可分为：
 
@@ -67,111 +190,6 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 您可以在 tianji 目录下找到四种路线的对应源码，如果您想参考 `Tianji` 的项目架构、数据管理、技术路线复刻出属于自己的垂直领域 AI 应用，欢迎 fork 或者直接参考，我们将会开源所有包括从`项目的起步、数据的方向探索、数据构建与管理、AI应用从0制作、领域（比如人情世故）与技术路线的深入结合`的全过程；我们希望看到 AI 原生应用在生活中进一步的加速推进。
 
-如果您想提建议 / 参与这个项目的开发流程，欢迎加入社区群！
-
-![image](./assets/tianji-wechat.jpg)
-
-## 目录
-
-- [News](#%F0%9F%93%B0News)
-  - [路线图](#%E8%B7%AF%E7%BA%BF%E5%9B%BE)
-- [运行环境](#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83)
-  - [环境安装](#%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85)
-  - [key配置](#key%E9%85%8D%E7%BD%AE)
-- [文件目录说明](#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E8%AF%B4%E6%98%8E)
-  - [文档说明](#%E6%96%87%E6%A1%A3%E8%AF%B4%E6%98%8E)
-- [运行方式](#%F0%9F%8D%BA%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F)
-  - [示例](#%E7%A4%BA%E4%BE%8B)
-- [如何参与本项目](#%E5%A6%82%E4%BD%95%E5%8F%82%E4%B8%8E%E6%9C%AC%E9%A1%B9%E7%9B%AE)
-  - [问题看板](#%E9%97%AE%E9%A2%98%E7%9C%8B%E6%9D%BF)
-  - [提交第一个PR](#%E6%8F%90%E4%BA%A4%E7%AC%AC%E4%B8%80%E4%B8%AAPR)
-- [如何复刻本项目](#%E5%A6%82%E4%BD%95%E5%A4%8D%E5%88%BB%E6%9C%AC%E9%A1%B9%E7%9B%AE)
-- [贡献者](#%E8%B4%A1%E7%8C%AE%E8%80%85)
-- [鸣谢](#%E9%B8%A3%E8%B0%A2)
-
-## 📰News
-
-- **\[2024.08.31\]** 🚀 我们重构了仓库组织结构，更新了相关工具代码以及README。彻底更新了 langchain [知识库问答](./tianji/knowledges/) 相关内容以及对应 [demo](run/demo_rag_langchain_onlinellm.py)，让项目更适合一键学习使用。
-
-- **\[2024.07.16\]** 🚀 我们发布了第一款们发布了第一款专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)
-
-- **\[2024.07.14\]** 更新了新版的[送祝福模块](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes) 支持更多风格切换，数据已开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.1.json)
-
-- **\[2024.05.04\]** 🚀 我们发布了以《化解"尴尬"场合》为例的[微调数据获取、制造教程](https://github.com/SocialAI-tianji/Tianji/blob/main/docs/finetune/how-to-get-finetune-data.md)，对应数据开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)
-
-- **\[2024.05.02\]** 🚀 我们发布了有关人情世故大模型-送祝福的数据收集到微调过程的[全流程可复现文档](./docs/finetune/tianji-wishes-chinese.md)及其对应[数据](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)、[配置](./tianji/finetune/xtuner/internlm2_chat_7b_qlora_oasst1_e3_copy.py)、[辅助脚本](./tools/finetune/README.md)，（鸽了一段时间但又回来了，主要维护者持续加班忙了，放假才能快乐开源）
-
-- **\[2024.02.01\]** 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库(TODO)、[模型微调(基于InternLM2)](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes)的初版体验地址，将仓库转为开放。
-
-### 路线图
-
-- \[x\] 释放最简初版(涉及prompt、aigame、agent、知识库、模型微调)
-- \[x\] 完成[人情世故大模型-送祝福](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的模型微调数据收集到微调过程的可复现文档
-- \[x\] 开源人情世故语料-送祝福至huggingface
-- \[x\] 迭代更好的数据制造工具与清洗方案，开源数据清洗脚本
-- \[ \] 完成知识库部分迭代
-- \[ \] 开放知识库语料获取细节至huggingface
-- \[ \] 完成 Agent 部分文档
-- \[ \] 补充文档（如何参考本项目构建自己的应用prompt、agent、知识库、微调应用）
-- \[ \] 整理多维度数据，开源较完整人情世故语料
-- \[ \] 收集 & 开源人情世故语料-2w并训练给出结果和全过程
-
-## 运行环境
-
-### 环境安装
-
-在本项目中，执行下列指令即可完成项目的安装
-
-```
-pip install -e .
-```
-
-### key配置
-
-为确保项目正常运行，**请在项目内新建`.env`文件，并在其中设置你的API密钥**，你可以根据下列例子写入对应的 key，即可成功运行调用,目前默认使用 zhipuai，你可以仅写入`ZHIPUAI_API_KEY`即可使用。
-
-```
-ZHIPUAI_API_KEY=
-```
-
-如果在从Hugging Face下载模型时遇到速度极慢或无法下载的问题，请在.env文件中设置`HF_ENDPOINT`的值为`https://hf-mirror.com`。请注意，某些Hugging Face仓库可能需要访问权限（例如Jina Ai）。为此，请注册一个Hugging Face账号，并在.env文件中添加`HF_TOKEN`。你可以在[这里](https://huggingface.co/settings/tokens)找到并获取你的token。
-
-```
-OPENAI_API_KEY=
-OPENAI_API_BASE=
-ZHIPUAI_API_KEY=
-BAIDU_API_KEY=
-OPENAI_API_MODEL=
-HF_HOME='./cache/'
-HF_ENDPOINT = 'https://hf-mirror.com'
-HF_TOKEN=
-```
-
-### 开发环境配置
-
-如果要进行开发，在保证key的正确设定后，你还需要在提交 pull request 前进行格式检查。你可以参考下列方式进行 pre-commit 的安装，在 commit 环节将会看到变更文件格式会被自动修改。
-
-```
-pip install pre-commit
-pre-commit install
-git add .
-git commit -m "提交信息"
-git push
-```
-
-这一步，你需要反复执行下列两步,直到 commit 成功 （该过程会帮助你自动修复绝大部分格式错误，但对于某些复杂格式需要自己手动根据提示修改。）
-
-```
-git add .
-git commit -m "提交信息"
-```
-
-若全部成功，你将会看到类似如下信息显示：
-
-```
-[main 2333] rebuild code standard
- 5 files changed, 4 insertions(+), 3 deletions(-)
-```
 
 ## 文件目录说明
 
@@ -186,18 +204,6 @@ tools/：帮助收集数据、整理数据清洗语料的工具
 ### 文档说明
 
 TODO,待覆盖全文档
-
-## 🍺运行方式
-
-以下给出 prompt 以及 agent 的相关应用方式，在运行前请确保你已经新建`.env`文件：
-
-```bash
-# 运行prompt webui前端
-python3 run/tianji_prompt_webui.py
-
-# 运行agent前端
-streamlit run run/metagpt_webui.py
-```
 
 ## 示例
 
