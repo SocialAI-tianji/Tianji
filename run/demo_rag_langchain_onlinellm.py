@@ -117,6 +117,14 @@ def initialize_chain(
     )
     retriever = vectordb.as_retriever()
     prompt = hub.pull("rlm/rag-prompt")
+    prompt.messages[
+        0
+    ].prompt.template = """
+    您是一名用于问答任务的助手。使用检索到的上下文来回答问题。如果您不知道答案，就直接说不知道。\
+    1.根据我的提问,总结检索到的上下文中与提问最接近的部分,将相关部分浓缩为一段话返回;
+    2.根据语料结合我的问题,给出建议和解释。\
+    \n问题：{question} \n上下文：{context} \n答案：
+    """
     llm = ZhipuLLM()  # 使用ZhipuLLM作为默认LLM
     return (
         {"context": retriever | format_docs, "question": RunnablePassthrough()}

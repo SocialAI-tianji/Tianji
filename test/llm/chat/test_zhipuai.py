@@ -3,9 +3,9 @@
 # https://open.bigmodel.cn/dev/api#sdk
 import os
 from dotenv import load_dotenv
+from tianji import TIANJI_PATH
 
-load_dotenv()
-
+load_dotenv(dotenv_path=TIANJI_PATH)
 from zhipuai import ZhipuAI
 
 client = ZhipuAI(

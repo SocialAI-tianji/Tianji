@@ -29,7 +29,10 @@
 
 ## 📰News
 
- 🔥🔥 **News**: ```2024.08.31```: -我们重构了仓库组织结构，更新了相关工具代码以及README。彻底更新了 langchain [知识库问答](./tianji/knowledges/) 相关内容以及对应 [demo](run/demo_rag_langchain_onlinellm.py)，让项目更适合一键学习使用。
+
+🔥🔥**News**: ```2024.09.02```: 我们更新了第一款专注[敬酒场景的知识库](http://120.76.130.14:6006/knowledges/)对话模型
+
+ 🔥 **News**: ```2024.08.31```: -我们重构了仓库组织结构，更新了相关工具代码以及README。彻底更新了 langchain [知识库问答](./tianji/knowledges/) 相关内容以及对应 [demo](run/demo_rag_langchain_onlinellm.py)，让项目更适合一键学习使用。
  🔥**News**: ```2024.07.16```: 我们发布了第一款们发布了第一款专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)
 
  🔥**News**: ```2024.07.14```: 更新了新版的[送祝福模块](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes) 支持更多风格切换，数据已开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.1.json)
