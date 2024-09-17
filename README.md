@@ -12,7 +12,7 @@
 🍵 在线体验懂人情世故的天机<a href="http://120.76.130.14:6006/prompt/">prompt应用</a>、<a href="http://120.76.130.14:6006/knowledges/">知识库应用</a>、<a href="http://120.76.130.14:6005/">Agent应用</a>
 </p>
 <p align="center">
-在上海人工智能实验室 OpenXLab 在线体验天机人情世故微调模型：<a href="https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes">送祝福模块</a>、<a href="https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette">敬酒礼仪文化</a>
+在上海 AILab OpenXLab 在线体验人情世故微调模型：<a href="https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes">送祝福模块</a>、<a href="https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette">敬酒礼仪文化</a>
 </p>
 <!-- End of Selection -->
 
@@ -28,6 +28,9 @@
     💡  有疑问或功能请求，欢迎 <a href="https://github.com/SocialAI-tianji/Tianji/issues" target="_blank">创建一个 issue</a> ，或者加入我们的 <a href="assets\tianji-wechat.jpg" target="_blank">微信社区群</a>
 </p>
 
+<p align="center">
+    对标 OpenAI 的  <a href="https://socialai-tianji.github.io/socialai-web/" target="_blank">SocialAI 首页</a>
+</p>
 
 ## 📰News
 
