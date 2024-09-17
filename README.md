@@ -285,6 +285,7 @@ TODO
 - [InternLM(书生·浦语) 系列开源教程（目前最好的LLM实战全栈教程之一）](https://github.com/InternLM/tutorial)
 - [Datawhale 开源学习社区](https://github.com/datawhalechina)
 - [奇想星球](https://1aigc.cn/)
+- [zRzRzR](https://github.com/zRzRzRzRzRzRzR)的帮助
 
 ## Star History
 
