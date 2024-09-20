@@ -15,5 +15,4 @@ temp/*
 test/knowledges/langchain/cache/
 run/cache/
 version.txt
-test/knowledges/langchain/db_files/spring_festival.txt
 test/knowledges/llamaindex/cache
