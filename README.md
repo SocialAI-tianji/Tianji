@@ -34,38 +34,31 @@
 
 ## 📰News
 
+🔥🔥**News**: `2024.09.02`: 我们更新了第一款专注[敬酒场景的知识库](http://120.76.130.14:6006/knowledges/)对话模型
 
-🔥🔥**News**: ```2024.09.02```: 我们更新了第一款专注[敬酒场景的知识库](http://120.76.130.14:6006/knowledges/)对话模型
+🔥 **News**: `2024.08.31`: -我们重构了仓库组织结构，更新了相关工具代码以及README。彻底更新了 langchain [知识库问答](./tianji/knowledges/) 相关内容以及对应 [demo](run/demo_rag_langchain_onlinellm.py)，让项目更适合一键学习使用。
 
- 🔥 **News**: ```2024.08.31```: -我们重构了仓库组织结构，更新了相关工具代码以及README。彻底更新了 langchain [知识库问答](./tianji/knowledges/) 相关内容以及对应 [demo](run/demo_rag_langchain_onlinellm.py)，让项目更适合一键学习使用。
- 
- 🔥**News**: ```2024.07.16```: 我们发布了第一款们发布了第一款专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)
+🔥**News**: `2024.07.16`: 我们发布了第一款们发布了第一款专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)
 
- 🔥**News**: ```2024.07.14```: 更新了新版的[送祝福模块](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes) 支持更多风格切换，数据已开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.1.json)
+🔥**News**: `2024.07.14`: 更新了新版的[送祝福模块](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes) 支持更多风格切换，数据已开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.1.json)
 
- 🔥**News**: ```2024.05.04```: 我们发布了以《化解"尴尬"场合》为例的[微调数据获取、制造教程](https://github.com/SocialAI-tianji/Tianji/blob/main/docs/finetune/how-to-get-finetune-data.md)，对应数据开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)
+🔥**News**: `2024.05.04`: 我们发布了以《化解"尴尬"场合》为例的[微调数据获取、制造教程](https://github.com/SocialAI-tianji/Tianji/blob/main/docs/finetune/how-to-get-finetune-data.md)，对应数据开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)
 
- 🔥**News**: ```2024.05.02```: 我们发布了有关人情世故大模型-送祝福的数据收集到微调过程的[全流程可复现文档](./docs/finetune/tianji-wishes-chinese.md)及其对应[数据](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)、[配置](./tianji/finetune/xtuner/internlm2_chat_7b_qlora_oasst1_e3_copy.py)、[辅助脚本](./tools/finetune/README.md)，（鸽了一段时间但又回来了，主要维护者持续加班忙了，放假才能快乐开源）
+🔥**News**: `2024.05.02`: 我们发布了有关人情世故大模型-送祝福的数据收集到微调过程的[全流程可复现文档](./docs/finetune/tianji-wishes-chinese.md)及其对应[数据](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)、[配置](./tianji/finetune/xtuner/internlm2_chat_7b_qlora_oasst1_e3_copy.py)、[辅助脚本](./tools/finetune/README.md)，（鸽了一段时间但又回来了，主要维护者持续加班忙了，放假才能快乐开源）
 
- 🍵 **News**: ```2024.02.01```: 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库(TODO)、[模型微调(基于InternLM2)](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes)的初版体验地址，将仓库转为开放。
+🍵 **News**: `2024.02.01`: 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库(TODO)、[模型微调(基于InternLM2)](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes)的初版体验地址，将仓库转为开放。
 
 ## 你将在该项目中学会 🍉
 
 **学完全部内容，你将获得大语言模型入门级全栈应用开发能力。**
 
-- 构建 [prompt](./tianji/prompt/gpt_prompt/) 对话[大模型应用](./run/tianji_prompt_webui.py)
+- **不同LLM的部署与使用**: 实现 `Zhipuai,Ernie,Deepseek,Transformers` 等在线或本地模型的[快速使用](test/llm).
 
-- 制作 [AI 游戏](./tianji/prompt/aigame/zhipu/)（类似哄哄模拟器）应用
+- **多样化LLM应用制作**: 包括构建 [prompt工程](./tianji/prompt/gpt_prompt/) 对话[大模型应用](./run/tianji_prompt_webui.py)、制作 [AI 游戏](./tianji/prompt/aigame/zhipu/)（类似哄哄模拟器）应用、基于 [metagpt](./tianji/agents/metagpt_agents/) 构建[智能体应用](./run/metagpt_webui.py)以及从零构建一个[知识库对话应用](./tianji/knowledges/)，支持 `LangChain, LlamaIndex` 多种 RAG 框架.
 
-- 基于 [metagpt](./tianji/agents/metagpt_agents/) 构建[智能体应用](./run/metagpt_webui.py)  （即将重构）
-
-- 从零构建一个[知识库对话应用](./tianji/knowledges/)
-
-- [从零制作语言模型微调数据](./docs/finetune/how-to-get-finetune-data.md)、[微调](./docs/finetune/how-to-get-finetune-data.md)属于自己的大语言模型
-
+- **从数据到微调全流程**: 包含[数据制造](./docs/finetune/how-to-get-finetune-data.md)、[模型微调](./docs/finetune/how-to-get-finetune-data.md)环节,快速入门制作属于自己的大语言模型, 支持 `Transformers, Xtuner` 框架 Lora与全量微调.
 
 ## 目录
-
 
 - [快速开始](#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83)
   - [环境安装](#%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85)
@@ -82,7 +75,6 @@
 - [如何复刻本项目](#%E5%A6%82%E4%BD%95%E5%A4%8D%E5%88%BB%E6%9C%AC%E9%A1%B9%E7%9B%AE)
 - [贡献者](#%E8%B4%A1%E7%8C%AE%E8%80%85)
 - [鸣谢](#%E9%B8%A3%E8%B0%A2)
-
 
 ## 快速开始 💫
 
@@ -158,16 +150,16 @@ git commit -m "提交信息"
 
 ## 路线图
 
-- [x] 释放最简初版(涉及prompt、aigame、agent、知识库、模型微调)
-- [x] 完成[人情世故大模型-送祝福](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的模型微调数据收集到微调过程的可复现文档
-- [x] 开源人情世故语料-送祝福至huggingface
-- [x] 迭代更好的数据制造工具与清洗方案，开源数据清洗脚本
-- [ ] 完成知识库部分迭代
-- [ ] 开放知识库语料获取细节至huggingface
-- [ ] 完成 Agent 部分文档
-- [ ] 补充文档（如何参考本项目构建自己的应用prompt、agent、知识库、微调应用）
-- [ ] 整理多维度数据，开源较完整人情世故语料
-- [ ] 收集 & 开源人情世故语料-2w并训练给出结果和全过程
+- \[x\] 释放最简初版(涉及prompt、aigame、agent、知识库、模型微调)
+- \[x\] 完成[人情世故大模型-送祝福](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)的模型微调数据收集到微调过程的可复现文档
+- \[x\] 开源人情世故语料-送祝福至huggingface
+- \[x\] 迭代更好的数据制造工具与清洗方案，开源数据清洗脚本
+- \[ \] 完成知识库部分迭代
+- \[ \] 开放知识库语料获取细节至huggingface
+- \[ \] 完成 Agent 部分文档
+- \[ \] 补充文档（如何参考本项目构建自己的应用prompt、agent、知识库、微调应用）
+- \[ \] 整理多维度数据，开源较完整人情世故语料
+- \[ \] 收集 & 开源人情世故语料-2w并训练给出结果和全过程
 
 ## 技术路线
 
@@ -198,7 +190,6 @@ git commit -m "提交信息"
 - 模型训练：基于不同优秀的模型基座，在积累大量数据的情况下进行Lora微调或全量微调。
 
 您可以在 tianji 目录下找到四种路线的对应源码，如果您想参考 `Tianji` 的项目架构、数据管理、技术路线复刻出属于自己的垂直领域 AI 应用，欢迎 fork 或者直接参考，我们将会开源所有包括从`项目的起步、数据的方向探索、数据构建与管理、AI应用从0制作、领域（比如人情世故）与技术路线的深入结合`的全过程；我们希望看到 AI 原生应用在生活中进一步的加速推进。
-
 
 ## 文件目录说明
 

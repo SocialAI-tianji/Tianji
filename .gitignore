@@ -12,6 +12,8 @@ tianji.egg-info/*
 temp/*
 *.bin
 *.pyc
-test/knowledges/langchain_pytorch/cache/
+test/knowledges/langchain/cache/
 run/cache/
 version.txt
+test/knowledges/langchain/db_files/spring_festival.txt
+test/knowledges/llamaindex/cache
