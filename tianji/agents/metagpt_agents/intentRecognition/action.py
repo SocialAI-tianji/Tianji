@@ -9,8 +9,8 @@ from metagpt.actions import Action
 from metagpt.logs import logger
 
 from tianji.utils.json_from import SharedDataSingleton
-from tianji.utils.common_llm_api import LLMApi
-from tianji.utils.helper_for_agent import *
+from tianji.agents.metagpt_agents.agent_llm import ZhipuApi as LLMApi
+from tianji.agents.metagpt_agents.helper_func import *
 from metagpt.const import METAGPT_ROOT as TIANJI_PATH
 
 

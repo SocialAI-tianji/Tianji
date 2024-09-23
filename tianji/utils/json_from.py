@@ -47,9 +47,9 @@ class SharedDataSingleton:
         cls.first_status_message_list = []
         cls.message_list_for_agent=[]
         cls.scene_attribute={}
-        cls.scene_label = ""
+        cls.scene_label=""
         cls.extra_query=[]
-        cls.search_results={}
+        search_results={}
         cls.chat_history = []
         cls.uuid_obj = {}
         return cls
