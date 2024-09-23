@@ -23,6 +23,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
+
 class QueryExpansion(Action):
     PROMPT_TEMPLATE: str = """
     #Role:
@@ -31,7 +32,7 @@ class QueryExpansion(Action):
     ## Background:
     - 作为一个专业的查询扩展小助手。接下来，我将向你展示一段用户与大模型的历史对话记录，user 表示用户，assistant 表示大模型，你需要从中分析并生成合适的额外查询。
 
-    ## Goals: 
+    ## Goals:
     - 你的任务是对历史对话记录中的内容进行分析，并且生成合适数量的额外查询，以供搜索引擎查询。
 
     ## Attention:
@@ -56,83 +57,93 @@ class QueryExpansion(Action):
 
     async def run(self, instruction: str):
         sharedData = SharedDataSingleton.get_instance()
-        scene_label=sharedData.scene_label
-        json_data=load_json("scene_attribute.json")
-        scene,_,_=extract_single_type_attributes_and_examples(json_data,scene_label)
+        scene_label = sharedData.scene_label
+        json_data = load_json("scene_attribute.json")
+        scene, _, _ = extract_single_type_attributes_and_examples(
+            json_data, scene_label
+        )
 
         prompt = self.PROMPT_TEMPLATE.format(
-            instruction=instruction, scene=scene,
+            instruction=instruction,
+            scene=scene,
         )
 
         rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
         logger.info("机器人分析需求：\n" + rsp)
         rsp = rsp.replace("```list", "").replace("```", "")
-        sharedData.extra_query=ast.literal_eval(rsp)
+        sharedData.extra_query = ast.literal_eval(rsp)
         return rsp
-    
+
+
 class WebSearch(Action):
     name: str = "WebSearch"
 
     async def run(self, instruction: str):
         sharedData = SharedDataSingleton.get_instance()
-        queries= sharedData.extra_query
+        queries = sharedData.extra_query
         search_results = {}
+
         def search(query):
-            max_retry=3
+            max_retry = 3
             for attempt in range(max_retry):
                 try:
-                    response = _call_ddgs(
-                        query)
+                    response = _call_ddgs(query)
                     return _parse_response(response)
                 except Exception as e:
                     time.sleep(random.randint(2, 5))
             raise Exception(
-                'Failed to get search results from DuckDuckGo after retries.')
-        
+                "Failed to get search results from DuckDuckGo after retries."
+            )
+
         def _call_ddgs(query: str, **kwargs) -> dict:
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
             try:
-                response = loop.run_until_complete(
-                    _async_call_ddgs(query, **kwargs))
+                response = loop.run_until_complete(_async_call_ddgs(query, **kwargs))
                 return response
             finally:
                 loop.close()
-
 
         async def _async_call_ddgs(query: str, **kwargs) -> dict:
             ddgs = DDGS(**kwargs)
             try:
                 response = await asyncio.wait_for(
-                    asyncio.to_thread(ddgs.text, query.strip("'"), max_results=10),
-                    timeout=20)
+                    asyncio.to_thread(ddgs.text, query.strip("'"), max_results=50),
+                    timeout=20,
+                )
                 return response
             except asyncio.TimeoutError:
                 raise
 
-        def _parse_response( response: dict) -> dict:
+        def _parse_response(response: dict) -> dict:
             raw_results = []
-            filtered_results={}
-            count=0
+            filtered_results = {}
+            count = 0
             for item in response:
                 raw_results.append(
-                    (item['href'], item['description']
-                    if 'description' in item else item['body'], item['title']))
-                
+                    (
+                        item["href"],
+                        item["description"] if "description" in item else item["body"],
+                        item["title"],
+                    )
+                )
+
             for url, snippet, title in raw_results:
-                filtered_results[count] = {
-                        'url': url,
-                        'summ': json.dumps(snippet, ensure_ascii=False)[1:-1],
-                        'title': title
+                if all(
+                    domain not in url for domain in ["zhihu.com", "baidu.com"]
+                ) and not url.endswith(".pdf"):
+                    filtered_results[count] = {
+                        "url": url,
+                        "summ": json.dumps(snippet, ensure_ascii=False)[1:-1],
+                        "title": title,
                     }
-                count += 1
+                    count += 1
+                    if count >= 10:
+                        break
             return filtered_results
 
         with ThreadPoolExecutor() as executor:
-            future_to_query = {
-                executor.submit(search, q): q
-                for q in queries
-            }
+            future_to_query = {executor.submit(search, q): q for q in queries}
 
             for future in as_completed(future_to_query):
                 try:
@@ -141,19 +152,20 @@ class WebSearch(Action):
                     pass
                 else:
                     for result in results.values():
-                        if result['url'] not in search_results:
-                            search_results[result['url']] = result
+                        if result["url"] not in search_results:
+                            search_results[result["url"]] = result
                         else:
-                            search_results[
-                                result['url']]['summ'] += f"\n{result['summ']}"
+                            search_results[result["url"]][
+                                "summ"
+                            ] += f"\n{result['summ']}"
 
         search_results = {
-            idx: result
-            for idx, result in enumerate(search_results.values())
+            idx: result for idx, result in enumerate(search_results.values())
         }
 
-        sharedData.search_results=search_results
+        sharedData.search_results = search_results
         return ""
+
 
 class SelectResult(Action):
     PROMPT_TEMPLATE: str = """
@@ -163,7 +175,7 @@ class SelectResult(Action):
     ## Background:
     - 接下来，我将向你展示一段从搜索引擎返回的内容（字典列表形式），"url"字段表示网址，"summ"表示网页的部分片段，"title"表示网页的标题。你需要分析哪一些网站可能需要进一步查询。
 
-    ## Goals: 
+    ## Goals:
     - 你的任务是基于我所提供的查询列表，从中识别并筛选出哪一些网页的内容可能符合查询列表里的查询。
 
     ## Constraints:
@@ -180,18 +192,19 @@ class SelectResult(Action):
     async def run(self, instruction: str):
         sharedData = SharedDataSingleton.get_instance()
 
-
         prompt = self.PROMPT_TEMPLATE.format(
-            search_results=sharedData.search_results, extra_query=sharedData.extra_query,
+            search_results=sharedData.search_results,
+            extra_query=sharedData.extra_query,
         )
 
         rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
         logger.info("机器人分析需求：\n" + rsp)
         rsp = rsp.replace("```list", "").replace("```", "")
-        rsp=ast.literal_eval(rsp)
-        sharedData.filter_weblist= [int(item) for item in rsp]
+        rsp = ast.literal_eval(rsp)
+        sharedData.filter_weblist = [int(item) for item in rsp]
         return str(rsp)
-    
+
+
 class SelectFetcher(Action):
     name: str = "selectFetcher"
 
@@ -206,14 +219,17 @@ class SelectFetcher(Action):
             except requests.RequestException as e:
                 return False, str(e)
 
-            text = BeautifulSoup(html, 'html.parser').get_text()
-            cleaned_text = re.sub(r'\n+', '\n', text)
+            text = BeautifulSoup(html, "html.parser").get_text()
+            cleaned_text = re.sub(r"\n+", "\n", text)
             return True, cleaned_text
-    
+
         with ThreadPoolExecutor() as executor:
             future_to_id = {
-                executor.submit(fetch, sharedData.search_results[select_id]['url']): select_id
-                for select_id in sharedData.filter_weblist if select_id in sharedData.search_results
+                executor.submit(
+                    fetch, sharedData.search_results[select_id]["url"]
+                ): select_id
+                for select_id in sharedData.filter_weblist
+                if select_id in sharedData.search_results
             }
 
             for future in as_completed(future_to_id):
@@ -224,9 +240,12 @@ class SelectFetcher(Action):
                     pass
                 else:
                     if web_success:
-                        sharedData.search_results[select_id]['content']=web_content[:1024]
+                        sharedData.search_results[select_id]["content"] = web_content[
+                            :4096
+                        ]
         return ""
-    
+
+
 class FilterSelectedResult(Action):
     PROMPT_TEMPLATE: str = """
     #Role:
@@ -235,7 +254,7 @@ class FilterSelectedResult(Action):
     ## Background:
     - 接下来，我将呈现一段从搜索引擎返回的内容。您的任务是仔细提取出与查询列表里的主题紧密相关的关键信息，同时高效地过滤掉所有不相关或冗余的部分，确保只保留最有价值的内容。
 
-    ## Goals: 
+    ## Goals:
     - 你的任务是基于我所提供的查询列表，把重要的内容提取出来。
 
     ## Constraints:
@@ -254,7 +273,8 @@ class FilterSelectedResult(Action):
 
         async def ask(result, extra_query):
             prompt = self.PROMPT_TEMPLATE.format(
-            search_results=result, extra_query=extra_query)
+                search_results=result, extra_query=extra_query
+            )
             rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
             logger.info("机器人分析需求：\n" + rsp)
             return rsp
@@ -263,25 +283,26 @@ class FilterSelectedResult(Action):
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
             try:
-                response = loop.run_until_complete(
-                    ask(result, extra_query))
+                response = loop.run_until_complete(ask(result, extra_query))
                 return response
             finally:
                 loop.close()
-        
+
         with ThreadPoolExecutor() as executor:
             future_to_id = {
-                executor.submit(run_ask, result['content'], sharedData.extra_query): select_id
+                executor.submit(
+                    run_ask, result["content"], sharedData.extra_query
+                ): select_id
                 for select_id, result in sharedData.search_results.items()
-                if 'content' in result
+                if "content" in result
             }
 
             for future in as_completed(future_to_id):
                 select_id = future_to_id[future]
                 try:
-                    result= future.result()
+                    result = future.result()
                 except Exception as exc:
                     pass
                 else:
-                    sharedData.search_results[select_id]['filtered_content']=result
+                    sharedData.search_results[select_id]["filtered_content"] = result
         return ""

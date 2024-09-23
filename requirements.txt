@@ -4,6 +4,7 @@ tiktoken
 einops
 bitsandbytes
 duckduckgo_search==5.3.1b1
+beautifulsoup4==4.12.3
 # metagpt==0.8.1  # 注意, metagpt 安装可能会导致 llamaindex 及 langchian 版本改变
 # langchain==0.2.15
 # langchain_community==0.2.14

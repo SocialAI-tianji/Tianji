@@ -31,8 +31,12 @@ def on_btn_click(sharedData):
     sharedData.first_status_message_list.clear()
     sharedData.scene_label = ""
     sharedData.scene_attribute = {}
+    sharedData.extra_query.clear()
+    sharedData.search_results = {}
     st.session_state["generated"].clear()
     st.session_state["past"].clear()
+    st.session_state["scene_label"] = ""
+    st.session_state["scene_attr"] = {}
 
 
 def flip():
@@ -50,10 +54,10 @@ def initialize_sidebar(scenes, sharedData):
             container_all_scenes.write(item)
         st.markdown("用户当前意图：")
         container_current_scene = st.container(border=True)
-        container_current_scene.write(sharedData.scene_label)
+        container_current_scene.write(st.session_state["scene_label"])
         st.markdown("当前场景要素：")
         container_scene_attribute = st.container(border=True)
-        container_scene_attribute.write(sharedData.scene_attribute)
+        container_scene_attribute.write(st.session_state["scene_attr"])
         st.button("Clear Chat History", on_click=lambda: on_btn_click(sharedData))
         st.checkbox(
             "启用网络搜索", value=st.session_state["enable_se"], key="check", on_change=flip
@@ -76,6 +80,10 @@ async def main():
         st.session_state["past"] = []
     if "enable_se" not in st.session_state:
         st.session_state["enable_se"] = False
+    if "scene_label" not in st.session_state:
+        st.session_state["scene_label"] = ""
+    if "scene_attr" not in st.session_state:
+        st.session_state["scene_attr"] = {}
 
     sharedData = SharedDataSingleton.get_instance()
     initialize_sidebar(extract_all_types(json_data), sharedData)
@@ -137,6 +145,8 @@ async def main():
                 await role_sceneRefine.run(str(sharedData.message_list_for_agent))
             ).content
 
+            st.session_state["scene_label"] = sharedData.scene_label
+            st.session_state["scene_attr"] = sharedData.scene_attribute
             if refine_ans != "":
                 st.session_state["generated"].append(refine_ans)
                 sharedData.message_list_for_agent.append(
@@ -225,6 +235,11 @@ async def main():
                     message(st.session_state["generated"][-1], is_user=False)
 
                 sharedData.message_list_for_agent.clear()
+                sharedData.scene_label = ""
+                sharedData.scene_attribute = {}
+                sharedData.extra_query.clear()
+                sharedData.search_results = {}
+
         st.rerun()
 
 
