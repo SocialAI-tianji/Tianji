@@ -293,12 +293,11 @@ with st.container(height=450):
                 if "filtered_content" in item:
                     filtered_result.append(item["filtered_content"])
 
-            delimiter = "搜索结果:  \n"
+            delimiter = "==== 搜索结果: ====  \n"
             urls = "   ".join(urls)
-            filtered_result = delimiter.join(
-                f"{delimiter}{item}" for item in filtered_result
-            )
-
+            filtered_result = [f"{delimiter}{item}" for item in filtered_result]
+            filtered_result = "".join(filtered_result)
+            
             sa_res1 = "生成的额外查询：" + str(sharedData.extra_query)
             sa_res2 = "搜索引擎返回的网页为：  \n" + urls
             sa_res3 = "判断需要进一步查询的网页为" + str(sharedData.filter_weblist)

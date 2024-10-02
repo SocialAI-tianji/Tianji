@@ -218,6 +218,8 @@ class SelectFetcher(Action):
 
             text = BeautifulSoup(html, "html.parser").get_text()
             cleaned_text = re.sub(r"\n+", "\n", text)
+            if len(cleaned_text)<=100:
+                return False, "no valuable content"
             return True, cleaned_text
 
         with ThreadPoolExecutor() as executor:
