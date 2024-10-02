@@ -2,20 +2,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from typing import Optional, Any
-import json
-
 from metagpt.actions import Action
 from metagpt.logs import logger
-
-from tianji.utils.json_from import SharedDataSingleton
-from tianji.agents.metagpt_agents.agent_llm import ZhipuApi as LLMApi
-from tianji.agents.metagpt_agents.helper_func import *
-from metagpt.const import METAGPT_ROOT as TIANJI_PATH
+from tianji.agents.metagpt_agents.utils.agent_llm import ZhipuApi as LLMApi
+from tianji.agents.metagpt_agents.utils.helper_func import *
 
 
 class IntentAnalyze(Action):
-
     PROMPT_TEMPLATE: str = """
     #Role:
     - 场景分析助手
@@ -23,7 +16,7 @@ class IntentAnalyze(Action):
     ## Background:
     - 作为一个专业的场景分析助手。接下来，我将向你展示一段用户与大模型的历史对话记录，user 表示用户，assistant 表示大模型，你需要从中判断对话属于哪个场景。
 
-    ## Goals: 
+    ## Goals:
     - 你的任务是准确判断最新的用户提问符合哪个场景，用户身处在哪个场景，用户想要大模型提供哪种场景下的帮助。
 
     ## Constraints:
@@ -31,7 +24,7 @@ class IntentAnalyze(Action):
     - 你需要根据历史对话记录判断用户的场景是否发生改变，如果是，回复最新的场景即可。
     - 如果历史对话都不符合场景标签选项，请只返回字符串"None"。
     - 你无需输出思考过程，直接返回答案即可。
-    
+
     ## Attention:
     - 有些用户提问看似与场景无关，但是实际上此用户回复是回答大模型关于场景的详细提问。
     - 有些用户提问是想更换场景要素，但是主要的场景并没有发生改变（例如从 "送祝福给爸爸" 换成 "送祝福给妈妈"，但是场景还是"4：送祝福"）。
@@ -69,13 +62,12 @@ class IntentAnalyze(Action):
     name: str = "IntentAnalyze"
 
     async def run(self, instruction: str):
-
-        json_data=load_json("scene_attribute.json")
+        json_data = load_json("scene_attribute.json")
         scene = extract_all_types(json_data)
-        scene_example= extract_all_types_and_examples(json_data)
+        scene_example = extract_all_types_and_examples(json_data)
 
         prompt = self.PROMPT_TEMPLATE.format(
-            instruction=instruction, scene=scene,scene_example=scene_example
+            instruction=instruction, scene=scene, scene_example=scene_example
         )
 
         rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)

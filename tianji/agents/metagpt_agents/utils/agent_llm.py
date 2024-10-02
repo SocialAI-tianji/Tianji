@@ -1,6 +1,7 @@
 from zhipuai import ZhipuAI
-import os 
+import os
 import asyncio
+
 
 class ZhipuApi:
     _instance = None
@@ -17,13 +18,20 @@ class ZhipuApi:
         self.__initialized = True
         self.client = ZhipuAI(api_key=os.environ["ZHIPUAI_API_KEY"])
 
-    async def _aask(self, prompt, stream=False, model="glm-4-flash", top_p=0.7, temperature=0.95):
+    async def _aask(
+        self, prompt, stream=False, model="glm-4-flash", top_p=0.7, temperature=0.95
+    ):
         messages = [{"role": "user", "content": prompt}]
         response = self.client.chat.completions.create(
-            model=model, messages=messages, top_p=top_p, temperature=temperature, stream=stream
+            model=model,
+            messages=messages,
+            top_p=top_p,
+            temperature=temperature,
+            stream=stream,
         )
         return response.choices[0].message.content
-    
+
+
 if __name__ == "__main__":
     llm_api = ZhipuApi()
     result = asyncio.run(llm_api._aask("你好啊"))

@@ -5,20 +5,19 @@ load_dotenv()
 from metagpt.logs import logger
 from metagpt.roles.role import Role, RoleReactMode
 from metagpt.schema import Message
-from .action import sceneRefineAnalyze,RaiseQuestion
-from tianji.utils.json_from import SharedDataSingleton
-from tianji.utils.helper_for_agent import *
+from .action import sceneRefineAnalyze, RaiseQuestion
+from tianji.agents.metagpt_agents.utils.json_from import SharedDataSingleton
+from tianji.agents.metagpt_agents.utils.helper_func import *
 
-class sceneRefine(Role):
+
+class SceneRefine(Role):
     name: str = "sceneRefinement"
     profile: str = "Scene Refinement Analyze"
 
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions([sceneRefineAnalyze,RaiseQuestion])
+        self._init_actions([sceneRefineAnalyze, RaiseQuestion])
         self._set_react_mode(react_mode=RoleReactMode.REACT.value)
-
 
     async def _act(self) -> Message:
         logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
@@ -33,9 +32,8 @@ class sceneRefine(Role):
             return msg
         else:
             return Message(content="", role=self.profile, cause_by=type(todo))
-    
 
-    async def _think(self) -> None: 
+    async def _think(self) -> None:
         sharedData = SharedDataSingleton.get_instance()
         if not has_empty_values(sharedData.scene_attribute):
             self.rc.todo = None
@@ -44,7 +42,6 @@ class sceneRefine(Role):
             self._set_state(self.rc.state + 1)
         else:
             self.rc.todo = None
-    
 
     async def _react(self) -> Message:
         while True:

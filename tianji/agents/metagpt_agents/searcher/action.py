@@ -2,23 +2,20 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from typing import Optional, Any
-import json
 
+import json
 import asyncio
 from metagpt.actions import Action
 from metagpt.logs import logger
-from copy import deepcopy
-from tianji.utils.json_from import SharedDataSingleton
-from tianji.agents.metagpt_agents.agent_llm import ZhipuApi as LLMApi
-from tianji.agents.metagpt_agents.helper_func import *
-from metagpt.const import METAGPT_ROOT as TIANJI_PATH
+from tianji.agents.metagpt_agents.utils.json_from import SharedDataSingleton
+from tianji.agents.metagpt_agents.utils.agent_llm import ZhipuApi as LLMApi
+from tianji.agents.metagpt_agents.utils.helper_func import *
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
 import random
 from duckduckgo_search import DDGS
 import ast
-from typing import List, Optional, Tuple, Type, Union
+from typing import Tuple
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -108,7 +105,7 @@ class WebSearch(Action):
             ddgs = DDGS(**kwargs)
             try:
                 response = await asyncio.wait_for(
-                    asyncio.to_thread(ddgs.text, query.strip("'"), max_results=50),
+                    asyncio.to_thread(ddgs.text, query.strip("'"), max_results=100),
                     timeout=20,
                 )
                 return response

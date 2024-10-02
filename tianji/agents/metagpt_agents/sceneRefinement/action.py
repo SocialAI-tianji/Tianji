@@ -2,16 +2,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from typing import Optional, Any
 import json
-
 from metagpt.actions import Action
 from metagpt.logs import logger
-from copy import deepcopy
-from tianji.utils.json_from import SharedDataSingleton
-from tianji.agents.metagpt_agents.agent_llm import ZhipuApi as LLMApi
-from tianji.agents.metagpt_agents.helper_func import *
-from metagpt.const import METAGPT_ROOT as TIANJI_PATH
+from tianji.agents.metagpt_agents.utils.json_from import SharedDataSingleton
+from tianji.agents.metagpt_agents.utils.agent_llm import ZhipuApi as LLMApi
+from tianji.agents.metagpt_agents.utils.helper_func import *
 
 
 class sceneRefineAnalyze(Action):
@@ -22,11 +18,11 @@ class sceneRefineAnalyze(Action):
     ## Background:
     - 作为一个专业的{scene}场景分析助手。接下来，我将向你展示一段用户与大模型的历史对话记录，user 表示用户，assistant 表示大模型，你需要从中提取相对应的场景要素并组装成json。
 
-    ## Goals: 
+    ## Goals:
     - 我将提供给你需要提取的场景要素，你的任务是从历史对话记录中的内容分析并提取对应场景的场景要素。
 
     ## Constraints:
-    - 你只需要返回 json 列表，不需要回复其他任何内容！，不要返回我提供以外的场景要素。
+    - 你只需要返回单个 json 对象，不需要回复其他任何内容！，不要返回我提供以外的场景要素。
     - 如果没有提取到对应的场景要素请用空字符串表示，例如："对象角色": ""
     - 你需要根据最新的对话记录判断场景要素是否发生改变，如果是，把旧的要素替换成新的（例如"对象角色"从"爸爸"变成"妈妈"）。
 
@@ -64,34 +60,47 @@ class sceneRefineAnalyze(Action):
 
     async def run(self, instruction: str):
         sharedData = SharedDataSingleton.get_instance()
-        scene_label=sharedData.scene_label
+        scene_label = sharedData.scene_label
 
-        scene_attributes=sharedData.scene_attribute
+        scene_attributes = sharedData.scene_attribute
 
+        json_data = load_json("scene_attribute.json")
+        scene, scene_attributes, _ = extract_single_type_attributes_and_examples(
+            json_data, scene_label
+        )
 
-        json_data=load_json("scene_attribute.json")
-        scene,scene_attributes,_=extract_single_type_attributes_and_examples(json_data,scene_label)
-
-        scene_attributes_description=extract_attribute_descriptions(json_data,scene_attributes)
+        scene_attributes_description = extract_attribute_descriptions(
+            json_data, scene_attributes
+        )
 
         prompt = self.PROMPT_TEMPLATE.format(
-            instruction=instruction, scene=scene, scene_attributes=scene_attributes, scene_attributes_description=scene_attributes_description
+            instruction=instruction,
+            scene=scene,
+            scene_attributes=scene_attributes,
+            scene_attributes_description=scene_attributes_description,
         )
 
         rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
-        rsp = rsp.replace("```json", "").replace("```", "").replace("[","").replace("]","")
-        sharedData.scene_attribute=json.loads(rsp)
+        logger.info("机器人分析需求：\n" + rsp)
+        rsp = (
+            rsp.replace("```json", "")
+            .replace("```", "")
+            .replace("[", "")
+            .replace("]", "")
+        )
+        sharedData.scene_attribute = json.loads(rsp)
 
         logger.info("机器人分析需求：\n" + rsp)
 
         return rsp
-    
+
+
 class RaiseQuestion(Action):
     PROMPT_TEMPLATE: str = """
     #Role:
     - 提问小助手
 
-    ## Goals: 
+    ## Goals:
     - 作为一个专业的提问小助手。接下来，我将提供你用户面对的场景，场景要素，以及每个场景要素的描述以及例子，你需要结合用户面对的场景以及空的场景要素进行提问，并且加上一些例子。
     - 例如场景是送祝福，空的场景细化要素为"对象角色": "" ，提问：请问你想要送祝福给谁呢？是妈妈吗？
 
@@ -130,18 +139,23 @@ class RaiseQuestion(Action):
     name: str = "RaiseQuestion"
 
     async def run(self, instruction: str):
-
         sharedData = SharedDataSingleton.get_instance()
-        scene_label=sharedData.scene_label
-        scene_attributes=sharedData.scene_attribute
+        scene_label = sharedData.scene_label
+        scene_attributes = sharedData.scene_attribute
 
-        json_data=load_json("scene_attribute.json")
-        scene,_,_=extract_single_type_attributes_and_examples(json_data,scene_label)
+        json_data = load_json("scene_attribute.json")
+        scene, _, _ = extract_single_type_attributes_and_examples(
+            json_data, scene_label
+        )
 
-        scene_attributes_description=extract_attribute_descriptions(json_data,scene_attributes)
+        scene_attributes_description = extract_attribute_descriptions(
+            json_data, scene_attributes
+        )
 
         prompt = self.PROMPT_TEMPLATE.format(
-            scene=scene,scene_attributes=scene_attributes,scene_attributes_description=scene_attributes_description
+            scene=scene,
+            scene_attributes=scene_attributes,
+            scene_attributes_description=scene_attributes_description,
         )
         rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
         logger.info("机器人分析需求：\n" + rsp)

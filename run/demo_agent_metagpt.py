@@ -11,12 +11,12 @@ from metagpt.logs import logger
 
 from tianji.agents.metagpt_agents.intentRecognition import IntentReg
 from tianji.agents.metagpt_agents.answerBot import AnswerBot
-from tianji.agents.metagpt_agents.sceneRefinement import sceneRefine
+from tianji.agents.metagpt_agents.sceneRefinement import SceneRefine
 from tianji.agents.metagpt_agents.searcher import Searcher
-from tianji.utils.json_from import SharedDataSingleton
+from tianji.agents.metagpt_agents.utils.json_from import SharedDataSingleton
 from tianji.utils.common import timestamp_str
-from tianji.agents.metagpt_agents.helper_func import *
-from tianji.agents.metagpt_agents.agent_llm import ZhipuApi as LLMApi
+from tianji.agents.metagpt_agents.utils.helper_func import *
+from tianji.agents.metagpt_agents.utils.agent_llm import ZhipuApi as LLMApi
 import time
 
 # 初始化session_state变量
@@ -28,7 +28,7 @@ if "user_id" not in st.session_state:
 
 def on_btn_click(sharedData):
     sharedData.message_list_for_agent.clear()
-    sharedData.first_status_message_list.clear()
+    sharedData.chat_history.clear()
     sharedData.scene_label = ""
     sharedData.scene_attribute = {}
     sharedData.extra_query.clear()
@@ -66,7 +66,7 @@ def initialize_sidebar(scenes, sharedData):
 
 async def main():
     role_intentReg = IntentReg()
-    role_sceneRefine = sceneRefine()
+    role_sceneRefine = SceneRefine()
     role_answerBot = AnswerBot()
     role_search = Searcher()
 
@@ -88,7 +88,7 @@ async def main():
     sharedData = SharedDataSingleton.get_instance()
     initialize_sidebar(extract_all_types(json_data), sharedData)
 
-    for first_status_message in sharedData.first_status_message_list:
+    for first_status_message in sharedData.chat_history:
         message(
             first_status_message["message"],
             is_user=first_status_message["is_user"],
@@ -101,7 +101,7 @@ async def main():
 
         sharedData.message_list_for_agent.append({"user": st.session_state["past"][-1]})
 
-        sharedData.first_status_message_list.append(
+        sharedData.chat_history.append(
             {
                 "message": st.session_state["past"][-1],
                 "is_user": True,
@@ -118,7 +118,7 @@ async def main():
             rsp = await LLMApi()._aask(prompt=user_input)
             sharedData.message_list_for_agent.clear()
             st.session_state["generated"].append(rsp)
-            sharedData.first_status_message_list.append(
+            sharedData.chat_history.append(
                 {
                     "message": st.session_state["generated"][-1],
                     "is_user": False,
@@ -134,25 +134,27 @@ async def main():
 
         else:
             if not sharedData.scene_label or sharedData.scene_label != intent_ans:
+                sharedData.scene_label = intent_ans
+                st.session_state["scene_label"] = sharedData.scene_label
                 _, scene_attributes, _ = extract_single_type_attributes_and_examples(
-                    json_data, intent_ans
+                    json_data, sharedData.scene_label
                 )
                 sharedData.scene_attribute = {attr: "" for attr in scene_attributes}
 
             sharedData.scene_label = intent_ans
+            st.session_state["scene_label"] = sharedData.scene_label
 
             refine_ans = (
                 await role_sceneRefine.run(str(sharedData.message_list_for_agent))
             ).content
 
-            st.session_state["scene_label"] = sharedData.scene_label
             st.session_state["scene_attr"] = sharedData.scene_attribute
             if refine_ans != "":
                 st.session_state["generated"].append(refine_ans)
                 sharedData.message_list_for_agent.append(
                     {"assistant": st.session_state["generated"][-1]}
                 )
-                sharedData.first_status_message_list.append(
+                sharedData.chat_history.append(
                     {
                         "message": st.session_state["generated"][-1],
                         "is_user": False,
@@ -166,7 +168,7 @@ async def main():
                     await role_answerBot.run(str(sharedData.message_list_for_agent))
                 ).content
                 st.session_state["generated"].append(final_ans)
-                sharedData.first_status_message_list.append(
+                sharedData.chat_history.append(
                     {
                         "message": st.session_state["generated"][-1],
                         "is_user": False,
@@ -181,7 +183,7 @@ async def main():
 
                     sa_res1 = "生成的额外查询：" + str(sharedData.extra_query)
                     st.session_state["generated"].append(sa_res1)
-                    sharedData.first_status_message_list.append(
+                    sharedData.chat_history.append(
                         {
                             "message": st.session_state["generated"][-1],
                             "is_user": False,
@@ -198,7 +200,7 @@ async def main():
                     urls = " ".join(urls)
                     sa_res2 = "搜索引擎返回的网页为：\n" + urls
                     st.session_state["generated"].append(sa_res2)
-                    sharedData.first_status_message_list.append(
+                    sharedData.chat_history.append(
                         {
                             "message": st.session_state["generated"][-1],
                             "is_user": False,
@@ -210,7 +212,7 @@ async def main():
 
                     sa_res3 = "判断需要进一步查询的网页为" + str(sharedData.filter_weblist)
                     st.session_state["generated"].append(sa_res3)
-                    sharedData.first_status_message_list.append(
+                    sharedData.chat_history.append(
                         {
                             "message": st.session_state["generated"][-1],
                             "is_user": False,
@@ -225,7 +227,7 @@ async def main():
                     ).content
                     final_ans_sa = "基于搜素引擎的回答：" + final_ans_sa
                     st.session_state["generated"].append(final_ans_sa)
-                    sharedData.first_status_message_list.append(
+                    sharedData.chat_history.append(
                         {
                             "message": st.session_state["generated"][-1],
                             "is_user": False,
