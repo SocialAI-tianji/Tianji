@@ -6,8 +6,11 @@ import streamlit as st
 class SharedDataSingleton:
     _instance = None
     json_from_data = None  # 这是要共享的变量
-    first_status_user_history = ""
-    first_status_message_list = []
+    message_list_for_agent = []
+    scene_label = ""
+    scene_attribute = {}
+    extra_query = []
+    search_results = {}
     chat_history = []
     uuid_obj = {}
     ask_num = 0
@@ -17,9 +20,6 @@ class SharedDataSingleton:
         user_id = ""
         if "user_id" in st.session_state:
             user_id = st.session_state["user_id"]
-            # st.write(f"您的会话ID6是: {user_id}")
-        # if cls._instance is None:
-        # cls._instance = cls()
         ret_cls_obj = {}
         if user_id == "":
             ret_cls_obj = cls()
@@ -38,8 +38,11 @@ class SharedDataSingleton:
     def _new_init(cls):
         cls._instance = None
         cls.json_from_data = None  # 这是要共享的变量
-        cls.first_status_user_history = ""
-        cls.first_status_message_list = []
+        cls.message_list_for_agent = []
+        cls.scene_attribute = {}
+        cls.scene_label = ""
+        cls.extra_query = []
+        cls.search_results = {}
         cls.chat_history = []
         cls.uuid_obj = {}
         return cls
