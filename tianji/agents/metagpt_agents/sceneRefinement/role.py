@@ -9,11 +9,18 @@ from .action import sceneRefineAnalyze, RaiseQuestion
 from tianji.agents.metagpt_agents.utils.json_from import SharedDataSingleton
 from tianji.agents.metagpt_agents.utils.helper_func import *
 
+"""
+场景细化 agent，具体作用为：
+action 1 （sceneRefineAnalyze）: 信息抽取，基于用户与大模型的对话记录，场景要素的描述以及例子，抽取出个别场景所需要的要素，以便后续大模型可以提供更详细的回答（具体场景要素置请参考 scene_attribute.json）。
+action 2 （RaiseQuestion）:提问助手，对于没有抽取到的场景要素，大模型会进一步对用户做出提问（以提问方式要求用户补充该场景要素）。
+"""
+
 
 class SceneRefine(Role):
     name: str = "sceneRefinement"
     profile: str = "Scene Refinement Analyze"
 
+    # RoleReactMode.REACT 模式下，agent运行过程为 _react -> _think -> _act
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._init_actions([sceneRefineAnalyze, RaiseQuestion])
@@ -33,6 +40,7 @@ class SceneRefine(Role):
         else:
             return Message(content="", role=self.profile, cause_by=type(todo))
 
+    # 如果全部场景要素都不为空的情况下，直接跳过 RaiseQuestion action，不再向用户提问
     async def _think(self) -> None:
         sharedData = SharedDataSingleton.get_instance()
         if not has_empty_values(sharedData.scene_attribute):

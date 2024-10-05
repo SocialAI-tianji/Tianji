@@ -105,7 +105,9 @@ class WebSearch(Action):
             ddgs = DDGS(**kwargs)
             try:
                 response = await asyncio.wait_for(
-                    asyncio.to_thread(ddgs.text, query.strip("'"), max_results=100),
+                    asyncio.to_thread(
+                        ddgs.text, query.strip("'"), max_results=100
+                    ),  # 先返回多个网页片段，避免遇到防爬虫的网站，导致可抽取的知识过少。
                     timeout=20,
                 )
                 return response
@@ -127,7 +129,8 @@ class WebSearch(Action):
 
             for url, snippet, title in raw_results:
                 if all(
-                    domain not in url for domain in ["zhihu.com", "baidu.com"]
+                    domain not in url
+                    for domain in ["zhihu.com", "baidu.com"]  # 屏蔽掉一些防爬虫的网站。
                 ) and not url.endswith(".pdf"):
                     filtered_results[count] = {
                         "url": url,
@@ -135,7 +138,7 @@ class WebSearch(Action):
                         "title": title,
                     }
                     count += 1
-                    if count >= 10:
+                    if count >= 10:  # 确保最多返回10个网页的内容，可自行根据大模型的 context length 更换合适的参数。
                         break
             return filtered_results
 
@@ -218,7 +221,7 @@ class SelectFetcher(Action):
 
             text = BeautifulSoup(html, "html.parser").get_text()
             cleaned_text = re.sub(r"\n+", "\n", text)
-            if len(cleaned_text)<=100:
+            if len(cleaned_text) <= 100:  # 如果提过滤后的网页内容少于100个字体，着判定为没有价值的，并且不加入到结果中。
                 return False, "no valuable content"
             return True, cleaned_text
 

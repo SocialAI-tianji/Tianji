@@ -7,6 +7,10 @@ from metagpt.logs import logger
 from tianji.agents.metagpt_agents.utils.agent_llm import ZhipuApi as LLMApi
 from tianji.agents.metagpt_agents.utils.helper_func import *
 
+"""
+意图识别 agent 所对应的 action。
+"""
+
 
 class IntentAnalyze(Action):
     PROMPT_TEMPLATE: str = """

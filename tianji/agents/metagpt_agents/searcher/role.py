@@ -14,6 +14,15 @@ from .action import (
 )
 from tianji.agents.metagpt_agents.utils.helper_func import *
 
+"""
+网络搜索助手 agent，具体作用为：
+action 1 （QueryExpansion）：基于用户以及大模型的对话记录，用户所面对的场景，进行查询扩展。
+action 2 （WebSearch）：启用网络搜索api（目前为 duckduckgo_Search），返回100个网页片段。
+action 3 （SelectResult）：基于返回的网页片段，判断哪些网页需要进一步查询。
+action 4 （SelectFetcher）：通过 requests 模块爬取网页里的内容。
+action 5 （FilterSelectedResult）：对爬取的网页内容进行过滤，并且加入到结果中。
+"""
+
 
 class Searcher(Role):
     name: str = "Searcher"

@@ -3,6 +3,7 @@ import os
 import asyncio
 
 
+# singleton 模式的 llm 实体
 class ZhipuApi:
     _instance = None
 

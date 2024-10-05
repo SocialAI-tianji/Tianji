@@ -7,6 +7,10 @@ from metagpt.roles.role import Role, RoleReactMode
 from metagpt.schema import Message
 from .action import IntentAnalyze
 
+"""
+意图识别 agent，具体作用为基于用户与大模型的对话记录，场景标签选项以及，场景标签选项的细分场景，识别用户目前的意图属于哪个场景（具体场景设置请参考 scene_attribute.json）。
+"""
+
 
 class IntentReg(Role):
     name: str = "IntentReg"

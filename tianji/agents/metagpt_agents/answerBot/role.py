@@ -7,6 +7,10 @@ from metagpt.roles.role import Role, RoleReactMode
 from metagpt.schema import Message
 from .action import AnswerQuestion
 
+"""
+回答助手 agent，具体作用为基于用户与大模型的对话记录，场景标签选项以及，场景要素的描述以及例子，做出回答以解决用户关于人情世故的提问。
+"""
+
 
 class AnswerBot(Role):
     name: str = "Answer Bot"

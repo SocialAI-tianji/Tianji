@@ -7,6 +7,10 @@ from tianji.agents.metagpt_agents.utils.json_from import SharedDataSingleton
 from tianji.agents.metagpt_agents.utils.agent_llm import ZhipuApi as LLMApi
 from tianji.agents.metagpt_agents.utils.helper_func import *
 
+"""
+回答助手 agent 所对应的 action。
+"""
+
 
 class AnswerQuestion(Action):
     PROMPT_TEMPLATE: str = """

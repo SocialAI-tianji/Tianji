@@ -88,6 +88,7 @@ async def main():
     sharedData = SharedDataSingleton.get_instance()
     initialize_sidebar(extract_all_types(json_data), sharedData)
 
+    # 显示历史对话记录
     for first_status_message in sharedData.chat_history:
         message(
             first_status_message["message"],
@@ -109,10 +110,12 @@ async def main():
             }
         )
 
+        # 运行意图识别 agent
         intent_ans = (
             await role_intentReg.run(str(sharedData.message_list_for_agent))
         ).content
 
+        # 目前不支持的场景
         if intent_ans == "None":
             st.warning("此模型只支持回答关于人情世故的事项，已调用 API 为你进行单轮回答。")
             rsp = await LLMApi()._aask(prompt=user_input)
@@ -127,15 +130,18 @@ async def main():
             )
             message(st.session_state["generated"][-1], is_user=False)
 
+        # 模型返回未知的场景标签
         elif not is_number_in_types(json_data, int(intent_ans)):
             st.warning("模型发生幻觉，请重新提问")
             sharedData.message_list_for_agent.clear()
             time.sleep(3)
 
         else:
+            # 确认用户意图后：
             if not sharedData.scene_label or sharedData.scene_label != intent_ans:
                 sharedData.scene_label = intent_ans
                 st.session_state["scene_label"] = sharedData.scene_label
+                # 提取对应场景所需要的场景要素
                 _, scene_attributes, _ = extract_single_type_attributes_and_examples(
                     json_data, sharedData.scene_label
                 )
@@ -144,11 +150,13 @@ async def main():
             sharedData.scene_label = intent_ans
             st.session_state["scene_label"] = sharedData.scene_label
 
+            # 运行场景细化 agent
             refine_ans = (
                 await role_sceneRefine.run(str(sharedData.message_list_for_agent))
             ).content
 
             st.session_state["scene_attr"] = sharedData.scene_attribute
+            # 用户提供的场景要素不全，场景细化 agent 进行提问
             if refine_ans != "":
                 st.session_state["generated"].append(refine_ans)
                 sharedData.message_list_for_agent.append(
@@ -163,6 +171,7 @@ async def main():
                 )
                 message(st.session_state["generated"][-1], is_user=False)
 
+            # 用户提供的场景要素齐全，运行回答助手 agent
             if not has_empty_values(sharedData.scene_attribute):
                 final_ans = (
                     await role_answerBot.run(str(sharedData.message_list_for_agent))
@@ -177,6 +186,7 @@ async def main():
                 )
                 message(st.session_state["generated"][-1], is_user=False)
 
+                # 如果开启已网络搜索助手 agent ，运行 agent
                 if st.session_state["enable_se"] is True:
                     with st.spinner("SearcherAgent 运行中..."):
                         await role_search.run(str(sharedData.message_list_for_agent))
@@ -193,6 +203,7 @@ async def main():
                     message(st.session_state["generated"][-1], is_user=False)
                     time.sleep(0.01)
 
+                    # 显示网页网址
                     urls = []
                     for item in sharedData.search_results.values():
                         if "url" in item:
@@ -222,6 +233,7 @@ async def main():
                     message(st.session_state["generated"][-1], is_user=False)
                     time.sleep(0.01)
 
+                    # 以网络搜索助手 agent 的结果为基础，再次运行回答助手 agent
                     final_ans_sa = (
                         await role_answerBot.run(str(sharedData.message_list_for_agent))
                     ).content
@@ -236,6 +248,7 @@ async def main():
                     )
                     message(st.session_state["generated"][-1], is_user=False)
 
+                # 回答完成，清除所有 agent 环境中的数据。
                 sharedData.message_list_for_agent.clear()
                 sharedData.scene_label = ""
                 sharedData.scene_attribute = {}
