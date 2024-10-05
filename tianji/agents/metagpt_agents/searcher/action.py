@@ -20,6 +20,10 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
+"""
+网络搜索助手 agent 所对应的 action。
+"""
+
 
 class QueryExpansion(Action):
     PROMPT_TEMPLATE: str = """
