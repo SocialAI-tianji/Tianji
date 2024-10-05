@@ -40,7 +40,7 @@ SUMMARY_PROMPT = """
 - 如果里面提到人名或者是作者名 需要忽略或者代称.
 - 文中涉及关注公众号\微信之类的,需要忽略.
 - 总结后需要面面俱到,变为类似知识条款的参考.
-需要总结的原文如下：
+总结只返回条款内容。需要总结的原文如下：
 """
 
 TITLE_PROMPT = """
@@ -75,7 +75,8 @@ def get_llm_response(prompt, model_type="zhipu", debug=False):
         res = response.choices[0].message.content
     elif model_type == "local":
         model_name = "internlm/internlm2_5-7b-chat"
-        cache_dir = os.path.join(os.getenv("TIANJI_PATH"), "temp", "local_llm")
+        cache_dir = os.path.join(TIANJI_PATH, "temp", "local_llm")
+        device = "cuda"  # 设备设置
         model = AutoModelForCausalLM.from_pretrained(
             model_name,
             torch_dtype="auto",
@@ -88,9 +89,9 @@ def get_llm_response(prompt, model_type="zhipu", debug=False):
             model_name, cache_dir=cache_dir, trust_remote_code=True
         )
 
-        inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
+        inputs = tokenizer(prompt, return_tensors="pt").to(device)
         outputs = model.generate(
-            inputs.input_ids, max_new_tokens=50, max_length=8096, temperature=0.1
+            inputs.input_ids, max_new_tokens=50, max_length=12800, temperature=0.1
         )
         generated_ids = [
             output_ids[len(input_ids) :]

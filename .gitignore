@@ -16,3 +16,4 @@ test/knowledges/langchain/cache/
 run/cache/
 version.txt
 test/knowledges/llamaindex/cache
+cache/*
