@@ -28,13 +28,13 @@
 from zhipuai import ZhipuAI
 import time
 import json
-import random 
-import datetime 
+import random
+import datetime
 
 # zhipuai
 # 此处填写您自己的APIKey
-# zhipu_api_key = "" 
-# client = ZhipuAI(api_key=zhipu_api_key) 
+# zhipu_api_key = ""
+# client = ZhipuAI(api_key=zhipu_api_key)
 # def get_data_zhipu(content):
 #     response = client.chat.completions.create(
 #         model="glm-4",  # 填写需要调用的模型名称
@@ -112,7 +112,7 @@ random_finalprompt_sentence = [
     '回答中不用出现“愿你”“祝你”',
 ]
 final_prompt = """
-该祝福语字数小于 {} 字。 \n 
+该祝福语字数小于 {} 字。 \n
 请根据对象称谓及场景，写出符合对象的身份和场景气氛的祝福文案。要求的风格是：{} \n，注意不要有标题混在其中，对象称谓是：{}，祝福场景是：{}。 \n
 {} 根据不同对象用不同的语气（尊敬、诙谐搞笑、亲近），请直接返回祝福文本，不要说任何其他话：
 """
@@ -124,7 +124,7 @@ if __name__ == "__main__":
     stylename = "小红书" # 小红书、正常、严肃
     output_number_limit = 50 # 限制回答输出长度，严肃的100，普通的小于20
     ##### 此处配置 #####
-    
+
     for roop in range(roop_count):
         conversations = []
         for name in name_list:
@@ -138,7 +138,7 @@ if __name__ == "__main__":
 
                     response = get_data_ds(input_prompt)
                     now_count += 1
-                    
+
                     if '\n' in str(response):
                         response = str(response).split('\n')[0]
 
@@ -146,9 +146,9 @@ if __name__ == "__main__":
                     print("当前生成数目：", now_count)
                     if stylename == '正常':
                         # 默认不加风格指定
-                        _input_prompt = f"祝{name}{scene}" 
+                        _input_prompt = f"祝{name}{scene}"
                     else:
-                        _input_prompt = f"祝{name}{scene},{stylename}风格" 
+                        _input_prompt = f"祝{name}{scene},{stylename}风格"
                     print("input:",_input_prompt)
 
                     conversation = {
@@ -162,7 +162,7 @@ if __name__ == "__main__":
                             }
                         ]
                     }
-                    
+
                     # 将对话加入到列表中
                     conversations.append(conversation)
                 except Exception as e:
@@ -187,17 +187,17 @@ if __name__ == "__main__":
 若成功运行，你将看到类似如下输出结果，等待片刻后将得到属于本地的json文件 `wishes_0501_5000.json` ：
 
 ```python
-同学 家庭和睦 response: "烟火年年，暖意洋洋，🏡❤️家是心之所向。"                                           
-当前生成数目： 914                                                                                        
-同学 比赛取得好成绩 response: "灿若星河，前程似锦🌟，所得皆所愿！"                                        
-当前生成数目： 915                                                                                        
-同学 发财 response: "春风得意马蹄疾，财源滚滚至君前🎉💰"                                                  
-当前生成数目： 916                                                                                        
-同学 工作升职  response: "升职之光，照亮星河，未来灿烂如霞。🌟🌈"                                         
-当前生成数目： 917                                                                                        
-同学 康复祝福 response: "挥别病痛，如花开坚强。🌱✨愿你前程，云蒸霞蔚，身心俱灿。"                        
-当前生成数目： 918                                                                                        
-                                            
+同学 家庭和睦 response: "烟火年年，暖意洋洋，🏡❤️家是心之所向。"
+当前生成数目： 914
+同学 比赛取得好成绩 response: "灿若星河，前程似锦🌟，所得皆所愿！"
+当前生成数目： 915
+同学 发财 response: "春风得意马蹄疾，财源滚滚至君前🎉💰"
+当前生成数目： 916
+同学 工作升职  response: "升职之光，照亮星河，未来灿烂如霞。🌟🌈"
+当前生成数目： 917
+同学 康复祝福 response: "挥别病痛，如花开坚强。🌱✨愿你前程，云蒸霞蔚，身心俱灿。"
+当前生成数目： 918
+
 ```
 
 💡注意，这里只是粗暴的进行所有角色和场景的遍历，但**并非所有角色都适配所有场景**（很多是不合适的），这里为了改进应该做一个heatmap进行映射，若不合适生产该数据，将直接跳过；又或者是在得到数据后做一个匹配，如果同时满足不合适的角色+场景就去除该数据QA对。
@@ -217,7 +217,7 @@ def extract_and_merge_conversations(folder_path, output_file):
     for filename in os.listdir(folder_path):
         if filename.endswith('.json'):
             file_path = os.path.join(folder_path, filename)
-            
+
             # 打开并读取JSON文件
             with open(file_path, 'r', encoding='utf-8') as file:
                 data = json.load(file)
@@ -272,7 +272,7 @@ extract_and_merge_conversations(folder_path, output_file)
 python -m pip install --upgrade pip
 pip install modelscope==1.9.5
 pip install transformers==4.36.2
-pip install streamlit==1.24.0
+pip install streamlit==1.39.0
 pip install sentencepiece==0.1.99
 pip install accelerate==0.24.1
 pip install transformers_stream_generator==0.0.4
@@ -343,13 +343,13 @@ cd /home/finetune && xtuner copy-cfg internlm2_chat_7b_qlora_oasst1_e3 ./
 + data_path = '/home/merged_data.json'
 
 # 修改Evaluate
-- 
+-
 evaluation_freq = 500
 SYSTEM = ''
 evaluation_inputs = [
     '请给我介绍五个上海的景点', 'Please tell me five scenic spots in Shanghai'
 ]
-+ 
++
 evaluation_freq = 50
 SYSTEM = '你现在是一个送祝福大师，帮我针对不同人和事情、节日送对应的祝福'
 evaluation_inputs = [
@@ -420,7 +420,7 @@ evaluation_freq = 50
 SYSTEM = '你现在是一个送祝福大师，帮我针对不同人和事情、节日送对应的祝福'
 evaluation_inputs = [
     '祝姐姐生日快乐','祝姐姐生日快乐，严肃风格','祝姐姐生日快乐,小红书风格', '祝妹妹谈判顺利，小红书风格','祝大家元宵节快乐','祝领导春节快乐，严肃风格'
-]   
+]
 
 #######################################################################
 #                      PART 2  Model & Tokenizer                      #
@@ -580,10 +580,10 @@ log_processor = dict(by_epoch=False)
 
 ```
 
-接下来对新的配置直接开始训练(如果你显存不够，可以切换成 ` --deepspeed deepspeed_zero3 ` )
+接下来对新的配置直接开始训练(如果你显存不够，可以切换成 `--deepspeed deepspeed_zero3` )
 
 ```bash
-xtuner train ./internlm2_chat_7b_qlora_oasst1_e3_copy.py  --deepspeed deepspeed_zero2 
+xtuner train ./internlm2_chat_7b_qlora_oasst1_e3_copy.py  --deepspeed deepspeed_zero2
 ```
 
 训练结束后，所有权重文件放置在训练目录下的work_dirs中，目录大致为：
@@ -608,8 +608,6 @@ LoRA和QLoRA微调语言大模型：数百次实验后的见解 - OneFlow的文�
 ```bash
 NPROC_PER_NODE=2 xtuner train ./全量微调配置.py  --deepspeed deepspeed_zero3
 ```
-
-
 
 ## 效果验证
 
@@ -651,14 +649,14 @@ mkdir -p $HF_OUTPUT_DIR
 
 xtuner convert pth_to_hf "${SCRIPT_PATH}" "${WEIGHTS_PATH}" "${HF_OUTPUT_DIR}"
 
-xtuner chat "${SRC_MODEL_PATH}" --adapter "${HF_OUTPUT_DIR}" --prompt-template internlm2_chat --system "你现在是一个送祝福大师，帮我针对不同人和事情、节日送对应的祝福" --temperature 0.7 
+xtuner chat "${SRC_MODEL_PATH}" --adapter "${HF_OUTPUT_DIR}" --prompt-template internlm2_chat --system "你现在是一个送祝福大师，帮我针对不同人和事情、节日送对应的祝福" --temperature 0.7
 ```
 
 启动对话：
 
 ```python
 # 如果想要多样性更强加上 --temperature 1
-xtuner chat ./merge --prompt-template internlm2_chat --system "你现在是一个送祝福大师，帮我针对不同人和事情、节日送对应的祝福" --temperature 0.7 
+xtuner chat ./merge --prompt-template internlm2_chat --system "你现在是一个送祝福大师，帮我针对不同人和事情、节日送对应的祝福" --temperature 0.7
 ```
 
 此时你会看到如下显示，你只需要恰当的输入之前的prompt和触发风格即可验证。这里比较不方便的是为了去除上下文影响，我们需要反复输入RESET进行重置。
@@ -689,7 +687,7 @@ double enter to end input (EXIT: exit chat, RESET: reset history) >>> 我想送�
 
 为了方便测试，我们还可以使用streamlit的demo，使用方法如下：
 
-`pip install streamlit==1.24.0`
+`pip install streamlit==1.39.0`
 
 ```
 # 找地方clone仓库
