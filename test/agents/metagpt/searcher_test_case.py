@@ -118,7 +118,7 @@ def get_answerBot_ans(sharedData, add_chat_history=True):
     ):
         _, value_1 = next(iter(item_1.items()))
         _, value_2 = next(iter(item_2.items()))
-        sharedData.message_list_for_agent[value_2] = value_1
+        sharedData.message_list_for_agent.append({value_2[0]: value_1})
 
     final_ans = run_async_code(
         async_func,
@@ -140,7 +140,7 @@ def get_searcherBot_ans(sharedData):
     ):
         _, value_1 = next(iter(item_1.items()))
         _, value_2 = next(iter(item_2.items()))
-        sharedData.message_list_for_agent[value_2] = value_1
+        sharedData.message_list_for_agent.append({value_2[0]: value_1})
     run_async_code(
         async_func,
         role=role_searchBot,
@@ -201,7 +201,6 @@ with st.container(height=560):
             for i in range(st.session_state["form_count"]):
                 form_key = f"form_{i}"
                 if form_key in st.session_state["deleted_forms"]:
-                    print("yes")
                     continue
                 with st.form(
                     key=form_key, enter_to_submit=False, clear_on_submit=False
@@ -297,7 +296,7 @@ with st.container(height=450):
             urls = "   ".join(urls)
             filtered_result = [f"{delimiter}{item}" for item in filtered_result]
             filtered_result = "".join(filtered_result)
-            
+
             sa_res1 = "生成的额外查询：" + str(sharedData.extra_query)
             sa_res2 = "搜索引擎返回的网页为：  \n" + urls
             sa_res3 = "判断需要进一步查询的网页为" + str(sharedData.filter_weblist)

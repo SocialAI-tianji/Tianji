@@ -99,7 +99,7 @@ def get_answerBot_ans(sharedData):
     ):
         _, value_1 = next(iter(item_1.items()))
         _, value_2 = next(iter(item_2.items()))
-        sharedData.message_list_for_agent[value_2] = value_1
+        sharedData.message_list_for_agent.append({value_2[0]: value_1})
 
     final_ans = run_async_code(
         async_func,
