@@ -34,13 +34,15 @@
 
 ## 📰News
 
-🔥🔥 **News**: `2024.10.05`: 我们重构了天机的[Agent 模块](https://github.com/SocialAI-tianji/Tianji/blob/main/run/demo_agent_metagpt.py)，加入网络搜索功能及功能可配置参数表，[具体可见](https://github.com/SocialAI-tianji/Tianji/tree/main/tianji/agents/metagpt_agents)。
+🔥🔥 **News**: `2024.10.08`: 我们完成了**第一阶段所有**知识库对话的更新，数据更新至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main/RAG),你可以直接在该[链接](http://120.76.130.14:6006/knowledges/)进行体验。
+
+🔥 **News**: `2024.10.05`: 我们重构了天机的[Agent 模块](https://github.com/SocialAI-tianji/Tianji/blob/main/run/demo_agent_metagpt.py)，加入网络搜索功能及功能可配置参数表，[具体可见源码](https://github.com/SocialAI-tianji/Tianji/tree/main/tianji/agents/metagpt_agents)。
 
 🔥 **News**: `2024.09.02`: 我们更新了第一款专注[敬酒场景的知识库](http://120.76.130.14:6006/knowledges/)对话模型
 
 🔥 **News**: `2024.08.31`: 我们重构了仓库组织结构，更新了相关工具代码以及README。彻底更新了 langchain [知识库问答](./tianji/knowledges/) 相关内容以及对应 [demo](run/demo_rag_langchain_onlinellm.py)，让项目更适合一键学习使用。
 
-🔥**News**: `2024.07.16`: 我们发布了第一款们发布了第一款专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)
+🔥**News**: `2024.07.16`: 我们发布了第一款们发布了第一款专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[敬酒语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)
 
 🔥**News**: `2024.07.14`: 更新了新版的[送祝福模块](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes) 支持更多风格切换，数据已开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.1.json)
 
@@ -157,8 +159,9 @@ git commit -m "提交信息"
 - \[x\] 开源人情世故语料-送祝福至huggingface
 - \[x\] 迭代更好的数据制造工具与清洗方案，开源数据清洗脚本
 - \[x\] 完成 Agent 部分重构
-- \[ \] 完成知识库部分迭代，开源至huggingface
-- \[ \] 整理多维度数据，开源较完整人情世故语料
+- \[x\] 完成知识库部分迭代，开源至huggingface
+- \[x\] 整理多维度数据，开源较完整人情世故语料
+- \[ \] 加入意图识别模块，替代主动选择场景
 - \[ \] 完成 Agent 部分文档
 - \[ \] 补充文档（如何参考本项目构建自己的应用prompt、agent、知识库、微调应用）
 
