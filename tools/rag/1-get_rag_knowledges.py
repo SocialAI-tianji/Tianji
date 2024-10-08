@@ -39,7 +39,7 @@ SUMMARY_PROMPT = """
 - 如果遇到里面提到几步法，你要合在一个回答里面.
 - 如果里面提到人名或者是作者名 需要忽略或者代称.
 - 文中涉及关注公众号\微信之类的,需要忽略.
-- 总结后需要面面俱到,变为类似知识条款的参考.
+- 总结后需要涵盖全方面,变为类似知识条款的参考，不要分点分1、2、3！！！只需要是一大段一大段的知识库整理.
 总结只返回条款内容。需要总结的原文如下：
 """
 
@@ -64,13 +64,11 @@ def get_llm_response(prompt, model_type="zhipu", debug=False):
         response = client.chat.completions.create(
             model="deepseek-chat",
             messages=[
-                {"role": "system", "content": prompt},
-                {
-                    "role": "user",
-                    "content": prompt,  # 这里传递 prompt
-                    "temperature": 0.1,
-                },
+                {"role": "system", "content": "你是一个知识库语料准备能手，你会把文章的重点整理成一大段话"},
+                {"role": "user", "content": prompt},
             ],
+            temperature=0.2,
+            top_p=0.8,
         )
         res = response.choices[0].message.content
     elif model_type == "local":

@@ -6,7 +6,7 @@
     python 3-json2txt.py -f <输入文件夹路径> [-o <输出文件夹路径>]
 
     参数:
-    -f --folder: 指定包含 JSON 文件的输入文件夹路径。
+    -f --folder: 指定包含所有 JSON 文件的输入文件夹路径。
     -o --output: 指定保存文本文件的输出文件夹路径，默认为输入文件夹路径。
 """
 
@@ -42,7 +42,7 @@ def process_json_files(input_folder, output_folder):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="将 JSON 文件转换为文本语料")
-    parser.add_argument("-f", "--folder", required=True, help="输入文件夹路径")
+    parser.add_argument("-i", "--folder", required=True, help="输入文件夹路径")
     parser.add_argument("-o", "--output", default=None, help="输出文件夹路径，默认为输入文件夹路径")
     args = parser.parse_args()
 
