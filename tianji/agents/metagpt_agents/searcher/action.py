@@ -38,20 +38,17 @@ class QueryExpansion(Action):
 
     ## Attention:
     - 我将提供给你用户目前所面对的场景，你可以自行参考，并且在此基础生成额外查询。
-    - 你需要自行判断生成的额外查询是否需要包含详的场景要素，以方便后续在搜索引擎中方便查询到更多相关内容（例如与敬酒相关的内容不太需要涉及到敬酒对象等等，可是化解矛盾相关的可能需要考虑对象是谁）。
-    - 在大多数形况下要包含详的场景要素反而会导致在搜索引擎中无法查询到相关资料。
 
     ## Constraints:
-    - 直接返回 list 列表（例如：["查询一","查询二","查询三"]），不需要回复其他任何内容！
+    - 直接返回单个列表（例如：["额外查询一","额外查询二","额外查询三"]），不需要回复其他任何内容！
 
     ## Input:
     - 历史对话记录：```{instruction}```
     - 用户目前所面对的场景: ```{scene}``
 
     ## Workflow:
-    ### Step 1: 思考生成的查询否需要包括场景要素。
-    ### Step 2: 生成查询列表 "["查询一","查询二","查询三"]"
-    ### Step 3: 返回结果： ["查询一","查询二","查询三"]
+    ### Step 1: 思考生成的额外查询否需要包含场景要素（例如对象，场景，语气等细节）。
+    ### Step 2: 生成查询列表并返回 "["额外查询一","额外查询二","额外查询三"]"
     """
 
     name: str = "queryExpansion"
@@ -71,7 +68,12 @@ class QueryExpansion(Action):
 
         rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
         logger.info("机器人分析需求：\n" + rsp)
-        rsp = rsp.replace("```list", "").replace("```", "")
+        rsp = (
+            rsp.replace("```list", "")
+            .replace("```", "")
+            .replace("“", '"')
+            .replace("”", '"')
+        )
         sharedData.extra_query = ast.literal_eval(rsp)
         return rsp
 
@@ -110,7 +112,7 @@ class WebSearch(Action):
             try:
                 response = await asyncio.wait_for(
                     asyncio.to_thread(
-                        ddgs.text, query.strip("'"), max_results=100
+                        ddgs.text, query.strip("'"), max_results=100, safesearch="off"
                     ),  # 先返回多个网页片段，避免遇到防爬虫的网站，导致可抽取的知识过少。
                     timeout=20,
                 )
@@ -130,11 +132,10 @@ class WebSearch(Action):
                         item["title"],
                     )
                 )
-
             for url, snippet, title in raw_results:
                 if all(
                     domain not in url
-                    for domain in ["zhihu.com", "baidu.com"]  # 屏蔽掉一些防爬虫的网站。
+                    for domain in ["zhihu.com", "baidu.com", "sohu.com"]  # 屏蔽掉一些防爬虫的网站。
                 ) and not url.endswith(".pdf"):
                     filtered_results[count] = {
                         "url": url,
@@ -142,7 +143,7 @@ class WebSearch(Action):
                         "title": title,
                     }
                     count += 1
-                    if count >= 10:  # 确保最多返回10个网页的内容，可自行根据大模型的 context length 更换合适的参数。
+                    if count >= 20:  # 确保最多返回20个网页的内容，可自行根据大模型的 context length 更换合适的参数。
                         break
             return filtered_results
 
@@ -184,7 +185,7 @@ class SelectResult(Action):
 
     ## Constraints:
     - 最多返回20个需要进一步查询的网页。
-    - 你只需要返回 list 列表，用索引值代表需要查询的网页（例如：["0","4","6"]），不需要回复其他任何内容！。
+    - 你只需要返回单个列表，用索引值代表需要进一步查询的网页（例如：["0","4","6"]），不需要回复其他任何内容！。
 
     ## Input:
     - 搜索引擎返回的内容：```{search_results}```
@@ -203,7 +204,12 @@ class SelectResult(Action):
 
         rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
         logger.info("机器人分析需求：\n" + rsp)
-        rsp = rsp.replace("```list", "").replace("```", "")
+        rsp = (
+            rsp.replace("```list", "")
+            .replace("```", "")
+            .replace("“", '"')
+            .replace("”", '"')
+        )
         rsp = ast.literal_eval(rsp)
         sharedData.filter_weblist = [int(item) for item in rsp]
         return str(rsp)
@@ -225,7 +231,7 @@ class SelectFetcher(Action):
 
             text = BeautifulSoup(html, "html.parser").get_text()
             cleaned_text = re.sub(r"\n+", "\n", text)
-            if len(cleaned_text) <= 100:  # 如果提过滤后的网页内容少于100个字体，着判定为没有价值的，并且不加入到结果中。
+            if len(cleaned_text) <= 50:  # 如果网页内容少于50个字体，着判定为没有价值的，并且不加入到结果中。
                 return False, "no valuable content"
             return True, cleaned_text
 
@@ -258,14 +264,14 @@ class FilterSelectedResult(Action):
     - 数据抽取小助手。
 
     ## Background:
-    - 接下来，我将呈现一段从搜索引擎返回的内容。您的任务是仔细提取出与查询列表里的主题紧密相关的关键信息，同时高效地过滤掉所有不相关或冗余的部分，确保只保留最有价值的内容。
+    - 接下来，我将呈现一段从搜索引擎返回的内容。您的任务是尽可能提取出有潜力或有可能与查询列表里的主题直接相关或间接相关的信息,同时过滤掉所有不相关或冗余的部分。
 
     ## Goals:
     - 你的任务是基于我所提供的查询列表，把重要的内容提取出来。
 
     ## Constraints:
     - 直接返回提取后的结果，不需要回复其他任何内容！。
-    - 提取至少一条关键信息。
+    - 提取的信息不可以过于概括，反之需要包含所有相关的细节。
 
     ## Input:
     - 搜索引擎返回的内容：```{search_results}```
