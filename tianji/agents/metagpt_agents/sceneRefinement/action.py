@@ -84,19 +84,26 @@ class sceneRefineAnalyze(Action):
             scene_attributes_description=scene_attributes_description,
         )
 
-        rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
-        logger.info("机器人分析需求：\n" + rsp)
-        rsp = (
-            rsp.replace("```json", "")
-            .replace("```", "")
-            .replace("[", "")
-            .replace("]", "")
-        )
-        sharedData.scene_attribute = json.loads(rsp)
-
-        logger.info("机器人分析需求：\n" + rsp)
-
-        return rsp
+        max_retry = 5
+        for attempt in range(max_retry):
+            try:
+                rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
+                logger.info("机器人分析需求：\n" + rsp)
+                rsp = (
+                    rsp.replace("```json", "")
+                    .replace("```", "")
+                    .replace("[", "")
+                    .replace("]", "")
+                    .replace("“", '"')
+                    .replace("”", '"')
+                    .replace("，", ",")
+                )
+                sharedData.scene_attribute = json.loads(rsp)
+                logger.info("机器人分析需求：\n" + rsp)
+                return rsp
+            except:
+                pass
+        raise Exception("sceneRefinement agent failed to response")
 
 
 class RaiseQuestion(Action):
