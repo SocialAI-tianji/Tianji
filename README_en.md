@@ -197,7 +197,7 @@ You can refer to this project to create new vertical domain applications:
   <img src="https://contrib.rocks/image?repo=SocialAI-tianji/Tianji" />
 </a>
 
-[Some contributors don't have github, we thank each and every contributor!](docs/contributor.md), and welcome you to join!
+[Some contributors don't have GitHub, we thank each and every contributor!](docs/contributor.md), and welcome you to join!
 
 
 ## Acknowledgements
