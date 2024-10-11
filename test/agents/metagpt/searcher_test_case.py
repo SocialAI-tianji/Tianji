@@ -9,8 +9,7 @@ from tianji.agents.metagpt_agents.answerBot import AnswerBot
 from tianji.agents.metagpt_agents.searcher import Searcher
 from tianji.agents.metagpt_agents.utils.json_from import SharedDataSingleton
 from tianji.agents.metagpt_agents.utils.helper_func import *
-
-# 给出针对回答的知识 并用md展示
+import copy
 import streamlit as st
 import uuid
 
@@ -120,6 +119,7 @@ def get_answerBot_ans(sharedData, add_chat_history=True):
         _, value_2 = next(iter(item_2.items()))
         sharedData.message_list_for_agent.append({value_2[0]: value_1})
 
+    sharedData.scene_attribute = copy.deepcopy(st.session_state["scene_attr"])
     final_ans = run_async_code(
         async_func,
         role=role_answerBot,
@@ -256,16 +256,21 @@ with st.container(height=560):
 
     with col2:
         with st.container(height=430, border=True):
-            sharedData.scene_label = st.session_state["mock_intentReg_ans"]
-            _, scene_attributes, _ = extract_single_type_attributes_and_examples(
-                json_data, sharedData.scene_label
-            )
-            sharedData.scene_attribute = {attr: "" for attr in scene_attributes}
-            st.session_state["scene_attr"] = sharedData.scene_attribute
+            if sharedData.scene_label != st.session_state["mock_intentReg_ans"]:
+                sharedData.scene_label = st.session_state["mock_intentReg_ans"]
+                _, scene_attributes, _ = extract_single_type_attributes_and_examples(
+                    json_data, sharedData.scene_label
+                )
+                sharedData.scene_attribute = {attr: "" for attr in scene_attributes}
+                st.session_state["scene_attr"] = copy.deepcopy(
+                    sharedData.scene_attribute
+                )
 
             for key in st.session_state["scene_attr"].keys():
                 st.session_state["scene_attr"][key] = st.text_input(
-                    f"Enter value for {key}", key=f"text_input_{key}"
+                    f"Enter value for {key}",
+                    key=f"text_input_{key}",
+                    value=st.session_state["scene_attr"].get(key, ""),
                 )
 
 with st.container(height=450):

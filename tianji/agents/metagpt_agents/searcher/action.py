@@ -66,16 +66,23 @@ class QueryExpansion(Action):
             scene=scene,
         )
 
-        rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
-        logger.info("机器人分析需求：\n" + rsp)
-        rsp = (
-            rsp.replace("```list", "")
-            .replace("```", "")
-            .replace("“", '"')
-            .replace("”", '"')
-        )
-        sharedData.extra_query = ast.literal_eval(rsp)
-        return rsp
+        max_retry = 5
+        for attempt in range(max_retry):
+            try:
+                rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
+                logger.info("机器人分析需求：\n" + rsp)
+                rsp = (
+                    rsp.replace("```list", "")
+                    .replace("```", "")
+                    .replace("“", '"')
+                    .replace("”", '"')
+                    .replace("，", ",")
+                )
+                sharedData.extra_query = ast.literal_eval(rsp)
+                return rsp
+            except:
+                pass
+        raise Exception("Searcher agent failed to response")
 
 
 class WebSearch(Action):
@@ -87,7 +94,7 @@ class WebSearch(Action):
         search_results = {}
 
         def search(query):
-            max_retry = 3
+            max_retry = 5
             for attempt in range(max_retry):
                 try:
                     response = _call_ddgs(query)
@@ -202,17 +209,24 @@ class SelectResult(Action):
             extra_query=sharedData.extra_query,
         )
 
-        rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
-        logger.info("机器人分析需求：\n" + rsp)
-        rsp = (
-            rsp.replace("```list", "")
-            .replace("```", "")
-            .replace("“", '"')
-            .replace("”", '"')
-        )
-        rsp = ast.literal_eval(rsp)
-        sharedData.filter_weblist = [int(item) for item in rsp]
-        return str(rsp)
+        max_retry = 5
+        for attempt in range(max_retry):
+            try:
+                rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
+                logger.info("机器人分析需求：\n" + rsp)
+                rsp = (
+                    rsp.replace("```list", "")
+                    .replace("```", "")
+                    .replace("“", '"')
+                    .replace("”", '"')
+                    .replace("，", ",")
+                )
+                rsp = ast.literal_eval(rsp)
+                sharedData.filter_weblist = [int(item) for item in rsp]
+                return str(rsp)
+            except:
+                pass
+        raise Exception("Searcher agent failed to response")
 
 
 class SelectFetcher(Action):

@@ -9,8 +9,7 @@ from tianji.agents.metagpt_agents.intentRecognition import IntentReg
 from tianji.agents.metagpt_agents.utils.json_from import SharedDataSingleton
 from tianji.agents.metagpt_agents.utils.helper_func import *
 import time
-
-# 给出针对回答的知识 并用md展示
+import copy
 import streamlit as st
 import uuid
 
@@ -145,6 +144,6 @@ if prompt := st.chat_input():
         sharedData.scene_attribute = {attr: "" for attr in scene_attributes}
 
         st.session_state["scene_label"] = sharedData.scene_label
-        st.session_state["scene_attr"] = sharedData.scene_attribute
+        st.session_state["scene_attr"] = copy.deepcopy(sharedData.scene_attribute)
 
     st.rerun()
