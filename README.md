@@ -58,14 +58,17 @@
 <p style="text-align: center;"><strong>天机虽不可泄漏，但总有一款适合你</strong></p>
 
 <p style="text-align: center;">运行<a href="http://120.76.130.14:6006/prompt/">prompt版本天机</a>，感受放飞自我的答复</p>
-
 <table border="0" style="width: 100%; text-align: center;">
   <tr>
       <td>
-          <img src="assets/demo/prompt应用1.png" width="100%" alt="prompt应用1">
+          <a href="assets/demo/prompt应用1.png" target="_blank">
+              <img src="assets/demo/prompt应用1.png" width="100%" alt="prompt应用1">
+          </a>
       </td>
       <td>
-          <img src="assets/demo/prompt应用2.png" width="100%" alt="prompt应用2">
+          <a href="assets/demo/prompt应用2.png" target="_blank">
+              <img src="assets/demo/prompt应用2.png" width="100%" alt="prompt应用2">
+          </a>
       </td>
   </tr>
 </table>
@@ -75,29 +78,41 @@
 <table border="0" style="width: 100%; text-align: left; margin-top: 20px;">
   <tr>
       <td>
-          <img src="assets/demo/化解尴尬场合.png" width="100%" alt="化解尴尬场合">
+          <a href="assets/demo/化解尴尬场合.png" target="_blank">
+              <img src="assets/demo/化解尴尬场合.png" width="100%" alt="化解尴尬场合">
+          </a>
           <p>化解尴尬场合</p>
       </td>
       <td>
-          <img src="assets/demo/如何说对话.png" width="100%" alt="如何说对话">
+          <a href="assets/demo/如何说对话.png" target="_blank">
+              <img src="assets/demo/如何说对话.png" width="100%" alt="如何说对话">
+          </a>
           <p>如何说对话</p>
       </td>
       <td>
-          <img src="assets/demo/敬酒礼仪文化.png" width="100%" alt="敬酒礼仪文化">
+          <a href="assets/demo/敬酒礼仪文化.png" target="_blank">
+              <img src="assets/demo/敬酒礼仪文化.png" width="100%" alt="敬酒礼仪文化">
+          </a>
           <p>敬酒礼仪文化</p>
       </td>
   </tr>
   <tr>
       <td>
-          <img src="assets/demo/矛盾冲突应对.png" width="100%" alt="矛盾冲突应对">
+          <a href="assets/demo/矛盾冲突应对.png" target="_blank">
+              <img src="assets/demo/矛盾冲突应对.png" width="100%" alt="矛盾冲突应对">
+          </a>
           <p>矛盾冲突应对</p>
       </td>
       <td>
-          <img src="assets/demo/请客礼仪文化.png" width="100%" alt="请客礼仪文化">
+          <a href="assets/demo/请客礼仪文化.png" target="_blank">
+              <img src="assets/demo/请客礼仪文化.png" width="100%" alt="请客礼仪文化">
+          </a>
           <p>请客礼仪文化</p>
       </td>
       <td>
-          <img src="assets/demo/送礼礼仪文化.png" width="100%" alt="送礼礼仪文化">
+          <a href="assets/demo/送礼礼仪文化.png" target="_blank">
+              <img src="assets/demo/送礼礼仪文化.png" width="100%" alt="送礼礼仪文化">
+          </a>
           <p>送礼礼仪文化</p>
       </td>
   </tr>
