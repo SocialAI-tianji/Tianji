@@ -12,7 +12,7 @@
 🍵 在线体验懂人情世故的天机<a href="http://120.76.130.14:6006/prompt/">prompt应用</a>、<a href="http://120.76.130.14:6006/knowledges/">知识库应用</a>、<a href="http://120.76.130.14:6005/">Agent应用</a>
 </p>
 <p align="center">
-在上海 AILab OpenXLab 在线体验人情世故微调模型：<a href="https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes">送祝福模块</a>、<a href="https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette">敬酒礼仪文化</a>
+在上海人工智能实验室 OpenXLab 体验人情世故微调模型：<a href="https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes">送祝福模块</a>、<a href="https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette">敬酒礼仪文化</a>
 </p>
 <!-- End of Selection -->
 
@@ -304,16 +304,16 @@ tools/：涵盖帮助收集数据、整理数据清洗语料的工具
   <img src="https://contrib.rocks/image?repo=SocialAI-tianji/Tianji" />
 </a>
 
-[有些贡献者没有github账户，我们感谢其中的每一位贡献者！](docs/contributor.md)，也欢迎你一起加入！
+[有些贡献者没有Github账户，我们发自内心感谢每一位贡献者，谢谢有你们！](docs/contributor.md)，也欢迎你一起加入！
 
 ## 鸣谢
 
-感谢下列所有人对本项目的帮助，以及你的关注：
+感谢下列所有人对本项目的帮助（不分前后），以及你的关注：
 
-- 所有贡献者
-- 项目最开始时刻 [智谱AI](https://open.bigmodel.cn/) 的token支持！
-- 上海人工智能实验室 [InternLM(书生·浦语) 模型](https://github.com/InternLM/InternLM)，以及提供的A100显卡资源！
-- [InternLM(书生·浦语) 系列开源教程（目前最好的LLM实战全栈教程之一）](https://github.com/InternLM/tutorial)
+- 项目最开始时刻 [智谱AI](https://open.bigmodel.cn/) 的token支持
+- 上海人工智能实验室 [InternLM(书生·浦语) 模型](https://github.com/InternLM/InternLM)，以及提供的A100显卡资源、与 [书生浦语API](https://internlm.intern-ai.org.cn/api/document) 支持
+- [InternLM(书生·浦语) 系列开源教程](https://github.com/InternLM/tutorial)（目前最好的LLM实战全栈教程之一）
+- [飞桨 aistudio 星河社区](https://aistudio.baidu.com/overview) 的 token 与显卡支持
 - [Datawhale 开源学习社区](https://github.com/datawhalechina)
 - [奇想星球](https://1aigc.cn/)
 - [zRzRzR](https://github.com/zRzRzRzRzRzRzR)的帮助
