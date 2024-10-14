@@ -1,6 +1,20 @@
 from tianji import TIANJI_PATH
 import json
 import os
+from datetime import datetime
+
+
+def timestamp_str():
+    now = datetime.now()
+    timestamp_str = now.strftime("%Y-%m-%d %H:%M:%S.%f")
+    timestamp_str = (
+        timestamp_str[:-3]
+        .replace(" ", "_")
+        .replace(":", "")
+        .replace("-", "")
+        .replace(".", "")
+    )
+    return timestamp_str
 
 
 # 返回 json 文件里的内容
