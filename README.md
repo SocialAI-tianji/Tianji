@@ -17,7 +17,7 @@
 <!-- End of Selection -->
 
 <p align="center">
-📚 查看  <a href="docs" target="_blank">使用文档</a>
+📚 查看  <a href="https://tianji.readthedocs.io/en/latest/" target="_blank">使用文档</a>
 </p>
 
 <p align="center">
@@ -51,7 +51,6 @@
 🔥**News**: `2024.05.02`: 我们发布了有关人情世故大模型-送祝福的数据收集到微调过程的[全流程可复现文档](./docs/finetune/tianji-wishes-chinese.md)及其对应[数据](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)、[配置](./tianji/finetune/xtuner/internlm2_chat_7b_qlora_oasst1_e3_copy.py)、[辅助脚本](./tools/finetune/README.md)
 
 🍵 **News**: `2024.02.01`: 🧑‍🚀 我们发布了有关 [prompt](http://120.76.130.14:6006/prompt/)、[Agent应用](http://120.76.130.14:6005/)、知识库x、[模型微调(基于InternLM2)](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes)的初版体验地址，将仓库转为开放。
-
 
 ## ⭐ 运行示例
 
@@ -119,13 +118,13 @@
 </table>
 
 <!-- Start of Selection -->
+
 <p style="text-align: center;">运行微调后<a href="https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes">送祝福天机</a>，一片真诚送出祝福</p>
 <!-- End of Selection -->
 
 <p style="text-align: center;">
     <img src="assets\demo\demo_wishes.png" alt="送祝福天机" width="100%">
 </p>
-
 
 ## 你将在该项目中学会 🍉
 
@@ -144,9 +143,9 @@
   - [key配置](#key%E9%85%8D%E7%BD%AE)
 - [路线图](#%E8%B7%AF%E7%BA%BF%E5%9B%BE)
 - [技术路线](#%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF)
-- [目录说明](#目录说明)
+- [目录说明](#%E7%9B%AE%E5%BD%95%E8%AF%B4%E6%98%8E)
 - [如何参与本项目](#%E5%A6%82%E4%BD%95%E5%8F%82%E4%B8%8E%E6%9C%AC%E9%A1%B9%E7%9B%AE)
-  - [提交第一个PullRequest](#提交第一个PullRequest)
+  - [提交第一个PullRequest](#%E6%8F%90%E4%BA%A4%E7%AC%AC%E4%B8%80%E4%B8%AAPullRequest)
 - [如何复刻本项目](#%E5%A6%82%E4%BD%95%E5%A4%8D%E5%88%BB%E6%9C%AC%E9%A1%B9%E7%9B%AE)
 - [贡献者](#%E8%B4%A1%E7%8C%AE%E8%80%85)
 - [鸣谢](#%E9%B8%A3%E8%B0%A2)
@@ -277,7 +276,6 @@ test/：这里存放了各类功能的测试文件，包括核心模块以及大
 tianji/：源代码目录，包含主要逻辑与算法实现（prompt、agent、knowledges、finetune）
 tools/：涵盖帮助收集数据、整理数据清洗语料的工具
 ```
-
 
 ## 如何参与本项目
 
