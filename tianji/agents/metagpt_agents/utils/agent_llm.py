@@ -20,7 +20,7 @@ class ZhipuApi:
         self.client = ZhipuAI(api_key=os.environ["ZHIPUAI_API_KEY"])
 
     async def _aask(
-        self, prompt, stream=False, model="glm-4-0520", top_p=0.7, temperature=0.95
+        self, prompt, stream=False, model="glm-4-flash", top_p=0.7, temperature=0.95
     ):
         messages = [{"role": "user", "content": prompt}]
         response = self.client.chat.completions.create(
