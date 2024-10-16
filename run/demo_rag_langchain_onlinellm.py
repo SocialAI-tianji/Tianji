@@ -190,9 +190,7 @@ def update_data_path(data_type: str):
         return (
             "https://r.jina.ai/https://baike.baidu.com/item/%E6%98%A5%E8%8A%82/136876"
         )
-    return os.path.join(
-        TIANJI_PATH, "test", "knowledges", "langchain_pytorch", "db_files"
-    )
+    return os.path.join(TIANJI_PATH, "test", "knowledges", "langchain", "db_files")
 
 
 def update_chat_history(msg: str, chat_history):
@@ -223,7 +221,7 @@ with gr.Blocks() as demo:
         data_path = gr.Textbox(
             label="数据路径",
             value=os.path.join(
-                TIANJI_PATH, "test", "knowledges", "langchain_pytorch", "db_files"
+                TIANJI_PATH, "test", "knowledges", "langchain", "db_files"
             ),
         )
         update_button = gr.Button("初始化数据库")
