@@ -86,7 +86,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 def do_setup():
     setup(
         name="tianji",
-        version="1.3.0",
+        version="1.5.0",
         description="天机是一个免费的非商业人工智能系统，旨在提升情感智能和核心竞争力。",
         author="SocialAI",
         url="https://socialai-tianji.github.io/socialai-web/",
