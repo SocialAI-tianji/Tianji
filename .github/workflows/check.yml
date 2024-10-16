@@ -56,7 +56,7 @@ jobs:
       run: python .ci/prompt_to_json_for_CI.py
 
     - name: upload json
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: upload_json
         path: tianji/prompt
@@ -69,7 +69,7 @@ jobs:
 
 
     - name: upload all gpt json
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: upload_all_gpt_json
         path: tianji/prompt/gpt_prompt/all_gpt_prompt.json
@@ -81,7 +81,7 @@ jobs:
       run: python .ci/build_all_yiyan_prompt.py
 
     - name: upload all yiyan json
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: upload_all_yiyan_json
         path: tianji/prompt/yiyan_prompt/all_yiyan_prompt.json
@@ -104,7 +104,7 @@ jobs:
             mv gpt_prompt_statistics.png .ci/gpt_prompt_statistics.png
 
     - name: upload gpt png
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
            name: gpt_prompt_statistics  # 工件的名称，您可以根据需要命名
            path: .ci/gpt_prompt_statistics.png  # 指定生成的 PNG 文件的路径
@@ -117,7 +117,7 @@ jobs:
 
 
     - name: upload yiyan png
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: yiyan_prompt_statistics  # 工件的名称，您可以根据需要命名
         path: .ci/yiyan_prompt_statistics.png  # 指定生成的 PNG 文件的路径
@@ -132,4 +132,3 @@ jobs:
         git add .
         git commit -m "Auto commit after PR merge"
         git push
-
