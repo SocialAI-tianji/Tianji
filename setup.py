@@ -91,7 +91,7 @@ def do_setup():
         author="SocialAI",
         url="https://socialai-tianji.github.io/socialai-web/",
         packages=find_packages(exclude=["build", "dist"]),
-        install_requires=parse_requirements("requirements/runtime.txt"),
+        install_requires=parse_requirements("requirements.txt"),
         classifiers=[
             "Programming Language :: Python :: 3",
             "License :: OSI Approved :: Apache Software License",
