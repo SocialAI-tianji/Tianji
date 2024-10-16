@@ -13,7 +13,7 @@
 | Jiaojiao Li    | https://github.com/Aphasia0515            | 参与构建prompt                  |                                 |
 | wuyingxue1230  | https://github.com/wuyingxue1230          | 官网+AI游戏界面设计                 |                                 |
 | hl123-123      | https://github.com/hl123-123              | tianji框架整理                  |                                 |
-| ElsaWang1215   | https://github.com/ElsaWang1215           | prompt工程                    |                                 |
+| ElsaWang1215   | https://github.com/ElsaWang1215           | prompt工程  项目文档撰写                  |好奇大模型在人情世故领域能走多远！                                 |
 | Yitong Guo     | https://github.com/Dobbytheelfisfree      | 参与构建prompt                  |                                 |
 | AmyWu          | https://github.com/AmyWu-CN               | AI游戏prompt、语料收集             | 勇敢做自己！                          |
 | Neo            | https://github.com/neowalter              | fake paper                  |                                 |
