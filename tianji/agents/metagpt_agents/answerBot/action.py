@@ -66,8 +66,5 @@ class AnswerQuestion(Action):
             else "",
         )
 
-        print("********************************")
-        print(filtered_dict)
-
         rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
         return rsp
