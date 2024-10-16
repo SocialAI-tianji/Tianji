@@ -88,7 +88,6 @@ class sceneRefineAnalyze(Action):
         for attempt in range(max_retry):
             try:
                 rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
-                logger.info("机器人分析需求：\n" + rsp)
                 rsp = (
                     rsp.replace("```json", "")
                     .replace("```", "")
@@ -98,8 +97,8 @@ class sceneRefineAnalyze(Action):
                     .replace("”", '"')
                     .replace("，", ",")
                 )
-                sharedData.scene_attribute = json.loads(rsp)
                 logger.info("机器人分析需求：\n" + rsp)
+                sharedData.scene_attribute = json.loads(rsp)
                 return rsp
             except:
                 pass

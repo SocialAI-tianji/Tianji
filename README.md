@@ -122,10 +122,18 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 ### 环境安装
 
-在本项目中，执行下列指令即可完成项目的安装
+由于 agent 和 rag 所依赖的环境不同，同时安装会导致版本冲突。
+
+如果想要运行 agent 版本，请运行以下指令安装环境：
 
 ```
-pip install -e .
+pip install -e .[agent]
+```
+
+如果想要运行 rag 版本，请运行以下指令安装环境：
+
+```
+pip install -e .[rag]
 ```
 
 ### key配置

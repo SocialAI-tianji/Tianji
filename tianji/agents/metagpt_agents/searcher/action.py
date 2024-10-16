@@ -150,7 +150,9 @@ class WebSearch(Action):
                         "title": title,
                     }
                     count += 1
-                    if count >= 20:  # 确保最多返回20个网页的内容，可自行根据大模型的 context length 更换合适的参数。
+                    if (
+                        count >= 7
+                    ):  # 确保最多每个扩展查询返回最多20个网页的内容，可自行根据大模型的 context length 更换合适的参数。
                         break
             return filtered_results
 

@@ -1,9 +1,10 @@
 # 天机 Tianji
+
 <p align="center">
     <img src="./assets/tianjilogo.jpg" width="100"/>
 <br>
 <p align="center">
-    &nbsp<a href="README.md">中文</a>&nbsp ｜ &nbsp<a href="README_en.md">English</a>&nbsp ｜ &nbsp<a href="README_jp.md">日本語</a> 
+    &nbsp<a href="README.md">中文</a>&nbsp ｜ &nbsp<a href="README_en.md">English</a>&nbsp ｜ &nbsp<a href="README_jp.md">日本語</a>
 <p align="center">
    <a href="https://python.org/" target="_blank"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/moelib?logo=python&style=flat-square"></a>
    <a href="https://github.com/tatsu-lab/stanford_alpaca/blob/main/LICENSE"><img alt="LICENSE" src="https://camo.githubusercontent.com/ff42248868bc1387751598955e573b397851d947f13ddd7618c0ba9e66aacdf6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f436f64652532304c6963656e73652d4170616368655f322e302d677265656e2e737667"></a>
@@ -28,7 +29,7 @@ Tianji is a free, non-commercial artificial intelligence system. You can utilize
 
 [SocialAI](https://socialai-tianji.github.io/socialai-web/) is a non-profit organization established in China. We have fully open-sourced the **Tianji** series of work. The current open-source system technology route involves [Prompt](tianji/prompt/yiyan_prompt), [AI games](test/prompt/aigame/zhipu), [Agent](tianji/agents), knowledge base, [model training](docs/finetune/tianji-wishes-chinese.md). For specific content, please refer to the documentation and corresponding repositories.
 
-Based on the organized social etiquette data, the social etiquette large model system - Tianji includes seven major areas of common interpersonal communication (specific details can be found in the scenario refinement details in [Scene Classification](test/场景分类)), which can be broadly divided into:
+Based on the organized social etiquette data, the social etiquette large model system - Tianji includes seven major areas of common interpersonal communication (specific details can be found in the scenario refinement details in [Scene Classification](test/%E5%9C%BA%E6%99%AF%E5%88%86%E7%B1%BB)), which can be broadly divided into:
 
 ```
 - Toasting etiquette culture Etiquette
@@ -39,6 +40,7 @@ Based on the organized social etiquette data, the social etiquette large model s
 - Resolving "awkward" situations Awkwardness
 - Dealing with conflicts & confrontations Conflict
 ```
+
 Combining these areas, Tianji involves four technical routes:
 
 - Pure prompt (including AI games): Built-in system prompt based on the large model's own ability to dialogue.
@@ -47,15 +49,17 @@ Combining these areas, Tianji involves four technical routes:
 - Model training: Based on different excellent model bases, perform Lora fine-tuning or full fine-tuning when accumulating a large amount of data.
 
 You can find the corresponding source code for the four routes in the tianji directory. If you want to refer to the project architecture, data management, and technical route of `Tianji` to recreate your own vertical domain AI application, welcome to fork or directly refer to it. We will open source all processes including `project start-up, data direction exploration, data construction and management, AI application creation from scratch, in-depth combination of domain (such as social etiquette) and technical routes`; we hope to see further acceleration of AI native applications in life.
+
 ## Table of Contents
-- [News](#📰News)
+
+- [News](#%F0%9F%93%B0News)
   - [Roadmap](#Roadmap)
 - [Running Environment](#Running-Environment)
   - [Environment Installation](#Environment-Installation)
   - [Key Configuration](#Key-Configuration)
 - [File Directory Description](#File-Directory-Description)
   - [Documentation Description](#Documentation-Description)
-- [How to Run](#🍺How-to-Run)
+- [How to Run](#%F0%9F%8D%BAHow-to-Run)
   - [Examples](#Examples)
 - [How to Participate in This Project](#How-to-Participate-in-This-Project)
   - [Issue Board](#Issue-Board)
@@ -66,37 +70,45 @@ You can find the corresponding source code for the four routes in the tianji dir
 
 ## 📰News
 
-- **[2024.07.14]** Updated the new [Sending Blessings module](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes) supporting more style switches, data open-sourced to [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.1.json)
+- **\[2024.07.14\]** Updated the new [Sending Blessings module](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes) supporting more style switches, data open-sourced to [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.1.json)
 
-- **[2024.05.04]** 🚀 We released a [fine-tuning data acquisition and production tutorial](https://github.com/SocialAI-tianji/Tianji/blob/main/docs/finetune/how-to-get-finetune-data.md) using "Resolving Awkward Situations" as an example, with corresponding data open-sourced to [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)
+- **\[2024.05.04\]** 🚀 We released a [fine-tuning data acquisition and production tutorial](https://github.com/SocialAI-tianji/Tianji/blob/main/docs/finetune/how-to-get-finetune-data.md) using "Resolving Awkward Situations" as an example, with corresponding data open-sourced to [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)
 
-- **[2024.05.02]** 🚀 We released a [fully reproducible document](./docs/finetune/tianji-wishes-chinese.md) on the entire process from data collection to fine-tuning for the social etiquette large model - Sending Blessings, along with corresponding [data](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main), [configuration](./tianji/finetune/xtuner/internlm2_chat_7b_qlora_oasst1_e3_copy.py), and [auxiliary scripts](./tools/finetune/README.md). (We were away for a while but are back now, mainly due to the main maintainer's continuous overtime work, only able to happily open source during holidays)
+- **\[2024.05.02\]** 🚀 We released a [fully reproducible document](./docs/finetune/tianji-wishes-chinese.md) on the entire process from data collection to fine-tuning for the social etiquette large model - Sending Blessings, along with corresponding [data](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main), [configuration](./tianji/finetune/xtuner/internlm2_chat_7b_qlora_oasst1_e3_copy.py), and [auxiliary scripts](./tools/finetune/README.md). (We were away for a while but are back now, mainly due to the main maintainer's continuous overtime work, only able to happily open source during holidays)
 
-- **[2024.02.01]** 🧑‍🚀 We released initial experience addresses for [prompt](http://120.76.130.14:6006/prompt/), [Agent applications](http://120.76.130.14:6005/), knowledge base(TODO), and [model fine-tuning (based on InternLM2)](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes), and made the repository open.
+- **\[2024.02.01\]** 🧑‍🚀 We released initial experience addresses for [prompt](http://120.76.130.14:6006/prompt/), [Agent applications](http://120.76.130.14:6005/), knowledge base(TODO), and [model fine-tuning (based on InternLM2)](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes), and made the repository open.
 
 ### Roadmap
 
-- [x] Release the simplest initial version (involving prompt, aigame, agent, knowledge base, model fine-tuning)
-- [x] Complete the reproducible documentation of the model fine-tuning data collection to fine-tuning process for [Social Etiquette Large Model - Sending Blessings](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)
-- [x] Open-source social etiquette corpus - Sending Blessings to huggingface
-- [x] Iterate better data production tools and cleaning solutions, open-source data cleaning scripts
-- [ ] Complete knowledge base part iteration
-- [ ] Complete Agent part documentation
-- [ ] Open knowledge base corpus acquisition details to huggingface
-- [ ] Add documentation (how to build your own application prompt, agent, knowledge base, fine-tuning application by referencing this project)
-- [ ] Organize multi-dimensional data, open-source relatively complete social etiquette corpus
-- [ ] Collect & open-source social etiquette corpus - 20,000 and train to give results and the entire process
+- \[x\] Release the simplest initial version (involving prompt, aigame, agent, knowledge base, model fine-tuning)
+- \[x\] Complete the reproducible documentation of the model fine-tuning data collection to fine-tuning process for [Social Etiquette Large Model - Sending Blessings](https://openxlab.org.cn/apps/detail/jujimeizuo/tianji-wish)
+- \[x\] Open-source social etiquette corpus - Sending Blessings to huggingface
+- \[x\] Iterate better data production tools and cleaning solutions, open-source data cleaning scripts
+- \[ \] Complete knowledge base part iteration
+- \[ \] Complete Agent part documentation
+- \[ \] Open knowledge base corpus acquisition details to huggingface
+- \[ \] Add documentation (how to build your own application prompt, agent, knowledge base, fine-tuning application by referencing this project)
+- \[ \] Organize multi-dimensional data, open-source relatively complete social etiquette corpus
+- \[ \] Collect & open-source social etiquette corpus - 20,000 and train to give results and the entire process
 
 ## Running Environment
 
 ### Environment Installation
 
-In this project, execute the following commands to install the project's complete requirements:
+Due to differing environment dependencies between the agent and RAG, installing both at the same time may cause version conflicts.
+
+If you want to run the agent version, please run the following command to install the environment:
 
 ```
-pip install -r requirements.txt
-pip install . 
+pip install -e .[agent]
 ```
+
+If you want to run the RAG version, please run the following command to install the environment:
+
+```
+pip install -e .[rag]
+```
+
 ### Key Configuration
 
 To ensure the project runs normally, **please create a new `.env` file in the project and set your API keys in it**. You can write the corresponding keys according to the following example to successfully run the call. Currently, zhipuai is used by default, so you can just write `ZHIPUAI_API_KEY` to use it.
@@ -143,6 +155,7 @@ streamlit run run/metagpt_webui.py
 ## Examples
 
 ### Fine-tuning - Blessing Module
+
 The current blessing module supports three modes of triggering:
 
 Normal style, directly write the blessing recipient, conforming to common conversation patterns.
@@ -179,17 +192,18 @@ TODO
 ### Submit Your First PR
 
 Thanks to good ci facilities, you only need to refer to the [example PR](https://github.com/SocialAI-tianji/Tianji/pull/27) to quickly propose your first prompt PR!
-After submitting the PR, the new prompt will be automatically merged into the json file under `tianji/prompt`, convenient for one-click calling. If you don't know what to write, you can refer to the various scenario refinement details in [Scene Classification](test/场景分类) to write prompts for different social etiquette domains.
+After submitting the PR, the new prompt will be automatically merged into the json file under `tianji/prompt`, convenient for one-click calling. If you don't know what to write, you can refer to the various scenario refinement details in [Scene Classification](test/%E5%9C%BA%E6%99%AF%E5%88%86%E7%B1%BB) to write prompts for different social etiquette domains.
 
 ## How to Replicate This Project
 
 The initial intention of this project is, first, to make `AI learn core technology`, and second, to allow more people (domains/industries) to build their own AI systems, accelerating AI's penetration into every field. You can learn about this project through the following ways:
 
 You can refer to this project to create new vertical domain applications:
+
 - Rental assistant (agent)
 - Childcare assistant (data collection and knowledge base)
 - Life guide (data collection and knowledge base)
-......
+  ......
 
 ## Contributors
 
@@ -198,7 +212,6 @@ You can refer to this project to create new vertical domain applications:
 </a>
 
 [Some contributors don't have github, we thank each and every contributor!](docs/contributor.md), and welcome you to join!
-
 
 ## Acknowledgements
 
