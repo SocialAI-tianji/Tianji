@@ -1,0 +1,4 @@
+langchain==0.2.15
+langchain_community==0.2.14
+langchain_chroma
+sentence-transformers
