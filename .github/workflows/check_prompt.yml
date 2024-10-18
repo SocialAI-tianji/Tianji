@@ -1,0 +1,38 @@
+name: Check Prompt
+
+permissions: read-all
+
+on:
+  pull_request:
+    types: [ assigned, opened, synchronize, reopened ]
+    branches:
+      - main
+    paths:
+      - 'test/prompt/**'
+      - 'tainji/prompt/**'
+      - '.ci/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'test/prompt/**'
+      - 'tainji/prompt/**'
+      - '.ci/**'
+jobs:
+  check :
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # 检出完整的提交历史
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: check the prompt
+      run: |
+        python .ci/check.py
