@@ -4,11 +4,9 @@ permissions:
   contents: write
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'tainji/prompt/**'
+  schedule:
+    - cron: '0 14 * * 6'  # 每周六晚上22:00 (UTC+8)
+
 jobs:
   update_prompt_json:
     runs-on: ubuntu-latest
