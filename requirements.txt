@@ -5,7 +5,13 @@ einops
 bitsandbytes
 duckduckgo_search==5.3.1b1
 beautifulsoup4==4.12.3
+streamlit
+streamlit_chat
+
+# for agent
 # metagpt==0.8.1  # 注意, metagpt 安装可能会导致 llamaindex 及 langchian 版本改变
+
+# for rag 
 # langchain==0.2.15
 # langchain_community==0.2.14
 # langchain_chroma

@@ -1,0 +1,29 @@
+name: Update Prompt JSON
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'tainji/prompt/**'
+jobs:
+  update_prompt_json:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # 检出完整的提交历史
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Update Prompt JSON
+      run: |
+        python build_all_yiyan_prompt.py

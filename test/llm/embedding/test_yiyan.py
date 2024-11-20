@@ -1,11 +1,10 @@
+# 参考 https://ai.baidu.com/ai-doc/AISTUDIO/rm344erns 兼容 OpenAI 接口
 from typing import List
 import os
-import erniebot
 from dotenv import load_dotenv
+from openai import OpenAI
 
-# 加载.env文件
 load_dotenv()
-# os.environ["BAIDU_API_KEY"]=""
 
 
 class ErnieEmbedding:
@@ -15,15 +14,15 @@ class ErnieEmbedding:
 
     def __init__(self) -> None:
         super().__init__()
-        erniebot.api_type = "aistudio"
-        erniebot.access_token = os.getenv("BAIDU_API_KEY")
-        self.client = erniebot.Embedding()
+        self.client = OpenAI()
+        self.client.base_url = os.getenv("OPENAI_API_BASE")
+        self.client.api_key = os.getenv("OPENAI_API_KEY")
 
-    def get_embedding(
-        self, text: str, model: str = "ernie-text-embedding"
-    ) -> List[float]:
-        response = self.client.create(model=model, input=[text])
-        return response.get_result()[0]
+    def get_embedding(self, text: str, model: str = "embedding-v1") -> List[float]:
+        text = text.replace("\n", " ")
+        return (
+            self.client.embeddings.create(input=[text], model=model).data[0].embedding
+        )
 
 
 if __name__ == "__main__":
