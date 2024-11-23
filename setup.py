@@ -7,11 +7,6 @@ setup(
     author="SocialAI",
     url="https://socialai-tianji.github.io/socialai-web/",
     packages=find_packages(exclude=["build", "dist"]),
-    install_requires=[
-        "modelscope",
-        "tiktoken",
-        "einops",
-    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",
