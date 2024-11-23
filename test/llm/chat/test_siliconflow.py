@@ -13,7 +13,7 @@ def call_with_messages():
         "model": "Qwen/Qwen2.5-7B-Instruct",
         "messages": [{"role": "user", "content": "请说明你是谁"}],
         "stream": False,
-        "max_tokens": 512,
+        "max_tokens": 2048,
         "temperature": 0.7,
         "top_p": 0.7,
         "top_k": 50,

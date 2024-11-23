@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from tianji.knowledges.langchain_onlinellm.models import ZhipuLLM
+from tianji.knowledges.langchain_onlinellm.models import SiliconFlowLLM
 from langchain_core.prompts import ChatPromptTemplate
 import asyncio
 
@@ -8,7 +8,7 @@ load_dotenv()
 
 
 def test_call():
-    model = ZhipuLLM()
+    model = SiliconFlowLLM()
     question = "今天天气如何"
     response = model._call(question)
     print(response)
@@ -19,7 +19,7 @@ async def test_langchain_api():
         [("system", "你是一个助手"), ("human", "{input}")]
     )
 
-    llm = ZhipuLLM()
+    llm = SiliconFlowLLM()
     chain = prompt | llm
 
     idx = 0

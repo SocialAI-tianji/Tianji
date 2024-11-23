@@ -18,6 +18,11 @@ def test_embedding_similarity_zhipuai():
     # Get embeddings for the sentences
     embedding1 = embedding_model.embed_query(sentence1)
     embedding2 = embedding_model.embed_query(sentence2)
+    embedding_documents = embedding_model.embed_documents([sentence1, sentence2])
+    # 打印嵌入向量及其形状
+    print(f"Embedding 1 shape: {len(embedding1)}")
+    print(f"Embedding 2 shape: {len(embedding2)}")
+    print(f"Embedding documents shape: {len(embedding_documents[0])}")
 
     # Calculate cosine similarity between the two embeddings
     similarity = cosine_similarity([embedding1], [embedding2])[0][0]
@@ -58,4 +63,4 @@ def test_embedding_similarity_huggingface():
 
 if __name__ == "__main__":
     test_embedding_similarity_zhipuai()
-    test_embedding_similarity_huggingface()
+    # test_embedding_similarity_huggingface()
