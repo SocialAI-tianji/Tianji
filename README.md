@@ -10,7 +10,7 @@
 </div>
 
 <p align="center">
-（网页更换维护中，请耐心等待开放）🍵 在线体验懂人情世故的天机<a href="http://120.76.130.14:6006/prompt/">prompt应用</a>、<a href="http://120.76.130.14:6006/knowledges/">知识库应用</a>、<a href="http://120.76.130.14:6005/">Agent应用</a>
+🍵 在线体验懂人情世故的天机 <a href="https://www.modelscope.cn/studios/sanbuphy/SocialAI-Tianji-prompt/summary">prompt应用</a>、<a href="https://www.modelscope.cn/studios/sanbuphy/SocialAI-Tianji-RAG/summary">知识库应用</a>、<a href="修复中,请等待">Agent应用</a>
 </p>
 <p align="center">
 在上海人工智能实验室 OpenXLab 体验人情世故微调模型：<a href="https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes">送祝福模块</a>、<a href="https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette">敬酒礼仪文化</a>
