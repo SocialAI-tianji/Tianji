@@ -2,11 +2,19 @@ import gradio as gr
 import json
 import random
 from dotenv import load_dotenv
+import argparse
 
 load_dotenv()
 from zhipuai import ZhipuAI
 import os
 from tianji import TIANJI_PATH
+
+# 添加命令行参数解析
+parser = argparse.ArgumentParser(description='Launch Gradio application')
+parser.add_argument('--listen', action='store_true', help='Specify to listen on 0.0.0.0')
+parser.add_argument('--port', type=int, default=None, help='The port the server should listen on')
+parser.add_argument('--root_path', type=str, default=None, help='The root path of the server')
+args = parser.parse_args()
 
 file_path = os.path.join(TIANJI_PATH, "tianji/prompt/yiyan_prompt/all_yiyan_prompt.json")
 API_KEY = os.environ["ZHIPUAI_API_KEY"]
@@ -221,4 +229,6 @@ with gr.Blocks() as demo:
     )
 
 if __name__ == "__main__":
-    demo.launch()
+    server_name = '0.0.0.0' if args.listen else None
+    server_port = args.port
+    demo.launch(server_name=server_name, server_port=server_port, root_path=args.root_path)
