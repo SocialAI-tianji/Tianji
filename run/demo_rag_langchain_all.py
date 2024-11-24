@@ -117,7 +117,7 @@ def initialize_chain(chunk_size: int, persist_directory: str, data_path: str, fo
         0
     ].prompt.template = """
     您是一名用于问答任务的助手。使用检索到的上下文来回答问题。如果没有高度相关上下文 你就自由回答。\
-    根据检索到的上下文，结合我的问题,直接给出最后的回答，要详细覆盖全方面。\
+    根据检索到的上下文，结合我的问题,直接给出最后的回答，要只紧扣问题围绕着回答，尽量根据涉及几个关键点用完整非常详细的几段话回复。。\
     \n问题：{question} \n上下文：{context} \n回答：
     """
     loguru.logger.info("初始化数据库结束")
