@@ -73,9 +73,9 @@ class SiliconFlowLLM(LLM):
         url = f"{self.base_url}/chat/completions"
         payload = {
             "model": self.model_name,
-            "messages": [{"role": "user", "content": prompt}],
+            "messages": [{"role": "system", "content": "你是 SocialAI 组织开发的人情世故大师，叫做天机，你将解答用户有关人情世故的问题。"},{"role": "user", "content": prompt}],
             "stream": False,
-            "max_tokens": 2048,
+            "max_tokens": 4096,
             "temperature": 0.7,
             "top_p": 0.7,
             "top_k": 50,

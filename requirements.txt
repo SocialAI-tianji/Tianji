@@ -9,7 +9,8 @@ beautifulsoup4==4.12.3
 gradio
 streamlit
 streamlit_chat
-zhipuai
+Agently
+zhipuai==2.0.1
 
 # for agent
 # metagpt==0.8.1  # 注意, metagpt 安装可能会导致 llamaindex 及 langchian 版本改变

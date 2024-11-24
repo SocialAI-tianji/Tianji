@@ -6,8 +6,9 @@ from dotenv import load_dotenv
 load_dotenv()
 from zhipuai import ZhipuAI
 import os
+from tianji import TIANJI_PATH
 
-file_path = "tianji/prompt/yiyan_prompt/all_yiyan_prompt.json"
+file_path = os.path.join(TIANJI_PATH, "tianji/prompt/yiyan_prompt/all_yiyan_prompt.json")
 API_KEY = os.environ["ZHIPUAI_API_KEY"]
 CHOICES = ["敬酒", "请客", "送礼", "送祝福", "人际交流", "化解尴尬", "矛盾应对"]
 
@@ -147,12 +148,11 @@ def regenerate(chat_history, system_prompt):
 
 
 TITLE = """
-# Tianji 人情世故大模型系统——prompt版 欢迎star🤗！\n
-## 🤖感谢[智谱AI](https://www.zhipuai.cn/)的token支持！
-## 开源项目地址：https://github.com/SocialAI-tianji/Tianji
-## 使用方法：选择或随机一个场景，输入提示词（或者点击上面的Example自动填充），随后发送！
+# Tianji 人情世故大模型系统——prompt版 欢迎star！\n
+## 💫开源项目地址：https://github.com/SocialAI-tianji/Tianji
 ### 我们的愿景是构建一个从数据收集开始的大模型全栈垂直领域开源实践。\n
-### 我们还有其他体验应用：知识库、agent、大模型微调，欢迎体验！更欢迎你的贡献！祝大家龙年快乐！
+## 我们支持不同模型进行对话，你可以选择你喜欢的模型进行对话。
+## 使用方法：选择或随机一个场景，输入提示词（或者点击上面的Example自动填充），随后发送！
 """
 
 with gr.Blocks() as demo:
@@ -194,7 +194,7 @@ with gr.Blocks() as demo:
                 respond, inputs=[system_prompt, msg, chatbot], outputs=[msg, chatbot]
             )
             with gr.Row():
-                clear = gr.Button("记录删除").click(
+                clear = gr.Button("清除历史记录").click(
                     clear_history, inputs=[chatbot], outputs=[chatbot]
                 )
                 regenerate = gr.Button("重新生成").click(
