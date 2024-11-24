@@ -1,7 +1,7 @@
 import os
 import gradio as gr
 from dotenv import load_dotenv
-from tianji.knowledges.langchain_onlinellm.models import ZhipuAIEmbeddings, SiliconFlowLLM
+from tianji.knowledges.langchain_onlinellm.models import SiliconFlowEmbeddings, SiliconFlowLLM
 from langchain_chroma import Chroma
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -32,9 +32,9 @@ except Exception as e:
     loguru.logger.error("SiliconFlow聊天功能测试失败: {}", str(e))
     raise e
 try:
-    embedding_model = ZhipuAIEmbeddings()
+    embeddings = SiliconFlowEmbeddings()
     test_text = "测试文本"
-    test_embedding = embedding_model.embed_query(test_text)
+    test_embedding = embeddings.embed_query(test_text)
     if len(test_embedding) > 0:
         loguru.logger.info("SiliconFlow嵌入功能测试成功")
     else:
@@ -110,7 +110,6 @@ def create_vectordb(
 
 def initialize_chain(chunk_size: int, persist_directory: str, data_path: str, force=False):
     loguru.logger.info("初始化数据库开始，当前数据路径为：{}", data_path)
-    embeddings = ZhipuAIEmbeddings()
     vectordb = create_vectordb(data_path, persist_directory, embeddings, chunk_size, force)
     retriever = vectordb.as_retriever()
     prompt = hub.pull("rlm/rag-prompt")
@@ -118,10 +117,9 @@ def initialize_chain(chunk_size: int, persist_directory: str, data_path: str, fo
         0
     ].prompt.template = """
     您是一名用于问答任务的助手。使用检索到的上下文来回答问题。如果没有高度相关上下文 你就自由回答。\
-    根据检索到的上下文，结合我的问题,直接给出最后的回答，要详细覆盖全方面。\
+    根据检索到的上下文，结合我的问题,直接给出最后的回答，要只紧扣问题围绕着回答，尽量根据涉及几个关键点用完整非常详细的几段话回复。。\
     \n问题：{question} \n上下文：{context} \n回答：
     """
-    llm = SiliconFlowLLM()
     loguru.logger.info("初始化数据库结束")
     return (
         {"context": retriever | format_docs, "question": RunnablePassthrough()}
@@ -184,7 +182,8 @@ def get_examples_for_scenario(scenario):
     examples_dict = {
         "敬酒礼仪文化": [
             "喝酒座位怎么排",
-            "喝酒的完整流程是什么",
+            "喝酒的先后顺序流程是什么",
+            "喝酒需要注意什么",
             "推荐的敬酒词怎么说",
             "宴会怎么点菜",
             "喝酒容易醉怎么办",
