@@ -8,21 +8,20 @@ load_dotenv()
 class SiliconFlowAPI:
     def __init__(self):
         self.base_url = "https://api.siliconflow.cn/v1"
-        self.token = os.getenv("SILICONFLOW_API_KEY")
+        self.token = os.getenv("OPENAI_API_KEY")
 
     def get_embedding(self, model, input_text, encoding_format="float"):
-        url = f"{self.base_url}/embeddings"
-        payload = {
-            "model": model,
-            "input": input_text,
-            "encoding_format": encoding_format,
-        }
-        headers = {
-            "Authorization": f"Bearer {self.token}",
-            "Content-Type": "application/json",
-        }
-        response = requests.post(url, json=payload, headers=headers)
-        return response.json()["data"][0]["embedding"]
+        from openai import OpenAI
+        client = OpenAI(
+            api_key=self.token,
+            base_url=self.base_url
+        )
+        response = client.embeddings.create(
+            model=model,
+            input=input_text,
+            encoding_format=encoding_format
+        )
+        return response.data[0].embedding
 
     def rerank(
         self,

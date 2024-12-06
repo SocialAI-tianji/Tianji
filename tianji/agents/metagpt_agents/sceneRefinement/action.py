@@ -7,7 +7,7 @@ from metagpt.actions import Action
 from metagpt.logs import logger
 from tianji.agents.metagpt_agents.utils.json_from import SharedDataSingleton
 from tianji.agents.metagpt_agents.utils.agent_llm import ZhipuApi as LLMApi
-from tianji.agents.metagpt_agents.utils.helper_func import *
+from tianji.agents.metagpt_agents.utils.helper_func import extract_single_type_attributes_and_examples, extract_attribute_descriptions, load_json
 
 """
 场景细化 agent 所对应的 action。

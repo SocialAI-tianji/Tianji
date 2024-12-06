@@ -12,7 +12,7 @@ from .action import (
     SelectFetcher,
     FilterSelectedResult,
 )
-from tianji.agents.metagpt_agents.utils.helper_func import *
+from tianji.agents.metagpt_agents.utils.helper_func import extract_single_type_attributes_and_examples, extract_attribute_descriptions, load_json
 
 """
 网络搜索助手 agent，具体作用为：
@@ -30,7 +30,7 @@ class Searcher(Role):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions(
+        self.set_actions(
             [
                 QueryExpansion,
                 WebSearch,

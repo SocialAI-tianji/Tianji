@@ -16,15 +16,31 @@ import os
 import argparse
 from tqdm import tqdm
 import shutil
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from tianji import TIANJI_PATH
+from dotenv import load_dotenv
 from loguru import logger
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from zhipuai import ZhipuAI
+from openai import OpenAI
+
+load_dotenv()
 
 
 class LLMProcessor:
-    def __init__(self, model_name, cache_dir, device="cuda"):
-        self.model, self.tokenizer = self.load_local_model(model_name, cache_dir)
-        self.device = device
+    def __init__(
+        self, model_type, model_name=None, api_key=None, cache_dir=None, device="cuda"
+    ):
+        self.model_type = model_type
+        if model_type == "local":
+            self.model, self.tokenizer = self.load_local_model(model_name, cache_dir)
+            self.device = device
+        elif model_type == "zhipuai":
+            self.client = ZhipuAI(api_key=api_key)
+        elif model_type == "openai":
+            self.client = OpenAI(
+                api_key=os.getenv("OPENAI_API_KEY"),
+                base_url=os.getenv("OPENAI_API_BASE")
+            )
+            self.model_name = os.getenv("OPENAI_API_MODEL")
 
     def load_local_model(self, model_name, cache_dir):
         model = AutoModelForCausalLM.from_pretrained(
@@ -40,50 +56,62 @@ class LLMProcessor:
         )
         return model, tokenizer
 
-    def process_message(
-        self,
-        system_message,
-        user_message,
-        max_length=12800,
-        temperature=0.2,
-        debug=False,
-    ):
-        messages = [
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": user_message},
-        ]
-        text = self.tokenizer.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True
-        )
-        inputs = self.tokenizer([text], return_tensors="pt").to(self.device)
-        outputs = self.model.generate(
-            inputs.input_ids, max_length=max_length, temperature=temperature
-        )
-        generated_ids = [
-            output_ids[len(input_ids) :]
-            for input_ids, output_ids in zip(inputs.input_ids, outputs)
-        ]
-        result = self.tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[
-            0
-        ].strip()
-        if debug:
-            logger.info(f"Generated result: {result}")
+    def process_message(self, system_message, user_message, debug=False):
+        if self.model_type == "local":
+            text = self.tokenizer.apply_chat_template(
+                [
+                    {"role": "system", "content": system_message},
+                    {"role": "user", "content": user_message},
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+            )
+            inputs = self.tokenizer([text], return_tensors="pt").to(self.device)
+            outputs = self.model.generate(
+                inputs.input_ids, max_length=12800, temperature=0.2
+            )
+            generated_ids = [
+                output_ids[len(input_ids) :]
+                for input_ids, output_ids in zip(inputs.input_ids, outputs)
+            ]
+            result = self.tokenizer.batch_decode(
+                generated_ids, skip_special_tokens=True
+            )[0].strip()
+        elif self.model_type == "zhipuai":
+            messages = [
+                {"role": "system", "content": system_message},
+                {"role": "user", "content": user_message},
+            ]
+            response = self.client.chat.completions.create(
+                model="glm-4-air",
+                messages=messages,
+                temperature=0.1,  # 设置温度为0.1
+            )
+            result = response.choices[0].message.content
+        elif self.model_type == "openai":
+            messages = [
+                {"role": "system", "content": system_message},
+                {"role": "user", "content": user_message},
+            ]
+            response = self.client.chat.completions.create(
+                model=self.model_name,
+                messages=messages,
+                max_tokens=2048,
+                temperature=0.1,
+            )
+            result = response.choices[0].message.content
         return result
 
 
-def check_summary(processor, content, debug=False):
-    system_message = "你是一个文档总结专家。你需要总结给定的Markdown文件内容，提取出文档的重要中心思想。请用简短一段连贯的话总结文档内容。"
-    user_message = content + "\n\n你的总结是:"
-    return processor.process_message(system_message, user_message, debug=debug)
-
-
 def check_theme(processor, summary, theme, debug=False):
-    system_message = "你是一个文档主题检查专家。你需要检查给定的文档总结是否符合指定的主题要求。请根据总结内容进行判断：1. 文档内容是否与指定主题相关。如果文档符合以上标准，请返回 true；否则返回 false。请只返回 true 或 false，不需要返回任何其他返回值."
-    user_message = f"主题是:{theme}\n\n需要检查的文档总结如下：{summary}"
-    result = processor.process_message(
-        system_message, user_message, debug=debug
-    ).lower()
-    return result == "true"
+    system_message = "你是一个检查专家。如果文档涉及任意一个主题内的元素就返回true。 如果是明星、特定广告、重复内容也只是返回 false。请只返回 true 或 false，不需要返回任何其他返回值."
+    user_message = f"主题是:{theme}\n\n需要检查的文档如下：{summary}"
+    result = processor.process_message(system_message, user_message, debug=debug)
+
+    if_true = "true" in result
+    if debug:
+        logger.info(f"Generated result: {result} , {if_true}")
+    return if_true
 
 
 def main():
@@ -105,6 +133,14 @@ def main():
         default="internlm/internlm2_5-7b-chat",
         help="指定使用的模型类型",
     )
+    parser.add_argument(
+        "-type",
+        "--model_type",
+        type=str,
+        choices=["local", "zhipuai", "openai"],
+        required=True,
+        help="选择模型类型",
+    )
     args = parser.parse_args()
 
     input_folder = args.input_folder
@@ -112,10 +148,15 @@ def main():
     theme = args.theme
     debug = args.debug
     model_name = args.model
+    model_type = args.model_type
+    
+    api_key = os.getenv("ZHIPUAI_API_KEY")
     error_log_path = os.path.join(output_folder, "error_log.txt")
 
-    cache_dir = os.path.join(TIANJI_PATH, "temp", "local_llm")
-    processor = LLMProcessor(model_name, cache_dir)
+    cache_dir = os.path.join(os.getenv("TIANJI_PATH", ""), "temp", "local_llm")
+    processor = LLMProcessor(
+        model_type, model_name=model_name, api_key=api_key, cache_dir=cache_dir
+    )
 
     os.makedirs(output_folder, exist_ok=True)
 
@@ -125,8 +166,7 @@ def main():
             try:
                 with open(input_file_path, "r", encoding="utf-8") as file:
                     content = file.read()
-                summary = check_summary(processor, content, debug)
-                is_relevant = check_theme(processor, summary, theme, debug)
+                is_relevant = check_theme(processor, content, theme, debug)
                 if not is_relevant:
                     output_file_path = os.path.join(output_folder, filename)
                     shutil.move(input_file_path, output_file_path)  # 移动不符合要求的文件

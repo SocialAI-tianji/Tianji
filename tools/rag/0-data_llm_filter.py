@@ -20,6 +20,7 @@ from dotenv import load_dotenv
 from loguru import logger
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from zhipuai import ZhipuAI
+from openai import OpenAI
 
 load_dotenv()
 
@@ -34,6 +35,12 @@ class LLMProcessor:
             self.device = device
         elif model_type == "zhipuai":
             self.client = ZhipuAI(api_key=api_key)
+        elif model_type == "openai":
+            self.client = OpenAI(
+                api_key=os.getenv("OPENAI_API_KEY"),
+                base_url=os.getenv("OPENAI_API_BASE")
+            )
+            self.model_name = os.getenv("OPENAI_API_MODEL")
 
     def load_local_model(self, model_name, cache_dir):
         model = AutoModelForCausalLM.from_pretrained(
@@ -81,6 +88,18 @@ class LLMProcessor:
                 temperature=0.1,  # 设置温度为0.1
             )
             result = response.choices[0].message.content
+        elif self.model_type == "openai":
+            messages = [
+                {"role": "system", "content": system_message},
+                {"role": "user", "content": user_message},
+            ]
+            response = self.client.chat.completions.create(
+                model=self.model_name,
+                messages=messages,
+                max_tokens=2048,
+                temperature=0.1,
+            )
+            result = response.choices[0].message.content
         return result
 
 
@@ -118,7 +137,7 @@ def main():
         "-type",
         "--model_type",
         type=str,
-        choices=["local", "zhipuai"],
+        choices=["local", "zhipuai", "openai"],
         required=True,
         help="选择模型类型",
     )
@@ -130,6 +149,7 @@ def main():
     debug = args.debug
     model_name = args.model
     model_type = args.model_type
+    
     api_key = os.getenv("ZHIPUAI_API_KEY")
     error_log_path = os.path.join(output_folder, "error_log.txt")
 

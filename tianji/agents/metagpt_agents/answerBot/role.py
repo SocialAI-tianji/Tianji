@@ -18,7 +18,7 @@ class AnswerBot(Role):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions([AnswerQuestion])
+        self.set_actions([AnswerQuestion])
         self._set_react_mode(react_mode=RoleReactMode.BY_ORDER.value)
 
     async def _act(self) -> Message:

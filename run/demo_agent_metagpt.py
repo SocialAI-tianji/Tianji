@@ -1,20 +1,23 @@
 from dotenv import load_dotenv
-
 load_dotenv()
 
 import asyncio
 import streamlit as st
 import uuid
 from streamlit_chat import message
-
 from metagpt.logs import logger
+import os
+
+import sys
+module_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  #当前文件夹路径
+sys.path.insert(0, module_dir)
 
 from tianji.agents.metagpt_agents.intentRecognition import IntentReg
 from tianji.agents.metagpt_agents.answerBot import AnswerBot
 from tianji.agents.metagpt_agents.sceneRefinement import SceneRefine
 from tianji.agents.metagpt_agents.searcher import Searcher
 from tianji.agents.metagpt_agents.utils.json_from import SharedDataSingleton
-from tianji.agents.metagpt_agents.utils.helper_func import *
+from tianji.agents.metagpt_agents.utils.helper_func import has_empty_values, is_number_in_types, timestamp_str, extract_single_type_attributes_and_examples, load_json, extract_all_types
 from tianji.agents.metagpt_agents.utils.agent_llm import ZhipuApi as LLMApi
 import time
 
@@ -23,7 +26,6 @@ if "user_id" not in st.session_state:
     # 为新用户会话生成一个唯一的UUID
     logger.log(0, "add uuid")
     st.session_state["user_id"] = str(uuid.uuid4())
-
 
 def on_btn_click(sharedData):
     sharedData.message_list_for_agent.clear()

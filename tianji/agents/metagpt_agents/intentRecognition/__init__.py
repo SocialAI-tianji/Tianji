@@ -1,1 +1,2 @@
-from .role import *
+from .role import IntentReg
+from .action import IntentAnalyze
