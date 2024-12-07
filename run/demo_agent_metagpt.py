@@ -18,7 +18,7 @@ from tianji.agents.metagpt_agents.sceneRefinement import SceneRefine
 from tianji.agents.metagpt_agents.searcher import Searcher
 from tianji.agents.metagpt_agents.utils.json_from import SharedDataSingleton
 from tianji.agents.metagpt_agents.utils.helper_func import has_empty_values, is_number_in_types, timestamp_str, extract_single_type_attributes_and_examples, load_json, extract_all_types
-from tianji.agents.metagpt_agents.utils.agent_llm import ZhipuApi as LLMApi
+from tianji.agents.metagpt_agents.utils.agent_llm import OpenaiApi as LLMApi
 import time
 
 # 初始化session_state变量

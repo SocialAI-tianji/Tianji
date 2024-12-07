@@ -1,12 +1,20 @@
-import streamlit as st
+"""
+这是一个单例模式的共享数据类，用于在多个智能体之间共享数据。
+主要功能:
+1. 维护每个用户会话的独立数据实例
+2. 存储场景标签、属性、搜索结果等会话状态
+3. 保存用户的聊天历史和消息列表
+4. 通过uuid区分不同用户的数据
+"""
 
-# shared_data_singleton.py
+import streamlit as st
 
 
 class SharedDataSingleton:
     _instance = None
     json_from_data = None  # 这是要共享的变量
     message_list_for_agent = []
+    filter_weblist = []
     scene_label = ""
     scene_attribute = {}
     extra_query = []

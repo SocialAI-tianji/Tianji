@@ -16,7 +16,6 @@ def timestamp_str():
     )
     return timestamp_str
 
-
 # 返回 json 文件里的内容
 def load_json(file_name):
     with open(
@@ -27,7 +26,6 @@ def load_json(file_name):
         encoding="utf-8",
     ) as file:
         return json.load(file)
-
 
 # 提取所有 json 文件里的场景标签
 def extract_all_types(json_data):

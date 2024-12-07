@@ -1,22 +1,13 @@
 from zhipuai import ZhipuAI
+from openai import OpenAI
 import os
 import asyncio
 
-
-# singleton 模式的 llm 实体
 class ZhipuApi:
-    _instance = None
-
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(ZhipuApi, cls).__new__(cls, *args, **kwargs)
-            cls._instance.__initialized = False
-        return cls._instance
-
+    """
+    此处演示如何注册一个自定义llm
+    """
     def __init__(self, client=None):
-        if self.__initialized:
-            return
-        self.__initialized = True
         self.client = ZhipuAI(api_key=os.environ["ZHIPUAI_API_KEY"])
 
     async def _aask(
@@ -33,7 +24,29 @@ class ZhipuApi:
         return response.choices[0].message.content
 
 
+class OpenaiApi:
+    def __init__(self, client=None):
+        self.client = OpenAI(api_key=os.environ["OPENAI_API_KEY"],base_url=os.environ["OPENAI_API_BASE"])
+
+    async def _aask(
+        self, prompt, stream=False, model=os.environ["OPENAI_API_MODEL"], top_p=0.7, temperature=0.95
+    ):
+        messages = [{"role": "user", "content": prompt}]
+        response = self.client.chat.completions.create(
+            model=model,
+            messages=messages,
+            max_tokens=2048,
+            top_p=top_p,
+            temperature=temperature,
+            stream=stream,
+        )
+        return response.choices[0].message.content
+
+
 if __name__ == "__main__":
-    llm_api = ZhipuApi()
-    result = asyncio.run(llm_api._aask("你好啊"))
-    print("result", result)
+    zhipu_api = ZhipuApi()
+    openai_api = OpenaiApi()
+    zhipu_result = asyncio.run(zhipu_api._aask("你是谁"))
+    openai_result = asyncio.run(openai_api._aask("你是谁"))
+    print("Zhipu result", zhipu_result)
+    print("OpenAI result", openai_result)

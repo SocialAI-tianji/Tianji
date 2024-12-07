@@ -84,7 +84,7 @@ class QueryExpansion(Action):
                 pass
         raise Exception("Searcher agent failed to response")
 
-
+ddgs = DDGS()
 class WebSearch(Action):
     name: str = "WebSearch"
 
@@ -98,7 +98,8 @@ class WebSearch(Action):
             for attempt in range(max_retry):
                 try:
                     response = _call_ddgs(query)
-                    return _parse_response(response)
+                    result = _parse_response(response)
+                    return result
                 except Exception as e:
                     time.sleep(random.randint(2, 5))
             raise Exception(
@@ -106,25 +107,31 @@ class WebSearch(Action):
             )
 
         def _call_ddgs(query: str, **kwargs) -> dict:
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
-            try:
-                response = loop.run_until_complete(_async_call_ddgs(query, **kwargs))
-                return response
-            finally:
-                loop.close()
+            max_retry = 5
+            for attempt in range(max_retry):
+                try:
+                    logger.info(f"正在搜索{query},kwargs为{kwargs}")
+                    response = ddgs.text(query.strip("'"), max_results=15, safesearch="off")
+                    logger.info(f"搜索结果为{response}")
+                    return response
+                except Exception as e:
+                    logger.error(f"搜索{query}出错: {str(e)}")
+                    time.sleep(random.randint(2, 5))
+            raise Exception("搜索失败")
 
         async def _async_call_ddgs(query: str, **kwargs) -> dict:
-            ddgs = DDGS(**kwargs)
             try:
+                logger.info(f"正在搜索{query},kwargs为{kwargs}")
                 response = await asyncio.wait_for(
                     asyncio.to_thread(
-                        ddgs.text, query.strip("'"), max_results=100, safesearch="off"
+                        ddgs.text, query.strip("'"), max_results=30, safesearch="off"
                     ),  # 先返回多个网页片段，避免遇到防爬虫的网站，导致可抽取的知识过少。
                     timeout=20,
                 )
+                logger.info(f"搜索结果为{response}")
                 return response
-            except asyncio.TimeoutError:
+            except Exception as e:
+                logger.error(f"搜索{query}出错: {str(e)}")
                 raise
 
         def _parse_response(response: dict) -> dict:
@@ -154,6 +161,7 @@ class WebSearch(Action):
                         break
             return filtered_results
 
+        logger.info(f"开始搜索{queries}")
         with ThreadPoolExecutor() as executor:
             future_to_query = {executor.submit(search, q): q for q in queries}
 
@@ -192,18 +200,23 @@ class SelectResult(Action):
 
     ## Constraints:
     - 最多返回20个需要进一步查询的网页。
-    - 你只需要返回单个列表，用索引值代表需要进一步查询的网页（例如：["0","4","6"]），不需要回复其他任何内容！。
+    - 结果：你只需要返回单个列表，用索引值代表需要进一步查询的网页（例如：["0","4","6"]），不需要回复其他任何内容！。
 
     ## Input:
     - 搜索引擎返回的内容：```{search_results}```
     - 查询列表: ```{extra_query}``
+
+    你只需要返回列表，用索引值代表需要进一步查询的网页（例如：["0","4","6"]），不需要回复其他任何内容！。
     """
 
     name: str = "selectResult"
 
     async def run(self, instruction: str):
         sharedData = SharedDataSingleton.get_instance()
-
+        logger.info(f"当前搜索结果为：{sharedData.search_results}")
+        if sharedData.search_results == {}:
+            logger.error("搜索结果为{}，请检查是否触发 searcher agent")
+            return "搜索结果为空"
         prompt = self.PROMPT_TEMPLATE.format(
             search_results=sharedData.search_results,
             extra_query=sharedData.extra_query,
@@ -222,6 +235,7 @@ class SelectResult(Action):
                     .replace("，", ",")
                 )
                 rsp = ast.literal_eval(rsp)
+                print(rsp)
                 sharedData.filter_weblist = [int(item) for item in rsp]
                 return str(rsp)
             except:
