@@ -165,7 +165,7 @@ pip install -e .
 
 为确保项目正常运行，**请在项目内新建`.env`文件，并在其中设置你的API密钥**，你可以根据下列例子写入对应的 key，即可成功运行调用,目前默认使用 [siliconflow](https://cloud.siliconflow.cn/models) 与 [ZhipuAI](https://bigmodel.cn/)，你可以获取对应token即可使用。
 
-当前 prompt demo 使用 ZhipuAI api，rag 与 agent demo 使用 siliconflow api，可以根据实际需要进行切换使用。
+当前 Pormpt demo 使用 ZhipuAI api，rag 与 agent demo 使用 Siliconflow api，你可以填写这两者调用密钥，即可使用 tianji 的全部功能。
 
 ```
 OPENAI_API_KEY=
@@ -182,7 +182,10 @@ OPENAI_API_BASE=
 ZHIPUAI_API_KEY=
 OPENAI_API_MODEL=
 HF_TOKEN=
+TAVILY_API_KEY=
 ```
+
+如果你想要结合 Agent 中的网络搜索工具给出更好的回答，你需要填写上述环境变量的 TAVILY_API_KEY 进行搜索请求，你可以在 [TAVILY 官网](https://app.tavily.com/home)获取体验免费密钥（个人免费额度）
 
 ### 运行
 

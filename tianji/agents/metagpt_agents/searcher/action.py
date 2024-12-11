@@ -19,7 +19,7 @@ from typing import Tuple
 import requests
 from bs4 import BeautifulSoup
 import re
-
+from tavily import TavilyClient
 """
 网络搜索助手 agent 所对应的 action。
 """
@@ -85,6 +85,7 @@ class QueryExpansion(Action):
         raise Exception("Searcher agent failed to response")
 
 ddgs = DDGS()
+tavily_client = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
 class WebSearch(Action):
     name: str = "WebSearch"
 
@@ -97,7 +98,7 @@ class WebSearch(Action):
             max_retry = 5
             for attempt in range(max_retry):
                 try:
-                    response = _call_ddgs(query)
+                    response = _call_tavily(query)
                     result = _parse_response(response)
                     return result
                 except Exception as e:
@@ -105,8 +106,18 @@ class WebSearch(Action):
             raise Exception(
                 "Failed to get search results from DuckDuckGo after retries."
             )
-
+        def _call_tavily(query: str, **kwargs) -> dict:
+            try:
+                logger.info(f"_call_tavily 正在搜索{query},kwargs为{kwargs}")
+                response = tavily_client.search(query, max_results=5)
+                return response
+            except Exception as e:
+                raise Exception(f"_call_tavily 搜索{query}出错: {str(e)}")
+        
         def _call_ddgs(query: str, **kwargs) -> dict:
+            """
+            TODO ddgs 容易触发202限制，等到后续优化
+            """
             max_retry = 5
             for attempt in range(max_retry):
                 try:
@@ -138,14 +149,30 @@ class WebSearch(Action):
             raw_results = []
             filtered_results = {}
             count = 0
-            for item in response:
-                raw_results.append(
-                    (
-                        item["href"],
-                        item["description"] if "description" in item else item["body"],
-                        item["title"],
+            
+            # 判断是否为 tavily 搜索引擎的结果
+            if isinstance(response, dict) and 'results' in response:
+                # tavily 搜索引擎结果解析
+                for item in response['results']:
+                    raw_results.append(
+                        (
+                            item['url'],
+                            item['content'],
+                            item['title']
+                        )
                     )
-                )
+            else:
+                # ddgs 搜索引擎结果解析
+                for item in response:
+                    raw_results.append(
+                        (
+                            item["href"],
+                            item["description"] if "description" in item else item["body"],
+                            item["title"],
+                        )
+                    )
+                    
+            # 过滤和格式化结果
             for url, snippet, title in raw_results:
                 if all(
                     domain not in url
@@ -160,7 +187,6 @@ class WebSearch(Action):
                     if count >= 20:  # 确保最多返回20个网页的内容，可自行根据大模型的 context length 更换合适的参数。
                         break
             return filtered_results
-
         logger.info(f"开始搜索{queries}")
         with ThreadPoolExecutor() as executor:
             future_to_query = {executor.submit(search, q): q for q in queries}
@@ -226,7 +252,7 @@ class SelectResult(Action):
         for attempt in range(max_retry):
             try:
                 rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
-                logger.info("机器人分析需求：\n" + rsp)
+                logger.info("机器人 SelectResult 分析需求：\n" + rsp)
                 rsp = (
                     rsp.replace("```list", "")
                     .replace("```", "")
@@ -281,12 +307,13 @@ class SelectFetcher(Action):
                 else:
                     if web_success:
                         sharedData.search_results[select_id]["content"] = web_content[
-                            :4096
+                            :1024
                         ]
         return ""
 
 
 class FilterSelectedResult(Action):
+    # 该处最好用长上下文的模型
     PROMPT_TEMPLATE: str = """
     #Role:
     - 数据抽取小助手。
@@ -316,7 +343,7 @@ class FilterSelectedResult(Action):
                 search_results=result, extra_query=extra_query
             )
             rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
-            logger.info("机器人分析需求：\n" + rsp)
+            logger.info("机器人 FilterSelectedResult 分析需求：\n" + rsp)
             return rsp
 
         def run_ask(result, extra_query):
@@ -342,6 +369,7 @@ class FilterSelectedResult(Action):
                 try:
                     result = future.result()
                 except Exception as exc:
+                    logger.error(f"FilterSelectedResult 提取{select_id}出错: {str(exc)}")
                     pass
                 else:
                     sharedData.search_results[select_id]["filtered_content"] = result

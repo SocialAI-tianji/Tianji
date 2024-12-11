@@ -4,14 +4,12 @@ load_dotenv()
 
 from metagpt.actions import Action
 from tianji.agents.metagpt_agents.utils.json_from import SharedDataSingleton
-from tianji.agents.metagpt_agents.utils.agent_llm import ZhipuApi as LLMApi
+from tianji.agents.metagpt_agents.utils.agent_llm import OpenaiApi as LLMApi
 from tianji.agents.metagpt_agents.utils.helper_func import extract_single_type_attributes_and_examples, extract_attribute_descriptions, load_json
-
+from metagpt.logs import logger
 """
 回答助手 agent 所对应的 action。
 """
-
-
 class AnswerQuestion(Action):
     PROMPT_TEMPLATE: str = """
     #Role:
@@ -56,6 +54,7 @@ class AnswerQuestion(Action):
             if "filtered_content" in item:
                 filtered_dict[index] = item["filtered_content"]
 
+        logger.info("AnswerQuestion 最后的回复 agent ：scene_attributes scene_attributes_description")
         prompt = self.PROMPT_TEMPLATE.format(
             scene=scene,
             scene_attributes=scene_attributes,
@@ -66,5 +65,5 @@ class AnswerQuestion(Action):
             else "",
         )
 
-        rsp = await LLMApi()._aask(prompt=prompt, temperature=1.00)
+        rsp = await LLMApi()._aask(prompt=prompt, temperature=0.7)
         return rsp

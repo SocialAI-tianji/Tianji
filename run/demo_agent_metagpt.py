@@ -61,7 +61,7 @@ def initialize_sidebar(scenes, sharedData):
         container_scene_attribute.write(st.session_state["scene_attr"])
         st.button("Clear Chat History", on_click=lambda: on_btn_click(sharedData))
         st.checkbox(
-            "启用网络搜索", value=st.session_state["enable_se"], key="check", on_change=flip
+            "启用网络搜索（确保填写密钥）", value=st.session_state["enable_se"], key="check", on_change=flip
         )
 
 
@@ -189,7 +189,7 @@ async def main():
 
                 # 如果开启已网络搜索助手 agent ，运行 agent
                 if st.session_state["enable_se"] is True:
-                    with st.spinner("SearcherAgent 运行中..."):
+                    with st.spinner("启用搜索引擎，请稍等片刻... 如有报错，请检查密钥是否填写正确"):
                         await role_search.run(str(sharedData.message_list_for_agent))
 
                     sa_res1 = "生成的额外查询：" + str(sharedData.extra_query)

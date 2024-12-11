@@ -10,6 +10,7 @@ logs/
 build/*
 tianji.egg-info/*
 temp/*
+temp_datasets/*
 *.bin
 *.pyc
 test/knowledges/langchain/cache/

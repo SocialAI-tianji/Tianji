@@ -35,7 +35,7 @@ class OpenaiApi:
         response = self.client.chat.completions.create(
             model=model,
             messages=messages,
-            max_tokens=2048,
+            max_tokens=4096,
             top_p=top_p,
             temperature=temperature,
             stream=stream,
