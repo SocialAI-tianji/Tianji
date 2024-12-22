@@ -44,25 +44,80 @@
 
 ## News
 
-[2024/12/21] 🔥 更新**送祝福模型v0.2**，支持更多风格切换，包含模型、[数据](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.2.json)、制作流程
+[2024/12/21] 🔥 更新**送祝福模型v0.2**，支持更多风格切换，包含 [3B](https://www.modelscope.cn/models/sanbuphy/tianji-wish2-3b) / [7B](https://www.modelscope.cn/models/sanbuphy/tianji-wish2-7b) / [14B(推荐)](https://www.modelscope.cn/models/sanbuphy/tianji-wish2-14b) 模型、[数据](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.2.json)、制作流程、测试代码（TODO）
+
+<details>
+<summary>祝朋友新年快乐，文艺风格</summary>
+
+```
+当晨曦的第一缕阳光轻轻拂过窗棂，新年的钟声在耳边回荡，我仿佛听见了岁月的低语。那些曾经在时光里绽放的瞬间，如同冬日里温暖的炉火，照亮了每一个寒冷的夜晚。记得去年冬天，我们一起围坐在火炉旁，分享着彼此的故事，那一刻，时间仿佛静止了。如今，新的一年已经到来，愿你依然能够保持那份纯真与热情，让生活中的每一个细节都充满诗意。愿你在未来的日子里，无论风雨变换，都能找到属于自己的那片晴空。
+```
+
+</details>
+
+<details>
+<summary>祝朋友中秋快乐，白话风格</summary>
+
+```
+中秋快乐！记得去年咱们一起在阳台上赏月，你非要给我讲那些古老的传说，结果我差点以为自己穿越了。今年虽然不能一起过节，但希望你能感受到家的温暖，和家人团团圆圆。对了，上次你借我的书我还没看完，等你有空了再还给你。中秋佳节，愿你和家人幸福安康，月饼甜甜的，生活美美的！
+```
+</details>
+
+<details>
+<summary>祝爷爷春节快乐，诗词赋风格</summary>
+
+```
+皇天赐庆，月满华晖。星临福寿之辰，日照吉祥之地。绮阁流丹，照子孙情深之谊；兰房飘香，显祖孙情长之真。今朝佳节，难得欢聚；千里同庆，举座生辉。玉盘珍馐罗列，金杯美酒盈樽。亲朋满座，尽展欢颜；贺寿齐声，共襄盛事。
+
+时维新春，序属佳节。春光明媚而庭院新，晓色融融而红霞艳。俨然华筵开锦席，共享天伦庆华诞。临寿宴之盛筵，得欢聚之良辰。层楼生辉，上接春晖；高堂焕彩，下临华宇。觥筹交错，尽显亲朋之情谊；歌舞升平，正逢良辰吉日。
+
+开华宴，陈美馔，亲友欢聚其满座，笑语盈盈而悦耳。觥筹交错，温情脉脉之际；花烛生辉，欢声笑语之间。云开月朗，光彻庭户。寿桃与寿糕同献，美酒共佳肴齐陈。笑语盈盈，响彻华堂之内；欢声阵阵，声传四座之中。
+
+抚今追昔，情思飞扬。温情涌动而心潮起，佳话缤纷而笑语生。儿时嬉戏，情深祖孙之间；长大成人，意笃亲情之谊。四季轮回，二难兼备。尽声色于今朝，极欢愉于此日。岁月悠悠，感天伦之可贵；时光荏苒，知亲情之难得。
+
+嗟乎！光阴似箭，岁月如梭。今朝良辰，愿爷爷常怀欢乐；此日华筵，祝君永沐春晖。愿君福如东海，寿比南山。事业蒸蒸日上，家庭幸福美满。所盼亲情永续，祖孙情深。岁岁常来，永享天伦之乐；年年如此，长沐春晖之恩。
+
+孙以微命，聊表衷肠。无以为赠，唯有真诚祝愿；有怀致意，愿献诚挚情深。舍千里而来贺，奉寿礼以表心。他日相聚，共话桑麻；今朝同庆，同享欢乐。
+```
+</details>
+
+<details>
+<summary>祝哥哥圣诞快乐，祝福长文风格</summary>
+
+```
+亲爱的哥哥：
+
+圣诞的钟声即将敲响，窗外飘着雪花，屋内暖意融融。想起小时候我们一起堆雪人、打雪仗的日子，心里暖洋洋的。那时候你总是抢着当我的“助手”，帮我堆出最完美的雪人，还偷偷给我塞了一颗糖，说是为了让雪人更甜。
+
+记得有一次，我因为期末考试压力大，心情特别不好。你不仅陪我聊天解闷，还带我去吃了最爱的烤肉，那顿饭吃得我心花怒放。从那以后，每当我遇到困难，都会想起你的鼓励和支持，让我有了继续前行的勇气。
+
+还有那次，你帮我修理自行车，虽然最后还是没修好，但那份耐心和细心让我感动不已。你总是在我需要的时候出现，就像圣诞老人一样，给我带来惊喜和温暖。
+
+现在，虽然我们各自忙碌，但这份兄弟情谊从未改变。希望这个圣诞节，你能和家人一起度过一个温馨美好的时光。愿你的生活像圣诞树上的彩灯一样，五彩斑斓；愿你的笑容像圣诞老人的礼物一样，带给身边的人无尽的快乐。
+
+最后，别忘了给自己准备一份特别的礼物，毕竟，你也是那个最棒的“圣诞老人”呢！
+```
+</details>
+
+<br>
 
 [2024/10/08] 完成**第一阶段全**知识库对话更新，数据下载 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main/RAG)
 
-[2024/10/05] 重构[Agent 模块](https://github.com/SocialAI-tianji/Tianji/blob/main/run/demo_agent_metagpt.py)，支持工具调用 [详见源码](https://github.com/SocialAI-tianji/Tianji/tree/main/tianji/agents/metagpt_agents)
+[2024/10/05] 重构 [Agent 模块](https://github.com/SocialAI-tianji/Tianji/blob/main/run/demo_agent_metagpt.py)，修复 [代码规范](https://github.com/SocialAI-tianji/Tianji/tree/main/tianji/agents/metagpt_agents)
 
 [2024/09/02] 更新第一款专注[敬酒场景的知识库](http://120.76.130.14:6006/knowledges/)对话模型
 
-[2024/08/31] 重构仓库结构，更新工具代码以及langchain [知识库问答](./tianji/knowledges/)、对应 [demo](run/demo_rag_langchain_onlinellm.py)
+[2024/08/31] 重构仓库结构，更新工具代码及langchain [知识库问答](./tianji/knowledges/)、对应 [demo](run/demo_rag_langchain_onlinellm.py)
 
-[2024/07/16] 发布专注[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 对应[语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)
+[2024/07/16] 发布[敬酒场景的天机模型](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Etiquette), 开源 [语料](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-etiquette-chinese-v0.1.json)
 
 [2024/07/14] 更新[送祝福模块](https://openxlab.org.cn/apps/detail/tackhwa00/Tianji-Wishes) 支持更多风格切换，数据开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.1.json)
 
-[2024/05/04] 《化解"尴尬"场合》为例的[微调数据获取、制造教程](https://github.com/SocialAI-tianji/Tianji/blob/main/docs/finetune/how-to-get-finetune-data.md)，对应数据开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)
+[2024/05/04] 《化解"尴尬"场合》为例[微调数据获取、制造教程](https://github.com/SocialAI-tianji/Tianji/blob/main/docs/finetune/how-to-get-finetune-data.md)，对应数据开源至 [huggingface](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)
 
-[2024/05/02] 送祝福任务的数据收集到微调过程的[全流程可复现文档](./docs/finetune/tianji-wishes-chinese.md)及其对应[数据](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)、[配置](./tianji/finetune/xtuner/internlm2_chat_7b_qlora_oasst1_e3_copy.py)、[辅助脚本](./tools/finetune/README.md)
+[2024/05/02] 送祝福任务的数据收集到微调过程的[全流程复现文档](./docs/finetune/tianji-wishes-chinese.md)及其对应[数据](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)、[配置](./tianji/finetune/xtuner/internlm2_chat_7b_qlora_oasst1_e3_copy.py)、[辅助脚本](./tools/finetune/README.md)
 
-[2024/02/01] 发布初版体验地址，将仓库转为开放 
+[2024/02/01] 发布初版体验地址
 
 
 ## 运行示例
