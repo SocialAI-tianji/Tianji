@@ -234,7 +234,7 @@ HF_TOKEN=
 TAVILY_API_KEY=
 ```
 
-如果你想要结合 Agent 中的网络搜索工具给出更好的回答，你需要填写上述环境变量的 TAVILY_API_KEY 进行搜索请求，你可以在 [TAVILY 官网](https://app.tavily.com/home)获取体验免���密钥（个人免费额度）
+如果你想要结合 Agent 中的网络搜索工具给出更好的回答，你需要填写上述环境变量的 TAVILY_API_KEY 进行搜索请求，你可以在 [TAVILY 官网](https://app.tavily.com/home)获取密钥（个人免费额度）
 
 ### 运行
 
@@ -291,7 +291,7 @@ python run/demo_rag_langchain_onlinellm.py
   《能屈能伸》
 ```
 
-结合这些领域，Tianji涉及到的技��路线共有四种：
+结合这些领域，Tianji涉及到的技术路线共有四种：
 
 - 纯prompt（包括AI游戏）：内置 system prompt 基于大模型自身能力对话。
 - Agent（MetaGPT等）：利用 Agent 架构的得到更丰富、更定制化详细的回答。
@@ -309,7 +309,7 @@ run/： 包括了各类演示用前端
 temp/：运行时临时文件目录，包含各类模型文件
 test/：这里存放了各类功能的测试文件，包括核心模块以及大语言模型单独运行的单元测试
 tianji/：源代码目录，包含主要逻辑与算法实现（prompt、agent、knowledges、finetune）
-tools/：涵盖帮助收集数据、整��数据清洗语料的工具
+tools/：涵盖帮助收集数据、整理数据清洗语料的工具
 ```
 
 ## 参与贡献
@@ -371,7 +371,7 @@ git commit -m "提交信息"
 感谢下列所有人对本项目的帮助（不分前后），以及你的关注：
 
 - 项目最开始时刻 [智谱AI](https://open.bigmodel.cn/) 的token支持
-- 上海人工智能实验室 [InternLM(书生·浦语) 模型](https://github.com/InternLM/InternLM)，以及提供的A100显卡��源、与 [书生浦语API](https://internlm.intern-ai.org.cn/api/document) 支持
+- 上海人工智能实验室 [InternLM(书生·浦语) 模型](https://github.com/InternLM/InternLM)，以及提供的A100显卡资源、与 [书生浦语API](https://internlm.intern-ai.org.cn/api/document) 支持
 - [InternLM(书生·浦语) 系列开源教程](https://github.com/InternLM/tutorial)（目前最好的LLM实战全栈教程之一）
 - [飞桨 aistudio 星河社区](https://aistudio.baidu.com/overview) 的 token 与显卡支持
 - [Datawhale 开源学习社区](https://github.com/datawhalechina)
