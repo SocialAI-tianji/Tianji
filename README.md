@@ -125,6 +125,8 @@
               <img src="assets/demo/prompt应用1.png" width="100%" alt="prompt应用1">
           </a>
       </td>
+  </tr>
+  <tr>
       <td>
           <a href="assets/demo/prompt应用2.png" target="_blank">
               <img src="assets/demo/prompt应用2.png" width="100%" alt="prompt应用2">
@@ -149,20 +151,22 @@
           </a>
           <p>如何说对话</p>
       </td>
+  </tr>
+  <tr>
       <td>
           <a href="assets/demo/敬酒礼仪文化.png" target="_blank">
               <img src="assets/demo/敬酒礼仪文化.png" width="100%" alt="敬酒礼仪文化">
           </a>
           <p>敬酒礼仪文化</p>
       </td>
-  </tr>
-  <tr>
       <td>
           <a href="assets/demo/矛盾冲突应对.png" target="_blank">
               <img src="assets/demo/矛盾冲突应对.png" width="100%" alt="矛盾冲突应对">
           </a>
           <p>矛盾冲突应对</p>
       </td>
+  </tr>
+  <tr>
       <td>
           <a href="assets/demo/请客礼仪文化.png" target="_blank">
               <img src="assets/demo/请客礼仪文化.png" width="100%" alt="请客礼仪文化">
@@ -184,7 +188,7 @@
 <!-- End of Selection -->
 
 <p style="text-align: center;">
-    <img src="assets\demo\demo_wishes.png" alt="送祝福天机" width="100%">
+    <img src="assets\demo\demo_wishes.png" alt="送祝福天机" width="80%">
 </p>
 
 
