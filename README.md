@@ -98,7 +98,7 @@
 
 [2024/10/05] 重构 [Agent 模块](https://github.com/SocialAI-tianji/Tianji/blob/main/run/demo_agent_metagpt.py)，修复 [代码规范](https://github.com/SocialAI-tianji/Tianji/tree/main/tianji/agents/metagpt_agents)
 
-[2024/09/02] 更新第一款专注[敬酒场景的知识库](http://120.76.130.14:6006/knowledges/)对话模型
+[2024/09/02] 更新第一款专注[敬酒场景的知识库](https://www.modelscope.cn/studios/sanbuphy/SocialAI-Tianji-RAG)对话模型
 
 [2024/08/31] 重构仓库结构，更新工具代码及langchain [知识库问答](./tianji/knowledges/)、对应 [demo](run/demo_rag_langchain_onlinellm.py)
 
@@ -117,7 +117,7 @@
 
 <p style="text-align: center;"><strong>天机虽不可泄漏，但总有一款适合你</strong></p>
 
-<p style="text-align: center;">运行<a href="http://120.76.130.14:6006/prompt/">prompt版本天机</a>，感受放飞自我的答复</p>
+<p style="text-align: center;">运行<a href="https://www.modelscope.cn/studios/sanbuphy/SocialAI-Tianji-prompt">prompt版本天机</a>，感受放飞自我的答复</p>
 <table border="0" style="width: 100%; text-align: center;">
   <tr>
       <td>
@@ -135,7 +135,7 @@
   </tr>
 </table>
 
-<p style="text-align: center;">运行<a href="http://120.76.130.14:6006/knowledges/">知识库版本天机</a>，获得详细的人情世故指导</p>
+<p style="text-align: center;">运行<a href="https://www.modelscope.cn/studios/sanbuphy/SocialAI-Tianji-RAG">知识库版本天机</a>，获得详细的人情世故指导</p>
 
 <table border="0" style="width: 100%; text-align: left; margin-top: 20px;">
   <tr>
@@ -206,7 +206,7 @@
 - [贡献者](#%E8%B4%A1%E7%8C%AE%E8%80%85)
 - [鸣谢](#%E9%B8%A3%E8%B0%A2)
 
-## 快速开始 💫
+## 快速开始 🚀
 
 ### 环境安装
 
