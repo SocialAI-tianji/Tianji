@@ -8,7 +8,7 @@ from tianji import TIANJI_PATH
 import os
 from modelscope import snapshot_download
 
-# download model
+# download model 根据显卡情况选择，推荐使用 7b 或 14b 模型
 download_path = os.path.join(TIANJI_PATH, "temp","tianji-wish2")
 snapshot_download("sanbuphy/tianji-wish2-3b", cache_dir=download_path)
 
