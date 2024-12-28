@@ -27,8 +27,8 @@ from datetime import datetime
 # =========================
 PATH_CONFIG = {
     "json_input": "/home/merged.json",                        # 数据集JSON文件路径
-    "model_cache_dir": "/home/temp",                           # 模型下载后缓存目录
-    "model_repo": "qwen/Qwen2.5-14B-Instruct",                  # 此处指定模型仓库名称
+    "model_cache_dir": "/home/temp",                           # 模型下载缓存目录
+    "model_repo": "qwen/Qwen2.5-14B-Instruct",                  # 此处可指定任意模型仓库名称,自动下载缓存至缓存目录
     
     "training_output_base_dir": "/home/output",                # 基础训练输出目录
     "training_job_name": "Qwen2.5_instruct_lora",             # 训练任务名称
