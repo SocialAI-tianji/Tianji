@@ -44,7 +44,7 @@
 
 ## News
 
-[2024/12/21] 🔥 更新**送祝福模型v0.2**，支持更多风格切换，包含 [3B](https://www.modelscope.cn/models/sanbuphy/tianji-wish2-3b) / [7B](https://www.modelscope.cn/models/sanbuphy/tianji-wish2-7b) / [14B(推荐)](https://www.modelscope.cn/models/sanbuphy/tianji-wish2-14b) 模型、[数据](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.2.json)、[制作流程](docs/finetune/tianji-wishes-chinese-2.md)、测试代码（TODO）
+[2024/12/21] 🔥 更新**送祝福模型v0.2**，支持更多风格切换，包含 [3B](https://www.modelscope.cn/models/sanbuphy/tianji-wish2-3b) / [7B](https://www.modelscope.cn/models/sanbuphy/tianji-wish2-7b) / [14B(推荐)](https://www.modelscope.cn/models/sanbuphy/tianji-wish2-14b) 模型、[数据](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.2.json)、[制作流程](docs/finetune/tianji-wishes-chinese-2.md)、[测试](tianji/finetune/transformers/Qwen2_5/qwen2_5_infer_base.py)与[训练](tianji/finetune/transformers/Qwen2_5)代码
 
 祝朋友新年快乐，文艺风格
 
