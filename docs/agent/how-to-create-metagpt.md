@@ -273,6 +273,20 @@ search_results = await role_search.run(user_input)
 - 对象情绪
 - 时间等
 
+您可以通过以下文件研究 MetaGPT 的实现:
+
+### 基础测试用例
+
+* `test/agents/metagpt/test_metagpt_dummy.py`: 简单的计算器助手示例,展示了基本的 Action 和 Role 实现
+* `test/agents/metagpt/test_WebSearch.py`: 基于 Tavily API 的网页搜索示例
+
+### 场景化测试
+
+* `test/agents/metagpt/intentReg_test_case.py`: 意图识别助手的测试用例
+* `test/agents/metagpt/sceneRefine_test_case.py`: 场景细化助手的测试用例
+* `test/agents/metagpt/answerBot_test_case.py`: 回答助手的测试用例
+* `test/agents/metagpt/searcher_test_case.py`: 搜索助手的测试用例
+
 ## 配置要求
 
 - Python 3.8+
