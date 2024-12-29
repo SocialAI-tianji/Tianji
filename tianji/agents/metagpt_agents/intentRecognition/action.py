@@ -8,11 +8,28 @@ from tianji.agents.metagpt_agents.utils.agent_llm import ZhipuApi as LLMApi
 from tianji.agents.metagpt_agents.utils.helper_func import *
 
 """
-意图识别 agent 所对应的 action。
+意图识别动作模块 (IntentAnalyze)
+
+该模块实现了意图识别智能体的核心分析功能。
+负责将用户输入的自然语言文本转换为系统预定义的场景类型。
+
+主要功能：
+1. 解析用户输入
+2. 使用LLM进行意图分析
+3. 匹配预定义场景类型
+4. 返回场景标签
 """
 
-
 class IntentAnalyze(Action):
+    """意图分析动作类
+    
+    使用LLM分析用户输入，识别用户意图并匹配到预定义场景。
+    
+    属性:
+        name (str): 动作名称
+        PROMPT_TEMPLATE (str): LLM提示模板
+    """
+    
     PROMPT_TEMPLATE: str = """
     #Role:
     - 场景分析助手

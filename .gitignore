@@ -19,3 +19,4 @@ version.txt
 test/knowledges/llamaindex/cache
 cache/*
 metagpt/*
+test/agents/metagpt/metagpt/*
