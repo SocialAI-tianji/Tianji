@@ -260,9 +260,9 @@ python run/demo_rag_langchain_onlinellm.py
 ## 路线图
 
 - [ ] 加入意图识别模块，替代主动选择场景
-- [ ] 完成 Agent 部分文档  
 - [ ] 增加 Dify、Agently 调用方式
 - [ ] 补充文档（如何参考本项目构建自己的应用prompt、agent、知识库、微调应用）
+- [ ] 等待造模型能力迭代，更新sft数据模板
 
 <details>
 <summary>已完成项目</summary>
@@ -274,6 +274,8 @@ python run/demo_rag_langchain_onlinellm.py
 - [x] 完成 Agent 部分重构
 - [x] 完成知识库部分迭代，开源至huggingface
 - [x] 整理多维度数据，开源较完整人情世故语料
+- [x] 完成 Agent 部分文档  
+
 </details>
 
 ## 技术路线
