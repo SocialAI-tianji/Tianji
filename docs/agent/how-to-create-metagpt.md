@@ -199,19 +199,46 @@ metagpt "创建一个 2048 游戏"  # 这将在 ./workspace 创建一个仓库
       "感人的生日祝福妈妈",
       "写给妈妈的生日祝福"
   ]
-  # 解释：系统基于原始查询，生成多个相关查询以获取更全面的信息
+  # 解释：系统基于原始查询，生成多个相关查询以获取更全面的信息。
   
-  # 2. WebSearch和SelectResult筛选后的结果：
+  # 2. WebSearch调用网络搜索API的结果:
+  search_results = {
+      0: {
+          "url": "https://example.com/birthday-wishes",
+          "title": "暖心的母亲生日祝福语" #网页标题
+          "summ": "暖心的母亲生日祝福语分别为...", #网络搜索api返回的网页内容片段。
+      }
+  }
+  # 解释："summ" 字段通常是网络内容里的前xx个字符，并不会包含整个网页里的内容。
+
+  # 3. SelectResult返回的结果：
+  filter_weblist= [0,2,6,8] 
+  # 解释：判断需要进一步爬取的网页（以索引形式表示），过滤与当前主题无关的网页。
+
+  # 4. SelectFetcher返回的结果：
   search_results = {
       0: {
           "url": "https://example.com/birthday-wishes",
           "title": "暖心的母亲生日祝福语",
-          "content": "...",
-          "filtered_content": "精选的生日祝福内容..."
+          "summ": "暖心的母亲生日祝福语...",
+          "content": "..." #网页内容
       }
   }
-  # 解释：系统搜索并筛选出最相关的内容，过滤掉广告和无关信息，
-  # 保留对生成祝福语有帮助的优质内容
+  # 解释：调用request模块爬取网页内容，考虑到大模型的token限制，目前只取网页内容里的前1024个字符，赋值到 "content" 字段中。
+
+  # 5. FilterSelectedResult筛选后的结果:
+  search_results = {
+      0: {
+          "url": "https://example.com/birthday-wishes",
+          "title": "暖心的母亲生日祝福语",
+          "summ": "暖心的母亲生日祝福语...",
+          "content": "...",
+          "filtered_content"："..." #精选的生日祝福内容
+      }
+  }
+  # 解释：对 "content" 字段里的内容进行提纯以及过滤，筛选出最相关的内容，过滤掉广告和无关信息，赋值到 "filtered_content" 字段中。
+
+  
   ```
 
 ## 工作流程
