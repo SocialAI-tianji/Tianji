@@ -209,7 +209,7 @@ metagpt "创建一个 2048 游戏"  # 这将在 ./workspace 创建一个仓库
           "summ": "暖心的母亲生日祝福语分别为...", #网络搜索api返回的网页内容片段。
       }
   }
-  # 解释："summ"字段通常是网络内容的前xx个字符，并不会包含整个网页里的内容。
+  # 解释："summ" 字段通常是网络内容中的前xx个字符，并不会包含整个网页里的内容。
 
   # 3. SelectResult返回的结果：
   filter_weblist= [0,2,6,8] 
@@ -224,7 +224,7 @@ metagpt "创建一个 2048 游戏"  # 这将在 ./workspace 创建一个仓库
           "content": "..." #网页内容
       }
   }
-  # 解释：调用request模块爬取网页内容，由于大模型的tokem限制，目前只取网页内容里的前1024个字符，赋值到 "content" 字段中。
+  # 解释：调用request模块爬取网页内容，考虑到大模型的token限制，目前只取网页内容里的前1024个字符，赋值到 "content" 字段中。
 
   # 5. FilterSelectedResult筛选后的结果:
   search_results = {
@@ -233,15 +233,12 @@ metagpt "创建一个 2048 游戏"  # 这将在 ./workspace 创建一个仓库
           "title": "暖心的母亲生日祝福语",
           "summ": "暖心的母亲生日祝福语...",
           "content": "...",
-          "filtered_content" #筛选后的内容
+          "filtered_content"："..." #过滤后的网页内容
       }
   }
-  # 解释：对 "content" 字段里的
-  系统搜索并筛选出最相关的内容，过滤掉广告和无关信息，
-  # 保留对生成祝福语有帮助的优质内容
+  # 解释：对 "content" 字段里的内容进行提纯以及过滤，筛选出最相关的内容，过滤掉广告和无关信息，赋值到 "filtered_content" 字段中。
 
-
-    和SelectResult筛选后的结果：
+  
   ```
 
 ## 工作流程
