@@ -201,7 +201,7 @@ metagpt "创建一个 2048 游戏"  # 这将在 ./workspace 创建一个仓库
   ]
   # 解释：系统基于原始查询，生成多个相关查询以获取更全面的信息。
   
-  # 2. WebSearch调用网络搜索API的结果
+  # 2. WebSearch调用网络搜索API的结果:
   search_results = {
       0: {
           "url": "https://example.com/birthday-wishes",
@@ -209,7 +209,7 @@ metagpt "创建一个 2048 游戏"  # 这将在 ./workspace 创建一个仓库
           "summ": "暖心的母亲生日祝福语分别为...", #网络搜索api返回的网页内容片段。
       }
   }
-  # 解释："summ" 字段通常是网络内容中的前xx个字符，并不会包含整个网页里的内容。
+  # 解释："summ" 字段通常是网络内容里的前xx个字符，并不会包含整个网页里的内容。
 
   # 3. SelectResult返回的结果：
   filter_weblist= [0,2,6,8] 
