@@ -56,6 +56,7 @@ class SceneRefine(Role):
             self.rc.todo = None
 
     async def _react(self) -> Message:
+        msg=None
         while True:
             await self._think()
             if self.rc.todo is None:
