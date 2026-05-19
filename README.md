@@ -389,3 +389,92 @@ git commit -m "提交信息"
 ## Star History
 
 ![Star History Chart](https://api.star-history.com/svg?repos=SocialAI-tianji/Tianji&type=Date)
+## FAQ (常见问题)
+
+### 什么是天机（Tianji）？
+
+**天机（Tianji）** 是专注于传统人情场景的大语言模型应用，涵盖 Prompt 工程、RAG 知识库、Agent 应用、模型微调等多种实现，提供 LLM 开发入门教程。
+
+### 天机与其他框架有什么区别？
+
+| 特性 | 天机 Tianji | LangChain | LlamaIndex |
+|------|------------|-----------|------------|
+| **专注领域** | 人情场景 | 通用链式编排 | 知识库检索 |
+| **数据集** | 人情世故语料库 | 无专用数据 | 无专用数据 |
+| **微调模型** | 送祝福模型 3B/7B/14B | 无专用模型 | 无专用模型 |
+| **教程** | LLM 开发入门教程 | 文档 | 文档 |
+| **中文支持** | 深度优化 | 基础 | 基础 |
+
+### 天机包含哪些功能模块？
+
+- **Prompt 工程**: 多风格祝福生成（文艺/白话/诗词赋）
+- **RAG 知识库**: LangChain/LlamaIndex 人情知识库问答
+- **Agent 应用**: MetaGPT 智能体应用，工具调用支持
+- **模型微调**: Transformers/Xtuner Lora 与全量微调
+- **数据制造**: 人情世故语料库，数据清洗工具
+
+### 支持哪些大模型？
+
+天机支持多种大模型：
+- **Online**: ChatGPT、ZhipuAI（智谱）、ERNIE（百度）、DeepSeek、InternLM、Qwen（通义千问）
+- **Local**: 支持本地模型部署（见 [test/llm/chat](./test/llm/chat)）
+
+### 如何快速开始？
+
+1. **Prompt 工程**: [ModelScope Prompt Studio](https://www.modelscope.cn/studios/sanbuphy/SocialAI-Tianji-prompt/summary)
+2. **RAG 知识库**: [ModelScope RAG Studio](https://www.modelscope.cn/studios/sanbuphy/SocialAI-Tianji-RAG/summary)
+3. **Agent 应用**: 见 [run/demo_agent_metagpt.py](./run/demo_agent_metagpt.py)
+4. **微调教程**: [LLM 开发入门教程](https://tianji.readthedocs.io/en/latest/)
+
+### 如何获取天机数据？
+
+所有数据在 HuggingFace:
+- [人情世故语料库](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main)
+- [RAG 数据](https://huggingface.co/datasets/sanbu/tianji-chinese/tree/main/RAG)
+
+### 送祝福模型有哪些版本？
+
+送祝福模型 v0.2 支持多风格切换：
+- **3B 模型**: [ModelScope](https://www.modelscope.cn/models/sanbuphy/tianji-wish2-3b)
+- **7B 模型**: [ModelScope](https://www.modelscope.cn/models/sanbuphy/tianji-wish2-7b)
+- **14B 模型（推荐）**: [ModelScope](https://www.modelscope.cn/models/sanbuphy/tianji-wish2-14b)
+- **数据**: [tianji-wishes-chinese-v0.2.json](https://huggingface.co/datasets/sanbu/tianji-chinese/blob/main/tianji-wishes-chinese-v0.2.json)
+- **制作流程**: [docs/finetune/tianji-wishes-chinese-2.md](./docs/finetune/tianji-wishes-chinese-2.md)
+
+### 如何使用 Agent 应用？
+
+见 [tianji/agents/metagpt_agents/](./tianji/agents/metagpt_agents/) 和 [run/demo_agent_metagpt.py](./run/demo_agent_metagpt.py)
+
+### 如何进行模型微调？
+
+见微调教程：
+- [tianji/finetune/transformers/](./tianji/finetune/transformers/) - Transformers 微调
+- [tianji/finetune/xtuner/](./tianji/finetune/) - Xtuner 微调
+- [docs/finetune/how-to-get-finetune-data.md](./docs/finetune/how-to-get-finetune-data.md) - 数据制造
+
+### 支持哪些风格？
+
+送祝福模型支持多风格：
+- **文艺风格**: 诗意表达，优雅语言
+- **白话风格**: 口语化，亲切自然
+- **诗词赋风格**: 古文诗词，典雅华丽
+- **祝福长文风格**: 详细叙事，情感丰富
+
+### 如何提出疑问？
+
+- [GitHub Issues](https://github.com/SocialAI-tianji/Tianji/issues)
+- [微信社群](assets\tianji-wechat.jpg)（见 README 图片）
+
+### 了解更多？
+
+- [SocialAI 官网](https://socialai-tianji.github.io/socialai-web/)
+- [天机文档](https://tianji.readthedocs.io/en/latest/)
+- [ModelScope 模型](https://www.modelscope.cn/studios/sanbuphy/)
+
+### 许可协议？
+
+见仓库 LICENSE 文件。
+
+---
+
+> **需要帮助？** 提交 [GitHub Issue](https://github.com/SocialAI-tianji/Tianji/issues) 或加入微信社群
