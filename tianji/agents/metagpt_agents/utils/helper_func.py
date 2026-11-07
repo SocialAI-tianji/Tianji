@@ -30,7 +30,7 @@ def load_json(file_name):
 # 提取所有 json 文件里的场景标签
 def extract_all_types(json_data):
     scene_types = json_data.get("scene_types", {})
-    types = [scene_types[key]["type"] for key in scene_types]
+    types = [scene_types[key]["type"] for key in scene_types if key in scene_types]
     return types
 
 
@@ -60,8 +60,8 @@ def extract_attribute_descriptions(json_data, attributes):
 
 
 # 判断dict里是否有空的要素
-def has_empty_values(dict):
-    for value in dict.values():
+def has_empty_values(d):
+    for value in d.values():
         if value == "" or value is None:
             return True
     return False
@@ -73,3 +73,4 @@ def is_number_in_types(json_data, number):
     for key, value in scene_types.items():
         if value.get("type", "").startswith(str(number) + "："):
             return True
+    return False
